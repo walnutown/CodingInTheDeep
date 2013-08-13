@@ -1,3 +1,4 @@
+// brute force, time litmit exceed
 public class Solution {
     public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
         // Start typing your Java solution below
@@ -62,5 +63,53 @@ public class Solution {
     public long hash(ArrayList<Integer> result){
         long hashNum = result.get(0) * 12345 + result.get(1) * 6789 + result.get(2) * 888; 
         return hashNum;
+    }
+}
+
+// sort the array, one traverse, in which is a 2Sum method
+// the one travser of the first change the 3SUm to 3Sum problem
+public class Solution {
+    public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        ArrayList<ArrayList<Integer>> resList = new ArrayList<ArrayList<Integer>>();
+        if (num == null || num.length < 3){
+            return resList;
+        }
+        
+        Set<ArrayList<Integer>> resSet = new HashSet<ArrayList<Integer>>(); 
+        Arrays.sort(num);
+        
+        for (int i = 0; i < num.length-2; i++){
+            int two_sum = 0 - num[i];
+            
+            // find two sum
+            int j = i +1;
+            int k = num.length -1;
+            while (j < k){
+                if (num[j] + num[k] == two_sum){
+                    int[] resArr = {num[i], num[j], num[k]};
+                    Arrays.sort(resArr);
+                    ArrayList<Integer> resArrList = new ArrayList<Integer>();
+                    resArrList.add(resArr[0]);
+                    resArrList.add(resArr[1]);
+                    resArrList.add(resArr[2]);
+                    if (!resSet.contains(resArrList)){
+                        resSet.add(resArrList);
+                        resList.add(resArrList);
+                    }
+                    j++;
+                    k--;
+                }
+                else if (num[j] + num[k] < two_sum){
+                    j++;
+                }
+                else{
+                    k--;
+                }
+            }
+        }
+        
+        return resList;
     }
 }
