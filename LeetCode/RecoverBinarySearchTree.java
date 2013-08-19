@@ -79,3 +79,58 @@ public class Solution {
     } 
     
 }
+
+
+
+
+// pass the large judge
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    ArrayList<TreeNode> swap;
+    TreeNode prev;
+    
+    public void recoverTree(TreeNode root) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (root == null){
+            return;
+        }
+        if (root.left == null && root.right == null){
+            return;
+        }
+        
+        prev = null;
+        swap = new ArrayList<TreeNode>();
+        
+        inorderTraversal(root);  
+        
+        // swap the node value
+        // two swapped nodes are the first and last lement of the arraylsit
+            int m = swap.get(0).val;
+            swap.get(0).val = swap.get(swap.size()-1).val;
+            swap.get(swap.size()-1).val = m;
+    } 
+    
+    public void inorderTraversal(TreeNode node){
+        if (node == null){
+            return;
+        }
+        inorderTraversal(node.left);
+        if (prev != null && prev.val >= node.val){
+               swap.add(prev);
+               swap.add(node);
+        } 
+        prev = node;
+        inorderTraversal(node.right);
+    }
+    
+}
