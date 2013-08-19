@@ -152,10 +152,10 @@ public class Solution {
                 char ch2 = s2.charAt(j-1);
                 char ch3 = s3.charAt(i+j-1);
                 if (ch1 == ch3){
-                    match[i][j] = match[i-1][j] || match[i][j];
+                    match[i][j] = match[i-1][j];
                 }
                 if (ch2 == ch3){
-                    match[i][j] = match[i][j-1] || match[i][j];
+                    match[i][j] = match[i][j-1] || match[i][j]; // or the result of previous if()
                 }
             }
         }
@@ -165,7 +165,7 @@ public class Solution {
     }
 }
 
-// recursive
+// recursive, pass large judge
 public class InterleavingString {
     public boolean isInterleave(String s1, String s2, String s3) {
         // Start typing your Java solution below
