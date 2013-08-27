@@ -31,6 +31,14 @@ public class Solution {
         }
         return Math.max(rHeight, lHeight) + 1;
     }
-    
-    
 }
+
+
+
+// At the first glance, it's easy to have the idea of recursively checking the left sub-tree and right sub-tree, plus the
+// requirements that the diff between the height of left and right sub-tree is no more than one.
+// that's:
+//       isBalanced(root.left) && isBalanced(root.right) && lHeight- rHeight <= 1
+// in this case, we have to do a DFS on the subtree to get the height of the subtree, the total time complexity is O(n^2)
+// Yet, actually, we can check whether the subtree is balanced when we recurse through the subtree. Then, we ca nreduce the
+// big O to O(n), and the space complexity is O(H), where H is the height of the tree.
