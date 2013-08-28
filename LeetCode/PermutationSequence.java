@@ -53,7 +53,8 @@ public class Solution {
 }
 
 
-
+// doesn't work, mainly about math deduction, but not program
+// http://fisherlei.blogspot.com/2013/04/leetcode-permutation-sequence-solution.html
 public class Solution {
     String res;
     StringBuilder s;
