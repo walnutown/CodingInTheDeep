@@ -26,11 +26,12 @@ public class Solution {
             int B = b.charAt(j) - '0';
             sum = A^B^carry;
             res.insert(0, sum);
-            carry = A & B + A & (B^carry);
+            carry &= A^B;
+            carry += A&B;
             i--;
             j--;
         }
-        if (i >= 0 && j == -1){
+        //if (i >= 0 && j == -1){
             while (i >= 0){
                 int A = a.charAt(i) - '0';
                 sum = A ^ carry;
@@ -38,23 +39,22 @@ public class Solution {
                 carry = (A + carry) /2;
                 i--;
             }
-            if (carry > 0){
-                res.insert(0, carry);
-            }
-        }
+            
+        //}
         
-        if (i == -1 && j >= 0){
+        //if (i == -1 && j >= 0){
             while (j >= 0){
-                int B = b.charAt(i) - '0';
+                int B = b.charAt(j) - '0';
                 sum = B ^ carry;
                 res.insert(0, sum);
                 carry = (B + carry) /2;
                 j--;
             }
-            if (carry > 0){
+        //}
+        
+        if (carry > 0){
                 res.insert(0, carry);
             }
-        }
         
         return res.toString();
         
