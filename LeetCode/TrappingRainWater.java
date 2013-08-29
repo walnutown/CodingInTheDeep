@@ -19,7 +19,7 @@ public class Solution {
         //int[] rightH = new int[A.length];
         for (int i =A.length-2; i >= 0; i--){
             //rightH[i] = rightMaxH;
-            if (A[i] < rigthMaxH && A[i] < leftH[i]){
+            if (A[i] < rightMaxH && A[i] < leftH[i]){
                 sum += Math.min(rightMaxH, leftH[i]) - A[i];
             }
             rightMaxH = Math.max(rightMaxH, A[i]);

@@ -36,7 +36,7 @@ public class Solution {
 }
 
 
-// cut the unnecessary subtrees
+// cut the unnecessary subtrees, TLE in large judge
 public class Solution {
     int sum;
     int min;
@@ -75,4 +75,40 @@ public class Solution {
         sum -= grid[row][col];
     }
     
+}
+
+
+
+// 2d matrix DP
+public class Solution {
+    int[][] mem;
+    int mWidth;
+    int mHeight;
+    public int minPathSum(int[][] grid) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        mWidth = grid[0].length;
+        mHeight = grid.length;
+        
+        if (mHeight == 0 || mWidth == 0){
+            return 0;
+        }
+        
+        mem = new int[mHeight][mWidth];
+        
+        mem[0][0] = grid[0][0];
+        for(int i=1; i < mHeight; i++){
+            mem[i][0] = mem[i-1][0] + grid[i][0];
+        }
+        for(int i = 1; i < mWidth; i++){
+            mem[0][i] = mem[0][i-1] + grid[0][i];
+        }
+        
+        for(int i = 1; i < mHeight; i++){
+            for(int j = 1; j < mWidth; j++){
+                mem[i][j] = Math.min(mem[i-1][j], mem[i][j-1]) + grid[i][j];
+            }
+        }   
+        return mem[mHeight-1][mWidth-1];
+    }
 }
