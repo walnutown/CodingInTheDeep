@@ -17,7 +17,7 @@ public class Solution {
                 mem[i] += mem[j-1] * mem[len-j];
             }
         }
-        
+       
         return mem[n];
         
     }
