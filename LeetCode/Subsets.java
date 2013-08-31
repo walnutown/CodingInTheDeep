@@ -33,7 +33,7 @@ public class Solution {
     
 }
 
-
+// DFS
 public class Solution {
     ArrayList<ArrayList<Integer>> resList;
     ArrayList<Integer> res;
@@ -58,12 +58,14 @@ public class Solution {
         for(int i = depth; i < S.length; i++){
             res.add(S[i]);
             resList.add(new ArrayList<Integer>(res));
-            DFS(S, depth+1);
-            res.remove(depth);
+            DFS(S, i+1);
+            res.remove(res.size()-1);
         }
     }
     
 }
+
+
 
 
 
