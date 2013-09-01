@@ -1,3 +1,4 @@
+// TLE in large judge
 public class Solution {
     public int minDistance(String word1, String word2) {
         // Start typing your Java solution below
@@ -12,8 +13,8 @@ public class Solution {
         if (len2 == 0){
             return len1;
         }
-        
-        int[][] mem = new int[len1][len2];
+        // not new int[len1][len2] here
+        int[][] mem = new int[len1+1][len2+1];
         
         mem[0][0] = 0;
         
@@ -35,7 +36,7 @@ public class Solution {
                     // delete one from word1: mem[i-1][j]
                     // insert one to word1: mem[i][j-1]
                     // replace one in word1: mem[i-1][j-1]
-                    mem[i][j] = Math.min( Math.min(mem[i-1][j], mem[i][j-1]), mem[i-1][j-1]);
+                    mem[i][j] = 1+ Math.min( Math.min(mem[i-1][j], mem[i][j-1]), mem[i-1][j-1]);
                 }
             }
         }
