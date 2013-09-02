@@ -64,7 +64,7 @@ public class Solution {
             prev.right=root;
         
         root.left=null;
-        root.right=null;
+        //root.right=null; // not needed here
         prev=root;
         
         dfs(left);
