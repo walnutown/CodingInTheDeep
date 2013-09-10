@@ -1,3 +1,4 @@
+// runtime error
 public class Solution {
     ArrayList<ArrayList<String>> resList;
     ArrayList<String> ipList;
@@ -66,57 +67,4 @@ public class Solution {
         }
     }
     
-}
-
-// works in both judge
-public class Solution {
-    ArrayList<String> ipList;
-    ArrayList<String> res;
-    public ArrayList<String> restoreIpAddresses(String s) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        ipList = new ArrayList<String>();
-        res = new ArrayList<String>();
-        int len = s.length();
-        if (len < 4){
-            return ipList;
-        }
-        
-        DFS(s, 1);
-        return ipList;
-    }
-    
-    public void DFS(String s, int depth){
-        if (depth == 4){
-            if (isValid(s)){
-                String resStr = "";
-                for (int i = 0; i < res.size(); i++){
-                    resStr += res.get(i) + ".";
-                }
-                resStr += s;
-                ipList.add(resStr);
-            }
-            return;
-        }
-        // don't forget i <= s.length()
-        for (int i = 1; i <= 3 && i <= s.length(); i++){
-            String curr = s.substring(0, i);
-            if (!isValid(curr)){
-                return;   
-            }   
-            res.add(curr);
-            DFS(s.substring(i), depth +1);
-            res.remove(res.size()-1);
-        }
-    }
-    
-    public boolean isValid(String s){
-        if (s.length() == 1 || s.length()>=1 && s.length()<=3 && !s.startsWith("0")){
-            int num = Integer.parseInt(s);
-            if (num <= 255){
-                return true;
-            }
-        }
-        return false;
-    }
 }
