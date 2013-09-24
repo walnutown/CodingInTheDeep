@@ -11,6 +11,12 @@ public class Solution {
     public boolean isSameTree(TreeNode p, TreeNode q) {
         // Start typing your Java solution below
         // DO NOT write main() function
+
+        // we can use one simple statement here
+        //if (p == null || q == null){
+        //    return p == null && q == null;
+        //}
+
         if (p == null && q == null){
             return true;
         }

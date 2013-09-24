@@ -1,3 +1,4 @@
+
 // large judge time exceed
 public class Solution {
     public boolean canJump(int[] A) {
