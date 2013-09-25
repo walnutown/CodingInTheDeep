@@ -151,3 +151,45 @@ public class Solution {
       resList.add(res);
    }
 }
+
+
+//Output Limit Exceed, #2 trial
+public class Solution {
+    ArrayList<String[]> res;
+    Set<Integer> prev;
+    public ArrayList<String[]> solveNQueens(int n) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        res = new ArrayList<String[]>();
+        prev = new HashSet<Integer>();
+        if (n <= 0)
+            return res;
+        for(int i  =0 ; i < n; i++){
+            DFS(i, 0, new String[n]);
+        }
+        return res;
+    }
+    
+    public void DFS(int x, int y, String[] m){
+        
+        prev.add(x);
+        StringBuilder row = new StringBuilder();
+        for (int i = 0; i < m.length; i++){
+            if (x != i)
+                row.append('.');
+            else
+                row.append('Q');
+        }
+        m[y] = row.toString();
+        if (y == m.length-1){
+            prev.remove(x);
+            res.add(m);
+            return;
+        }
+        for(int i=0; i< m.length; i++){
+            if (i != x-1 && i !=x+1 && !prev.contains(i))
+                DFS(i, y+1, m);
+        }
+        prev.remove(x);
+    }
+}

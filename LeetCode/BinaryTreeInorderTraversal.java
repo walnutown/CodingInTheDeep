@@ -37,3 +37,61 @@ public class Solution {
         return res;
     }
 }
+
+//http://n00tc0d3r.blogspot.com/2013/01/binary-tree-traversals-i.html
+// logic is more clear than wiki
+
+// Binary tree preorder traversal
+public class Solution{
+    public ArrayList<Integer> preorderTraversal(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        while (root != null){
+            st.push(root);
+            res.add(root.val);
+            root = root.left;
+        }
+        while (st.size() > 0){
+            TreeNode curr = st.pop();
+            curr = curr.right;
+            while (curr != null){
+                st.push(curr);
+                res.add(curr.val);
+                curr = curr.left;
+            } 
+        }
+        return res;
+    }
+}
+
+
+// Binary tree postorder traversal
+public class Solution{
+    public ArrayList<Integer> preorderTraversal(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        Stack<Integer> reverse = new Stack<Integer>();
+        while (root != null){
+            st.push(root);
+            reverse.push(root.val);
+            root = root.right;
+        }
+
+        while (st.size() > 0){
+            TreeNode curr = st.pop();
+            curr = curr.left();
+            while (curr != null){
+                st.push(curr);
+                reverse.push(curr.val);
+                curr = curr.left;
+            }
+        }
+
+        while (reverse.size() > 0){
+            res.add(reverse.pop());
+        }
+
+
+
+    }
+}   

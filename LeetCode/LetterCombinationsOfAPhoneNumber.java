@@ -40,3 +40,41 @@ public class Solution {
         }
     }
 }
+
+// use array to store the mapping
+public class Solution {
+    ArrayList<String> res; 
+    public ArrayList<String> letterCombinations(String digits) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        res = new ArrayList<String>();
+        if (digits == null || digits.length() == 0){
+            res.add("");
+            return res;
+        }
+        String[] dict = new String[10];
+        dict[0] = " ";
+        dict[1] = "";
+        dict[2] = "abc";
+        dict[3] = "def";
+        dict[4] = "ghi";
+        dict[5] = "jkl";
+        dict[6] = "mno";
+        dict[7] = "pqrs";
+        dict[8] = "tuv";
+        dict[9] = "wxyz";
+        DFS(0, "", digits, dict);
+        return res;
+    }
+    
+    public void DFS(int dep, String str, String digits, String[] dict){
+        if (dep == digits.length()){
+            res.add(str);
+            return;
+        }
+        int curr = digits.charAt(dep) - '0';
+        for (int i = 0; i < dict[curr].length(); i++){
+            DFS(dep+1, str+ dict[curr].charAt(i), digits, dict);
+        }
+    }
+}
