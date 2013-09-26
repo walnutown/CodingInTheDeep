@@ -1,4 +1,4 @@
-// TLE
+// TLE. not work if T has duplicate chars
 public class Solution {
     ArrayList<Integer> pos;
     int minWidth;
@@ -55,5 +55,70 @@ public class Solution {
             pos.remove(pos.size()-1);
         }
         
+    }
+}
+
+
+
+//  http://leetcode.com/2010/11/finding-minimum-window-in-s-which.html
+//  The second solution uses a sliding window, is good. 
+public class Solution {
+       
+    public String minWindow(String S, String T) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (S.length() < T.length()){
+            return "";
+        }
+        
+        Map<Character, Integer> hasFind = new HashMap<Character, Integer>();
+        Map<Character, Integer> tm = new HashMap<Character, Integer>();
+        for (int i = 0; i < T.length(); i++){
+            char curr = T.charAt(i);
+            if (tm.containsKey(curr)){
+                tm.put(curr, tm.get(curr) + 1);
+            }
+            else
+                tm.put(curr, 1);
+        }
+        int minWidth = Integer.MAX_VALUE;
+        String minStr = "";
+        int start = 0, end =0;
+        int count = 0;
+        for (; end < S.length(); end++){
+            char curr = S.charAt(end);
+            if (!tm.containsKey(curr))
+                continue;
+                
+            if (!hasFind.containsKey(curr)){
+                hasFind.put(curr, 1);
+                count++;
+            }
+            else{
+                hasFind.put(curr, hasFind.get(curr) + 1);
+                if (hasFind.get(curr) <= tm.get(curr))
+                    count++;
+            }
+        
+            if (count == T.length()){
+                char startCh = S.charAt(start);
+                while (!tm.containsKey(startCh) || hasFind.get(startCh) > tm.get(startCh)){
+                    if (!tm.containsKey(startCh))
+                        start++;
+                    else{
+                        hasFind.put(startCh, hasFind.get(startCh) -1);
+                        start++;
+                    }
+                    startCh = S.charAt(start);
+                }
+                int width = end - start + 1;
+                if (width < minWidth){
+                    minWidth = width;
+                    minStr = S.substring(start, end+1);
+                }
+            }
+        }
+        
+        return minStr;
     }
 }

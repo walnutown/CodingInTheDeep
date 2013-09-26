@@ -37,3 +37,26 @@ public class Solution {
         return step;
     }
 } 
+
+// #2 trial, DFS, TLE
+public class Solution {
+    int min;
+    public int jump(int[] A) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (A == null || A.length <= 1)
+            return 0;
+        min = Integer.MAX_VALUE;
+        DFS(A, 0, 0);
+        return min;
+    }
+    
+    public void DFS(int[] A, int dep, int count){
+        if (dep >= A.length -1){
+            min = Math.min(min, count);
+            return;
+        }
+        for (int i = 1 ; i <= A[dep]; i++)
+            DFS(A, dep + A[dep], count+1);
+    }
+}

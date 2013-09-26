@@ -90,3 +90,56 @@ public class Solution {
         return count;
     }
 }
+
+// #2 trial
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) {
+ *         val = x;
+ *         next = null;
+ *     }
+ * }
+ */
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (l1 == null || l2 == null)
+            return l1 == null? l2: l1;
+        ListNode p = l1;
+        ListNode q = l2;
+        ListNode resList = new ListNode(0);
+        ListNode res = resList;
+        int carry = 0;
+        while(p != null && q != null){
+            int sum = (carry + p.val + q.val) % 10;
+            carry = (carry + p.val + q.val) / 10;
+            res.next = new ListNode(sum);
+            p = p.next;
+            q = q.next;
+            res = res.next;
+        }
+        while (p != null){
+            int sum = (carry + p.val) % 10;
+            carry = (carry + p.val) / 10;
+            res.next = new ListNode(sum);
+            res = res.next;
+            p = p.next;
+        }
+        while (q != null){
+             int sum = (carry + q.val) % 10;
+            carry = (carry + q.val) / 10;
+            res.next = new ListNode(sum);
+            res = res.next;
+            q = q.next;
+        }
+        if ( carry > 0){
+            res.next = new ListNode(carry);
+        }
+        
+        return resList.next;
+    }
+}
