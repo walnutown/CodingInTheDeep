@@ -54,3 +54,50 @@ public class Solution {
         return res;
     }
 }
+
+
+// #2 trial
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (root == null){
+            return res;
+        }
+        Queue<TreeNode> qu = new LinkedList<TreeNode>();
+        qu.add(root);
+        ArrayList<Integer> row = new ArrayList<Integer>();
+        int currNum = 1;
+        int nextNum = 0;
+        while (qu.size() > 0){
+            TreeNode curr = qu.poll();
+            row.add(curr.val);
+            currNum--;
+            if (curr.left != null){
+                qu.add(curr.left);
+                nextNum++;
+            }
+            if (curr.right != null){
+                qu.add(curr.right);
+                nextNum++;
+            }
+            if (currNum == 0){
+                currNum = nextNum;
+                nextNum = 0;
+                res.add(new ArrayList<Integer>(row));
+                row.clear();
+            }
+        }
+        return res;
+    }
+}

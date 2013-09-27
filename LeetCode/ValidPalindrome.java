@@ -28,3 +28,32 @@ public class Solution {
         return true;
     }
 }
+
+// #2 trial
+public class Solution {
+    public boolean isPalindrome(String s) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (s == null || s.length() == 0){
+            return true;
+        }
+        
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length() ; i++){
+            char curr = s.charAt(i);
+            if ('a' <= curr && curr <= 'z' || 'A' <= curr && curr <= 'Z' || '0' <= curr && curr <= '9')
+                sb.append(Character.toLowerCase(curr));
+        }
+        
+        if (sb.length() == 0)
+            return true;
+        int start =0, end = sb.length()-1;
+        while (start < end){
+            if (sb.charAt(start) != sb.charAt(end))
+                return false;
+            start++;
+            end--;
+        }
+        return true;
+    }
+}

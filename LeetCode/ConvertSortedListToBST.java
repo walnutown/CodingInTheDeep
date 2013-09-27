@@ -150,3 +150,62 @@ public class Solution {
         return tn;
     }
 }
+
+
+// #2 tiral, 
+// Input: {0}
+// Output: {}
+// Expected:   {0}
+
+public class Solution {
+    ArrayList<Integer> num;
+    public TreeNode sortedListToBST(ListNode head) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        TreeNode res = null;
+        if (head == null)
+            return res;
+        num = new ArrayList<Integer>();
+        while(head != null){
+            num.add(head.val);
+            head = head.next;
+        }
+        BinarySearch(num, 0, num.size()-1, res);
+        return res;
+    }
+    
+    public void BinarySearch(ArrayList<Integer> num, int start, int end, TreeNode node){
+        if (start > end)
+            return;
+        int mid = start + (end - start)/2;
+        node = new TreeNode(num.get(mid));
+        BinarySearch(num, start, mid-1, node.left);  // doesn't work here, wrong way of passing arguments
+        BinarySearch(num, mid+1, end, node.right);
+    }
+}
+// Accepted
+public class Solution {
+    ArrayList<Integer> num;
+    public TreeNode sortedListToBST(ListNode head) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (head == null)
+            return null;
+        num = new ArrayList<Integer>();
+        while(head != null){
+            num.add(head.val);
+            head = head.next;
+        }
+        return BinarySearch(num, 0, num.size()-1);
+    }
+    
+    public TreeNode BinarySearch(ArrayList<Integer> num, int start, int end){
+        if (start > end)
+            return null;
+        int mid = start + (end - start)/2;
+        TreeNode node = new TreeNode(num.get(mid));
+        node.left = BinarySearch(num, start, mid-1);
+        node.right = BinarySearch(num, mid+1, end);
+        return node;
+    }
+}
