@@ -73,3 +73,30 @@ public class Solution {
         return mem[slen][tlen];
     }
 }
+
+// #2 trial, TLE, complexity?
+public class Solution {
+    int count;
+    public int numDistinct(String S, String T) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (S == null || T == null)
+            return 0;
+        if (S.length() == 0 || T.length() == 0)
+            return S.length() == 0 && T.length() == 0 ? 1 : 0;
+        count = 0;
+        DFS(S, T);
+        return count;
+    }
+    public void DFS(String S, String T){
+        if (T.length() == 0){
+            count++;
+            return;
+        }
+        for (int i = 0 ; i< S.length(); i++){
+            if (S.charAt(i) == T.charAt(0)){
+                DFS(S.substring(i+1), T.substring(1));
+            }
+        }
+    }
+}

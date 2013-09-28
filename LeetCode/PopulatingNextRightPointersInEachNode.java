@@ -47,3 +47,66 @@ public class Solution {
     }
 }
 
+// #2, BFS, actually not constant mem
+/**
+ * Definition for binary tree with next pointer.
+ * public class TreeLinkNode {
+ *     int val;
+ *     TreeLinkNode left, right, next;
+ *     TreeLinkNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (root == null)
+            return;
+        Queue<TreeLinkNode> qu = new LinkedList<TreeLinkNode>();
+        qu.add(root);
+        int currNum = 1;
+        int nextNum = 0;
+        while(qu.size() > 0){
+            TreeLinkNode curr = qu.poll();
+            currNum--;
+            if (curr.left != null){
+                qu.add(curr.left);
+                nextNum++;
+            }
+            if (curr.right != null){
+                qu.add(curr.right);
+                nextNum++;
+            }
+            if (currNum == 0){
+                currNum = nextNum;
+                nextNum = 0;
+            }
+            else
+                curr.next = qu.peek();
+        }
+    }
+}
+
+// http://discuss.leetcode.com/questions/7/populating-next-right-pointers-in-each-node
+// constant mem, effeciently use the next pointer
+public class Solution {
+    public void connect(TreeLinkNode root) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (root == null)
+            return;
+        TreeLinkNode levelHead = root;
+        while (levelHead != null){
+            TreeLinkNode p = levelHead;
+            while (p != null){
+                if (p.left != null){
+                    p.left.next = p.right;
+                    if (p.next != null)
+                        p.right.next = p.next.left;
+                }
+                p = p.next;
+            }
+            levelHead = levelHead.left;
+        }
+    }
+}

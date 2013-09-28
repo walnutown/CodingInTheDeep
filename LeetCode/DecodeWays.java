@@ -51,3 +51,63 @@ public class Solution {
         return false;
     }
 }
+
+// #2 , doesn't ocnsider 0, totally wrong
+// Input:  "0"
+// Output: 1
+// Expected:   0
+
+// Input:  "10"
+// Output: 2
+// Expected:   1
+
+
+public class Solution {
+    public int numDecodings(String s) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (s == null || s.length() == 0)
+            return 0;
+        int[] count = new int[s.length()+1];
+        count[0] = 0;
+        count[1] = 1;
+        for (int i = 2; i <= s.length(); i++){
+            if (Integer.parseInt(s.substring(i-2, i)) <= 26)
+                count[i]++;
+            count[i]++;
+        }
+        return count[s.length()];
+    }
+}
+// Accepted
+public class Solution {
+    public int numDecodings(String s) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (s == null || s.length() == 0)
+            return 0;
+        int[] count = new int[s.length()+1];
+        
+        if (s.charAt(0) == '0')
+            return 0;
+        count[0] = 1;
+        count[1] = 1;
+        for (int i = 2; i <= s.length(); i++){
+            int left = s.charAt(i-2) - '0';
+            int right = s.charAt(i-1) - '0';
+            if (right == 0){
+                if (left == 1 || left == 2)
+                    count[i] = count[i-2];
+                else
+                    return 0;
+            }
+            else{
+                if (left == 1 || left == 2 && right <= 6)
+                    count[i] = count[i-2] + count[i-1];
+                else
+                    count[i] = count[i-1];
+            }
+        }
+        return count[s.length()];
+    }
+}

@@ -89,3 +89,6 @@ public class Solution {
         }
     }
 }
+
+
+// see const mem here, http://discuss.leetcode.com/questions/282/populating-next-right-pointers-in-each-node-ii

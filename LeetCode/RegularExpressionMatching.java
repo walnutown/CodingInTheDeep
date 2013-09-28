@@ -34,3 +34,57 @@ public class Solution {
     }
 }
 
+// #2, miss cases
+// Input:  "aaa", "ab*a"
+// Output: true
+// Expected: false
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (s == null || p == null){
+            if (s == null && p == null)
+                return true;
+            return false;
+        }
+        // ""
+        if (s.length() == 0){
+            if (p.length() == 0)
+                return true;
+            if (p.length() == 1)
+                return false;
+            if (p.charAt(1) == '*')
+                return isMatch(s, p.substring(2));
+            return false;
+        }
+        //"a"
+        if (s.length() == 1){
+            if (p.length() == 0)
+                return false;
+            if (p.length() == 1)
+                return p.equals(s) || p.equals(".");
+            if (p.charAt(1) == '*')
+                return p.charAt(0) == '.'? isMatch(s.substring(1), p.substring(2)) : isMatch(s, p.substring(2));
+            return false;
+        }
+        // "aa"
+        if (s.charAt(0) == s.charAt(1)){
+            if (p.length() <= 1)
+                return false;
+            if (p.charAt(1) == '*')
+                return p.charAt(0) == '.' || p.charAt(0) == s.charAt(0)? isMatch(s, p.substring(2)) || isMatch(s.substring(1), p.substring(2)) || isMatch(s.substring(2), p.substring(2)) : isMatch(s, p.substring(2));
+            if (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.'){
+                return p.charAt(1) == s.charAt(1)|| p.charAt(1) == '.' ? isMatch(s.substring(2), p.substring(2)) : isMatch(s.substring(1), p.substring(1));
+            }
+            return false;
+        }
+        // "ab"
+        if (p.length() <= 1)
+            return false;
+        if (p.charAt(1) == '*')
+            return p.charAt(0) == '.' || p.charAt(0) == s.charAt(0)? isMatch(s, p.substring(2)) || isMatch(s.substring(1), p.substring(2)) || isMatch(s.substring(2), p.substring(2)) : isMatch(s, p.substring(2)) || isMatch(s.substring(1), p.substring(2));
+        if (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.')
+            return p.charAt(1) == s.charAt(1) || p.charAt(1) == '.'? isMatch(s.substring(2), p.substring(2)) : isMatch(s.substring(1), p.substring(1));
+        return false;
+    }
+}
