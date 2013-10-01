@@ -55,3 +55,106 @@ public class Solution {
         return head;
     }
 }
+
+
+
+// #2 trial, 3 pointers
+// Last executed input: {1,1}
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (head == null || head.next == null)
+            return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode end = dummy;
+        ListNode prev = head;
+        ListNode curr = prev.next;
+        boolean dup = false;
+        while (curr != null){
+            while(curr.val == prev.val){
+                dup = true;
+                curr = curr.next;
+            }
+            if (dup == true){
+                end.next = curr;
+                end = end.next;
+                prev = end.next;
+                curr =prev.next;
+                dup = false;
+            }
+            else{
+                end = end.next;
+                prev = prev.next;
+                curr = curr.next;
+            }
+        }
+        return dummy.next;
+    }
+}
+// Accepted
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (head == null || head.next == null)
+            return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode end = dummy;
+        ListNode prev = head;
+        ListNode curr = prev.next;
+        boolean dup = false;
+        while (curr != null){
+            while(curr != null && curr.val == prev.val){
+                dup = true;
+                curr = curr.next;
+            }
+            if (dup == true){
+                end.next = curr;
+                if (curr == null)
+                    break;
+                prev = end.next;
+                curr =prev.next;
+                dup = false;
+            }
+            else{
+                if (curr == null)
+                    break;
+                end = end.next;
+                prev = prev.next;
+                curr = curr.next;
+            }
+        }
+        return dummy.next;
+    }
+}
+
+// refactor the code, 2 pointers
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (head == null || head.next == null)
+            return head;
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode end = dummy;
+        ListNode curr = head;
+        while (curr != null && curr.next != null){
+            if (curr.val != curr.next.val){
+                end = curr;
+                curr =curr.next;
+            }
+            else{
+                while(curr.next != null && curr.val == curr.next.val){
+                    curr = curr.next;
+                }
+                end.next = curr.next;
+                curr = end.next;
+            }
+        }
+        return dummy.next;
+    }
+}

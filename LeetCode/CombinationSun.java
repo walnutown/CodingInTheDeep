@@ -75,3 +75,42 @@ public class Solution {
         }
     }
 }
+
+// iterative
+public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if(candidates == null || candidates.length ==0)
+            return new ArrayList<ArrayList<Integer>>();
+        HashMap<Integer, ArrayList<ArrayList<Integer>>> map = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
+        
+        for(int i=1; i<=target; i++){
+            ArrayList<ArrayList<Integer>> v = new ArrayList<ArrayList<Integer>>();
+            for(int j=0; j<= candidates.length; j++){// notice j=0 , not j=c
+                if(i == candidates[j]){
+                    ArrayList<Integer> temp = new ArrayList<Integer>();
+                    temp.add(i);
+                    v.add(temp);
+                }else if(i> candidates[j]){
+                    int prev_num = i-candidates[j];
+                    ArrayList<ArrayList<Integer>> prev = map.get(prev_num);// here lead to duplicate
+                    if(prev!=null){
+                        for(ArrayList<Integer> list: prev){
+                            if(list.get(list.size() -1) <= candidates[j]){
+                                ArrayList<Integer> new_list = new ArrayList<Integer>(list);
+                                new_list.add(candidates[j]);
+                                v.add(new_list);
+                            }
+                        }
+                    }
+                }
+            }
+            if(v.size() > 0){
+                map.put(i, v);
+            }
+        }
+        if(map.get(target) == null)
+            return new ArrayList<ArrayList<Integer>>();
+        return map.get(target);
+    }
+

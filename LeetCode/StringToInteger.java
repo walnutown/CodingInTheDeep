@@ -40,8 +40,7 @@ public class Solution {
             else{
                 break;
             }
-        }
-        
+        }  
        
         if (neg){
             res = -res;

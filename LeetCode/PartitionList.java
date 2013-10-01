@@ -91,3 +91,61 @@ public class Solution {
         return res.next;
     }
 }
+
+
+// #2 trial, not in position
+// Last executed input: {2,1}, 2
+public class Solution {
+    public ListNode partition(ListNode head, int x) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (head == null || head.next == null)
+            return head;
+        ListNode p = head;
+        ListNode leftList = new ListNode(0);
+        ListNode left = leftList;
+        ListNode rightList = new ListNode(0);
+        ListNode right = rightList;
+        while (p != null){
+            if (p.val < x){
+                left.next = p;
+                left = left.next;
+            }
+            else{
+                right.next = p;
+                right = right.next;
+            }
+            p = p.next;
+        }
+        left.next = rightList.next;
+        return leftList.next;
+    }
+}
+// Accepted
+public class Solution {
+    public ListNode partition(ListNode head, int x) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        if (head == null || head.next == null)
+            return head;
+        ListNode p = head;
+        ListNode leftList = new ListNode(0);
+        ListNode left = leftList;
+        ListNode rightList = new ListNode(0);
+        ListNode right = rightList;
+        while (p != null){
+            if (p.val < x){
+                left.next = p;
+                left = left.next;
+            }
+            else{
+                right.next = p;
+                right = right.next;
+            }
+            p = p.next;
+        }
+        left.next = rightList.next;
+        right.next = null; // important here
+        return leftList.next;
+    }
+}

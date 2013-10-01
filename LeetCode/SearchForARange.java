@@ -7,7 +7,6 @@ public class Solution {
         if (A == null || A.length == 0){
             return res;
         }
-        
         searchHelper(A, 0, A.length -1 , target);
         return res;
     }
@@ -28,9 +27,7 @@ public class Solution {
                 res[1] = mid;
             }
         }
-        
         searchHelper(A, start, mid-1, target);
         searchHelper(A, mid+1, end, target);
-        
     }
 }

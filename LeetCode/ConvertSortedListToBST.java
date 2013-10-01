@@ -209,3 +209,32 @@ public class Solution {
         return node;
     }
 }
+
+
+
+1:  public TreeNode sortedListToBST(ListNode head) {  
+2:    // calculate list length  
+3:    int len = 0; ListNode cur = head;  
+4:    while (cur!=null) {  
+5:      cur = cur.next;  
+6:      len++;  
+7:    }  
+8:    // build the BST  
+9:    return listToBST(head, 0, len-1);  
+10:  }  
+11:    
+12:  private TreeNode listToBST(ListNode head, int low, int high) {  
+13:    if (low > high) return null;  
+14:    int mid = low + (high - low) / 2;  
+15:    // build up tree recursively  
+16:    TreeNode left = listToBST(head, low, mid-1);  
+17:    TreeNode root = new TreeNode(head.val);  
+18:    root.left = left;  
+19:    // Java pass in Object by reference, so we can't change head but we can change its content :)  
+20:    if (head.next != null) { // "move to next"  
+21:      head.val = head.next.val;  
+22:      head.next = head.next.next;  
+23:      root.right = listToBST(head, mid+1, high);  
+24:    }  
+25:    return root;  
+26:  }  

@@ -193,3 +193,44 @@ public class Solution {
         prev.remove(x);
     }
 }
+
+
+// bit manipulation, O(n)
+public ArrayList<String[]> solveNQueens2(int n) {
+    return solveNQueensHelper(new long[n], 0, 0, 0, 0,
+        new ArrayList<String[]>());
+  }
+
+  private ArrayList<String[]> solveNQueensHelper(long[] rows, int cur,
+      long row, long lDiagonal, long rDiagonal,
+      ArrayList<String[]> results) {
+    long validator = (1 << rows.length) - 1;
+    if (row == validator) {
+      return convertSolution(rows, results);
+    } else {
+      long candidates = ((~(row | lDiagonal | rDiagonal)) & validator);
+      while (candidates > 0) { // find potential positions
+        // pick up lowest bit
+        long pos = (candidates & (0 - candidates));
+        candidates -= pos;
+        rows[cur] = pos;
+        solveNQueensHelper(rows, cur + 1, (row | pos),
+            ((lDiagonal | pos) << 1), ((rDiagonal | pos) >> 1),
+            results);
+      }
+    }
+    return results;
+  }
+
+  private ArrayList<String[]> convertSolution(long[] rows,
+      ArrayList<String[]> results) {
+    String[] res = new String[rows.length];
+    for (int i = 0; i < rows.length; ++i) {
+      res[i] = Long.toBinaryString(rows[i]).replace('0', '.')
+          .replace('1', 'Q');
+      while (res[i].length() < rows.length)
+        res[i] = '.' + res[i];
+    }
+    results.add(res);
+    return results;
+  }

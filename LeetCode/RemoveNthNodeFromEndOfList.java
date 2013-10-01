@@ -45,3 +45,57 @@ public class Solution {
         return newHead.next;
     }
 }
+
+
+// #2 trial, in position
+// Input:  {1,2}, 1
+// Output: {}
+// Expected:   {1}
+
+public class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        // n is always valid
+        if (head == null)
+            return null;
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+        ListNode prev = dum;
+        ListNode target = prev.next;
+        ListNode p = head;
+        while (p != null){
+            n--;
+            if (n < 0)
+                target = target.next;
+            p = p.next;
+        }
+        prev.next = target.next;
+        return dum.next;
+    }
+}
+// Accepted
+public class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // Start typing your Java solution below
+        // DO NOT write main() function
+        // n is always valid
+        if (head == null)
+            return null;
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+        ListNode prev = dum;
+        ListNode target = prev.next;
+        ListNode p = head;
+        while (p != null){
+            n--;
+            if (n < 0){
+                prev =prev.next;  // missing here
+                target = target.next;
+            }
+            p = p.next;
+        }
+        prev.next = target.next;
+        return dum.next;
+    }
+}
