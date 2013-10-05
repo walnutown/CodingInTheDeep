@@ -92,3 +92,28 @@ public class Solution {
 
 
 // see const mem here, http://discuss.leetcode.com/questions/282/populating-next-right-pointers-in-each-node-ii
+
+
+public static void connect(TreeLinkNode root) {
+      // Start typing your Java solution below
+      // DO NOT write main() function
+      while (root != null) {
+         TreeLinkNode next = null;
+         TreeLinkNode pre = null;
+         for (; root != null; root = root.next) {
+            if (next == null)
+               next = root.left != null ? root.left : root.right;
+            if (root.left != null) {
+               if (pre != null)
+                  pre.next = root.left;
+               pre = root.left;
+            }
+            if (root.right != null) {
+               if (pre != null)
+                  pre.next = root.right;
+               pre = root.right;
+            }
+         }
+         root = next;
+      }
+   }

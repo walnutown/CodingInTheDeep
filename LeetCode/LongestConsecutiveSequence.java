@@ -185,7 +185,7 @@ public class Solution {
             if (mp.containsKey(n)) continue;
             mp.put(n,1);
             if (mp.containsKey(n-1))
-                max = Math.max(max, merge(n-1, n));
+                max = Math.max(max, merge(n-1, n)); // as n is not in the map, we're sure that the range of n-1 is left range, but not right range
             if (mp.containsKey(n+1))
                 max = Math.max(max, merge(n, n+1));
         }  
