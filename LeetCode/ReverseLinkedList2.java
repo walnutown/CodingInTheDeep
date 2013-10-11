@@ -55,3 +55,31 @@ public class Solution {
         return newHead.next;
     }
 }
+
+// trial #2, 
+// Last executed input: {3,5}, 1, 2
+public class Solution {
+    public ListNode reverseBetween(ListNode head, int m, int n) {
+        // m, n is pre-validated, we use a reverse function here
+        if (head == null || head.next == null || m == n)
+            return head;
+        ListNode dum = new ListNode(0); // need a dummy node here, cause the first node may be reversed
+        dum.next = head;
+        ListNode prev = dum;           // last node in list before reversed list
+        int numReversed = n - m + 1;        // number of nodes to be reversed
+        while ( m-- > 1 ){
+            prev = prev.next;
+        }
+        ListNode start  = prev.next;     // start node in the original list to be reversed
+        ListNode end = start;           // end node in the list has been reversed
+        ListNode next = end.next;      // 
+        while (numReversed > 1){        // missing numReversed-- here
+            next = end.next;
+            end.next = next.next;     
+            prev.next = next;
+            next.next = start;
+            start = next;
+        }
+        return dum.next;
+    }
+}

@@ -84,7 +84,7 @@ public class Solution {
             int k = num.length -1;
             while (j < k){
                 if (num[j] + num[k] == two_sum){
-                    int[] resArr = {num[i], num[p], num[j], num[k]};
+                    int[] resArr = {num[i], num[p], num[j], num[k]};  // no need to sort here, as num is sorted before, and i < p < j < k, 
                     Arrays.sort(resArr);
                     ArrayList<Integer> resArrList = new ArrayList<Integer>();
                     resArrList.add(resArr[0]);

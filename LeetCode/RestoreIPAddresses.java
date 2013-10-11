@@ -68,3 +68,100 @@ public class Solution {
     }
     
 }
+
+// trail #2, 
+// Last executed input: "0000"
+public class Solution {
+    public ArrayList<String> restoreIpAddresses(String s) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        // we use DFS to search for the successors satisfying the conditions 
+        ArrayList<String> res = new ArrayList<String>();
+        if (s == null || s.length() == 0)
+            return res;
+        DFS(0, 0, s, res, new StringBuilder());
+        return res;
+    }
+    
+    public void DFS(int dep, int index, String s, ArrayList<String> res, StringBuilder sb ){
+        if (dep == 4){
+            sb.deleteCharAt(sb.length()-1);
+            res.add(sb.toString());
+            return;
+        }
+        
+        for (int i = 1; i <= 3; i ++){
+            if (i + index > s.length()) continue;
+            int val = Integer.parseInt(s.substring(index, index+ i));
+            if (val <= 255 && val >= 0){
+                if (val > 0 && s.charAt(index) == '0') continue;
+                sb.append(val);
+                sb.append('.');
+                DFS(dep + 1, index + i, s, res, sb);
+                sb.delete(sb.length() - i - 1 ,sb.length());
+            }
+        }
+    }
+}
+// time limit
+// last execute: 1111111111111111111111111111111111111111111111111111
+public class Solution {
+    public ArrayList<String> restoreIpAddresses(String s) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        // we use DFS to search for the successors satisfying the conditions 
+        ArrayList<String> res = new ArrayList<String>();
+        if (s == null || s.length() == 0)
+            return res;
+        DFS(0, 0, s, res, new StringBuilder());
+        return res;
+    }
+    
+    public void DFS(int dep, int index, String s, ArrayList<String> res, StringBuilder sb ){
+        if (dep == 4 && index == s.length()){   // add condition here
+            res.add(sb.substring(0, sb.length()-1).toString());  // remove the last point here
+            return;
+        }
+        
+        for (int i = 1; i <= 3; i ++){
+            if (i + index > s.length()) continue;
+            int val = Integer.parseInt(s.substring(index, index+ i));
+            if (val <= 255 && val >= 0){
+                if (i >= 2 && s.charAt(index) == '0') continue;
+                sb.append(val);
+                sb.append('.');
+                DFS(dep + 1, index + i, s, res, sb);
+                sb.delete(sb.length() - i - 1 ,sb.length());
+            }
+        }
+    }
+}
+// Accepted
+public class Solution {
+    public ArrayList<String> restoreIpAddresses(String s) {
+        // Note: The Solution object is instantiated only once and is reused by each test case.
+        // we use DFS to search for the successors satisfying the conditions 
+        ArrayList<String> res = new ArrayList<String>();
+        if (s == null || s.length() == 0)
+            return res;
+        DFS(0, 0, s, res, new StringBuilder());
+        return res;
+    }
+    
+    public void DFS(int dep, int index, String s, ArrayList<String> res, StringBuilder sb ){
+        if (dep == 4){
+            if (index == s.length())   // check index here, when dep > 4 , should return, no matter whether the string is the goal string
+                res.add(sb.substring(0, sb.length()-1).toString());
+            return;
+        }  
+        for (int i = 1; i <= 3; i ++){
+            if (i + index > s.length()) continue;
+            int val = Integer.parseInt(s.substring(index, index+ i));
+            if (val <= 255 && val >= 0){
+                if (i >= 2 && s.charAt(index) == '0') continue;
+                sb.append(val);
+                sb.append('.');
+                DFS(dep + 1, index + i, s, res, sb);
+                sb.delete(sb.length() - i - 1 ,sb.length());
+            }
+        }
+    }
+}

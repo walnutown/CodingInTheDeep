@@ -111,3 +111,24 @@ public class Solution {
         return count[s.length()];
     }
 }
+
+
+// tong version
+  public int numDecodings(String s) {
+      // Note: The Solution object is instantiated only once and is reused by
+      // each test case.
+      if (s == null || s.length() == 0)
+         return 0;
+      int[] res = new int[s.length() + 1];
+      res[s.length()] = 1;
+      for (int i = s.length() - 1; i >= 0; i--) {
+         if (s.charAt(i) == '0')
+            res[i] = 0;
+         else
+            res[i] = res[i + 1];
+
+         if (i < s.length() - 1 && (s.charAt(i) - '0' == 1 || (s.charAt(i) - '0' == 2 && s.charAt(i) - '0' > 0 && s.charAt(i + 1) - '0' < 7 && s.charAt(i + 1) - '0' >= 0)))
+            res[i] += res[i + 2];
+      }
+      return res[0];
+   }

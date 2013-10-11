@@ -1,4 +1,4 @@
-// TLE. not work if T has duplicate chars
+r// TLE. not work if T has duplicate chars
 public class Solution {
     ArrayList<Integer> pos;
     int minWidth;

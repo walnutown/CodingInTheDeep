@@ -22,7 +22,7 @@ public class Solution {
 }
 
 // two map traverse, O(n)
-
+// exactly one solution, so every number in the array is unique
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
         // Start typing your Java solution below

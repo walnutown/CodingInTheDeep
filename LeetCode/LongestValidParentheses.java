@@ -76,3 +76,28 @@ public class Solution {
     }
 }
 
+
+// trail #2, not verified
+public class Solution {
+    public int longestValidParentheses(String s) {
+        // we use a var to count the number of valid pairs
+        if (s == null || s.length() == 0)
+            return 0;
+        int lefts = 0, count = 0, max = 0;
+        for (int i = 0; i < s.length(); i++){
+            if (s.charAt(i) == '(')
+                lefts++;
+            else{
+                if (lefts > 0){
+                    count++;
+                    lefts--;
+                }else{
+                    max = Math.max(max, 2 * count);
+                    count = 0;
+                }
+            }
+        }
+        return max;
+    }
+}
+

@@ -109,4 +109,7 @@ public class Solution {
 }
 
 
+// Maximum Subarray Problem can be transformed to Stock Problem,
+// but need O(n) extra space and pass the array two times (one time to create array, another time to get the max increment)
+
 

@@ -33,3 +33,36 @@ public class Solution {
 	return mem.get(n);
     }
 }
+
+// trail #2
+// Last executed input: 1
+
+public class Solution {
+    public int climbStairs(int n) {
+        // we use DP here to store the solution to each step
+        int[] mem = new int[n+1];
+        mem[0] = 0;
+        mem[1] = 1;
+        mem[2] = 2;
+        for (int i = 3; i <= n; i++){
+            mem[i] = mem[i-1] + mem[i-2];
+        }
+        return mem[n];
+    }
+}
+// Accepted
+public class Solution {
+    public int climbStairs(int n) {
+        // we use DP here to store the solution to each step
+        if (n <= 2)
+            return n;
+        int[] mem = new int[n+1];
+        mem[0] = 0;
+        mem[1] = 1;
+        mem[2] = 2;
+        for (int i = 3; i <= n; i++){
+            mem[i] = mem[i-1] + mem[i-2];
+        }
+        return mem[n];
+    }
+}

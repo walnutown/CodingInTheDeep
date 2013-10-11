@@ -78,3 +78,54 @@ public class Solution {
         
     }
 }
+
+// trial #2
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generate(int numRows) {
+        // n[row][0] = 1, n[row][last] = 1
+        // n[row][i] = n[row-1][i-1] + n[row-1][i+1]
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (numRows == 0)
+            return res;
+        ArrayList<Integer> prev = new ArrayList<Integer>();
+        prev.add(1);
+        res.add(new ArrayList<Integer>(prev));
+        if (numRows == 1)
+            return res;
+        for (int i = 2; i <= numRows; i++){
+            ArrayList<Integer> curr = new ArrayList<Integer>();
+            curr.add(1);
+            for (int j = 1 ; j < prev.size(); j++){
+                curr.add(prev.get(j-1) + prev.get(j));
+            }
+            curr.add(1);
+            res.add(curr);
+            prev = curr;
+        }
+        return res;
+    }
+}
+// refactor code
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generate(int numRows) {
+        // n[row][0] = 1, n[row][last] = 1
+        // n[row][i] = n[row-1][i-1] + n[row-1][i+1]
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (numRows == 0)
+            return res;
+        ArrayList<Integer> first = new ArrayList<Integer>();
+        first.add(1);
+        res.add(first);
+        for (int i = 2; i <= numRows; i++){
+            ArrayList<Integer> prev = res.get(i-2);  // get prev directly here from the result arraylist
+            ArrayList<Integer> curr = new ArrayList<Integer>();
+            curr.add(1);
+            for (int j = 1 ; j < prev.size(); j++){
+                curr.add(prev.get(j-1) + prev.get(j));
+            }
+            curr.add(1);
+            res.add(curr);
+        }
+        return res;
+    }
+}
