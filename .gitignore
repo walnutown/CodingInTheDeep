@@ -1,2 +1,10 @@
 
 .DS_Store
+
+*.zip
+
+*.plist
+
+*.jpg
+
+LeetCodeTracker.numbers/Metadata/DocumentIdentifier

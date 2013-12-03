@@ -57,3 +57,34 @@ public class Solution {
         return res;
     }
 }
+
+// #2 trial
+public class Solution {
+    public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (root == null)
+            return res;
+        Queue<TreeNode> qu_curr = new LinkedList<TreeNode>();
+        int level = 1;
+        qu_curr.add(root);
+        while (!qu_curr.isEmpty()){
+            ArrayList<Integer> r = new ArrayList<Integer>();
+            Queue<TreeNode> qu_next = new LinkedList<TreeNode>();
+            while (!qu_curr.isEmpty()){
+                TreeNode curr = qu_curr.poll();
+                if (curr.left != null)
+                    qu_next.add(curr.left);
+                if (curr.right != null)
+                    qu_next.add(curr.right);
+                if (level % 2 == 1)
+                    r.add(curr.val);
+                else
+                    r.add(0, curr.val);
+            }
+            res.add(r);
+            qu_curr = qu_next;
+            level++;
+        }
+        return res;
+    }
+}

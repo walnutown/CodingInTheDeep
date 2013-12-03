@@ -113,3 +113,80 @@ public class Solution {
         return resList;
     }
 }
+
+// trial #2, wrong answer
+//Input:    []
+//Output: null
+//Expected:   []
+public class Solution {
+    public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
+        // sum = a + b + c; we traverse the array in a , then solve the porblem as two-sum-problem, sum -a = b + c
+        // to get the non-descending order, we sort the array first
+        // to remove duplicates, we skip the visited integer and traverse b,c with b > a && c > a
+        
+        ArrayList<ArrayList<Integer>> resList = new ArrayList<ArrayList<Integer>>();
+        if (num == null || num.length <= 2)
+            return null;
+        Arrays.sort(num);
+        int prev = 0;
+        for (int i = 0; i < num.length; i++){     // i should be less than num.lenght -2 
+            if (i > 0){
+                if (num[i] == prev )
+                    continue;
+            }
+            int j = i + 1;
+            int k = num.length-1;
+            while (j < k){
+                if (num[j] + num[k] < 0 - num[i])
+                    j++;
+                else if (num[j] + num[k] > 0 - num[i])
+                    k--;
+                else{
+                    ArrayList<Integer> res = new ArrayList<Integer>();
+                    res.add(num[i]);
+                    res.add(num[j]);
+                    res.add(num[k]);
+                    resList.add(res);
+                    break;                  // cannot break here, (e.g.  [-2,0,1,1,2], will miss [-2,1,1])
+                }
+            }
+            prev = num[i];                      // ridiculous to use prev, why not num[i-1]?
+        }
+        return resList;
+    }
+}
+// without set
+public class Solution {
+    public ArrayList<ArrayList<Integer>> threeSum(int[] num) {
+        ArrayList<ArrayList<Integer>> resList = new ArrayList<ArrayList<Integer>>();
+        if (num == null || num.length <= 2)
+            return resList;
+        Arrays.sort(num);
+        for (int i = 0; i < num.length - 2; i++){
+            if (i > 0 && num[i] == num[i-1])
+                continue;
+            int j = i + 1;
+            int k = num.length-1;
+            while (j < k){
+                if (num[j] + num[k] < 0 - num[i])
+                    j++;
+                else if (num[j] + num[k] > 0 - num[i])
+                    k--;
+                else{
+                    ArrayList<Integer> res = new ArrayList<Integer>();
+                    res.add(num[i]);
+                    res.add(num[j]);
+                    res.add(num[k]);
+                    resList.add(res);
+                    do{j++;} while (j < k && num[j] == num[j-1]);
+                    do{k--;} while (j < k && num[k] == num[k+1]);
+                }
+            }
+        }
+        return resList;
+    }
+}
+
+
+
+

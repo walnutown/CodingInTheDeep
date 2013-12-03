@@ -57,3 +57,45 @@ public class Solution {
         return res;
     }
 }
+
+// DFS
+// Time Limit 
+public class Solution {
+    private int min;
+    public int ladderLength(String start, String end, HashSet<String> dict) {
+        min = Integer.MAX_VALUE;
+        Set<String> used = new HashSet<String>();
+        used.add(start);
+        getMinLength(start, end, dict, used, 1);
+        return min;
+    }
+    
+    public void getMinLength(String curr, String end, Set<String> dict, Set<String> used, int len){
+        Set<String> nexts = getNexts(used, dict, curr);
+        if (nexts.contains(end)){
+            min = Math.min(len, min);
+            return;
+        }
+        if (nexts.isEmpty())
+            return;
+        for (String next : nexts){
+            used.add(next);
+            getMinLength(next, end, dict, used, len+1);
+            used.remove(used.size()-1);
+        }
+    }
+    
+    public Set<String> getNexts(Set<String> used, Set<String> dict, String curr){
+        Set<String> nexts = new HashSet<String>();
+        for (int i = 0; i < curr.length(); i++){
+            StringBuilder next = new StringBuilder(curr);
+            for (char c = 'a'; c <= 'z'; c++){
+                next.setCharAt(i, c);
+                String next_word = next.toString();
+                if (dict.contains(next_word) && !used.contains(next_word) && !curr.equals(next_word))
+                    nexts.add(next_word);
+            }
+        }
+        return nexts;
+    }
+}

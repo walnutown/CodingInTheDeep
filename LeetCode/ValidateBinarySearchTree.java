@@ -39,3 +39,27 @@ public class Solution {
         inorderTraversal(node.right, treeArr);
     }
 }
+
+
+// #2 trial
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if (root == null)
+            return true;
+        ArrayList<Integer> arr = new ArrayList<Integer>();
+        inorderTraverse(root, arr);
+        for (int i = 1 ;i < arr.size(); i ++){
+            if (arr.get(i) <= arr.get(i-1))
+                return false;
+        }
+        return true;
+    }
+    
+    public void inorderTraverse(TreeNode root, ArrayList<Integer> arr){
+        if (root == null)
+            return;
+        inorderTraverse(root.left, arr);
+        arr.add(root.val);
+        inorderTraverse(root.right, arr);
+    }
+}

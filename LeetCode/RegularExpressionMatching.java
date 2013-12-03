@@ -89,4 +89,46 @@ public class Solution {
     }
 }
 
+// TLE, 3 cases: "", "a", "aa"
+// Last executed input: "aaaaaaaaaaaaab", "a*a*a*a*a*a*a*a*a*a*c"
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        // string matching problem, we can use recursion here
+        if (s == null || p == null)
+            return s ==null && p == null;
+        // ""
+        if (s.length() == 0){
+            if (p.length() == 0)
+                return true;
+            else if (p.length() == 1)
+                return false;
+            else if (p.charAt(1) == '*')
+                return isMatch(s, p.substring(2));
+            return false;
+        }
+        //"a"
+        if (s.length() == 1){
+            if (p.length() == 0)
+                return false;
+            else if (p.length() == 1)
+                return p.equals(s) || p.equals(".");
+            else if (p.charAt(1) == '*')
+                return p.charAt(0) == '.' || p.charAt(0) == s.charAt(0)? isMatch(s.substring(1), p.substring(2)) : isMatch(s, p.substring(2));
+            return false;
+        }
+        // "aa", "ab"
+        if (p.length() <= 1)
+            return false;
+        if (p.charAt(1) == '*'){
+            if (p.charAt(0) == '.' || p.charAt(0) == s.charAt(0))
+                return isMatch(s, p.substring(2)) || isMatch(s.substring(1), p.substring(2)) || isMatch(s.substring(1), p);
+            return isMatch(s, p.substring(2)) || isMatch(s.substring(1), p.substring(2)); // p.charAt(0) != s.charAt(0)
+        }else{
+            if (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.')
+                return isMatch(s.substring(1), p.substring(1));
+            return false;
+        }
+    }
+}
+
 

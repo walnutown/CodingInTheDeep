@@ -55,3 +55,44 @@ public class Solution {
         return res;
     }
 }
+
+// #trial2
+class Solution {
+public:
+    vector<int> plusOne(vector<int> &digits) {
+        if (digits.size() == 0)
+            return digits;
+        int carry = 1;
+        for (int i = digits.size()-1 ; i >= 0; i--){
+            int curr = digits[i];
+            digits[i] = (curr + carry ) % 10;
+            carry = (curr + carry )/ 10;
+        }
+        if (carry > 0){
+            vector<int> res;
+            res.push_back(1);
+            for (int i = 0; i < digits.size() ; i++){
+                res.push_back(digits[i]);    
+            }
+            return res;
+        }
+        return digits;
+    }
+};
+// refactor, use vector.insert()
+class Solution {
+public:
+    vector<int> plusOne(vector<int> &digits) {
+        if (digits.size() == 0)
+            return digits;
+        int carry = 1;
+        for (int i = digits.size()-1 ; i >= 0; i--){
+            int curr = digits[i];
+            digits[i] = (curr + carry ) % 10;
+            carry = (curr + carry )/ 10;
+        }
+        if (carry > 0)
+            digits.insert(digits.begin(), 1);
+        return digits;
+    }
+};

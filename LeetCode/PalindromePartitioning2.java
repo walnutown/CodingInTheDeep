@@ -1,3 +1,4 @@
+
 // DFS 
 public class Solution {
     int cut;
@@ -45,6 +46,41 @@ public class Solution {
             end--;
         }
         
+        return true;
+    }
+}
+
+// trial 2
+public class Solution {
+    public int minCut(String s) {
+        // of course, we can use DFS here like in PP, just need a var to record the min cut
+        // we try to solve use DP here
+        int[] mem = new int[s.length() +1];
+        mem[0] = 0;
+        mem[1] = 0;
+        for (int i = 1; i <= s.length() ; i++){
+            mem[i] = Integer.MAX_VALUE;
+            for (int j = i-1; j > 0; j--){
+                if (isPalindrome(s.substring(j,i))){
+                    mem[i] = Math.min(mem[i], mem[j] + 1);
+                }
+            }
+            if (isPalindrome(s.substring(0,i)))
+                mem[i] = 0;
+        }
+        return mem[s.length()];
+    }
+    public boolean isPalindrome(String s){
+        if (s.length() <= 1)
+            return true;
+        int start = 0;
+        int end = s.length()-1;
+        while (start < end){
+            if (s.charAt(start) == s.charAt(end)){
+                start++;
+                end--;
+            }else{  return false;   }
+        }
         return true;
     }
 }

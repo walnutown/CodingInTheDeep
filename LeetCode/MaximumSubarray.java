@@ -63,6 +63,7 @@ public class Solution {
 
 
 // divide and conquer
+// use master method
 public class Solution {
     int len;
     public int maxSubArray(int[] A) {
@@ -108,8 +109,41 @@ public class Solution {
     
 }
 
+// we can have a DP solution with O(n) extra space
+public class Solution {
+    public int maxSubArray(int[] A) {
+        if (A == null || A.length == 0) return 0;
+        int[] mem = new int[A.length + 1];
+        mem[1] = A[0];
+        int max = mem[1];
+        for (int i = 2; i <= A.length; i++){
+            mem[i] = Math.max(mem[i-1] + A[i-1], A[i-1]);
+            max = Math.max(max, mem[i]);
+        }
+        return max;
+    }
+}
+
 
 // Maximum Subarray Problem can be transformed to Stock Problem,
 // but need O(n) extra space and pass the array two times (one time to create array, another time to get the max increment)
-
+public class Solution {
+    public int maxSubArray(int[] A) {
+        // use transformation
+        if (A == null || A.length == 0) return 0;
+        if (A.length == 1) return A[0];
+        int[] B = new int[A.length+1];
+        B[0] = 0;
+        for (int i = 1; i <= A.length; i++){
+            B[i] = B[i-1] + A[i-1];
+        }
+        int min = B[0];
+        int max = Integer.MIN_VALUE;
+        for (int i = 1; i < B.length; i++){
+            max = Math.max(B[i] - min, max);
+            min = Math.min(min, B[i]);
+        }
+        return max;
+    }
+}
 
