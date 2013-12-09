@@ -41,3 +41,33 @@ public class Solution {
         
     }
 }
+
+
+// Runtime error
+// Last executed input: {1,2}
+
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null)
+            return head;
+        // at least one node here
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+        ListNode prev = dum;
+        ListNode curr = head;
+        int i = 1;
+        while (curr.next != null){
+            if ((i & 0x01) > 0){
+                // swap here
+                ListNode next = curr.next;
+                curr.next = next.next;
+                prev.next = next;
+                next.next = curr;
+            }
+            i++;
+            prev = curr;            // prev = prev.next
+            curr = curr.next;       // curr =prev.next
+        }
+        return dum.next;
+    }
+}
