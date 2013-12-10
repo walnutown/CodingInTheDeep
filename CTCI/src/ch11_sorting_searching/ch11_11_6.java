@@ -10,9 +10,9 @@ public class ch11_11_6 {
     */
    public static void main(String[] args) {
       int[][] matrix = new int[][]{{1,2,3}, {4,5,6},{7,8,9}};
-      int num = 5;
+      int num = 9;
       printMatrix(matrix);
-      System.out.println(matrixSearch(matrix, 5));
+      System.out.println(matrixSearch(matrix, num));
       
    }
    
@@ -24,25 +24,22 @@ public class ch11_11_6 {
    
    
    public static String matrixSearch(int[][] matrix, int num){
-      StringBuilder sb = new StringBuilder();
       int i = matrix[0].length -1 ;
-      while(i >= 0 && num < matrix[0][i]){
+      while(i >= 0){
+         if (num == matrix[0][i])
+            return "(0, " + i + ")";
+         if (num > matrix[0][i]){
+            int j = matrix.length-1; // can use binary search here to optimize
+            while (j > 0){
+               if (matrix[j][i] == num){
+                  return "(" + j + ", " + i + ")";
+               }
+               j--;
+            }
+         }
          i--;
       }
-      int j = 0;
-      while (j < matrix.length){
-         if (matrix[j][i] == num){
-            break;
-         }else if (matrix[j][i] < num){
-            j++;
-         }else{
-            return "Element Not Found";
-         }
-      }
-      sb.append(j);
-      sb.append(" , ");
-      sb.append(i);
-      return sb.toString();
+      return "Element Not Found";
    }
 
 }

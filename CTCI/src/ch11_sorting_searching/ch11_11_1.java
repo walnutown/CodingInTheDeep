@@ -14,7 +14,7 @@ public class ch11_11_1 {
    public static void main(String[] args) {
       // TODO Auto-generated method stub
       int[] a = new int[7];
-      a[0] = -4;
+      a[0] = 6;
       a[1] = 20;
       int[] b = new int[]{1,3,5,7,9};
       System.out.println(Arrays.toString(a));
@@ -35,6 +35,12 @@ public class ch11_11_1 {
             k--;
          }
          i--;
+      }
+      // IMPORTANT here : never never forget this step !!!
+      while (k >= 0){
+         a[i] = b[k];
+         i--;
+         k--;
       }
    }
 }
