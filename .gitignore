@@ -8,3 +8,9 @@
 *.jpg
 
 LeetCodeTracker.numbers/Metadata/DocumentIdentifier
+
+*.class
+
+CTCI/.classpath
+
+CTCI/.project
