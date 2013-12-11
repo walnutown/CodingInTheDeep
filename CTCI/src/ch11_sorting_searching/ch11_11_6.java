@@ -10,9 +10,9 @@ public class ch11_11_6 {
     */
    public static void main(String[] args) {
       int[][] matrix = new int[][]{{1,2,3}, {4,5,6},{7,8,9}};
-      int num = 9;
+      int num = 7;
       printMatrix(matrix);
-      System.out.println(matrixSearch(matrix, num));
+      System.out.println(matrixSearch2(matrix, num));
       
    }
    
@@ -41,5 +41,21 @@ public class ch11_11_6 {
       }
       return "Element Not Found";
    }
+   
+   public static String matrixSearch2(int[][] matrix, int num){
+      int col = matrix[0].length - 1;
+      int row = 0;
+      while (col >= 0 && row < matrix.length){
+         if (matrix[row][col] == num)
+            return "(" + row + "," + col + ")";
+         else if (matrix[row][col] > num)
+            col--;
+         else
+            row++;
+      }
+      return "Element Not Found";
+   }
 
 }
+
+// haven't reviewed the Solution#2 : binary search
