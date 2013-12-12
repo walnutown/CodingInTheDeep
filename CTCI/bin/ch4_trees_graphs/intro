@@ -1,0 +1,24 @@
+Binary Tree vs. Binary Search Tree
+BST: left < root < right
+
+Balanced vs. Unbalanced
+Balanced tree: 
+	depth of subtrees will not vary by more than a certain amount.
+	it doesn't mean that the left and right subtrees are exactly the same size.
+
+Full and Complete:
+	have exactly 2^n -1 nodes
+	
+Binary tree traversal:
+	in-order, pre-order, post-order
+
+Tree Balancing: 
+	Red-Black Trees and AVL Trees
+
+Trie:
+
+Graph Traversal:
+	DFS
+	BFS
+	remember to mark the visited node to avoid cycle
+	
