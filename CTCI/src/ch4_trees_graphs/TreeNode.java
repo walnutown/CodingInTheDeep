@@ -12,6 +12,30 @@ public class TreeNode {
       left = null;
       right = null;
    }
+   // create a minimal height BST with the given array
+   public TreeNode(int[] arr){
+      if (arr == null){
+         try {
+            throw new Exception("Initializaiton Failed");
+         } catch (Exception e) {
+            e.printStackTrace();
+         }
+      }
+      TreeNode node = buildTree(arr, 0, arr.length-1);
+      this.val = node.val;
+      this.left = node.left;
+      this.right = node.right;
+   }
+   
+   public static TreeNode buildTree(int[] arr, int start, int end){
+      if (start > end)
+         return null;
+      int mid = (start + end) >> 1;
+      TreeNode root = new TreeNode(arr[mid]);
+      root.left = buildTree(arr, start, mid-1);
+      root.right = buildTree(arr, mid+1, end);
+      return root;
+   }
 
    public String printTree() {
       StringBuilder sb = new StringBuilder();
@@ -41,6 +65,6 @@ public class TreeNode {
    }
    
    public String toString(){
-      return val+" ";
+      return val+"";
    }
 }

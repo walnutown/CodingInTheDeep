@@ -1,5 +1,7 @@
 package ch4_trees_graphs;
 
+import java.util.List;
+
 public class ch4_9 {
 
    /*
@@ -21,6 +23,10 @@ public class ch4_9 {
       root.left = buildTree(arr, start, mid-1);
       root.right = buildTree(arr, mid+1, end);
       return root;
+   }
+   
+   public static List<TreeNode> getPaths(TreeNode root){
+      
    }
 
 }
