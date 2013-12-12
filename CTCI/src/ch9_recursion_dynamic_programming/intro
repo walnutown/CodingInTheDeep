@@ -1,0 +1,18 @@
+Questions can be solved:
+	when you solve the problem like "find nth number..." or "implement a method to compute all...", it's likely
+	that this is a recursive problem
+
+Approach:
+	Base case + Build
+	<1> Bottom Up:
+			start with knowing how to solve the problem for a simple case.
+			the key here is to think about how you can build the solution for one case off of the previous case
+	<2>	Top Down:
+			think about how to divide the problem for case N into sub-problems. 
+			Be careful of overlap between the case.
+			
+Dynamic Programming:
+	Recursive with cache			
+
+Comparison with Iterative
+	all recursive code can be implemented iteratively. So, it's a topic to talk with the interviewee. 
