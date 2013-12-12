@@ -6,11 +6,14 @@ import java.util.Queue;
 public class TreeNode {
    public int val;
    public TreeNode left, right;
+   public TreeNode parent;
+   private static int pre_index;
 
    public TreeNode(int val) {
       this.val = val;
       left = null;
       right = null;
+      parent = null;    
    }
    // create a minimal height BST with the given array
    public TreeNode(int[] arr){
@@ -25,15 +28,50 @@ public class TreeNode {
       this.val = node.val;
       this.left = node.left;
       this.right = node.right;
+      this.parent = null;
    }
-   
-   public static TreeNode buildTree(int[] arr, int start, int end){
+   // construct a tree from in-order and pre-order traversal arrays
+   public TreeNode(int[] in, int[] pre){
+      // skip valid check for arrays here
+      pre_index = 0;
+      TreeNode node = buildTree (in, pre, 0, in.length-1);
+      this.val = node.val;
+      this.left = node.left;
+      this.right = node.right;
+      this.parent = null;
+   }
+   // create a minimal height BST with the given array
+   public TreeNode buildTree(int[] arr, int start, int end){
       if (start > end)
          return null;
       int mid = (start + end) >> 1;
       TreeNode root = new TreeNode(arr[mid]);
       root.left = buildTree(arr, start, mid-1);
       root.right = buildTree(arr, mid+1, end);
+      if (root.left != null)
+         root.left.parent = root;
+      if (root.right != null)
+         root.right.parent = root;
+      return root;
+   }
+   // construct a tree from in-order and pre-order traversal arrays
+   public TreeNode buildTree(int[] in, int[] pre, int in_start, int in_end){
+      if (in_start > in_end)
+         return null;
+      TreeNode root = new TreeNode(pre[pre_index++]);
+      int in_root_index = 0;
+      for (int i = 0; i < in.length; i++){
+         if (in[i] == root.val){
+            in_root_index = i;
+            break;
+         }
+      }
+      root.left = buildTree(in, pre, in_start, in_root_index-1);
+      root.right = buildTree(in, pre, in_root_index+1, in_end);
+      if (root.left != null)
+         root.left.parent = root;
+      if (root.right != null)
+         root.right.parent = root;
       return root;
    }
 

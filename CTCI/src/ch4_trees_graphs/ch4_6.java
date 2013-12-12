@@ -7,18 +7,37 @@ public class ch4_6 {
     * a given node in a BST. You may assume that each node has a link to its parent.
     */
    public static void main(String[] args) {
-      // TODO Auto-generated method stub
-
+      int[] arr = new int[]{1,3,5,7, 9, 14, 23, 32};
+      TreeNode root = new TreeNode(arr);
+      TreeNode n = root.right.right.right;
+      System.out.println(root.printTree());
+      System.out.println(n);
+      System.out.println(findInorderSuccessor(root, n));
    }
    
-   public static TreeNode buildTree(int[] arr, int start, int end){
-      if (start > end)
+   public static TreeNode findInorderSuccessor(TreeNode root, TreeNode n){
+      if (n == null)
          return null;
-      int mid = (start + end) >> 1;
-      TreeNode root = new TreeNode(arr[mid]);
-      root.left = buildTree(arr, start, mid-1);
-      root.right = buildTree(arr, mid+1, end);
-      return root;
+      // has right subtree
+      if (n.right != null)
+         return findLeftMostNode(n.right);
+      // track back until on the left subtree of parent node or to the root 
+      TreeNode curr = n;
+      TreeNode parent = curr.parent;
+      while (parent != null && parent.left != curr){
+         curr = parent;
+         parent = curr.parent;
+      }
+      return parent;
    }
-
+   
+   public static TreeNode findLeftMostNode(TreeNode root){
+      if (root == null)
+         return null;
+      TreeNode p = root;
+      while (p.left != null){
+         p = p.left;
+      }
+       return p;        
+   }
 }

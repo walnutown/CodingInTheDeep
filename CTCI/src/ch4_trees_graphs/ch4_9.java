@@ -1,6 +1,6 @@
 package ch4_trees_graphs;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ch4_9 {
 
@@ -9,24 +9,42 @@ public class ch4_9 {
     * The path does not need to start or end at the root or a leaf
     */
    public static void main(String[] args) {
-      int[] arr1 = new int[]{50,3,5,7, 9, 14, 23, 32};
-      int[] arr2 = new int[]{50,3,5};
-      TreeNode t1 = buildTree(arr1, 0, arr1.length-1);
-      TreeNode t2 = buildTree(arr2, 0, arr2.length-1);
+      int[] in = new int[]{4,2,5,1,6,3};
+      int[] pre = new int[]{1,2,4,5,3,6};
+      TreeNode root = new TreeNode(in, pre);
+      System.out.println(root.printTree());
+      for (ArrayList<TreeNode> list : getPaths(root, 7)) {
+         System.out.println(list.toString());
+      }
    }
    
-   public static TreeNode buildTree(int[] arr, int start, int end){
-      if (start > end)
-         return null;
-      int mid = (start + end) >> 1;
-      TreeNode root = new TreeNode(arr[mid]);
-      root.left = buildTree(arr, start, mid-1);
-      root.right = buildTree(arr, mid+1, end);
-      return root;
+   // record the path from root to current node, and trace back from the current node, 
+   // through the path to check if path sum meets goal 
+   public static ArrayList<ArrayList<TreeNode>> getPaths(TreeNode root, int sum){
+      ArrayList<ArrayList<TreeNode>> paths = new ArrayList<ArrayList<TreeNode>>();
+      if (root == null)
+         return paths;
+      finder(root, sum, paths, new ArrayList<TreeNode>(), 0);
+      return paths;
    }
    
-   public static List<TreeNode> getPaths(TreeNode root){
-      
+   public static void finder(TreeNode root, int sum, ArrayList<ArrayList<TreeNode>> paths, ArrayList<TreeNode> path, int dep){
+      if (root == null)
+         return;
+      path.add(root);
+      int path_sum = 0;
+      for (int i = dep; i >= 0; i--){
+         path_sum += path.get(i).val;
+         if (path_sum == sum){
+            ArrayList<TreeNode> tmp = new ArrayList<TreeNode>();
+            for (int j = i; j <= dep; j++)
+               tmp.add(path.get(j));
+            paths.add(tmp);
+         }
+      }
+      finder(root.left, sum, paths, path, dep+1);
+      finder(root.right, sum, paths, path, dep+1);
+      path.remove(path.size()-1);
    }
 
 }
