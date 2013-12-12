@@ -1,0 +1,4 @@
+singly linked list vs. doubly linked list
+
+The runner technique
+	iterate through the linked list with two pointers simultaneously, with one ahead of the other
