@@ -126,3 +126,19 @@ public class Solution {
         return min;
     }
 }
+
+
+//# trial 3
+public class Solution {
+    public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
+        int[] path_sum = new int[triangle.size()+1];  // ATTENTION: array size is important here
+        for (int level = triangle.size()-1; level >= 0; level--){
+            ArrayList<Integer> curr_line = triangle.get(level);
+            for (int j = 0; j< curr_line.size(); j++){
+                path_sum[j] = curr_line.get(j) + Math.min(path_sum[j], path_sum[j+1]);
+            }
+        }
+        return path_sum[0];
+    }
+}
+

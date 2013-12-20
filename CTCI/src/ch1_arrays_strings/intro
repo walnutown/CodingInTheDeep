@@ -1,0 +1,11 @@
+ArrayList:
+	when the array is full, the array doubles in size;
+	each doubling takes O(n) time, but happens so rarely that its amortized time is still O(1)
+
+Auto-boxing:
+	cast primitive type into object so that it can be inserted into arrayList, map or set
+	
+StringBuilder / StringBuffer:
+	StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization.
+	When possible, it is recommended that this class be used in preference to StringBuffer as it will be 
+	faster under most implementations.
