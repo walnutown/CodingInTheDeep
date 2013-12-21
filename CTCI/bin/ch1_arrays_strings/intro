@@ -9,3 +9,42 @@ StringBuilder / StringBuffer:
 	StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization.
 	When possible, it is recommended that this class be used in preference to StringBuffer as it will be 
 	faster under most implementations.
+	
+	
+ASCII:
+	ASCII is a seven-bit encoding technique which assigns a number to each of the 128 characters used most
+	frequently in American English. This allows most computers to record and display basic text. ASCII does
+	not include symbols frequently used in other countries, such as the British pound symbol or the German
+	umlaut. ASCII is understood by almost all email and communications software.
+	
+ISO 8859:
+	is an eight-bit extension to ASCII developed by ISO (the International Organization for Standardization).
+	ISO 8859 includes the 128 ASCII characters along with an additional 128 characters, such as the British 
+	pound symbol and the American cent symbol. Several variations of the ISO 8859 standard exist for different
+	language families:
+
+	Latin-1 (Western European languages)
+
+	Latin-2 (Non-Cyrillic Central and Eastern European languages)
+
+	Latin-3 (Southern European languages and Esperanto)
+
+	Latin-5 (Turkish)
+
+	Latin-6 (Northern European and Baltic languages)
+
+	8859-5 (Cyrillic)
+
+	8859-6 (Arabic)
+
+	8859-7 (Greek)
+
+	8859-8 (Hebrew)
+	Not all email or communications software can understand ISO-8859 character sets.
+	
+Unicode:
+	Unicode is an attempt by ISO and the Unicode Consortium to develop a coding system for electronic text 
+	that includes every written alphabet in existence. Unicode uses 8-, 16-, or 32-bit characters depending
+	on the specific representation, so Unicode documents often require up to twice as much disk space as ASCII
+	or Latin-1 documents. The first 256 characters of Unicode are identical to Latin-1. Not all email or 
+	communications software can understand the Unicode character set.

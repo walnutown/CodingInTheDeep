@@ -10,10 +10,11 @@ public class ch1_1 {
     */
    public static void main(String[] args) {
       // TODO Auto-generated method stub
-      System.out.println(isUnique_inPlace("abc"));
-      System.out.println(isUnique_oneRun("abc"));
+      System.out.println(isUnique_inPlace("abca"));
+      System.out.println(isUnique_oneRun("abca"));
+      System.out.println(isUnique_constSpace("abca"));
    }
-   // O(lgn)
+   // O(nlgn)
    public static boolean isUnique_inPlace(String str){
       char[] ch_arr = str.toCharArray();
       Arrays.sort(ch_arr);
@@ -23,7 +24,9 @@ public class ch1_1 {
       }
       return true;
    }
+   
    // decide whether it's unicode character or ASCII character
+   // ASCII: 128; ISO8859: 256, Unicode : 2^8, 2^16, 2^32 
    public static boolean isUnique_oneRun(String str){
       boolean[] char_set = new boolean[256];
       if (str.length() > 256)   return false;
@@ -31,7 +34,20 @@ public class ch1_1 {
          if (char_set[str.charAt(i)] == true)
             return false;
          else
-            char_set[str.charAt(i)] = false;
+            char_set[str.charAt(i)] = true;
+      }
+      return true;
+   }
+   
+   // use bit vector, only support 32bit
+   // the string only uses the lower case letter a through z 
+   public static boolean isUnique_constSpace(String str){
+      int checker = 0;
+      for (int i = 0; i < str.length(); i++){
+         int val = str.charAt(i) - 'a';
+         if ((checker & (1<<val)) > 0)
+            return false;
+         checker |= (1<< val);
       }
       return true;
    }
