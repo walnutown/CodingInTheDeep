@@ -11,7 +11,8 @@ public class ch1_7 {
    public static void main(String[] args) {
       int[][] matrix = new int[][] { { 1, 0, 3 }, { 4, 5, 6 }, { 0, 8, 9 } };
       printMatrix(matrix);
-      setZeros(matrix);
+      //setZeros(matrix);
+      setZeros_bitVector(matrix);
       printMatrix(matrix);
    }
 
@@ -44,16 +45,11 @@ public class ch1_7 {
          }
       }
       // set others zeros
-      for (int i = 0; i < h; i++) {
-         if (matrix[i][0] == 0) {
-            for (int j = 1; j < w; j++)
+      for (int i = 1; i < h; i++) {
+         for (int j = 1; j < w; j++) {
+            if (matrix[0][j] == 0 || matrix[i][0] == 0) {
                matrix[i][j] = 0;
-         }
-      }
-      for (int i = 0; i < w; i++) {
-         if (matrix[0][i] == 0) {
-            for (int j = 1; j < h; j++)
-               matrix[j][i] = 0;
+            }
          }
       }
       // set first row and col zeros if necessary
@@ -65,6 +61,27 @@ public class ch1_7 {
          for (int i = 0; i < h; i++)
             matrix[i][0] = 0;
       }      
+   }
+   // use bit vector to save space
+   public static void setZeros_bitVector(int[][] matrix){
+      int row = 0;
+      int col = 0;
+      for (int i = 0; i < matrix.length; i++) {
+         for (int j = 0; j < matrix[0].length; j++) {
+            if (matrix[i][j] == 0) {
+               row |= (1<< i);
+               col |= (1<< j);
+            }
+         }
+      }
+      for (int i = 0; i < matrix.length; i++) {
+         for (int j = 0; j < matrix[0].length; j++) {
+            if ((row & (1<<i)) > 0 || (col & (1<<j)) > 0) {
+               matrix[i][j] = 0;
+            }
+         }
+      }
+      
    }
 
    public static void printMatrix(int[][] matrix) {
