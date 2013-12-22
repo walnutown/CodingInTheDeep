@@ -109,3 +109,18 @@ public class Solution {
         return x;
     }
 }
+
+// refactor, Dec 21
+public class Solution {
+    public double pow(double x, int n) {
+        return power(x, (long) n);
+    }
+    public double power(double x, long n){
+        if (n == 0)
+            return 1.0;
+        double val = power(x,n/2); 
+        if (n%2 == 0)   return val * val;
+        if (n > 0)  return val * val * x;
+        return val * val / x;
+    }
+}
