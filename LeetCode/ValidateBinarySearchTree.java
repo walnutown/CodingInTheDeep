@@ -39,3 +39,18 @@ public class Solution {
         inorderTraversal(node.right, treeArr);
     }
 }
+
+
+// min-max, Accepted, Dec 24
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return checker(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    public boolean checker(TreeNode root, int min, int max){
+        if (root == null)
+            return true;
+        if (root.val <= min || root.val >= max)
+            return false;
+        return checker(root.left, min, root.val) && checker(root.right, root.val, max);
+    }
+}

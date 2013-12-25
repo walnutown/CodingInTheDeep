@@ -121,6 +121,6 @@ public class Solution {
         double val = power(x,n/2); 
         if (n%2 == 0)   return val * val;
         if (n > 0)  return val * val * x;
-        return val * val / x;
+        return val * val / x;           // notice not 1/(val*val*x) here, understand why
     }
 }
