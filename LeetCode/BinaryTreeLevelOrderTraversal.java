@@ -101,3 +101,37 @@ public class Solution {
         return res;
     }
 }
+
+
+
+// Accepted, Dec 24, same as CTCI ch4_4
+public class Solution {
+    public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (root == null)
+            return res;
+        Queue<TreeNode> qu = new LinkedList<TreeNode>();
+        qu.add(root);
+        int curr_num = 1, next_num = 0;
+        ArrayList<Integer> r = new ArrayList<Integer>();
+        while (!qu.isEmpty()){
+            TreeNode curr = qu.poll();
+            r.add(curr.val);
+            if (curr.left != null){
+                qu.add(curr.left);
+                next_num++;
+            }
+            if (curr.right != null){
+                qu.add(curr.right);
+                next_num++;
+            }
+            if (--curr_num == 0){           // refactor here
+                curr_num = next_num;
+                next_num = 0;
+                res.add(new ArrayList<Integer>(r));
+                r.clear();
+            }
+        }
+        return res;
+    }
+}

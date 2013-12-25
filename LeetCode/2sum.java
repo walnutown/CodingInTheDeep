@@ -90,3 +90,54 @@ public class Solution {
         
     }
 }
+
+
+// Submission Result: Wrong Answer
+
+// Input:  [3,2,4], 6
+// Output: 1, 1
+// Expected:   2, 3
+public class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        Map<Integer, Integer> index_map = new HashMap<Integer, Integer>();
+        int[] res = new int[2];
+        if (numbers == null || numbers.length <= 1)
+            return null;
+        for (int i = 0; i < numbers.length; i++){
+            index_map.put(numbers[i], i+1);
+        }
+        for (int i = 0; i < numbers.length; i++){
+            if (index_map.containsKey(target - numbers[i])){
+                res[0] = i+1;
+                res[1] = index_map.get(target-numbers[i]);
+                Arrays.sort(res);
+                break;
+            }
+        }
+        return res;
+    }
+}
+
+
+// Accepted, Dec 24, use map to track the index of number
+public class Solution {
+    public int[] twoSum(int[] numbers, int target) {
+        Map<Integer, Integer> index_map = new HashMap<Integer, Integer>();
+        int[] res = new int[2];
+        if (numbers == null || numbers.length <= 1)
+            return null;
+        for (int i = 0; i < numbers.length; i++){
+            index_map.put(numbers[i], i+1);
+        }
+        for (int i = 0; i < numbers.length; i++){
+            int second = target - numbers[i];
+            if (index_map.containsKey(second) && index_map.get(second) != i+1){   // index cannot be the same here
+                res[0] = i+1;
+                res[1] = index_map.get(second);
+                Arrays.sort(res);
+                break;
+            }
+        }
+        return res;
+    }
+}

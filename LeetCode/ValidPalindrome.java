@@ -57,3 +57,25 @@ public class Solution {
         return true;
     }
 }
+
+// Accepted, Dec 24
+public class Solution {
+    public boolean isPalindrome(String s) {
+        if (s == null || s.length() == 0)
+            return true;
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < s.length(); i++){
+            char ch = s.charAt(i);
+            if (ch>='a' && ch<='z'|| ch>='0' && ch<='9')
+                sb.append(ch);
+            else if ( ch>='A' && ch<='Z' )
+                sb.append(Character.toLowerCase(ch));
+        }
+        int i = 0, j = sb.length()-1;
+        while (i < j){
+            if (sb.charAt(i++) != sb.charAt(j--))
+                return false;
+        }
+        return true;
+    }
+}

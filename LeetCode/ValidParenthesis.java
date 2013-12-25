@@ -77,3 +77,52 @@ public class Solution {
         return true;
     }
 }
+
+
+// Submission Result: Wrong Answer
+
+// Input:  "["
+// Output: true
+// Expected:   false
+
+public class Solution {
+    public boolean isValid(String s) {
+        if (s == null || s.length() == 0)
+            return true;
+        Stack<Character> st = new Stack<Character>();
+        for (int i = 0 ; i < s.length(); i++){
+            char ch = s.charAt(i);
+            if (ch == '[' || ch == '(' || ch == '{')    
+                st.push(ch);
+            else if (ch == ']' || ch == ')' || ch == '}'){
+                if (st.isEmpty())   return false;
+                char left = st.pop();
+                if ((ch == ']' && left != '[') || (ch == ')' && left != '(') || (ch == '}' && ch != '{'))
+                    return false;
+            }else return false;
+        }
+        return true;
+    }
+}
+
+
+// Accepted, Dec 24
+public class Solution {
+    public boolean isValid(String s) {
+        if (s == null || s.length() == 0)
+            return true;
+        Stack<Character> st = new Stack<Character>();
+        for (int i = 0 ; i < s.length(); i++){
+            char ch = s.charAt(i);
+            if (ch == '[' || ch == '(' || ch == '{')    
+                st.push(ch);
+            else if (ch == ']' || ch == ')' || ch == '}'){
+                if (st.isEmpty())   return false;
+                char left = st.pop();
+                if ((ch == ']' && left != '[') || (ch == ')' && left != '(') || (ch == '}' && left != '{'))
+                    return false;
+            }else return false;
+        }
+        return st.isEmpty();            // don't forget to check st here
+    }
+}

@@ -42,3 +42,27 @@ public class Solution {
         
     }
 }
+
+
+// Accepted, Dec24.
+public class Solution {
+    public void merge(int A[], int m, int B[], int n) {
+        // A has enough space to hold B
+        if (n == 0)
+            return;
+        int i = m-1, j = n-1;
+        int index = A.length-1;
+        while (i >= 0 && j >= 0){
+            if (A[i] > B[j]){
+                A[index] = A[i];
+                i--;
+            }else{
+                A[index] = B[j];
+                j--;
+            }
+            index--;
+        }
+        while (j >= 0)
+            A[index--] = B[j--];    // no need to copy remaing elements in A, understand why
+    }
+}
