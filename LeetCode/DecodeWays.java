@@ -132,3 +132,50 @@ public class Solution {
       }
       return res[0];
    }
+
+
+
+// Submission Result: Runtime Error
+
+// Last executed input:    "0"
+public class Solution {
+    public int numDecodings(String s) {
+        if (s == null || s.length() == 0)   return 0;
+        int[] mem = new int[s.length()];
+        mem[0] = 0;
+        mem[1] = 1;
+        for (int i = 2; i <= s.length(); i++){
+            int curr = Integer.parseInt(s.substring(i-1,i));
+            int prev = Integer.parseInt(s.substring(i-2,i-1));
+            if (curr == 0 ){
+                if (prev == 1 || prev == 2) mem[i] = mem[i-1];
+                else return 0;
+            }else{
+                int two_digits = Integer.parseInt(s.substring(i-2,i));
+                if ( two_digits <= 26 && two_digits > 10)   mem[i] = mem[i-1] + mem[i-2];
+                else    mem[i] = mem[i-1];
+            }
+        }
+        return mem[s.length()];
+    }
+}
+
+// Accepted, Dec 25, 
+public class Solution {
+    public int numDecodings(String s) {
+        if (s == null || s.length() == 0)   return 0;
+        int[] mem = new int[s.length()+1];
+        mem[0] = 1;
+        for (int i = 1; i <= s.length(); i++){
+            int curr = s.charAt(i-1) - '0';
+            if (curr == 0 ) mem[i] = 0;         // check '0' first
+            else    mem[i] = mem[i-1];
+            if (i -2 >= 0){
+                int prev = s.charAt(i-2) - '0';
+                if (prev==1 || (prev==2 && curr>=0 && curr<=6))    mem[i] += mem[i-2];
+            }
+            if (mem[i] == 0)    return 0;       // if 0, invalid string
+        }
+        return mem[s.length()];
+    }
+}

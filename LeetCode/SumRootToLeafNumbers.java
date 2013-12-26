@@ -45,3 +45,24 @@ public class Solution {
     }
     
 }
+
+// Accepted, Dec 25, DFS
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+        if (root == null)   return 0;
+        // mem[0] -> sum
+        int[] mem = new int[1];
+        findPath(root, mem, 0);
+        return mem[0];
+    }
+    
+    public void findPath(TreeNode root, int[] mem, int value){
+        value = 10 * value + root.val;
+        if (root.left == null && root.right == null){
+            mem[0] += value;
+            return;
+        }
+        if (root.left != null)  findPath(root.left, mem, value);
+        if (root.right != null) findPath(root.right, mem, value);
+    }
+}

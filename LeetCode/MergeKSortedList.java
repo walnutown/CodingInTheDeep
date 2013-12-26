@@ -178,7 +178,7 @@ public class Solution {
         while (qu.size() > 0){
             ListNode curr = qu.poll();
             if (curr != null){
-                res.next = new ListNode(curr.val);
+                res.next = new ListNode(curr.val);              // notice that we don't have to create new ListNode here
                 res = res.next;
                 ListNode next = curr.next;
                 if (next != null)
@@ -186,5 +186,31 @@ public class Solution {
             }
         }
         return result.next;
+    }
+}
+
+
+// Accepted, Dec 25
+public class Solution {
+    public ListNode mergeKLists(ArrayList<ListNode> lists) {
+        // heap sort, O (nlgk)
+        if (lists == null || lists.size() == 0) return null;
+        Comparator<ListNode> com = new Comparator<ListNode>(){
+            public int compare(ListNode l1, ListNode l2){
+                return l1.val - l2.val;
+            }
+        };
+        PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(lists.size(), com);
+        for (ListNode node : lists){
+            if (node != null)   heap.add(node);
+        }
+        ListNode res = new ListNode(0);
+        ListNode r = res;
+        while (!heap.isEmpty()){
+            r.next = heap.poll();
+            r = r.next;
+            if (r.next != null)  heap.add(r.next);
+        }
+        return res.next;
     }
 }

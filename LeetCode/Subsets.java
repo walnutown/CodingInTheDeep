@@ -66,56 +66,107 @@ public class Solution {
     
 }
 
-
-// better one, no extra space
-    public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        result.add(new ArrayList<Integer>());
-        Arrays.sort(num);
-        
-        int previousSize =0;
-        for(int i=0; i< num.length;i++){
-            int size = result.size();
-            for(int j=0; j<size; j++){
-                if(i==0 || num[i]!=num[i-1]|| j>=previousSize){
-                    ArrayList<Integer> a = new ArrayList<Integer>(result.get(j));
-                    a.add(num[i]);
-                    result.add(a);
-                }
-            }
-            previousSize = size;
-        }
-        return result;
+// Output Limit Exceed, Dec 25, recursion
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res.add(new ArrayList<Integer>());
+        if (S == null || S.length == 0)     return res;
+        return finder(S, S.length-1);
     }
     
-    //hashSet version, extra space, bad
-    public ArrayList<ArrayList<Integer>> subsetsWithDup2(int[] num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        Arrays.sort(num);
-        return subsetsWithDup(num, num.length-1, new HashSet<ArrayList<Integer>>());
+    public ArrayList<ArrayList<Integer>> finder(int[] S, int index){
+        if (index < 0){
+             ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+             res.add(new ArrayList<Integer>());
+             return res;
+        }
+        ArrayList<ArrayList<Integer>> old_sets = finder(S, index-1);
+        ArrayList<ArrayList<Integer>> new_sets = new ArrayList<ArrayList<Integer>>(old_sets);
+        for (ArrayList<Integer> r : new_sets)
+            r.add(S[index]);
+        new_sets.addAll(old_sets);
+        return new_sets;
     }
-    public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num, int index, HashSet<ArrayList<Integer>> set){
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
-        if(index <0){
-            result.add(new ArrayList<Integer>());
-        }else{
-            result = subsetsWithDup(num, index -1, set);
-            int size = result.size();
-            for(int i=0; i<size; i++){
-                ArrayList<Integer> tmp = new ArrayList<Integer>(result.get(i));
-                tmp.add(num[index]);
-                if(!set.contains(tmp)){
-                    result.add(tmp);
-                    set.add(tmp);
-                }
+}
+// runtime error
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        // a set of distinct integers
+        // Elements in a subset must be in non-descending order
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res.add(new ArrayList<Integer>());
+        if (S == null || S.length == 0)     return res;
+        Arrays.sort(S);
+        return finder(S, S.length-1);
+    }
+    
+    public ArrayList<ArrayList<Integer>> finder(int[] S, int index){
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (index < 0){
+             res.add(new ArrayList<Integer>());
+             return res;
+        }
+        res = finder(S, index-1);
+        for (ArrayList<Integer> r : res){           // concurrent modificaiotn exception, res keeps changing 
+            ArrayList<Integer> new_set = new ArrayList<Integer>(r);
+            new_set.add(S[index]);
+            res.add(new_set);
+        }
+        return res;
+    }
+}
+// Accepted
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        // a set of distinct integers
+        // Elements in a subset must be in non-descending order
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res.add(new ArrayList<Integer>());
+        if (S == null || S.length == 0)     return res;
+        Arrays.sort(S);
+        return finder(S, S.length-1);
+    }
+    
+    public ArrayList<ArrayList<Integer>> finder(int[] S, int index){
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (index < 0){
+             res.add(new ArrayList<Integer>());
+             return res;
+        }
+        res = finder(S, index-1);
+        ArrayList<ArrayList<Integer>> new_subsets = new ArrayList<ArrayList<Integer>>();
+        for (ArrayList<Integer> r : res) {
+            ArrayList<Integer> new_set = new ArrayList<Integer>(r);
+            new_set.add(S[index]);
+            new_subsets.add(new_set);
+        }
+        res.addAll(new_subsets);
+        return res;
+    }
+}
+
+
+// DP, the best solution to the subset problem
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        // a set of distinct integers
+        // Elements in a subset must be in non-descending order
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res.add(new ArrayList<Integer>());
+        if (S == null || S.length == 0)     return res;
+        Arrays.sort(S);
+        for (int i=0; i<S.length; i++){
+            int size = res.size();
+            for (int j=0; j<size; j++){
+                ArrayList<Integer> new_set = new ArrayList<Integer>(res.get(j));
+                new_set.add(S[i]);
+                res.add(new_set);
             }
         }
-        return result;
+        return res;
     }
-
-
-
+}
 
 
 
