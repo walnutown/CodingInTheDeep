@@ -46,3 +46,22 @@ public class Solution {
         return len;
     }
 }
+
+// Accepted, Dec25
+public class Solution {
+    public int removeElement(int[] A, int elem) {
+        if (A==null || A.length==0) return 0;
+        int i=0, j=A.length-1;
+        while (i <= j){
+            if (A[i] == elem)   swap(A, i, j--);
+            else i++;
+        }
+        return j+1;
+    }
+    
+    public void swap(int[] A, int i, int j){
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
+    }
+}
