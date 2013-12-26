@@ -64,3 +64,39 @@ public class Solution {
        return (start+end)/2;
     }
 }
+
+// Submission Result: Time Limit Exceeded
+
+// Last executed input:  2147395599
+public class Solution {
+    public int sqrt(int x) {
+        if (x == 0)
+            return 0;
+        int start = 1, end = x;
+        while (start <= end){
+            int mid = (start + end) >>1;
+            long value = mid * mid;
+            if (value > x)  end = mid-1;
+            else if (value < x)  start = mid+1;
+            else return mid;
+        }
+        return start;
+    }
+}
+
+
+// Accepted, Dec 24
+public class Solution {
+    public int sqrt(int x) {
+        if (x < 2)  return x;
+        int start = 0, end = x;
+        while (end - start > 1){            // end - start > 1 => mid is different from start and end
+            int mid = (start + end) >>1;
+            int tmp = x/mid;                // use division here to avoid overflow
+            if (tmp > mid)  start = mid;
+            else if (tmp < mid)  end = mid;
+            else return mid;
+        }
+        return start;
+    }
+}
