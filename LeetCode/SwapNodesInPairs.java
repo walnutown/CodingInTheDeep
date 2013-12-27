@@ -55,7 +55,7 @@ public class Solution {
         dum.next = head;
         ListNode prev = dum;
         ListNode curr = head;
-        int i = 1;
+        int i = 1;                                  // no need to use count here, seee the code below
         while (curr.next != null){
             if ((i & 0x01) > 0){
                 // swap here
@@ -67,6 +67,26 @@ public class Solution {
             i++;
             prev = curr;            // prev = prev.next
             curr = curr.next;       // curr =prev.next
+        }
+        return dum.next;
+    }
+}
+
+
+// Accepted, Dec26
+public class Solution {
+    public ListNode swapPairs(ListNode head) {
+        if (head == null || head.next == null)  return head;
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+        ListNode p = head, p_prev = dum, p_next = null;
+        while (p != null && p.next != null){
+            p_next = p.next;
+            p.next = p_next.next;
+            p_next.next = p;
+            p_prev.next = p_next;
+            p_prev = p;
+            p = p.next;
         }
         return dum.next;
     }
