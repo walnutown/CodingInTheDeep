@@ -114,3 +114,51 @@ public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target
         return map.get(target);
     }
 
+
+
+// DFS, 
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (candidates == null || candidates.length == 0)   return res;
+        Arrays.sort(candidates);
+        finder(candidates, index, 0, target, res, new ArrayList<Integer>());
+        return res;
+    }
+    
+    public void finder(int[] candidates, int index, int sum, int target, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r){
+        if (sum > target)   return;
+        if (sum == target){                             // no need to use sum here, see the code below
+            res.add(new ArrayList<Integer>(r));
+            return;
+        }
+        for (int i = index; i < candidates.length; i++){
+            r.add(candidates[i]);
+            finder(candidates, i, sum+candidates[i], target, res, r);
+            r.remove(r.size()-1);
+        }
+    }
+}
+// Accepted, Dec 26
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (candidates == null || candidates.length == 0)   return res;
+        Arrays.sort(candidates);
+        finder(candidates, 0, target, res, new ArrayList<Integer>());
+        return res;
+    }
+    
+    public void finder(int[] candidates, int index, int target, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r){
+        if (target < 0)   return;
+        if (target == 0){
+            res.add(new ArrayList<Integer>(r));
+            return;
+        }
+        for (int i = index; i < candidates.length; i++){
+            r.add(candidates[i]);
+            finder(candidates, i, target - candidates[i], res, r);
+            r.remove(r.size()-1);
+        }
+    }
+}
