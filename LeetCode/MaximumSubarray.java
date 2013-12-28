@@ -1,39 +1,3 @@
-// partial works
-public class Solution {
-    
-    public int maxSubArray(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int len = A.length;
-        if (A == null && len == 0){
-            return 0;
-        }
-        if (len == 1){
-            return A[0];
-        }
-        int disSum = 0;
-        int[] mem = new int[len];
-        mem[0] = A[0];
-        for (int i = 1; i < len; i++){
-                int left = mem[i-1];
-                int right = A[i];
-                int both = left + disSum + right;
-                mem[i] = Math.max(both, Math.max(left, right));
-                if (mem[i] == left){
-                    disSum += A[i];
-                }
-                else if (mem[i] == right){
-                    disSum = 0;
-                }
-                else{
-                    disSum = 0;
-                }
-        }
-        
-        return mem[len-1];  
-    }  
-}
-
 // O(n) solution
 public class Solution {
     public int maxSubArray(int[] A) {
@@ -113,3 +77,61 @@ public class Solution {
 // but need O(n) extra space and pass the array two times (one time to create array, another time to get the max increment)
 
 
+
+
+
+
+// Submission Result: Wrong Answer
+// Input:  [-1]
+// Output: 0
+// Expected:   -1
+public class Solution {
+    public int maxSubArray(int[] A) {
+        if (A==null || A.length==0) return 0;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i=0; i<A.length; i++){
+            sum = sum+A[i] <= 0 ? 0 : sum+A[i];
+            max = Math.max(sum, max);
+        }
+        return max;
+    }
+}
+// Accepted
+public class Solution {
+    public int maxSubArray(int[] A) {
+        if (A==null || A.length==0) return 0;
+        int max = Integer.MIN_VALUE;
+        int sum = 0;
+        for (int i=0; i<A.length; i++){
+            sum += A[i];
+            max = Math.max(sum, max);
+            sum = sum<0 ? 0 : sum;
+        }
+        return max;
+    }
+}
+// Accepted, Divide and Conquer
+public class Solution {
+    public int maxSubArray(int[] A) {
+        if (A==null || A.length==0) return 0;
+        return finder(A, 0, A.length-1);
+    }
+    
+    public int finder(int[] A, int start, int end){
+        if (start > end)    return Integer.MIN_VALUE;
+        int mid = start + ((end - start)>>1);           // notice here, cannot omit the out-nested brackets
+        int left=Integer.MIN_VALUE, right=Integer.MIN_VALUE, sum=0;
+        for (int i=mid+1; i<=end; i++){
+            sum += A[i];
+            right = Math.max(sum,right);
+        }
+        sum = 0;
+        for (int i=mid-1; i>=start; i--){
+            sum += A[i];
+            left = Math.max(sum, left);
+        }
+        int mmax = A[mid] + Math.max(left, 0) + Math.max(right, 0);
+        return Math.max(mmax, Math.max(finder(A, start, mid-1), finder(A, mid+1, end)));
+    }
+}
