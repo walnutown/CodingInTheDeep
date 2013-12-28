@@ -78,3 +78,81 @@ public class Solution {
         }
     }
 }
+
+
+// Submission Result: Runtime Error
+
+// Last executed input:    "2"
+public class Solution {
+    ArrayList<String> res; 
+    public ArrayList<String> letterCombinations(String digits) {
+        ArrayList<String> res = new ArrayList<String>();
+        if (digits == null || digits.length() == 0)   return res;
+        Map<Integer, String> map = new HashMap<Integer, String>();
+        map.put(1, "");
+        map.put(2, "abc");
+        map.put(3, "def");
+        map.put(4, "ghi");
+        map.put(5, "jkl");
+        map.put(6, "mno");
+        map.put(7, "pqrs");
+        map.put(8, "tuv");
+        map.put(9, "wxyz");
+        map.put(0, " ");
+        finder(digits, 0, res, new StringBuilder(), map);
+        return res;
+    }
+    
+    public void finder(String digits, int index, ArrayList<String> res, StringBuilder sb, Map<Integer, String> map){
+        if (index == digits.length()){
+            res.add(sb.toString());
+            return;
+        }
+        String sets = map.get(digits.charAt(index));        // error here
+        for (int i=0; i < sets.length(); i++){
+            char ch = sets.charAt(i);
+            sb.append(ch);
+            finder(digits, index+1, res, sb, map);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+}
+// Accepted
+public class Solution {
+    ArrayList<String> res; 
+    public ArrayList<String> letterCombinations(String digits) {
+        ArrayList<String> res = new ArrayList<String>();
+        if (digits == null || digits.length() == 0){   
+            res.add("");
+            return res;
+        }
+        Map<Integer, String> map = new HashMap<Integer, String>();
+        map.put(1, "");
+        map.put(2, "abc");
+        map.put(3, "def");
+        map.put(4, "ghi");
+        map.put(5, "jkl");
+        map.put(6, "mno");
+        map.put(7, "pqrs");
+        map.put(8, "tuv");
+        map.put(9, "wxyz");
+        map.put(0, " ");
+        finder(digits, 0, res, new StringBuilder(), map);
+        return res;
+    }
+    
+    public void finder(String digits, int index, ArrayList<String> res, StringBuilder sb, Map<Integer, String> map){
+        if (index == digits.length()){
+            res.add(sb.toString());
+            return;
+        }
+        String sets = map.get(digits.charAt(index) - '0');
+        for (int i=0; i < sets.length(); i++){
+            char ch = sets.charAt(i);
+            sb.append(ch);
+            finder(digits, index+1, res, sb, map);
+            sb.deleteCharAt(sb.length()-1);
+        }
+    }
+    
+}

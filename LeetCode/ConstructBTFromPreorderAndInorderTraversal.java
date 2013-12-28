@@ -51,3 +51,46 @@ public class Solution {
         }
     }
 }
+
+
+// Submission Result: Runtime Error
+
+// Last executed input:    [1,2], [1,2]
+public class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0)   return null;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i=0; i<inorder.length; i++)
+            map.put(inorder[i], i);
+        return builder(preorder, 0, 0, map);
+    }
+    
+    public TreeNode builder(int[] preorder, int ps, int is, Map<Integer, Integer> map){
+        if (ps == preorder.length)  return null;
+        TreeNode root = new TreeNode(preorder[ps]);
+        int in_pos = map.get(preorder[ps]);
+        root.left = builder(preorder, ps+1, is, map);
+        root.right = builder(preorder, ps+in_pos-is+1, in_pos+1, map);
+        return root;
+    }
+}
+
+// Accepted, Dec 27
+public class Solution {
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0)   return null;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i=0; i<inorder.length; i++)
+            map.put(inorder[i], i);
+        return builder(preorder, 0, 0, inorder.length-1, map);
+    }
+    
+    public TreeNode builder(int[] preorder, int curr, int is, int ie, Map<Integer, Integer> map){
+        if (is > ie)    return null;
+        TreeNode root = new TreeNode(preorder[curr]);
+        int im = map.get(preorder[curr]);
+        root.left = builder(preorder, curr+1, is, im-1, map);
+        root.right = builder(preorder, curr+im-is+1, im+1, ie, map);
+        return root;
+    }
+}
