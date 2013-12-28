@@ -82,15 +82,6 @@ public class Solution {
 }
 
 // recursion, pass both
-/**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 public class Solution {
     int maxSum;
     public int maxPathSum(TreeNode root) {
@@ -123,4 +114,51 @@ public class Solution {
         return s;
     }
     
+}
+
+
+
+// TLE
+public class Solution {
+    public int maxPathSum(TreeNode root) {
+        if (root == null)   return 0;
+        int lmax = getMax(root.left);
+        int rmax = getMax(root.right);
+        int max = Math.max(Math.max(lmax, rmax), root.val);
+        max = Math.max(Math.max(lmax+root.val, rmax+root.val), lmax+root.val+rmax);
+        return Math.max(Math.max(maxPathSum(root.left), maxPathSum(root.right)), max);
+    }
+    
+    public int getMax(TreeNode root){
+        int[] max = new int[1];
+        DFS(root, 0, max);
+        return max[0];
+    }
+    
+    public void DFS(TreeNode root, int sum, int[] max){
+        if (root == null)   return;
+        sum += root.val;
+        max[0] = Math.max(max[0], sum);
+        DFS(root.left, sum, max);
+        DFS(root.right, sum, max);
+    }
+}
+
+// Accepted, Gloabl variable. 
+public class Solution {
+    int max = Integer.MIN_VALUE;
+    public int maxPathSum(TreeNode root) {
+        if (root ==null)    return 0;
+        getMax(root);
+        return max;
+    }
+    
+    public int getMax(TreeNode root){           // only return value of the max path that includes that root node
+        if (root == null)   return 0;           // in this case, we don't need DFS to get the path
+        int lmax = getMax(root.left);
+        int rmax = getMax(root.right);
+        int mmax = Math.max(Math.max(lmax+root.val, rmax+root.val), root.val);
+        max = Math.max(Math.max(mmax, lmax+rmax+root.val), max);
+        return mmax;
+    }
 }
