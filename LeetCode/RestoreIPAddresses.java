@@ -1,74 +1,3 @@
-// runtime error
-public class Solution {
-    ArrayList<ArrayList<String>> resList;
-    ArrayList<String> ipList;
-    ArrayList<String> res;
-    public ArrayList<String> restoreIpAddresses(String s) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        resList = new ArrayList<ArrayList<String>>();
-        res = new ArrayList<String>();
-        ipList = new ArrayList<String>();
-        int len = s.length();
-        if (len < 4){
-            return ipList;
-        }
-        DFS(s, 0, 1);
-        return ipList;
-    }
-    
-    public void DFS(String s, int start, int depth){
-        if (depth <= 4 && start >= s.length()){
-            return;
-        }
-        if (depth == 4 && start < s.length()){
-           if (isValid(s, start)){
-                    resList.add(new ArrayList<String>(res));
-                    printIP();
-                }
-           return;
-        }
-        
-        for (int i = 1; i <= 3; i++){
-            if (start + i <= s.length()){
-                String curr = s.substring(start, start + i);
-                res.add(curr);
-                DFS(s, start+i, depth+1);
-                res.remove(res.size()-1);
-            }
-        }
-    }
-    
-    public boolean isValid(String s, int start){
-        for (int i = 0; i < 3; i++){
-            int curr = Integer.parseInt(res.get(i));
-            if (curr > 255){
-                return false;
-            }
-        }
-        String last = s.substring(start, s.length());
-        if (Integer.parseInt(last) > 255){
-            return false;
-        }
-        
-        return true; 
-    }
-    
-    public void printIP(){
-        for (int i = 0; i< resList.size(); i++){
-            ArrayList<String> curr = resList.get(i);
-            StringBuilder temp = new StringBuilder();
-            for (int j =0; j < 4; j++){
-                temp.append(curr.get(j));
-                temp.append(".");
-            }
-            temp.deleteCharAt(temp.length()-1);
-            ipList.add(temp.toString());
-        }
-    }
-    
-}
-
 // trail #2, 
 // Last executed input: "0000"
 public class Solution {
@@ -161,6 +90,65 @@ public class Solution {
                 sb.append('.');
                 DFS(dep + 1, index + i, s, res, sb);
                 sb.delete(sb.length() - i - 1 ,sb.length());
+            }
+        }
+    }
+}
+
+// Submission Result: Runtime Error
+
+// Last executed input:    "0000"
+
+// see the totally same error in trial2, WTF!
+public class Solution {
+    public ArrayList<String> restoreIpAddresses(String s) {
+        ArrayList<String> res = new ArrayList<String>();
+        finder(s, 0, 1, res, new StringBuilder());
+        return res;
+    }
+    
+    public void finder(String s, int index, int dot, ArrayList<String> res, StringBuilder r){
+        if (dot == 5){
+            r.deleteCharAt(r.length()-1);                       // wrong here, should be deleted in "r.delete(r.length()-str.length()-1, r.length());"
+            res.add(r.toString());
+            return;
+        }
+        for (int i=1; i<=3 && index+i <= s.length(); i++){
+            String str = s.substring(index, index+i);
+            if (i > 1 && str.charAt(0) == '0') break;
+            int num = Integer.parseInt(str);
+            if (num >= 0 && num<=255){
+                r.append(num);
+                r.append('.');
+                finder(s, index+i, dot+1, res, r);
+                r.delete(r.length()-str.length()-1, r.length());
+            }
+        }
+    }
+}
+// Accepted
+public class Solution {
+    public ArrayList<String> restoreIpAddresses(String s) {
+        ArrayList<String> res = new ArrayList<String>();
+        if (s==null || s.length() == 0) return res;
+        finder(s, 0, 1, res, new StringBuilder());
+        return res;
+    }
+    
+    public void finder(String s, int index, int dot, ArrayList<String> res, StringBuilder r){
+        if (dot == 5){
+            if (index == s.length())    res.add(r.substring(0, r.length()-1).toString());       // important, should check length here
+            return;
+        }
+        for (int i=1; i<=3 && index+i <= s.length(); i++){
+            String str = s.substring(index, index+i);
+            if (i > 1 && str.charAt(0) == '0') break;
+            int num = Integer.parseInt(str);
+            if (num >= 0 && num<=255){
+                r.append(num);
+                r.append('.');
+                finder(s, index+i, dot+1, res, r);
+                r.delete(r.length()-i-1, r.length());
             }
         }
     }
