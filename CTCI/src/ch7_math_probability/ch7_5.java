@@ -8,8 +8,9 @@ public class ch7_5 {
     * the bottom sides of the square run parallel to the x-axis.
     */
    public static void main(String[] args) {
-      // TODO Auto-generated method stub
-
+      Line l = new Line(8.82035, 8);
+      double tmp = l.getFlooredSlope();
+      System.out.println(tmp);
    }
     
    public static class Square{
