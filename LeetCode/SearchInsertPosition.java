@@ -45,3 +45,18 @@ public class Solution {
         
     }
 }
+
+// Accepted, binary search
+public class Solution {
+    public int searchInsert(int[] A, int target) {
+        if (A==null || A.length==0) return 0;
+        int start=0, end=A.length-1;
+        while (start <= end){
+            int mid = start + ((end-start)>>1);
+            if (A[mid] == target)   return mid;
+            else if (A[mid] > target)   end=mid-1;
+            else    start=mid+1;
+        }
+        return start;
+    }
+}

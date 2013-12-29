@@ -27,7 +27,7 @@ public class Solution {
     }
 }
 
-// spiral matrix
+
 int start = 0, end = matrix.length -1;
         while(start < end){
             for(int i=0; i<end - start; i++){
@@ -40,3 +40,36 @@ int start = 0, end = matrix.length -1;
             start++;
             end--;
         }
+
+// Wrong answer
+public class Solution {
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for (int level=0; level<n/2; level++){
+            int offset = n - level - 2;
+            for (int i=0; i<=offset; i++){          // change one line here
+                int tmp = matrix[level][i];
+                matrix[level][i] = matrix[n-1-i][level];
+                matrix[n-1-i][level] = matrix[n-1-level][n-1-i];
+                matrix[n-1-level][n-1-i] = matrix[i][n-1-level];
+                matrix[i][n-1-level] = tmp;
+            }
+        }
+    }
+}
+// Accepted, Dec 28
+public class Solution {
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+        for (int level=0; level<n/2; level++){
+            int offset = n - level - 2;
+            for (int i=level; i<=offset; i++){
+                int tmp = matrix[level][i];
+                matrix[level][i] = matrix[n-1-i][level];
+                matrix[n-1-i][level] = matrix[n-1-level][n-1-i];
+                matrix[n-1-level][n-1-i] = matrix[i][n-1-level];
+                matrix[i][n-1-level] = tmp;
+            }
+        }
+    }
+}

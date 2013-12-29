@@ -56,3 +56,50 @@ public class Solution {
         return res;
     }
 }
+
+// Submission Result: Runtime Error
+// Last executed input:    []
+public class Solution {
+    public ArrayList<Integer> spiralOrder(int[][] matrix) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (matrix==null)   return res;             // check matrix.length first
+        int w = matrix[0].length;
+        int h = matrix.length;
+        if (w==0 || h==0)   return res;
+        int left=0, right=w-1, top=0, bottom=h-1;
+        while (left <= right && top <=bottom){
+            for (int i=left; i<=right; i++)  res.add(matrix[top][i]);
+            top++;
+            for (int i=top; i<=bottom; i++) res.add(matrix[i][right]);
+            right--;
+            for (int i=right; i>=left; i--)    res.add(matrix[bottom][i]);
+            bottom--;
+            for (int i=bottom; i>=top; i--)   res.add(matrix[i][left]);
+            left++;
+        }
+        return res;
+    }
+}
+// Accepted
+public class Solution {
+    public ArrayList<Integer> spiralOrder(int[][] matrix) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (matrix == null || matrix.length==0 || matrix[0].length==0)  return res;
+        int left=0, right=matrix[0].length-1, top=0, bottom= matrix.length-1;
+        while (left <= right && top <=bottom){
+            for (int i=left; i<=right; i++)  
+                res.add(matrix[top][i]);
+            if (++top > bottom) break;          // need to break immediately
+            for (int i=top; i<=bottom; i++) 
+                res.add(matrix[i][right]);
+            if (--right < left) break;
+            for (int i=right; i>=left; i--)    
+                res.add(matrix[bottom][i]);
+            if (--bottom < top) break;
+            for (int i=bottom; i>=top; i--)   
+                res.add(matrix[i][left]);
+            if (++left > right) break;
+        }
+        return res;
+    }
+}
