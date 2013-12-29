@@ -1,0 +1,11 @@
+Prime Numbers:
+	every positive integers can be decomposed into a product of primes
+	84 = 2^2 * 3^1 * 5^0 * 7^1 * 11^0 ...
+	
+Probability:
+	P (A^B) = P (A|B) * P(B)
+	P (A | B) = P(A) + P(B) - P(A^B)
+	Independent events: if one happening, tells nothing about the other happening
+	Mutually Exclusive events: if one happening, then the other cannot happening
+
+	
