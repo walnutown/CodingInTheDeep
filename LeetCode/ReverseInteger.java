@@ -68,3 +68,17 @@ public class Solution {
         return (int)res;
     }
 }
+
+// Accepted
+public class Solution {
+    public int reverse(int x) {
+        int num = Math.abs(x);
+        long res = 0;
+        while (num > 0){
+            res = res*10 + num%10;
+            num /= 10;
+        }
+        if (res>Integer.MAX_VALUE)   return x>0 ? Integer.MIN_VALUE : Integer.MAX_VALUE;
+        return x>0 ? (int)res : (int)-res;          // need cast here, otherwise, precision loss warning
+    }
+}
