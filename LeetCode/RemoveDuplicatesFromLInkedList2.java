@@ -1,20 +1,7 @@
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
         
-        // count used to count the freq of values in the list
+        //count the freq of values in the list
         Map<Integer, Integer> count = new HashMap<Integer, Integer>();
         ListNode n = head;
         if (n == null || n.next == null){
@@ -59,40 +46,6 @@ public class Solution {
 
 
 // #2 trial, 3 pointers
-// Last executed input: {1,1}
-public class Solution {
-    public ListNode deleteDuplicates(ListNode head) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (head == null || head.next == null)
-            return head;
-        ListNode dummy = new ListNode(0);
-        dummy.next = head;
-        ListNode end = dummy;
-        ListNode prev = head;
-        ListNode curr = prev.next;
-        boolean dup = false;
-        while (curr != null){
-            while(curr.val == prev.val){
-                dup = true;
-                curr = curr.next;
-            }
-            if (dup == true){
-                end.next = curr;
-                end = end.next;
-                prev = end.next;
-                curr =prev.next;
-                dup = false;
-            }
-            else{
-                end = end.next;
-                prev = prev.next;
-                curr = curr.next;
-            }
-        }
-        return dummy.next;
-    }
-}
 // Accepted
 public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
@@ -156,5 +109,57 @@ public class Solution {
             }
         }
         return dummy.next;
+    }
+}
+
+
+// Submission Result: Wrong Answer
+
+// Input:  {1,1}
+// Output: {1}
+// Expected:   {}
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null)   return head;
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+        ListNode p = head;
+        ListNode p_prev = dum;
+        boolean isDup = false;
+        while (p != null && p.next != null){
+            ListNode p_next = p.next;
+            if (p_next.val == p.val){
+                p.next = p_next.next;
+                isDup = true;
+            }else{
+                if (isDup){
+                    p_prev.next = p.next;
+                    isDup = false;
+                }  
+                else    p_prev = p;
+                p = p.next;
+            }
+        }
+        return dum.next;
+    }
+}
+
+// Accepted, Dec 29
+public class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null)   return head;
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+        ListNode p = head;
+        ListNode p_prev = dum;
+        while (p != null && p.next != null){
+            if (p.val != p.next.val)    p_prev = p_prev.next;
+            else{
+                while (p.next!=null && p.val == p.next.val) p=p.next;       // once find dups, remove all dups
+                p_prev.next = p.next;
+            }
+            p = p.next;
+        }
+        return dum.next;
     }
 }

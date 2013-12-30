@@ -65,125 +65,7 @@ public class Solution {
     }
 }
 
-
-// convert to array first;
-
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) { val = x; next = null; }
- * }
- */
-/**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public TreeNode sortedListToBST(ListNode head) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (head == null ){
-            return null;
-        }
-        if (head.next == null){
-            return new TreeNode(head.val);
-        }
-        
-        // get list length
-        int len = 0;
-        ListNode p = head;
-        while(p != null){
-            p = p.next;
-            len++;
-        }
-        
-        int[] num = new int[len];
-        p = head;
-        int i = 0;
-        while(p != null){
-            num[i] = p.val;
-            i++;
-            p = p.next;
-        }
-        
-        return sortedArrayToBST(num);
-    }
-    
-    public TreeNode sortedArrayToBST(int[] num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-       if (num == null || num.length == 0){
-           return null;
-       }
-       
-       if (num.length == 1){
-           return new TreeNode(num[0]);
-       }
-       
-       int head = 0;
-       int tail = num.length -1;
-       
-       return convert(head, tail, num);
-       
-        
-    }
-    
-    public TreeNode convert(int head, int tail, int[] num){
-        if (head == tail){
-            return new TreeNode(num[head]);
-        }
-        int mid = (head + tail)/2;
-        TreeNode tn = new TreeNode(num[mid]);
-        if (head != mid  ){
-            tn.left = convert(head, mid-1, num);
-        }
-        if (tail != mid  ){ 
-            tn.right = convert(mid+1,tail, num);   
-        }
-        return tn;
-    }
-}
-
-
-// #2 tiral, 
-// Input: {0}
-// Output: {}
-// Expected:   {0}
-
-public class Solution {
-    ArrayList<Integer> num;
-    public TreeNode sortedListToBST(ListNode head) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        TreeNode res = null;
-        if (head == null)
-            return res;
-        num = new ArrayList<Integer>();
-        while(head != null){
-            num.add(head.val);
-            head = head.next;
-        }
-        BinarySearch(num, 0, num.size()-1, res);
-        return res;
-    }
-    
-    public void BinarySearch(ArrayList<Integer> num, int start, int end, TreeNode node){
-        if (start > end)
-            return;
-        int mid = start + (end - start)/2;
-        node = new TreeNode(num.get(mid));
-        BinarySearch(num, start, mid-1, node.left);  // doesn't work here, wrong way of passing arguments
-        BinarySearch(num, mid+1, end, node.right);
-    }
-}
-// Accepted
+// Accepted, convert to array first
 public class Solution {
     ArrayList<Integer> num;
     public TreeNode sortedListToBST(ListNode head) {
@@ -238,3 +120,63 @@ public class Solution {
 24:    }  
 25:    return root;  
 26:  }  
+
+
+// TLE, top-down recursion doesn't work
+public class Solution {
+    public TreeNode sortedListToBST(ListNode head) {
+        if (head == null)   return null;
+        int len = 0;
+        ListNode p = head;
+        while (p != null) {
+            p = p.next;
+            len++;
+        }
+        return builder(head, 0, len-1);
+    }
+    
+    public TreeNode builder(ListNode head, int start, int end){
+        if (start > end)    return null;
+        int mid = start + ((end-start) >> 1);
+        ListNode p = head;
+        int i = mid;
+        while (--i >= 0)    p = p.next;
+        TreeNode root = new TreeNode(p.val);
+        root.left = builder(head, start, mid-1);
+        root.right = builder(head, mid+1, end);
+        return root;
+    }
+}
+
+// Each time you are stucked with the top-down approach, give bottom-up a try. 
+// Although bottom-up approach is not the most natural way we think, it is extremely
+// helpful in some cases. However, you should prefer top-down instead of bottom-up in
+// general, since the latter is more difficult to verify in correctness.
+
+// Accepted, bottom-up recursion, visiting each node only once
+public class Solution {
+    ListNode node;
+    public TreeNode sortedListToBST(ListNode head) {
+        if (head == null)   return null;
+        int len = 0;
+        ListNode p = head;
+        while (p != null) {
+            p = p.next;
+            len++;
+        }
+        node = head;
+        return builder(0, len-1);
+    }
+    
+    public TreeNode builder(int start, int end){
+        if (start > end)    return null;
+        int mid = start + ((end-start) >> 1);
+        TreeNode left = builder(start, mid-1);
+        TreeNode root = new TreeNode(node.val);
+        root.left = left;
+        node = node.next;           // move to next node, node is a global vairable becuase the "node" in the caller function should also change
+        root.right = builder(mid+1, end);
+        return root;
+    }
+   
+}

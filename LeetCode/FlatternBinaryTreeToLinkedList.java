@@ -74,3 +74,39 @@ public class Solution {
         dfs(root);
     }
 }
+
+// Accepted, Recursion
+public class Solution {
+    public TreeNode flatten(TreeNode root) {  
+        if (root == null) return root;  
+        TreeNode rtree = root.right;  
+        if (root.left != null) {  
+            root.right = root.left;  
+            root.left = null;  
+            root = flatten(root.right);  
+        }  
+        if (rtree != null) {  
+            root.right = rtree;  
+            root = flatten(root.right);  
+        }  
+        return root;  
+    }        
+}
+// Accepted, Preorder traversal
+public class Solution {
+    TreeNode prev;
+    public TreeNode flatten(TreeNode root) {  
+        flat(root);
+        return root;
+    }
+    public void flat(TreeNode root){
+        if (root == null)   return;
+        TreeNode l = root.left, r = root.right;
+        if (prev != null)   prev.right = root;
+        root.left = null;
+        root.right = null;
+        prev = root;
+        flat(l);
+        flat(r);
+    }
+}
