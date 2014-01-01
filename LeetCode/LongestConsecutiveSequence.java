@@ -44,54 +44,7 @@ public class Solution {
     }
 }
 
-// recursive, pass small judge, not pass large judge
-public class Solution {
-    public int longestConsecutive(int[] num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (num == null || num.length == 0){
-            return 0;
-        }
-        if (num.length == 1){
-            return 1;
-        }
-        int maxLong = 1;
-        int count = 1;
-        
-        
-        Set<Integer> set = new HashSet<Integer>();
-        for (int i = 0; i < num.length; i++){
-            if (!set.contains(num[i])){
-                set.add(num[i]);
-            }  
-        }
-        
-        for (int number : num){
-            if (set.contains(number)){
-                set.remove(number);
-                int len = 1 + findLen(set, number - 1, -1);
-                len += findLen(set, number + 1, 1);
-                maxLong = Math.max(len, maxLong);
-            }
-        }
-        
-        
-        return maxLong;
-    }
-    
-    public int findLen(Set<Integer> set, int number, int direction){
-        int len = 0;
-        if (set.contains(number)){
-            set.remove(number);
-            number += direction;
-            len = 1 + findLen(set, number, direction);
-        }
-        return len;
-    }
-}
 
-
-// pass both
 public class Solution {
     public int longestConsecutive(int[] num) {
         // Start typing your Java solution below
@@ -138,36 +91,6 @@ public class Solution {
     }
 }
 
-// #2, priority queue
-// Input:  [1,2,0,1]
-// Output: 2
-// Expected:   3
-public class Solution {
-    public int longestConsecutive(int[] num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (num == null || num.length == 0)
-            return 0;
-        PriorityQueue<Integer> qu = new PriorityQueue<Integer>();
-        for (int i = 0; i < num.length; i++){
-            qu.add(num[i]);
-        }
-        int len = 1;
-        int maxLen = 1;
-        int prev = qu.poll();
-        while (qu.size() > 0){
-            int curr = qu.poll();
-            if (curr == prev +1){
-                len++;
-                maxLen = Math.max(maxLen, len);
-            }
-            else if (curr > prev + 1)  // notice here the case: curr == prev 
-                len = 1;
-            prev = curr;
-        }
-        return maxLen;
-    }
-}
 
 
 // cluster merge , const mem
@@ -199,4 +122,33 @@ public class Solution {
         mp.put(end, len);
         return len;
     }
+}
+
+// Accepted, Dec 31
+public class Solution {
+    public int longestConsecutive(int[] num) {
+        if (num==null || num.length==0) return 0;
+        Set<Integer> set = new HashSet<Integer>();
+        for (int i=0; i<num.length; i++){
+            set.add(num[i]);
+        }
+        int max_len = Integer.MIN_VALUE;
+        while (!set.isEmpty()){
+            int mid = set.iterator().next();        // to get the next available value in the set
+            set.remove(mid);
+            int len = 1;
+            int i = mid;
+            while (!set.isEmpty() && set.contains(--i)){
+                len++;
+                set.remove(i);
+            }
+            i = mid;
+            while(!set.isEmpty() && set.contains(++i)){
+                len++;
+                set.remove(i);
+            }
+            max_len = Math.max(max_len, len);
+        }
+        return max_len;
+    } 
 }

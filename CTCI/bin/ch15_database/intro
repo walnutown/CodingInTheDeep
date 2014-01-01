@@ -1,0 +1,82 @@
+Denormalized and Normalized databases:
+	<1>	Normalized databases are designed to minimize redundancy, 
+	while denormalized database are designed to optimize read time
+	<2>	The drawback of normalized db is that many queries require expensive joins
+	<3>	Denormalize the db by storing redundant data.
+	
+	
+SQL statements:
+	<1>	SELECT
+		SELECT col FROM table	;	SELECT	* FROM table
+	<2>	SELECT DISTINCT, only list the distinct ones
+		SELECT DSITINCT col 
+		FROM table
+	<3>	WHERE
+		SELECT	col	
+		FROM table	
+		WHERE  col operator value
+		(opeartor: =, >, <, <>, >=, <=, BETWEEN, LIKE, IN)
+	<4>	AND / OR
+		SELECT	*
+		FROM Customers
+		WHERE	Country='China'	AND	(City='Beijing' OR City='Shanghai'
+	<5>	ORDER BY : sort the result-set by one or more columns
+		SELECT col1, col2
+		FROM table
+		ORDER BY col1, col2  ASC|DESC
+	<6>	INSERT INTO
+		INSERT INTO table (col1, col2, col3)
+		VALUES (val1, val2, val3, ...)
+	<7>	UPDATE	: update existing table
+		UPDATE table
+		SET col1 = val1, col2 = val2
+		WHERE coln = valn
+	<8>	DELETE	: delete rows in a table
+		DELETE FROM table
+		WHERE coln = valn
+		DELETE FROM table	DELETE * FROM table,  delete all rows
+	<9>	INNER JOIN : intersection  (INNER JOIN is the same as JOIN)
+		SELECT col
+		FROM table1
+		INNER JOIN table2
+		ON table1.col = table2.col
+	<10> LEFT JOIN, RIGHT JOIN, FULL JOIN
+	<11> AS 
+		 SELECT col AS alias_name
+		 FROM table
+
+SQL Functions
+	<1>	COUNT  :  return the number of values of a specified col
+		SELECT COUNT(col) FROM table
+		SELECT COUNT(*)	FROM table
+	<2>	HAVING : the HAVING clauses was added to SAL because WHERE keyword could not be used with aggregate functions
+		SELECT col, aggregate_function(col)
+		FROM table
+		WHERE col operator value
+		GROUP BY col
+		HAVING aggregate_function(col)	operator value
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

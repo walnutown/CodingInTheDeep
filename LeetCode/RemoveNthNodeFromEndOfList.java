@@ -99,3 +99,21 @@ public class Solution {
         return dum.next;
     }
 }
+
+// Accepted, Dec 31
+public class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        // n is always valid
+        if (head==null) return null;
+        ListNode dum = new ListNode(0);
+        dum.next = head;
+        ListNode p = head, q = dum;
+        while (n-- > 0) p = p.next;
+        while (p!=null){
+            p = p.next;
+            q = q.next;
+        }
+        q.next = q.next.next;
+        return dum.next;
+    }
+}

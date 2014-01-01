@@ -40,112 +40,52 @@ public class Solution {
     }
 }
 
-
-// need debug
-/**
- * Definition for singly-linked list.
- * public class ListNode {
- *     int val;
- *     ListNode next;
- *     ListNode(int x) {
- *         val = x;
- *         next = null;
- *     }
- * }
- */
+// Submission Result: Time Limit Exceeded
+// Last executed input:    {2,1}, 2
 public class Solution {
     public ListNode partition(ListNode head, int x) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (head == null || head.next == null){
-            return head;
-        }
-        int len =1;
-        
-        ListNode res = new ListNode(0);
-        res.next = head;
-        ListNode end = head;
-        while(end.next != null){
-            end = end.next;
-            len++;
-        }
-        
-        ListNode curr = head;
-        ListNode prev = res;
-        ListNode next = null;
-        if (curr != null && len > 0){
-            if (curr.val < x){
-                prev = curr;
-                curr = curr.next;
+        if (head==null || head.next==null)  return head;
+        ListNode left = new ListNode(0);
+        ListNode right = new ListNode(0);
+        ListNode p = left, q = right, k = head;
+        while (k != null){
+            if (k.val < x){
+                p.next = k;
+                p = p.next;
             }
             else{
-                next = curr.next;
-                prev.next = curr.next;
-                curr.next = null;
-                end.next = curr;
-                end = end.next;
-                curr = next;
+                q.next = k;
+                q = q.next;
             }
-            len--;
+            k = k.next;
         }
-        return res.next;
+        p.next = right.next;
+        return left.next;
     }
 }
 
-
-// #2 trial, not in position
-// Last executed input: {2,1}, 2
+// Accepted, 
 public class Solution {
     public ListNode partition(ListNode head, int x) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (head == null || head.next == null)
-            return head;
-        ListNode p = head;
-        ListNode leftList = new ListNode(0);
-        ListNode left = leftList;
-        ListNode rightList = new ListNode(0);
-        ListNode right = rightList;
-        while (p != null){
-            if (p.val < x){
-                left.next = p;
-                left = left.next;
+        if (head==null || head.next==null)  return head;
+        ListNode left = new ListNode(0);
+        ListNode right = new ListNode(0);
+        ListNode p = left, q = right, k = head;
+        while (k != null){
+            ListNode next = k.next;             // keep a reference for next node here
+            if (k.val < x){
+                p.next = k;
+                p = p.next;
+                p.next = null;                  // should nullify the next
             }
             else{
-                right.next = p;
-                right = right.next;
+                q.next = k;
+                q = q.next;
+                q.next =null;
             }
-            p = p.next;
+            k = next;
         }
-        left.next = rightList.next;
-        return leftList.next;
-    }
-}
-// Accepted
-public class Solution {
-    public ListNode partition(ListNode head, int x) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (head == null || head.next == null)
-            return head;
-        ListNode p = head;
-        ListNode leftList = new ListNode(0);
-        ListNode left = leftList;
-        ListNode rightList = new ListNode(0);
-        ListNode right = rightList;
-        while (p != null){
-            if (p.val < x){
-                left.next = p;
-                left = left.next;
-            }
-            else{
-                right.next = p;
-                right = right.next;
-            }
-            p = p.next;
-        }
-        left.next = rightList.next;
-        right.next = null; // important here
-        return leftList.next;
+        p.next = right.next;
+        return left.next;
     }
 }
