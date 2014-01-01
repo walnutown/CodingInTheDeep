@@ -19,4 +19,17 @@ public class Solution {
     }
 }
 
-// DFS, store previous set
+// Accepted, Dec 31
+public class Solution {
+    public ArrayList<Integer> grayCode(int n) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        res.add(0);
+        if (n==0)   return res;
+        for (int i=1; i<=n; i++){
+            for (int j=res.size()-1; j>=0; j--){
+                res.add(res.get(j) | (1<<(i-1)));
+            }
+        }
+        return res;
+    }
+}

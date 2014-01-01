@@ -1,99 +1,13 @@
-    // how to find the two swapped values
+// E.g. Given [1, 4, 3, 2, 5], which two shall we swap to fix the array?
+// One way is starting from the second element in the list and comparing it with its previous one. If it is smaller than its previous one, then we know at least one of the two is in wrong spot. So, the larger one in the first pair and the smaller one in the second pair are the ones we are looking for.
 
-/**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    public void recoverTree(TreeNode root) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (root == null){
-            return;
-        }
-        if (root.left == null && root.right == null){
-            return;
-        }
-        /*
-        if (root.left != null && root.right == null){
-            if (root.left.val >= root.val){
-                int m = root.left.val;
-                root.left.val = root.val;
-                root.val = m;
-            }
-            return;
-        }
-        
-       if (root.left == null && root.right != null){
-            if (root.right.val <= root.val){
-                int m = root.right.val;
-                root.right.val = root.val;
-                root.val = m;
-            }
-            return;
-        }
-        */
-        TreeNode[] temp = new TreeNode[2];
-        temp[0] = new TreeNode(Integer.MIN_VALUE);
-        ArrayList<TreeNode> swap = new ArrayList<TreeNode>(); 
-        int count = 0;
-        
-        // find the two nodes
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        st.push(root);
-        TreeNode curr = root.left;
-        while (!st.empty() || curr != null){
-            if (curr != null){
-                st.push(curr);
-                curr = curr.left;
-            }
-            else{
-                curr = st.pop();
-                temp[1] = curr;
-                if (temp[0].val >= temp[1].val){
-                    if (count == 0){
-                        swap.add(temp[0]);
-                        count++;
-                    }
-                    else if (count == 1){
-                        swap.add(temp[1]);
-                        break;
-                    }
-                }
-                temp[0] = temp[1];
-                curr = curr.right;
-            }
-        }
-        
-        // swap the node value
-        if (swap.size() == 2){
-            int m = swap.get(0).val;
-            swap.get(0).val = swap.get(1).val;
-            swap.get(1).val = m;
-        }
-    } 
-    
-}
+// But, how about [1, 3, 2, 4, 5]?
+// This tells us that if there is only one such pair where the latter one is greater than the previous one. That pair is actually the two element we are looking for.
 
 
 
 
-// pass the large judge
-
-/**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
+// inorder traversal, DFS version
 public class Solution {
     ArrayList<TreeNode> swap;
     TreeNode prev;
@@ -218,3 +132,67 @@ public static void inMorrisTraversal2(TreeNode root){
         }
         
     }
+
+// Accepted, Inorder traversal, iterative version
+public class Solution {
+    public void recoverTree(TreeNode root) {
+       if (root==null)  return;
+       TreeNode[] nodes = new TreeNode[2];
+       Stack<TreeNode>  st = new Stack<TreeNode>();
+       TreeNode prev = null;
+       while (root != null){
+           st.push(root);
+           root = root.left;
+       }
+       while (!st.isEmpty()){
+           TreeNode curr = st.pop();
+           if (prev != null && prev.val > curr.val){
+               if (nodes[0]==null){
+                   nodes[0] = prev;
+                   nodes[1] = curr;
+               }else{
+                   nodes[1] = curr;
+               }
+           }
+           prev = curr;
+           curr = curr.right;
+           while (curr != null){
+               st.push(curr);
+               curr = curr.left;
+           }
+       }
+       int tmp = nodes[0].val;
+       nodes[0].val = nodes[1].val;
+       nodes[1].val = tmp;
+    }
+}
+// Accepted, arraylsit version, the two wsapped nodes are hte first and last node in the arraylsit
+// no matter there're two pairs or just one pair of swapped nodes
+public class Solution {
+    public void recoverTree(TreeNode root) {
+       if (root==null)  return;
+       ArrayList<TreeNode>  nodes = new ArrayList<TreeNode>();
+       Stack<TreeNode>  st = new Stack<TreeNode>();
+       TreeNode prev = null;
+       while (root != null){
+           st.push(root);
+           root = root.left;
+       }
+       while (!st.isEmpty()){
+           TreeNode curr = st.pop();
+           if (prev != null && prev.val > curr.val){
+               nodes.add(prev);
+               nodes.add(curr);
+           }
+           prev = curr;
+           curr = curr.right;
+           while (curr != null){
+               st.push(curr);
+               curr = curr.left;
+           }
+       }
+       int tmp = nodes.get(0).val;
+       nodes.get(0).val = nodes.get(nodes.size()-1).val;
+       nodes.get(nodes.size()-1).val = tmp;
+    }
+}

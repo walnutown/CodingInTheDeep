@@ -113,3 +113,25 @@ public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
 
     return ret;
 }
+
+// Accepted, Dec 31
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        res.add(new ArrayList<Integer>());
+        if (num==null || num.length==0) return res;
+        Arrays.sort(num);
+        ArrayList<ArrayList<Integer>> prev = res;
+        for (int i=0; i<num.length; i++){
+            ArrayList<ArrayList<Integer>> curr = new ArrayList<ArrayList<Integer>>();
+            for (ArrayList<Integer> subset : prev){
+                ArrayList<Integer> new_subset = new ArrayList<Integer>(subset);
+                new_subset.add(num[i]);
+                curr.add(new_subset);
+            }
+            res.addAll(curr);
+            prev = i<num.length-1 && num[i]==num[i+1] ? curr : res;     // choose the previous set for the next step to add on
+        }
+        return res;
+    }
+}
