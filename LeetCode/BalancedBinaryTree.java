@@ -42,3 +42,16 @@ public class Solution {
 // in this case, we have to do a DFS on the subtree to get the height of the subtree, the total time complexity is O(n^2)
 // Yet, actually, we can check whether the subtree is balanced when we recurse through the subtree. Then, we ca nreduce the
 // big O to O(n), and the space complexity is O(H), where H is the height of the tree.
+
+// Accepted, Jan 1
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if (root==null) return true;
+        return getHeight(root) > -1;
+    }
+    public int getHeight(TreeNode node){
+        if (node==null)  return 0;
+        int l = getHeight(node.left), r = getHeight(node.right);
+        return Math.abs(l-r)>1 || l<0 || r<0 ? -1 : Math.max(l, r) + 1 ;
+    }
+}

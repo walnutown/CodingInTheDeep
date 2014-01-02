@@ -47,3 +47,49 @@ public class Solution {
            
     }
 }
+
+
+// Submission Result: Wrong Answer
+
+// Input:  {0,1,1}, 1
+// Output: [[0,1],[0,1,1]]
+// Expected:   [[0,1],[0,1]]
+public class Solution {
+    public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
+        ArrayList<ArrayList<Integer>> paths = new ArrayList<ArrayList<Integer>>();
+        if (root==null) return paths;
+        finder(root, sum, paths, new ArrayList<Integer>());
+        return paths;
+    }
+    public void finder(TreeNode root, int sum, ArrayList<ArrayList<Integer>> paths, ArrayList<Integer> path){
+        if (root==null)    return;
+        path.add(root.val);
+        if (root.left==null && root.right==null){
+            if (sum == root.val)   paths.add(new ArrayList<Integer>(path));
+            return;
+        }
+        finder(root.left, sum-root.val, paths, path);
+        finder(root.right, sum-root.val, paths, path);
+        path.remove(path.size()-1);
+    }
+}
+// Accepted
+public class Solution {
+    public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
+        ArrayList<ArrayList<Integer>> paths = new ArrayList<ArrayList<Integer>>();
+        if (root==null) return paths;
+        finder(root, sum, paths, new ArrayList<Integer>());
+        return paths;
+    }
+    public void finder(TreeNode root, int sum, ArrayList<ArrayList<Integer>> paths, ArrayList<Integer> path){
+        if (root==null)    return;
+        path.add(root.val);
+        if (root.left==null && root.right==null){                   // notice the logics here, easy to make mistake
+            if (sum == root.val)   paths.add(new ArrayList<Integer>(path));
+        }else{
+            finder(root.left, sum-root.val, paths, path);
+            finder(root.right, sum-root.val, paths, path);
+        }
+        path.remove(path.size()-1);
+    }
+}
