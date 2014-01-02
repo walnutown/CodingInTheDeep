@@ -46,21 +46,12 @@ public class Solution {
 // There is a more generic way of solving this problem.
 public class Solution {
     public boolean isPalindrome(int x) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (x < 0)
-            return false;
-        long num = x;
-        long rev = reverse(num);
-        return rev == num;
-    }
-    
-    public long reverse(long num){
-        long res = 0;
-        while (num > 0){
-            res = res * 10 + num%10;
-            num /= 10;
+        if (x < 0)  return false;
+        long reversed = 0, original=x;          // notice overflow
+        while (x > 0){
+            reversed = reversed*10 + x%10;
+            x /= 10;
         }
-        return res;
+        return reversed == original;
     }
 }
