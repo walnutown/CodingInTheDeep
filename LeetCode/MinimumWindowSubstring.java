@@ -1,65 +1,3 @@
-r// TLE. not work if T has duplicate chars
-public class Solution {
-    ArrayList<Integer> pos;
-    int minWidth;
-    String minStr;
-    public String minWindow(String S, String T) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (S.length() < T.length()){
-            return "";
-        }
-        
-        Map<Character, ArrayList<Integer>> map = new HashMap<Character, ArrayList<Integer>>();
-        for (int i = 0; i < S.length(); i++){
-            char curr = S.charAt(i);
-            if (!map.containsKey(curr)){
-                ArrayList<Integer> pos = new ArrayList<Integer>();
-                pos.add(i);
-                map.put(curr, pos);
-            }
-            else{
-                ArrayList<Integer> pos = map.get(curr);
-                pos.add(i);
-                map.put(curr, pos);
-            }
-        }
-        pos = new ArrayList<Integer>();
-        minStr = "";
-        minWidth = Integer.MAX_VALUE;
-        DFS(0, S, T, map);
-        return minStr;
-    }
-    
-    public void DFS(int dep, String S, String T, Map<Character, ArrayList<Integer>> map){
-        if (dep == T.length()){
-            ArrayList<Integer> al = new ArrayList<Integer>(pos);
-            Collections.sort(al);
-            int width = al.get(al.size()-1) - al.get(0);
-            if ( width< minWidth){
-                minWidth = width;
-                minStr = S.substring(al.get(0), al.get(al.size()-1)+1);
-            }
-            return;
-        }
-        char curr = T.charAt(dep);
-        if (!map.containsKey(curr)){
-            minWidth = 0;
-            minStr = "";
-            return;
-        }
-        ArrayList<Integer> p = map.get(curr);
-        for (int i = 0 ; i< p.size(); i++){
-            pos.add(p.get(i));
-            DFS(dep+1, S, T, map);
-            pos.remove(pos.size()-1);
-        }
-        
-    }
-}
-
-
-
 //  http://leetcode.com/2010/11/finding-minimum-window-in-s-which.html
 //  The second solution uses a sliding window, is good. 
 public class Solution {
@@ -122,3 +60,63 @@ public class Solution {
         return minStr;
     }
 }
+
+// modified from AnnieKim
+public class Solution {
+    public String minWindow(String S, String T) {
+        if (S==null || T==null) return "";
+        int m = S.length(), n=T.length();
+        if (m==0 || n==0 || m<n)   return "";
+        return minWindow(S.toCharArray(), T.toCharArray());
+    }
+    public String minWindow(char[] S, char[] T){
+        int[] need = new int[256];
+        int[] find = new int[256];
+        int m=S.length, n=T.length;
+        for (int i=0; i<n; i++) need[T[i]]++;
+        int count=0, r_start = -1, r_end = m;
+        for (int start=0, end=0; end<m; end++){
+            if (need[S[end]]==0)    continue;
+            if (find[S[end]] < need[S[end]])    count++;
+            find[S[end]]++;
+            if (count < n)   continue;
+            // move 'start'
+            for (; start<end; start++){
+                if (need[S[start]]==0)  continue;
+                if (find[S[start]] <= need[S[start]])   break;
+                find[S[start]]--;
+            }
+            // update result
+            if (end-start < r_end - r_start){
+                r_start = start;
+                r_end = end;
+            }
+        }
+        return r_start==-1 ? "" : String.valueOf(S, r_start, r_end-r_start+1);  // valueOf(char[] data, int offset, int count)
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

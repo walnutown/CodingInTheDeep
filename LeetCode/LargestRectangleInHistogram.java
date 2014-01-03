@@ -29,3 +29,29 @@ public class Solution {
     }
 }
 
+
+// Accepted
+public class Solution {
+    public int largestRectangleArea(int[] height) {
+        if (height == null || height.length == 0)
+         return 0;
+        Stack<Integer> left = new Stack<Integer>();
+        int max = Integer.MIN_VALUE, r = 0;
+        while (r < height.length) {
+            if (left.isEmpty() || height[r] >= height[left.peek()])
+                left.push(r++);
+            else {      // Calculate the local max in [lef, r)
+                int h = height[left.pop()];
+                int len = left.isEmpty() ? r : r - left.peek() - 1;   
+                max = Math.max(max, h * len);
+            }
+        }
+        while (!left.isEmpty()) {
+            int h = height[left.pop()];
+            int len = left.isEmpty() ? r : r - left.peek() - 1;
+            max = Math.max(max, h * len);
+        }
+        return max;
+    }
+}
+
