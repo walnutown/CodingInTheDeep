@@ -1,34 +1,3 @@
-// use the original array as storage, to achieve constant space
-public class Solution {
-    public int firstMissingPositive(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int len = A.length;
-        if (A == null || len == 0){
-            return 1;
-        }
-        
-        for (int i = 0; i < len; i++){
-            while( A[i] != i+1){
-                if (A[i] > len || A[i] <= 0 || A[i] == A[A[i]-1]){
-                    break;
-                }
-                int temp = A[A[i]-1];
-                A[A[i]-1] = A[i];
-                A[i] = temp;
-            }
-        }
-        
-        for (int i = 0; i < len; i++){
-            if (A[i] != i+1){
-                return i+1;
-            }
-        }
-        
-        return len+1;
-    }
-}
-
 // Bitset, like Hashmap, not constant space
 public int firstMissingPositive(int[] A){
         int length = A.length >> 3 +1;
@@ -89,5 +58,25 @@ public class Solution {
         int temp = A[x];
         A[x] = A[y];
         A[y] = temp;
+    }
+}
+
+// Accepted
+public class Solution {
+    public int firstMissingPositive(int[] A) {
+        if (A==null || A.length==0) return 1;       // notice return 1 here
+        int i=0;
+        while (i < A.length){
+            // IMPORTANT conditions here, cannot miss one
+            while ((A[i]-1) != i && A[i] <= A.length && A[i] > 0 && A[i] != A[A[i]-1])   swap(A, i, A[i]-1);
+            i++;
+        }
+        for (i=0; i<A.length; i++){
+            if ((A[i]-1) != i)  return i+1;
+        }
+        return A.length+1;
+    }
+    public void swap(int[] A, int i, int j){
+        int tmp = A[i]; A[i]=A[j]; A[j]=tmp;
     }
 }

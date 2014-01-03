@@ -1,48 +1,28 @@
+// Accepted, DFS
 public class Solution {
-    ArrayList<ArrayList<Integer>> resList;
-    ArrayList<Integer> res;
     public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        resList = new ArrayList<ArrayList<Integer>>();
-        res = new ArrayList<Integer>();
-        if(num == null || num.length == 0){
-            return resList;
-        }
-        
-        Set<Integer> visitedVal = new HashSet<Integer>();
-        Set<Integer> visitedIndex = new HashSet<Integer>();
-        
-        permuteHelper(num, 0, visitedIndex);
-        
-        return resList;
-    }
-    
-    public void permuteHelper(int[] num, int depth, Set<Integer> visitedIndex){
-        if (depth == num.length){
-            return;
-        }
-        Set<Integer> visitedVal = new HashSet<Integer>();
-        for (int i = 0; i < num.length; i++){
-            if (visitedVal.contains(num[i])){
-                continue;
-            }
-            if (visitedIndex.contains(i)){
-                continue;
-            }
-            visitedVal.add(num[i]);
-                visitedIndex.add(i);
-                res.add(num[i]);
-                if (depth == num.length - 1){
-                    ArrayList<Integer> temp = new ArrayList<Integer>(res);
-                    resList.add(temp);
-                }
-                permuteHelper(num, depth+1, visitedIndex);
-                
-                visitedIndex.remove(i);
-                res.remove(depth);
-        }
-    }
+          ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+          if (num==null || num.length==0) return res;
+          Arrays.sort(num);
+          boolean[] visited = new boolean[num.length];
+          finder(num, 0, res, new ArrayList<Integer>(), visited);
+          return res;
+      }
+      public void finder(int[] num, int len, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r, boolean[] visited){
+          if (len == num.length){
+              res.add(new ArrayList<Integer>(r));
+              return;
+          }
+          Set<Integer> visited_val = new HashSet<Integer>();        // to avoid using duplicates in one loop
+          for (int i=0; i<num.length; i++){
+              if (visited_val.contains(num[i]) || visited[i])    continue;
+              r.add(num[i]);
+              visited[i] = true;
+              visited_val.add(num[i]);
+              finder(num, len+1, res, r, visited);
+              r.remove(r.size()-1);
+              visited[i] = false;
+          }
+      }
 }
-
 

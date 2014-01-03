@@ -1,37 +1,4 @@
-public class Solution {
-    public int trap(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (A == null || A.length < 3){
-            return 0;
-        }
-        
-        int sum = 0;
-        
-        int leftMaxH = A[0];
-        int[] leftH = new int[A.length];
-        for (int i = 1; i < A.length; i++){
-            leftH[i] = leftMaxH;
-            leftMaxH = Math.max(leftMaxH, A[i]);
-        }
-        
-        int rightMaxH = A[A.length-1];
-        //int[] rightH = new int[A.length];
-        for (int i =A.length-2; i >= 0; i--){
-            //rightH[i] = rightMaxH;
-            if (A[i] < rightMaxH && A[i] < leftH[i]){
-                sum += Math.min(rightMaxH, leftH[i]) - A[i];
-            }
-            rightMaxH = Math.max(rightMaxH, A[i]);
-        }
-        
-        return sum;
-    }
-}
-
-
-
-// version wanghuaiqi
+// from wanghuaiqi
 public class Solution {
     public int trap(int[] A) {
         // Start typing your Java solution below
@@ -65,5 +32,26 @@ public class Solution {
             }
         }       
         return ans; 
+    }
+}
+
+// Accepted
+public class Solution {
+    public int trap(int[] A) {
+        if (A==null || A.length==0) return 0;
+        int[] left = new int[A.length], right = new int[A.length];
+        int lmax=0, rmax=0, sum=0;
+        for (int i=0; i<A.length; i++){
+            left[i] = lmax;
+            lmax = Math.max(lmax, A[i]);
+            int j = A.length-1-i;
+            right[j] = rmax;
+            rmax = Math.max(rmax, A[j]);
+        }
+        for (int i=0; i<A.length; i++){
+            int bar = Math.min(left[i], right[i]);
+            if (bar > A[i]) sum += bar-A[i];
+        }
+        return sum;
     }
 }
