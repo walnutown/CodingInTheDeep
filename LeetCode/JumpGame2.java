@@ -1,25 +1,4 @@
-public class Solution {
-    public int jump(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int[] mem = new int[A.length];
-        for (int i = 0; i < A.length; i++){
-            mem[i] = -1;
-        }
-        mem[0] = 0;
-        for(int i = 0; i < A.length; i++){
-            for (int j = i + 1; j <= A[i] + i && j < A.length ; j++){
-                if (mem[j] == -1){
-                    mem[j] = mem[i]+ 1;
-                }
-            }
-        }
-        
-        return mem[A.length -1];
-    }
-}
-
-// OJ assume that final pos can always be reached
+// OJ 
 public class Solution {
     public int jump(int[] A) {
         // Start typing your Java solution below
@@ -38,26 +17,37 @@ public class Solution {
     }
 } 
 
-// #2 trial, DFS, TLE
+
+// 2d DP, TLE, O(n^2)
 public class Solution {
-    int min;
     public int jump(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (A == null || A.length <= 1)
-            return 0;
-        min = Integer.MAX_VALUE;
-        DFS(A, 0, 0);
-        return min;
-    }
-    
-    public void DFS(int[] A, int dep, int count){
-        if (dep >= A.length -1){
-            min = Math.min(min, count);
-            return;
+        if (A==null || A.length==0) return 0;
+        int[] dp = new int[A.length+1];
+        dp[0] = 0;
+        dp[1] = 0;
+        for (int i=1; i<A.length; i++){
+            int range = A[i];
+            for (int j=1; j<=range && ((i+j)<A.length); j++){ 
+                if (dp[i+j] == 0)   dp[i+j] = dp[i] + 1;
+                else dp[i+j] = Math.min(dp[i+j], dp[i]+1);
+            }
         }
-        for (int i = 1 ; i <= A[dep]; i++)
-            DFS(A, dep + A[dep], count+1);
+        return dp[A.length];
     }
 }
 
+// assume that final pos can always be reached, update the max range of next step using current range
+public class Solution {
+    public int jump(int[] A) {
+        if (A==null || A.length==0) return 0;
+        int step=0, curr_range=0, prev_range=0;
+        for (int i=0; i<A.length; i++){
+            if (i > prev_range){
+                prev_range = curr_range;
+                step++;
+            }
+            curr_range = Math.max(curr_range, A[i]+i);
+        }
+        return step;
+    }
+}
