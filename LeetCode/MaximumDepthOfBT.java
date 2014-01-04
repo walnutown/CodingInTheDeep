@@ -1,75 +1,27 @@
-/**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
-public class Solution {
-    int maxDepth;
-    int depth;
-    
-    public int maxDepth(TreeNode root) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (root == null){
-            return 0;
-        }
-        
-        maxDepth = 0;
-        depth = 0;
-        inorderTraversal(root);
-        
-        return maxDepth;
-        
-    }
-    
-    public void inorderTraversal(TreeNode root){
-        depth++;
-        if (depth > maxDepth){
-            maxDepth = depth;
-        }
-        if (root.left != null){
-            inorderTraversal(root.left);
-            depth--;
-        }
-        
-        
-        
-        if (root.right != null){
-            inorderTraversal(root.right);
-            depth--;
-        }
-        
-    }
-}
-
-
 // recursive
-/**
- * Definition for binary tree
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode(int x) { val = x; }
- * }
- */
 public class Solution {
     public int maxDepth(TreeNode root) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (root == null){
-            return 0;
-        }
-        
-        return 1+ Math.max(maxDepth(root.left), maxDepth(root.right));
-        
+        if (root == null)   return 0;
+        return 1+ Math.max(maxDepth(root.left), maxDepth(root.right));   
     }
 }
 
-// BFS, we can use a var to mark the number of next layer.
+// Accepted, DFS
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root==null) return 0;
+        int[] max = new int[1];
+        finder(root, 1, max);       // notice the initial len is 1
+        return max[0];
+    }
+    public void finder(TreeNode root, int len, int[] max){
+        if (root.left==null && root.right==null){
+            max[0] = Math.max(len, max[0]);
+            return;
+        }
+        if (root.left != null)  finder(root.left, len+1, max);
+        if (root.right != null) finder(root.right, len+1, max);
+    }
+}
 
 
