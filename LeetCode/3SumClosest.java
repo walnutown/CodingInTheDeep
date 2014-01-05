@@ -1,44 +1,3 @@
-// same as the 3Sum, add sum value to track the minimum diff
-
-public class Solution {
-    public int threeSumClosest(int[] num, int target) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int sum = Integer.MAX_VALUE;
-        int diff = Integer.MAX_VALUE;
-        if (num == null || num.length < 3){
-            return sum;
-        }
-        
-        Arrays.sort(num);
-        for(int i = 0; i < num.length-2; i++){
-            int two_sum = target - num[i];
-            int j = i + 1;
-            int k = num.length -1;
-            while (j < k){
-                if (num[j] + num[k] == two_sum){     
-                    return target;  
-                }
-                else if(num[j] + num[k] < two_sum){
-                    if (Math.abs(num[j] + num[k] - two_sum) < diff){
-                        sum = num[i] + num[j] + num[k];
-                        diff = Math.abs(num[j] + num[k] - two_sum);
-                    }
-                    j++;
-                }else{
-                    if (Math.abs(num[j] + num[k] - two_sum) < diff){
-                        sum = num[i] + num[j] + num[k];
-                        diff = Math.abs(num[j] + num[k] - two_sum);
-                    }
-                    k--;
-                }
-            }
-        }
-        
-        return sum;
-    }
-} 
-
 
 // #2 trial, ttraverse the array, and choose twoSum on the remaining 2 numbers in array
 public class Solution {
@@ -79,5 +38,26 @@ public class Solution {
             else
                 i++;
         }
+    }
+}
+
+// Accepted
+public class Solution {
+    public int threeSumClosest(int[] num, int target) {
+        if (num==null || num.length<3) return 0;
+        int m = num.length; 
+        Arrays.sort(num);                   // IMPORTANT, remember to sort here
+        int min = num[0]+num[1]+num[2];
+        for (int i=0; i<m; i++){
+            int j=i+1, k=m-1;
+            while(j<k){
+                int sum = num[i] + num[j] + num[k];
+                if (sum == target)    return target;
+                else if (sum < target)  j++;
+                else k--;
+                if (Math.abs(target-sum) < Math.abs(target-min)) min = sum;
+            }
+        }
+        return min;
     }
 }
