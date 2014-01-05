@@ -1,45 +1,5 @@
-// greedy, choose the larget profit, then chose the second largest from the lrest, not optimal
-public class Solution {
-    int[] max;
-    public int maxProfit(int[] prices) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int len = prices.length;
-        if (len <= 1){
-            return 0;
-        }
-        
-        max = new int[2];
-        
-        findMax(prices, 0, len-1, 0);
-        return max[0] + max[1];
-    }
-    
-    public void findMax(int[] prices, int start, int end, int index){
-        if (start >= end || index > 1){
-            return;
-        }
-        int min = prices[start];
-        int minIndex = start;
-        int maxIndex = start;
-        max[index] = 0;
-        for (int i = start+1; i <= end; i++ ){
-            int curr = prices[i];
-            if (curr < min){
-                min = curr;
-                minIndex = i;
-            }
-            if (curr - min > max[index]){
-                maxIndex = i;
-                max[index] = curr - min;
-            }
-        }
-        
-        findMax(prices, start, minIndex, index+1);
-        findMax(prices, maxIndex, end, index+1);
-        
-    }
-}
+// choose the largest and then second largest doesn't work
+// e.g. [8, 11, 10, 12, 10, 15], should be 8-12, 10-15, instead of 8-15
 
 // Divide and Conquer, TLE in large judge
 public class Solution {
@@ -122,5 +82,28 @@ public class Solution {
        
        
         return maxProfit;
+    }
+}
+
+// Accepted
+public class Solution {
+    public int maxProfit(int[] prices) {
+        if (prices==null || prices.length==0)   return 0;
+        int m=prices.length;
+        int[] left = new int[m];
+        int[] right = new int[m];
+        int lmin=prices[0], rmax=prices[m-1], sum=0;
+        for (int i=1; i<prices.length; i++){
+            left[i] = Math.max(left[i-1], prices[i]-lmin);
+            lmin = Math.min(lmin, prices[i]);
+        }
+        for (int i=m-2; i>=0; i--){
+            right[i] = Math.max(right[i+1], rmax-prices[i]);
+            rmax = Math.max(rmax, prices[i]);
+        }
+        for (int i=0; i<m; i++){
+            sum = Math.max(sum, left[i] + right[i]);
+        }
+        return sum;
     }
 }

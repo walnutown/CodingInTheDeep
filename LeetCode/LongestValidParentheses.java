@@ -1,48 +1,4 @@
-// misunderstand the question
-public class Solution {
-    public int longestValidParentheses(String s) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        
-        if (s == null || s.length() <=1){
-            return 0;
-        }
-        
-        int max = 0;
-        
-        
-        for (int i = 0; i < s.length(); i++){
-            int index =i;
-            int sum = 0;
-            boolean done = false;
-            boolean left = true;
-            char curr = s.charAt(index);
-            if (curr == '(' ){
-                while (!done){
-                    index++; 
-                    if (index == s.length()){
-                        done = true;
-                        continue;
-                    }
-                    curr = s.charAt(index);
-                    if (left && curr == '(' || !left && curr == ')'){
-                        done = true;
-                    }
-                    else if (left && curr == ')'){
-                        left = false;
-                        sum += 2;
-                        max = Math.max(max, sum);
-                    }
-                    else if (!left && curr == '('){
-                        left = true;
-                    }
-                }
-            }
-        }
-        
-        return max;
-    }
-}
+// how to differentiate "()(()" and "(()()", or "())()" and ")()()"
 
 // DP
 public class Solution {
@@ -76,28 +32,47 @@ public class Solution {
     }
 }
 
-
-// trail #2, not verified
+// Accepted, from AnnieKim
+// use stack to store the previous length, variant of DP 
 public class Solution {
     public int longestValidParentheses(String s) {
-        // we use a var to count the number of valid pairs
-        if (s == null || s.length() == 0)
-            return 0;
-        int lefts = 0, count = 0, max = 0;
-        for (int i = 0; i < s.length(); i++){
-            if (s.charAt(i) == '(')
-                lefts++;
-            else{
-                if (lefts > 0){
-                    count++;
-                    lefts--;
-                }else{
-                    max = Math.max(max, 2 * count);
-                    count = 0;
-                }
+        Stack<Integer> st = new Stack<Integer>();
+        int max=0, count=0;
+        for (int i=0; i<s.length(); i++){
+            if (s.charAt(i)=='('){
+                st.push(count); count=0;
+            }else{
+                if (!st.isEmpty()){
+                    count += 1+st.pop();
+                    max = Math.max(max, count);
+                }else   count=0;
             }
         }
-        return max;
+        return max*2;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
