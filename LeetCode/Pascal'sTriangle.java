@@ -129,3 +129,42 @@ public class Solution {
         return res;
     }
 }
+
+// Accepted
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generate(int numRows) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (numRows <=0)    return res;
+        ArrayList<Integer> prev = new ArrayList<Integer>(); prev.add(1);
+        res.add(prev);
+        for (int i=2; i<=numRows; i++){
+            ArrayList<Integer> curr = new ArrayList<Integer>();
+            for (int j=0; j<=prev.size(); j++){
+                if (j==0)   curr.add(prev.get(0));
+                else if (j==prev.size())  curr.add(prev.get(prev.size()-1));
+                else    curr.add(prev.get(j-1) + prev.get(j));
+            }
+            res.add(curr);
+            prev = curr;
+        }
+        return res;
+    }
+}
+// Accepted, Refactor code
+public class Solution {
+    public ArrayList<ArrayList<Integer>> generate(int numRows) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (numRows <=0)    return res;
+        ArrayList<Integer> prev = new ArrayList<Integer>(); prev.add(1);
+        res.add(prev);
+        for (int i=2; i<=numRows; i++){
+            ArrayList<Integer> curr = new ArrayList<Integer>();
+            curr.add(1);
+            for (int j=1; j<prev.size(); j++)   curr.add(prev.get(j-1) + prev.get(j));
+            curr.add(1);
+            res.add(curr);
+            prev = curr;
+        }
+        return res;
+    }
+}
