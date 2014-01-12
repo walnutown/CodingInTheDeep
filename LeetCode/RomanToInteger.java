@@ -1,52 +1,10 @@
-public class Solution {
-    public int romanToInt(String s) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (s.isEmpty()){
-            return 0;
-        }
-        
-        Map<String, Integer> map = new HashMap<String, Integer>();
-        map.put("I", 1);
-        map.put("IV", 4);
-        map.put("V", 5);
-        map.put("IX", 9);
-        map.put("X", 10);
-        map.put("XL", 40);
-        map.put("L", 50);
-        map.put("XC", 90);
-        map.put("C", 100);
-        map.put("CD", 400);
-        map.put("D", 500);
-        map.put("CM", 900);
-        map.put("M", 1000);
-        
-        int res = 0;
-        int i = 0;
-        while (i+1 < s.length()){
-            String curr = s.substring(i, i+1);
-            String next = s.substring(i+1, i+2);
-            if (map.get(next) <= map.get(curr)){
-                res += map.get(curr);
-                i++;
-            }
-            else{
-                res += map.get(curr + next);
-                i += 2;  
-            }
-            
-        }
-        
-        if (i == s.length()-1){
-            res += map.get(s.substring(i, i+1));   
-        }
-        
-        return res;
-        
-    }
-}
+/*
+    Given a roman numeral, convert it to an integer.
 
-// Accepted, Dec 25
+    Input is guaranteed to be within the range from 1 to 3999.
+*/
+
+// time: O(n); space: O(1)
 public class Solution {
     public int romanToInt(String s) {
         if (s == null || s.length()==0) return 0;
@@ -72,5 +30,27 @@ public class Solution {
             }else   num += map.get(s.substring(i, i+1));
         }
         return num;
+    }
+}
+
+// AnnieKim, time: O(n); space: O(1)
+// This sol is better
+public class Solution {
+    public int romanToInt(String s) {
+        if (s == null || s.length()==0) return 0;
+          Map<Character, Integer> map = new HashMap<Character, Integer>();
+          map.put('I', 1);
+          map.put('V', 5);
+          map.put('X', 10);
+          map.put('L', 50);
+          map.put('C', 100);
+          map.put('D', 500);
+          map.put('M', 1000);
+          int num = 0, m = s.length();
+          for (int i=0; i<m; i++){
+              if (i<m-1 && map.get(s.charAt(i))<map.get(s.charAt(i+1)))   num -= map.get(s.charAt(i));
+              else num += map.get(s.charAt(i));
+          }
+          return num;
     }
 }

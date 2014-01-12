@@ -1,41 +1,10 @@
-public class Solution {
-    public String intToRoman(int num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        Map<Integer, String> map = new HashMap<Integer, String>();
-        map.put(1, "I");
-        map.put(4, "IV");
-        map.put(5, "V");
-        map.put(9, "IX");
-        map.put(10, "X");
-        map.put(40, "XL");
-        map.put(50, "L");
-        map.put(90, "XC");
-        map.put(100, "C");
-        map.put(400, "CD");
-        map.put(500, "D");
-        map.put(900, "CM");
-        map.put(1000, "M");
-        
-        int[] m = new int[]{1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};
-        int i = m.length -1;
-        StringBuilder res = new StringBuilder();
-        while(i >= 0 && num > 0){
-            if (num -m[i] >= 0){
-                res.append(map.get(m[i]));
-                num -= m[i];
-            }
-            else{
-                i--;
-            }
-        }
-        
-        return res.toString();
-    }
-}
+/*
+    Given an integer, convert it to a roman numeral.
 
+    Input is guaranteed to be within the range from 1 to 3999.
+*/
 
-// Accepted, Dec 25
+// time: O(5m); space: O(5m), m is the number of digits in num
 public class Solution {
     public String intToRoman(int num) {
         if (num == 0)   return "";
@@ -51,5 +20,25 @@ public class Solution {
            }
         }
         return res.toString();
+    }
+}
+
+// AnnieKim, time: O(m); space: O(10m), m is the number of digits in num
+public class Solution {
+    public String intToRoman(int num) {
+        if (num <=0)    return "";
+        StringBuilder sb = new StringBuilder();
+        String[][] roman = new String[][]{  {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"},
+                                            {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"},
+                                            {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"},
+                                            {"", "M", "MM", "MMM"}};
+        int i=3;
+        while (num > 0){
+            int divisor = (int) Math.pow(10, i);
+            sb.append(roman[i][num/divisor]);
+            num %= divisor;
+            i--;
+        }
+        return sb.toString();
     }
 }
