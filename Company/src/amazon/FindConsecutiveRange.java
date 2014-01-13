@@ -10,11 +10,12 @@ public class FindConsecutiveRange {
     * Given an array of integers, output all the interval ranges
     * e.g. Input: (4，6，5，7，9，10)
     * Output: [4,7][9,10]
+    * 
+    * Sol:
+    *   refer to Leetcode -- LongestConsecutiveSequence
     */
-   // similar to Leetcode -- LongestConsecutiveSequence
    public static void main(String[] args) {
-      System.out.println(findConsecutiveRange(new int[]{4,11, 13, 12, 6,5,7,9,10}).toString());
-      
+      System.out.println(findConsecutiveRange(new int[]{4,11, 13, 12, 6,5,7,9,10}).toString());    
    }
    public static ArrayList<ArrayList<Integer>> findConsecutiveRange(int[] arr){
       ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
