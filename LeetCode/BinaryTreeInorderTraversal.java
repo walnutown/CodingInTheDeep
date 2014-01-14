@@ -1,60 +1,30 @@
+/*
+    Given a binary tree, return the inorder traversal of its nodes' values.
 
-public class Solution {
-    
-    public ArrayList<Integer> inorderTraversal(TreeNode root) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        
-        if (root == null){
-            return res;
-        }
-        
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        st.push(root);
-        TreeNode curr = root.left;
-        // curr != null is used when the root is popped, at that thime, st.empty == true
-        while (!st.empty() || curr != null){
-            if (curr != null){
-                st.push(curr);
-                curr = curr.left;
-            }
-            else{
-                curr = st.pop();
-                res.add(curr.val);
-                curr = curr.right;
-            }
-        }
-        
-        return res;
-    }
-}
+    For example:
+    Given binary tree {1,#,2,3},
+       1
+        \
+         2
+        /
+       3
+    return [1,3,2].
 
+    Note: Recursive solution is trivial, could you do it iteratively?
+*/
 
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
 
-
-// Submission Result: Time Limit Exceeded
-
-// Last executed input:    {1,2}
-public class Solution {
-    public ArrayList<Integer> inorderTraversal(TreeNode root) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (root == null)   return res;
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        while (root != null){
-            if (root.left != null){             // will go in loop here, need to mark whether a node has been visited
-                st.push(root);
-                root = root.left;
-            }else{
-                res.add(root.val);
-                if (root.right != null) root = root.right;
-                else    root = st.isEmpty() ? null : st.pop();
-            }
-        }
-        return res;
-    }
-}
-// Accepted, modified from Sophie
+// Stack Iterative traversal. From Sophie, 2 while loops, logic is easier to understand than the wiki version.
+// time: O(n); space: O(h), h is the maximum height of the tree
 public class Solution {
     public ArrayList<Integer> inorderTraversal(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<Integer>();
@@ -71,6 +41,42 @@ public class Solution {
             while (curr!=null){
                 st.push(curr);
                 curr = curr.left;
+            }
+        }
+        return res;
+    }
+}
+
+// Threads are references to the predecessor and successor of 
+// the node according to an inorder traversal
+//
+// Trees whose nodes use threads are called 
+// threaded trees
+
+// Morris threaded tree in-order traversal
+// Great post from AnnieKim. http://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html
+public class Solution {
+    public ArrayList<Integer> inorderTraversal(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (root == null)   return res;
+        TreeNode curr =root;
+        while (curr != null){
+            if (curr.left != null){
+                TreeNode prev = curr.left;
+                // find predecessor 
+                while (prev.right!=null && prev.right!=curr)    prev = prev.right;
+                if (prev.right == curr){    
+                    res.add(curr.val);
+                    curr = curr.right;
+                    prev.right = null;
+                }
+                else{                  
+                    prev.right = curr;
+                    curr = curr.left;
+                }
+            }else{
+                res.add(curr.val);
+                curr = curr.right;
             }
         }
         return res;
