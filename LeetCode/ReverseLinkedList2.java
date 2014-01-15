@@ -1,4 +1,18 @@
-// Accepted
+/*
+    Reverse a linked list from position m to n. Do it in-place and in one-pass.
+
+    For example:
+    Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+
+    return 1->4->3->2->5->NULL.
+
+    Note:
+    Given m, n satisfy the following condition:
+    1 ≤ m ≤ n ≤ length of list.
+*/
+
+// get the head and tail of the sublist to be reversed, and then reverse the sublist.
+// time: O(n); space: in place
 public class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
         if (head==null || head.next==null || m==n)  return head;
@@ -20,9 +34,8 @@ public class Solution {
     }
 }
 
-// Accepted
-// modified from AnnieKim
-// use number of reverse times, instead of curr.next!=end as reverse condition
+// AnnieKim, count reverse times
+// time: O(n); space: in place
 public class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
         if (head==null || head.next==null || m==n)  return head;

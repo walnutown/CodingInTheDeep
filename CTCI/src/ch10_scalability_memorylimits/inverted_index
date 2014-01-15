@@ -1,0 +1,46 @@
+Terminology:
+	An inverted index (also referred to as postings file or inverted file) is an index data structure 
+storing a mapping from content, such as words or numbers, to its locations in a database file, 
+or in a document or a set of documents. 
+
+Purpose:
+	allow fast full text searches, at a cost of pre-process
+	
+Usage:
+	Apache Solr full-text search
+	
+	
+Scalability:
+	Given a list of millions of documents, how would you find all documents that contain
+	a list of words?
+
+Step1:
+	index the data:
+	e.g.
+		"book" -> {doc2, doc3, doc6}
+		"many" -> {doc1, doc3, doc7}
+	if search "many books", will return doc3
+
+Step2:
+	design the lookup table:
+		each machine stores a range of consecutive words(e.g., m#1 stores docs containing the words from "after" to "apple")
+		each machine also stores a lookup table
+		alternative: divide by doc(value), instead of by keyword(key)
+	pre-process:
+		iterate through the keywords alphabetically, storing as much data as possible on one machine.
+		When that machine is full, move to the next machine.
+	implement search:
+		e.g.
+			search for docs containing "after builds boat amaze banana"
+			m#1 get the request to search for "after" and "amaze"
+			m#2 get the request to search for "banana" "boat" "builds"
+			intersect the results 
+	advantages:
+		lookup table is small and simple
+	disadvantages:
+		if new docs are added, we may need to perform an expensive shift of keywords. Re-index
+		
+		
+	
+	
+ 

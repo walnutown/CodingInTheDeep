@@ -1,0 +1,11 @@
+A Typical System
+	Hard Drive Space, Memory, Internet Transfer Latency
+	
+Divide up lots of data
+	<1> By order of Appearance
+		Ad: never use more machines than are necessary
+	<2>	By Hash Value
+		the data is stored on machine #[ mod(hash(key), N) ]. N is the number of machines
+	<3>	By Actual Value
+		store similar data on the same machines
+	<4> Arbitrarily
