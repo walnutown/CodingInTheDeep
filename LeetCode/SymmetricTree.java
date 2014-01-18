@@ -1,3 +1,23 @@
+/*
+    Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+    For example, this binary tree is symmetric:
+
+        1
+       / \
+      2   2
+     / \ / \
+    3  4 4  3
+    But the following is not:
+        1
+       / \
+      2   2
+       \   \
+       3    3
+    Note:
+    Bonus points if you could solve it both recursively and iteratively.
+*/
+
 /**
  * Definition for binary tree
  * public class TreeNode {
@@ -7,45 +27,8 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
-public class Solution {
-    ArrayList<String> nodeArr;
-    
-    public boolean isSymmetric(TreeNode root) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (root == null){
-            return true;
-        }
-        nodeArr = new ArrayList<String>();
-        inorderTraversal(root);   
-        
-        int i = 0;
-        int j = nodeArr.size() -1;
-        while (i < j){
-            if (!nodeArr.get(i).equals(nodeArr.get(j))){
-                return false;
-            }
-            i++;
-            j--;
-        }
-        
-        return true;
-               
-    }
-    
-    public void inorderTraversal(TreeNode n){
-        if (n == null){
-            nodeArr.add("#");
-            return;
-        }
-      
-        inorderTraversal(n.left);
-        nodeArr.add(""+n.val);
-        inorderTraversal(n.right);     
-    }
-}
 
-// recursion
+// recursion, time: O(nlgn); space: recursive stack
 public class Solution {
     public boolean isSymmetric(TreeNode root) {
         if (root == null)   return true;
@@ -58,7 +41,31 @@ public class Solution {
     }
 }
 
-// inorder traversal, iterative
+// AnnieKim, better iteration, more elegant, but has duplicate comparisons (in fact, only need to compare the half of one level)
+// time: O(n); space: O(b^(d-1)), b is branching factor, d is the maximum depth of the tree
+public class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        if (root==null) return true;
+        Queue<TreeNode> qu = new LinkedList<TreeNode>();
+        qu.add(root.left);
+        qu.add(root.right);
+        while (!qu.isEmpty()){      // compare one pair each time
+            TreeNode t1 = qu.poll();
+            TreeNode t2 = qu.poll();
+            if (t1==null && t2==null)  continue;
+            if (t1==null || t2==null || t1.val != t2.val)   return false;
+            qu.add(t1.left);
+            qu.add(t2.right);
+            qu.add(t1.right);
+            qu.add(t2.left);
+        }
+        return true;
+    }
+}
+
+// inorder traversal, iterative.
+// The inorder traversal of the tree is symmetric
+// time: O(n); space: O(h), h is the maximum height of the tree
 public class Solution {
     public boolean isSymmetric(TreeNode root) {
       if (root == null)
@@ -98,23 +105,28 @@ public class Solution {
    }
 }
 
-// better iteration, more clear and elegant, from AnnieKim
+// inorder traversal, DFS
 public class Solution {
     public boolean isSymmetric(TreeNode root) {
-        if (root==null) return true;
-        Queue<TreeNode> qu = new LinkedList<TreeNode>();
-        qu.add(root.left);
-        qu.add(root.right);
-        while (!qu.isEmpty()){      // compare one pair each time
-            TreeNode t1 = qu.poll();
-            TreeNode t2 = qu.poll();
-            if (t1==null && t2==null)  continue;
-            if (t1==null || t2==null || t1.val != t2.val)   return false;
-            qu.add(t1.left);
-            qu.add(t2.right);
-            qu.add(t1.right);
-            qu.add(t2.left);
+        if (root == null)   return true;
+        ArrayList<String> nodes = new ArrayList<String>();
+        inorderTraversal(root, nodes);   
+        int i = 0, j = nodes.size() -1;
+        while (i < j){
+            if (!nodes.get(i++).equals(nodes.get(j--))) return false;   
         }
-        return true;
+        return true;          
+    }
+    public void inorderTraversal(TreeNode n, ArrayList<String> nodes){
+        if (n == null){
+            nodes.add("#");
+            return;
+        }
+        if (n.left==null && n.right==null)  nodes.add(""+n.val);
+        else{
+            inorderTraversal(n.left, nodes);
+            nodes.add(""+n.val);
+            inorderTraversal(n.right, nodes);     
+        }
     }
 }

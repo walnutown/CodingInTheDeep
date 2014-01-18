@@ -1,86 +1,19 @@
-// http://discuss.leetcode.com/questions/29/spiral-matrix
-// iterative or recursion
+/*
+    Given a matrix of m x n elements (m rows, n columns), return all elements of the matrix in spiral order.
 
-// Last executed input:    []
-public class Solution {
-    public ArrayList<Integer> spiralOrder(int[][] matrix) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (matrix == null || matrix[0].length == 0 || matrix.length == 0)
-            return res;
-        int width = matrix[0].length;
-        int height = matrix.length;
-        int rStart = 0, rEnd = width -1;
-        int cStart = 0, cEnd = height -1;
-        int dir = 0;
-        int i = 0, j = 0;
-        while ( rStart < rEnd && cStart < cEnd){
-            if (dir == 0){
-                res.add(matrix[i][j]);
-                i++;
-                if (i == rEnd){
-                    dir = 1;
-                    cStart++;
-                    j = cStart;
-                }
-            }
-            else if (dir == 1){
-                res.add(matrix[i][j]);
-                j++;
-                if (j == cEnd){
-                    dir = 2;
-                    rEnd--;
-                    i = rEnd;
-                }
-            }
-            else if (dir == 2){
-                res.add(matrix[i][j]);
-                i--;
-                if (i == rStart){
-                    dir = 3;
-                    cEnd--;
-                    j = cEnd;
-                }
-            }
-            else if (dir == 3){
-                res.add(matrix[i][j]);
-                j--;
-                if (j == cStart){
-                    dir = 0;
-                    rStart++;
-                    i = rStart;
-                }
-            }
-        }
-        return res;
-    }
-}
+    For example,
+    Given the following matrix:
 
-// Submission Result: Runtime Error
-// Last executed input:    []
-public class Solution {
-    public ArrayList<Integer> spiralOrder(int[][] matrix) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (matrix==null)   return res;             // check matrix.length first
-        int w = matrix[0].length;
-        int h = matrix.length;
-        if (w==0 || h==0)   return res;
-        int left=0, right=w-1, top=0, bottom=h-1;
-        while (left <= right && top <=bottom){
-            for (int i=left; i<=right; i++)  res.add(matrix[top][i]);
-            top++;
-            for (int i=top; i<=bottom; i++) res.add(matrix[i][right]);
-            right--;
-            for (int i=right; i>=left; i--)    res.add(matrix[bottom][i]);
-            bottom--;
-            for (int i=bottom; i>=top; i--)   res.add(matrix[i][left]);
-            left++;
-        }
-        return res;
-    }
-}
-// Accepted
+    [
+     [ 1, 2, 3 ],
+     [ 4, 5, 6 ],
+     [ 7, 8, 9 ]
+    ]
+    You should return [1,2,3,6,9,8,7,4,5].
+*/
+
+// Iterative, update the four borders of the matrix.
+// time: O(n); space:(1)
 public class Solution {
     public ArrayList<Integer> spiralOrder(int[][] matrix) {
         ArrayList<Integer> res = new ArrayList<Integer>();
@@ -89,7 +22,7 @@ public class Solution {
         while (left <= right && top <=bottom){
             for (int i=left; i<=right; i++)  
                 res.add(matrix[top][i]);
-            if (++top > bottom) break;          // need to break immediately
+            if (++top > bottom) break;          // need to break immediately, otherwise will influence the value of 'right' and 'left'
             for (int i=top; i<=bottom; i++) 
                 res.add(matrix[i][right]);
             if (--right < left) break;

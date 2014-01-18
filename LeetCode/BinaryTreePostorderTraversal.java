@@ -1,8 +1,35 @@
+/*
+    Given a binary tree, return the postorder traversal of its nodes' values.
 
-// Binary tree postorder traversal
+    For example:
+    Given binary tree {1,#,2,3},
+       1
+        \
+         2
+        /
+       3
+    return [3,2,1].
+*/
+
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+
+
+// Stack Iterative traversal. From Sophie, 2 while loops, logic is easier to understand.
+// post-order: left -> right -> curr
+// pre-order: curr -> left -> right
+// mirror of pre-order: curr -> right -> left. Reverse to get the post-order
 public class Solution{
-    public ArrayList<Integer> preorderTraversal(TreeNode root) {
+    public ArrayList<Integer> postorderTraversal(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<Integer>();
+        if (root == null) return res;
         Stack<TreeNode> st = new Stack<TreeNode>();
         Stack<Integer> reverse = new Stack<Integer>();
         while (root != null){
@@ -10,58 +37,22 @@ public class Solution{
             reverse.push(root.val);
             root = root.right;
         }
-
-        while (st.size() > 0){
+        while (!st.isEmpty()){
             TreeNode curr = st.pop();
-            curr = curr.left();
+            curr = curr.left;
             while (curr != null){
                 st.push(curr);
                 reverse.push(curr.val);
-                curr = curr.left;
+                curr = curr.right;
             }
         }
-
-        while (reverse.size() > 0){
-            res.add(reverse.pop());
-        }
+        while (reverse.size() > 0)  res.add(reverse.pop());
+        return res;
     }
 }   
 
-
-// Submission Result: Wrong Answer
-
-// Input:  {1,#,2}
-// Output: [2,2]
-// Expected:   [2,1]
-public class Solution {
-    public ArrayList<Integer> postorderTraversal(TreeNode root) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (root == null)   return res;
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        while (root != null){
-            st.push(root);
-            root = root.left;
-        }
-        Stack<Integer> rtree = new Stack<Integer>();
-        while (!st.isEmpty()){
-            TreeNode curr = st.pop();
-            if (curr.right == null){
-                while (!rtree.isEmpty())    res.add(rtree.pop());
-                res.add(curr.val);
-            }else{
-                curr = curr.right;
-                while (curr != null){
-                    st.push(curr);
-                    rtree.push(curr.val);
-                    curr = curr.left;
-                }
-            }
-        }
-        return res;
-    }
-}
-
-// Accepted, mirrored preorder, use a reverse stack
+// Stack Iterative traversal.
+// time: O(n); space: O(h), h is the maximum height of the tree
 public class Solution {
     public ArrayList<Integer> postorderTraversal(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<Integer>();
