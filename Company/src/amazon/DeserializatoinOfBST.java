@@ -1,4 +1,4 @@
-package others;
+package amazon;
 
 import lib.TreeNode;
 
