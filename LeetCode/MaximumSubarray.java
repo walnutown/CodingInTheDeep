@@ -1,117 +1,28 @@
-// O(n) solution
-public class Solution {
-    public int maxSubArray(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int len = A.length;
-        if (A == null || len == 0 ){
-            return 0;
-        }
-        
-        int max = Integer.MIN_VALUE;
-        int sum = 0;
-        
-        for(int i = 0; i < len; i++){
-            sum += A[i];
-            max = Math.max(max, sum);
-            // if sum < 0, neg plus A[i], equals that A[i] is reduced
-            // so, we just need to throw away the previous sum
-            if (sum < 0){
-                sum = 0;
-            }
-        }
-        
-        return max;
-    }
-}
+/*
+    Find the contiguous subarray within an array (containing at least one number) which has the largest sum.
+
+    For example, given the array [−2,1,−3,4,−1,2,1,−5,4],
+    the contiguous subarray [4,−1,2,1] has the largest sum = 6.
+
+    More practice:
+    If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
+*/
 
 
-// divide and conquer
-public class Solution {
-    int len;
-    public int maxSubArray(int[] A) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        
-        len = A.length;
-        if (A == null || len == 0){
-            return 0;
-        }
-        
-        int max = Integer.MIN_VALUE;
-        return findMax(A, 0, len -1, max);
-        
-    }
-    
-    public int findMax(int[] A, int start, int end, int max){
-        if (start > end){
-            return Integer.MIN_VALUE;
-        }
-        int mid = start + (end - start) /2;
-        int lMax = findMax(A, start, mid-1, max);
-        int rMax = findMax(A, mid+1, end, max);
-        max = Math.max(Math.max(lMax, rMax), max);
-        int sum = 0;
-        int lmaxSum = 0;
-        for (int i = mid-1; i >= start; i--){
-            sum += A[i];
-            lmaxSum = Math.max(lmaxSum, sum);
-            
-        }
-        
-        sum = 0;
-        int rmaxSum = 0;
-        for (int i = mid + 1; i <= end; i++){
-            sum += A[i];
-            rmaxSum = Math.max(rmaxSum, sum);
-        }
-        
-        max = Math.max(max, rmaxSum + lmaxSum + A[mid]);
-        return max;
-    }
-    
-}
-
-
-// Maximum Subarray Problem can be transformed to Stock Problem,
-// but need O(n) extra space and pass the array two times (one time to create array, another time to get the max increment)
-
-
-
-
-
-
-// Submission Result: Wrong Answer
-// Input:  [-1]
-// Output: 0
-// Expected:   -1
+// DP, time: O(n); space: O(1)
 public class Solution {
     public int maxSubArray(int[] A) {
         if (A==null || A.length==0) return 0;
         int max = Integer.MIN_VALUE;
         int sum = 0;
         for (int i=0; i<A.length; i++){
-            sum = sum+A[i] <= 0 ? 0 : sum+A[i];
+            sum = Math.max(A[i], sum+A[i]);
             max = Math.max(sum, max);
         }
         return max;
     }
 }
-// Accepted
-public class Solution {
-    public int maxSubArray(int[] A) {
-        if (A==null || A.length==0) return 0;
-        int max = Integer.MIN_VALUE;
-        int sum = 0;
-        for (int i=0; i<A.length; i++){
-            sum += A[i];
-            max = Math.max(sum, max);
-            sum = sum<0 ? 0 : sum;
-        }
-        return max;
-    }
-}
-// Accepted, Divide and Conquer
+// Divide and Conquer, time: O(nlgn); space: O(1)
 public class Solution {
     public int maxSubArray(int[] A) {
         if (A==null || A.length==0) return 0;
