@@ -1,148 +1,39 @@
-// dp
+/*
+    Given s1, s2, s3, find whether s3 is formed by the interleaving of s1 and s2.
 
-public class Solution {
-    public boolean isInterleave(String s1, String s2, String s3) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        // judge null
-        int nullCount = 0;
-        if (s1 == null){
-            nullCount++;
-        }
-        if (s2 == null){
-            nullCount++;
-        }
-        if (s3 == null){
-            nullCount++;
-        }
-        
-        if (nullCount < 3 && nullCount > 0){
-            return false;
-        }
-        if (nullCount == 3){
-            return true;
-        }
-        // judge length
-        int len1 = s1.length();
-        int len2 = s2.length();
-        int len3 = s3.length();
-        
-        if(len1 == 0 && len2 == 0 && len3 == 0){
-            return true;
-        }
-        
-        if (len1 + len2 != len3){
-            return false;
-        }
-        
-        boolean[][] match = new boolean[len1+1][len2+1];
-        match[0][0] = true;
-        for (int i = 1; i <= len1; i ++){
-            if (s1.charAt(i-1) == s3.charAt(i-1)){
-                match[i][0] = true;
-            }
-            else{
-                break;
-            }
-        }
-        
-        for (int j = 1; j <= len2; j++){
-            if (s2.charAt(j-1) == s3.charAt(j-1)){
-                match[0][j] = true;
-            }
-            else{
-                break;
-            }
-        }
-        
-        for (int i = 1; i <= len1; i++){
-            char ch1 = s1.charAt(i-1);
-            for (int j = 1; j <= len2; j++){
-                char ch2 = s2.charAt(j-1);
-                char ch3 = s3.charAt(i+j-1);
-                if (ch1 == ch3){
-                    match[i][j] = match[i-1][j];
-                }
-                if (ch2 == ch3){
-                    match[i][j] = match[i][j-1] || match[i][j]; // or the result of previous if()
-                }
-            }
-        }
-        
-        return match[len1][len2];
-             
-    }
-}
+    For example,
+    Given:
+    s1 = "aabcc",
+    s2 = "dbbca",
 
-// recursive, pass large judge
-public class InterleavingString {
-    public boolean isInterleave(String s1, String s2, String s3) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if(s1.length()==0 && s2.length()==0 && s3.length()==0)
-            return true;
-        if(s3.length()!=s1.length()+s2.length()) 
-            return false;
-        if(s1.length()!=0 && s2.length()!=0 && s3.charAt(s3.length()-1)==s1.charAt(s1.length()-1) && s3.charAt(s3.length()-1)==s2.charAt(s2.length()-1)) {
-            return isInterleave(s1.substring(0,s1.length()-1),s2,s3.substring(0,s3.length()-1)) || 
-                isInterleave(s1,s2.substring(0,s2.length()-1),s3.substring(0,s3.length()-1));
-        }
-        else if(s1.length()!=0 && s3.charAt(s3.length()-1)==s1.charAt(s1.length()-1)) {
-            return isInterleave(s1.substring(0,s1.length()-1),s2,s3.substring(0,s3.length()-1));
-        }
-        else if(s2.length()!=0 && s3.charAt(s3.length()-1)==s2.charAt(s2.length()-1)) {
-            return isInterleave(s1,s2.substring(0,s2.length()-1),s3.substring(0,s3.length()-1));
-        }
-        else 
-            return false;
-    }
-}
+    When s3 = "aadbbcbcac", return true.
+    When s3 = "aadbbbaccc", return false.
+*/
 
-// 3d DP like scrambled string, O(n^3)
-// TLE
+
+// 3d DP like scrambled string, time: O(n^3); space: O(n^3)
 public class Solution {
     public boolean isInterleave(String s1, String s2, String s3) {
         // omit null check
         int l1=s1.length(), l2=s2.length(), l3=s3.length();
-          if (l1+l2 != l3)  return false;
-          boolean[][][] dp =new boolean[l3+1][l1+1][l2+1];
-          dp[0][0][0] = true;
-          for (int i=1; i<=l1 && s1.substring(0,i).equals(s3.substring(0,i)); i++)   dp[i][i][0]=true;
-          for (int i=1; i<=l2 && s2.substring(0,i).equals(s3.substring(0,i)); i++)   dp[i][0][i]=true;
-          for (int k=1; k<=l3; k++){
-              for (int i=1; i<=l1; i++){
-                  for (int j=1; j<=l2; j++){
-                      dp[k][i][j] = s1.charAt(i-1)==s3.charAt(k-1) && dp[k-1][i-1][j] || s2.charAt(j-1)==s3.charAt(k-1) && dp[k-1][i][j-1];
-                  }
+        if (l1+l2 != l3)  return false;
+        boolean[][][] dp =new boolean[l3+1][l1+1][l2+1];
+        dp[0][0][0] = true;
+        for (int i=1; i<=l1 && s1.charAt(i-1)==s3.charAt(i-1); i++)   dp[i][i][0]=true;
+        for (int i=1; i<=l2 && s2.charAt(i-1)==s3.charAt(i-1); i++)   dp[i][0][i]=true;
+        for (int k=1; k<=l3; k++){
+          for (int i=1; i<=l1; i++){
+              for (int j=1; j<=l2; j++){
+                  dp[k][i][j] = s1.charAt(i-1)==s3.charAt(k-1) && dp[k-1][i-1][j] || s2.charAt(j-1)==s3.charAt(k-1) && dp[k-1][i][j-1];
               }
           }
-          return dp[l3][l1][l2];
-    }
-}
-// Accepted, change string equal to char comparison
-// test on Eclipse, 50ms and 46ms
-public class Solution {
-    public boolean isInterleave(String s1, String s2, String s3) {
-        // omit null check
-        int l1=s1.length(), l2=s2.length(), l3=s3.length();
-          if (l1+l2 != l3)  return false;
-          boolean[][][] dp =new boolean[l3+1][l1+1][l2+1];
-          dp[0][0][0] = true;
-          for (int i=1; i<=l1 && s1.charAt(i-1)==s3.charAt(i-1); i++)   dp[i][i][0]=true;
-          for (int i=1; i<=l2 && s2.charAt(i-1)==s3.charAt(i-1); i++)   dp[i][0][i]=true;
-          for (int k=1; k<=l3; k++){
-              for (int i=1; i<=l1; i++){
-                  for (int j=1; j<=l2; j++){
-                      dp[k][i][j] = s1.charAt(i-1)==s3.charAt(k-1) && dp[k-1][i-1][j] || s2.charAt(j-1)==s3.charAt(k-1) && dp[k-1][i][j-1];
-                  }
-              }
-          }
-          return dp[l3][l1][l2];
+        }
+        return dp[l3][l1][l2];
     }
 }
 
-// Accepted, O(m*n)
-// 2d DP, modified from AnnieKim, best solution to this problem
+// 
+// 2d DP, modified from AnnieKim, time: O(m*n); space: O(m*n)
 // dp[i][j] == true' means that there is at least one way to construct 
 // the string s3[0...i+j-1] by interleaving s1[0...j-1] and s2[0...i-1].
 public class Solution {
@@ -162,8 +53,9 @@ public class Solution {
     }
 }
 
-// Accepted
-// 1d DP, notice that for each A[i][j], we only need A[i-1][j] and A[i][j-1].
+
+// 1d DP, time: O(m*n); space: O(n)
+// notice that for each A[i][j], we only need A[i-1][j] and A[i][j-1].
 public class Solution {
     public boolean isInterleave(String s1, String s2, String s3){
         int m = s1.length(), n = s2.length(), k = s3.length();

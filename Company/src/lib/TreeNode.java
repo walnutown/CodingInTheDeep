@@ -56,7 +56,7 @@ public class TreeNode {
    }
    // construct a tree from in-order and pre-order traversal arrays
    public TreeNode buildTree(int[] in, int[] pre, int in_start, int in_end){
-      if (in_start > in_end)
+      if (in_start > in_end || pre_index >= pre.length) // notice 'pre_index >= pre.length'
          return null;
       TreeNode root = new TreeNode(pre[pre_index++]);
       int in_root_index = 0;
