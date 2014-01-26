@@ -10,29 +10,25 @@ import java.util.Set;
  */
 // the most challenging part is how to deal with the case: good, goody.
 // That's why we need the 'isEnd' flag
-public class Trie implements Dictionary {
+public class Trie {
    private TrieNode root;
 
    public Trie() {
       root = new TrieNode('.');
    }
 
-   @Override
    public void add(String word) {
       root.add(word);
    }
 
-   @Override
    public boolean contains(String word) {
       return root.contains(word);
    }
 
-   @Override
    public void remove(String word) {
       root.remove(word);
    }
 
-   @Override
    public Set<String> getWords() {
       return root.getSuffix();
    }
@@ -47,13 +43,13 @@ public class Trie implements Dictionary {
          children = new HashMap<Character, TrieNode>();
          isEnd = false;
       }
-      
-      public boolean hasChildren(){
+
+      public boolean hasChildren() {
          return !children.isEmpty();
       }
 
       public void add(String word) {
-         if (word == null || word.length() == 0){
+         if (word == null || word.length() == 0) {
             this.isEnd = true;
             return;
          }
@@ -67,19 +63,23 @@ public class Trie implements Dictionary {
          if (word == null || word.length() == 0)
             return isEnd;
          char ch = word.charAt(0);
-         if (!children.containsKey(ch)) return false;
+         if (!children.containsKey(ch))
+            return false;
          TrieNode child = children.get(ch);
-         if (word.length()==1 && child.isEnd)   return true;
+         if (word.length() == 1 && child.isEnd)
+            return true;
          return child.contains(word.substring(1));
       }
+
       // this method can be optimized
       public void remove(String word) {
-         if (word==null || word.length()==0)    return;
+         if (word == null || word.length() == 0)
+            return;
          if (!this.contains(word))
             return;
          char ch = word.charAt(0);
          TrieNode child = children.get(ch);
-         if (child.isEnd && word.length()==1){
+         if (child.isEnd && word.length() == 1) {
             child.isEnd = false;
          }
          if (!child.hasChildren() || child.getSuffix().size() <= 1)
@@ -101,7 +101,8 @@ public class Trie implements Dictionary {
                   suffix.add(ch + s);
                }
             }
-            if (isEnd)  suffix.add(""); // the word is part of another word. e.g., good and goody
+            if (isEnd)
+               suffix.add(""); // the word is part of another word. e.g., good and goody
          }
          return suffix;
       }
