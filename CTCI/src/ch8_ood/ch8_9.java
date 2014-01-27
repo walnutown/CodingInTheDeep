@@ -26,9 +26,13 @@ public class ch8_9 {
       
       public abstract boolean has(String filename);
       
-      public abstract boolean delete(String filename);
+      public abstract boolean remove(String filename);
       
       public abstract boolean create(String filename);
+      
+      // soft link file src and dst
+      // find the node and put the filenam-node pair into the map
+      public abstract boolean link(String src, String dst);
    }
    
    public enum Type{

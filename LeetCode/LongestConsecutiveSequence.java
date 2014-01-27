@@ -40,7 +40,7 @@ public class Solution {
     }
 }
 
-// Accepted, time: O(n), space: O(n)
+// Use a set of available numbers, time: O(n), space: O(n)
 public class Solution {
     public int longestConsecutive(int[] num) {
         if (num==null || num.length==0) return 0;

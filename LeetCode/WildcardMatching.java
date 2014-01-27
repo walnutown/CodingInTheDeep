@@ -1,17 +1,24 @@
-// Submission Result: Time Limit Exceeded
+/*
+    Implement wildcard pattern matching with support for '?' and '*'.
 
-// Last executed input:	"aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba", "a*******b"
-public class Solution {
-    public boolean isMatch(String s, String p) {
-        if (s==null || p==null) return s==null && p==null;
-        if (s.length()==0 && p.length()==0) return true;
-        if (s.length()>0 && p.length()==0)  return false;
-        if (s.length()==0 && p.length()>0)  return p.charAt(0)=='*' && isMatch(s, p.substring(1));
-        if (s.charAt(0)==p.charAt(0) || p.charAt(0)=='?')   return isMatch(s.substring(1), p.substring(1));
-        if (p.charAt(0)=='*')   return isMatch(s, p.substring(1)) || isMatch(s.substring(1), p);
-        return false;
-    }
-}
+    '?' Matches any single character.
+    '*' Matches any sequence of characters (including the empty sequence).
+
+    The matching should cover the entire input string (not partial).
+
+    The function prototype should be:
+    bool isMatch(const char *s, const char *p)
+
+    Some examples:
+    isMatch("aa","a") → false
+    isMatch("aa","aa") → true
+    isMatch("aaa","aa") → false
+    isMatch("aa", "*") → true
+    isMatch("aa", "a*") → true
+    isMatch("ab", "?*") → true
+    isMatch("aab", "c*a*b") → false
+*/
+
 
 // from sophie,
 public class Solution {
@@ -53,42 +60,35 @@ public class Solution {
         ++pid;
     }
     return matches[s.length()];
-}
+    }
 }
 
-// devised from c0mm3nt
+// From AnnieKim
 public class Solution {
     public boolean isMatch(String s, String p) {
-	    if (s==null || p==null)  return s==null && p==null;
-	    int m=s.length(), n=p.length(), chars = 0;
-	    for (Character c : p.toCharArray())
-	        if (c!='*' && m<++chars)    return false;
-	    boolean[] matches = new boolean[m+1];
-	    matches[0] = true;
-	    int i=0, j, firstMatch=0;
-	    while (i < p.length()) {
-	        if (i>0 && p.charAt(i)=='*' && p.charAt(i-1)=='*'){
-	            i++;
-	            continue;
-	        }
-	        if (p.charAt(i) == '*')
-	            for (j=firstMatch+1; j<=s.length(); j++)  matches[j] = true;
-	        else{
-	            int match = -1;
-	            for (j=s.length(); j>firstMatch; j--) {
-	                matches[j] = (p.charAt(i)==s.charAt(j-1) || p.charAt(i)=='?') && matches[j-1];
-	                if (matches[j])  match = j;
-	            }
-	            if (match < 0)  return false;
-	            firstMatch = match;
-	        }
-	        i++;
-	    }
-	    return matches[s.length()];
-	}
+        if (s==null || p==null)  return s==null && p==null;
+        return isMatch(s.toCharArray(), p.toCharArray());
+    } 
+    public boolean isMatch(char[] s, char[] p){
+        int i=0, j=0;
+        int sb=-1, pb=-1;
+        while (i<s.length){
+            if (j<p.length && (p[j]==s[i] || p[j]=='?')){
+                i++; j++;
+            }else if (j<p.length && p[j]=='*'){
+                while (j<p.length && p[j]=='*')   j++;    // ignore duplicates
+                if (j==p.length)  return true;
+                sb=i; pb=j;
+            }else{
+                if (sb==-1) return false;
+                i = ++sb;
+                j = pb;
+            }
+        }
+        while(j<p.length && p[j]=='*')    j++;
+        return i==s.length && j==p.length;           
+    }
 }
-
-
 
 
 

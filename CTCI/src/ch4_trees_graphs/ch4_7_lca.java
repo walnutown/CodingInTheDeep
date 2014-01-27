@@ -1,9 +1,9 @@
 package ch4_trees_graphs;
 
-public class ch4_7 {
+public class ch4_7_lca {
 
-   /*
-    * Design an algorithm to find the first common ancestor of two nodes in a binary tree
+   /**
+    * Design an algorithm to find the Lowest common ancestor of two nodes in a binary tree
     * Avoid sorting additional nodes in a data structure
     */
    public static void main(String[] args) {
@@ -28,17 +28,12 @@ public class ch4_7 {
       TreeNode right = findFirstCommonAncestor(root.right, a, b);
       if (left != null && right != null)
          return root;
-//      if (left != null)
-//         return left;
-//      if (right != null)
-//         return right;
-//      return null;
       return left != null ? left : right;
    }
 
    // if this is a BST, we could modify the find operation for the two nodes and see where the paths
    // diverge
-   // Lowest Common Ancestor in BST
+   // Lowest Common Ancestor in BST, time: O(n); space: O(1)
    public static TreeNode findLCA(TreeNode root, int a, int b) {
       if (root == null)
          return null;

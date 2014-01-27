@@ -7,7 +7,7 @@ import java.util.Set;
 public class FindConsecutiveRange {
 
    /**
-    * Given an array of integers, output all the interval ranges
+    * Given an array of integers, output all the consecutive ranges
     * e.g. Input: (4，6，5，7，9，10)
     * Output: [4,7][9,10]
     * 
