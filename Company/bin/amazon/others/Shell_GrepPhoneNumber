@@ -1,0 +1,14 @@
+Q:
+Write Linux commands to find all the phone numbers in the current directory
+
+A:
+depends on the format of the phone number
+we use (000)000-0000 as example
+
+grep -r '^\([0-9]{3}\)[0-9]{3}-[0-9]{4}$' .
+
+To search a single file 'foo'
+grep -r '^\([0-9]{3}\)[0-9]{3}-[0-9]{4}$' 'foo'
+
+To search all the files on the computer
+grep -r '^\([0-9]{3}\)[0-9]{3}-[0-9]{4}$' /

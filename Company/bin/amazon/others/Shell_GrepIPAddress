@@ -1,0 +1,12 @@
+Q:
+Write Linux commands to find all the IP address in the current directory
+
+192.168.1.1
+
+
+A:
+range: 0-255
+some special cases: 
+	03.1.1.1
+	
+grep -r '^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$' .

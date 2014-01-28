@@ -1,0 +1,16 @@
+1. Explain how to solve the collisions in a hash table.
+	Collision happens when two value has the same key, although they have different hash codes.
+	Collision is solved by using a LinkedList to store the values with the same key
+
+2. Time complexity of put a <K,V> pair into the map. Best? Worst? Average?
+	Best: 
+		O(1). use hash code to find the bucket index 
+	Worst: 
+		the 'put' triggers the resize of the hash table. In this case, a new bucket table 
+	is created. It doubles the size of the original table and need to copy all data of the original
+	table, hence O(n)
+	Average: 
+		O(1). Good hash table design improves the performance by choosing proper
+	 initial capacity and load factor. Initial capacity is the initial length of the table bucket,
+	 load factor decides when to resize the table bucket. Higher value of load factor decreases
+	 
