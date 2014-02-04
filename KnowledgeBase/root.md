@@ -11,3 +11,8 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
 * find out duplicates;
 * find out whether a given number x is in the set or not.
 
+
+
+
+##Object Oriented Design
+[oodesign.com](http://www.oodesign.com/)
