@@ -15,4 +15,8 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
 
 
 ##Object Oriented Design
-[oodesign.com](http://www.oodesign.com/)
+[oodesign.com](http://www.oodesign.com/)<br>
+[google doc](https://docs.google.com/document/d/1tWOAhdr4QG_Y4GTpKjmx-OP6HnKFtnGp0I5KZi12LV0/edit?usp=sharing)
+* Singleton:  java.lang.Runtime
+* Observer: listener
+* Decorator: BufferedReader
