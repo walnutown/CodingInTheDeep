@@ -16,9 +16,9 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
 #### 2. special binary trees
 * Balanced binary tree
   * BalancedBinaryTree (Leetcode)
-* Sum Tree
+* Sum binary tree
   * IsSumTree (Company/amazon)
-* Mirror Tree
+* Mirror binary tree
   * IsMirrorTree (Leetcode) 
 
 #### 3. binary tree serialization and deserialization
