@@ -1,3 +1,22 @@
+/*
+    Given a binary tree, return the zigzag level order traversal of its nodes' values. (ie, from left to right, then right to left for the next level and alternate between).
+
+    For example:
+    Given binary tree {3,9,20,#,#,15,7},
+        3
+       / \
+      9  20
+        /  \
+       15   7
+    return its zigzag level order traversal as:
+    [
+      [3],
+      [20,9],
+      [15,7]
+    ]
+
+*/
+
 /**
  * Definition for binary tree
  * public class TreeNode {
@@ -7,51 +26,42 @@
  *     TreeNode(int x) { val = x; }
  * }
  */
+// one stack, need to reverse in even level
+// time: O(n); space: O(b^d)
 public class Solution {
     public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-        if (root == null){
-            return res;
-        }
-        
+        if (root == null)   return res;
         Queue<TreeNode> qu = new LinkedList<TreeNode>();
         qu.add(root);
-        Stack<Integer> arr = new Stack<Integer>();
-        int currCount = 1;
-        int nextCount = 0;
-        int lineCount = 0;
+        Stack<Integer> st = new Stack<Integer>();
+        int curr_num = 1, next_num = 0;
+        int level = 0;
         while(qu.size() > 0){
             TreeNode curr = qu.poll();
-            arr.push(curr.val);
-            currCount--;
-            
+            st.push(curr.val);
+            curr_num--;
             if (curr.left != null){
                 qu.add(curr.left);
-                nextCount++;
+                next_num++;
             }
-            
             if (curr.right != null){
                 qu.add(curr.right);
-                nextCount++;
+                next_num++;
             }
-            
-            if (currCount == 0){
-                currCount = nextCount;
-                nextCount = 0;
-                lineCount++;
-                if (lineCount%2 == 1){
-                    res.add(new ArrayList<Integer>(arr));
-                }
+            if (curr_num == 0){
+                curr_num = next_num;
+                next_num = 0;
+                level++;
+                if (level%2 == 1)   res.add(new ArrayList<Integer>(st));
                 else{
-                    ArrayList<Integer> temp = new ArrayList<Integer>();
-                    while(arr.size() > 0){
-                        temp.add(arr.pop());
+                    ArrayList<Integer> tmp = new ArrayList<Integer>();
+                    while(!st.isEmpty()){
+                        tmp.add(st.pop());
                     }
-                    res.add(temp);
+                    res.add(tmp);
                 }
-                arr.clear();
+                st.clear();
             }
         }
         return res;
@@ -59,8 +69,8 @@ public class Solution {
 }
 
 
-// Accepted, Dec 26, two stacks, time complexity is better than the above, becuase we 
-// don't have to do extra pops to reverse the list
+// Two stacks, time: O(n); space: O(b^d)
+// time complexity is better than the above, becuase we don't have to do extra pops to reverse the list
 public class Solution {
     public ArrayList<ArrayList<Integer>> zigzagLevelOrder(TreeNode root) {
         // use two stacks

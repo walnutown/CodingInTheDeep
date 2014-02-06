@@ -9,8 +9,7 @@ public class ch1_4 {
     * 
     */
    public static void main(String[] args) {
-      // TODO Auto-generated method stub
-      char[] str = new char[9];
+      char[] str = new char[9]{};
       str[0] = 'a';
       str[1] = ' ';
       str[2] = 'b';
