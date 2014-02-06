@@ -16,6 +16,10 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
 #### 2. special binary trees
 * Balanced binary tree
   * BalancedBinaryTree (Leetcode)
+* Sum Tree
+  * IsSumTree (Company/amazon)
+* Mirror Tree
+  * IsMirrorTree (Leetcode) 
 
 #### 3. binary tree serialization and deserialization
 *  Sol1:
@@ -26,17 +30,21 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
     * use "#" to denote null node
     * use BFS level order traversal, each level has 2^(d-1) nodes
 *  Sol3:
-    * <1> serialization: use two arrays, inorder and preorder traversal arrays of the tree
-    * <2> need the prerequisite: no duplicate vals in tree
+    * serialization: use two arrays, inorder and preorder traversal arrays of the tree
+    * need the prerequisite: no duplicate vals in tree
+*  Examples:
+    * DeserializePreorderArrayOfBST (Company/amazon)
+    * ConstructBTFromInorderAndPreorderTraversal (Leetcode)
+    * ConstructBTFromInorderAndPostorderTraversal (Leetcode)
     
 
 
-#### 2. find a specific path in the tree
+#### 4. find a specific path in the tree
 * Root to leaf path
   * SumRootToLeafNumbers (Leetcode)
 * Path between two nodes
   * DistanceOfTwoNodesInBST (Company/amazon)
-<br> 
 * Path of maximum value in the tree
   * BinaryTreeMaximumPathSum (Leetcode)
   
+##Total: 13
