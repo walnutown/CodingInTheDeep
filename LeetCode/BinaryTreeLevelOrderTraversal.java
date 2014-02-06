@@ -28,7 +28,7 @@
  */
 
 // same as CTCI ch4_4
-// count the number of nodes in a level
+// count the number of nodes in a level, time: O(n); space: O(b^d)
 public class Solution {
     public ArrayList<ArrayList<Integer>> levelOrder(TreeNode root) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

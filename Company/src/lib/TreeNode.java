@@ -60,7 +60,7 @@ public class TreeNode {
          return null;
       TreeNode root = new TreeNode(pre[pre_index++]);
       int in_root_index = 0;
-      for (int i = 0; i < in.length; i++){
+      for (int i = in_start; i <= in_end; i++){
          if (in[i] == root.val){
             in_root_index = i;
             break;

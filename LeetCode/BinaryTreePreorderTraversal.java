@@ -1,3 +1,18 @@
+/*
+    Given a binary tree, return the preorder traversal of its nodes' values.
+
+    For example:
+    Given binary tree {1,#,2,3},
+       1
+        \
+         2
+        /
+       3
+    return [1,2,3].
+
+    Note: Recursive solution is trivial, could you do it iteratively?
+*/
+
 // Stack Iterative traversal.
 // time: O(n); space: O(h), h is the maximum height of the tree
 public class Solution {
@@ -15,8 +30,7 @@ public class Solution {
     }
 }
 
-
-// Stack Iterative traversal. From Sophie, 2 while loops, logic is easier to understand.
+// Stack Iterative traversal, from Sophie. 2 while loops, logic is easier to understand.
 // Refer to BinaryTreeInorderTraversal, only position of 'res.add()'' changes
 public class Solution{
     public ArrayList<Integer> preorderTraversal(TreeNode root) {

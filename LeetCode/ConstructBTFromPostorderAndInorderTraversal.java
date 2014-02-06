@@ -33,3 +33,23 @@ public class Solution {
         return root;
     }
 }
+// mirror of constructBTFromInorderAndPreorderTraversal
+public class Solution {
+    private int post_index;
+    public TreeNode buildTree(int[] inorder, int[] postorder) {
+        if (inorder == null || inorder.length == 0) return null;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i =0; i<inorder.length; i++)
+            map.put(inorder[i], i);
+        post_index = postorder.length-1;
+        return builder(postorder, 0, inorder.length-1, map);
+    }
+    public TreeNode builder(int[] postorder, int start, int end, Map<Integer, Integer> map){
+        if (start > end)    return null;
+        TreeNode root = new TreeNode(postorder[post_index]);
+        int mid = map.get(postorder[post_index--]);
+        root.right = builder(postorder, mid+1, end, map);
+        root.left = builder(postorder, start, mid-1, map);
+        return root;
+    }
+}

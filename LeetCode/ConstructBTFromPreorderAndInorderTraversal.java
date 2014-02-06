@@ -34,3 +34,25 @@ public class Solution {
         return root;
     }
 }
+
+// use a global variable, basically, it's a preorder traversal
+public class Solution {
+    private int pre_index;
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0)   return null;
+        Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i=0; i<inorder.length; i++)
+            map.put(inorder[i], i);
+        pre_index = 0;
+        return builder(preorder, 0, inorder.length-1, map);
+    }
+    
+    public TreeNode builder(int[] preorder, int start, int end, Map<Integer, Integer> map){
+        if (start > end)    return null;
+        TreeNode root = new TreeNode(preorder[pre_index]);
+        int mid = map.get(preorder[pre_index++]);
+        root.left = builder(preorder, start, mid-1, map);
+        root.right = builder(preorder, mid+1, end, map);
+        return root;
+    }
+}

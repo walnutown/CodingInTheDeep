@@ -21,8 +21,26 @@
  * }
  */
 
+// Stack Iterative traversal.
+// time: O(n); space: O(h), h is the maximum height of the tree
+public class Solution {
+    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (root == null)   return res;
+        Stack<TreeNode> st = new Stack<TreeNode>();
+        Stack<Integer> reverse = new Stack<Integer>();
+        while (root != null || !st.isEmpty()){
+            if (root == null)   root = st.pop();
+            reverse.push(root.val);
+            if (root.left != null) st.push(root.left);
+            root = root.right;
+        }
+        while (!reverse.isEmpty())  res.add(reverse.pop());
+        return res;
+    }
+}
 
-// Stack Iterative traversal. From Sophie, 2 while loops, logic is easier to understand.
+// Stack Iterative traversal, from Sophie. 2 while loops, logic is easier to understand.
 // post-order: left -> right -> curr
 // pre-order: curr -> left -> right
 // mirror of pre-order: curr -> right -> left. Reverse to get the post-order
@@ -50,22 +68,3 @@ public class Solution{
         return res;
     }
 }   
-
-// Stack Iterative traversal.
-// time: O(n); space: O(h), h is the maximum height of the tree
-public class Solution {
-    public ArrayList<Integer> postorderTraversal(TreeNode root) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (root == null)   return res;
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        Stack<Integer> reverse = new Stack<Integer>();
-        while (root != null || !st.isEmpty()){
-            if (root == null)   root = st.pop();
-            reverse.push(root.val);
-            if (root.left != null) st.push(root.left);
-            root = root.right;
-        }
-        while (!reverse.isEmpty())  res.add(reverse.pop());
-        return res;
-    }
-}

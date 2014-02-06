@@ -2,7 +2,7 @@ package amazon;
 
 import lib.TreeNode;
 
-public class DeserializatoinOfBST {
+public class DeserializePreorderArrayOfBST {
    
    /**
     * A BST has been serizliazed as an array, using pre-order traversal.
@@ -10,7 +10,7 @@ public class DeserializatoinOfBST {
     * 
     * Sol1: time O(n), same as preorder traversal
     *   <1> do preorder traversal, insert the node to position where min<node.val<max
-    * Sol2: time O(n)
+    * Sol2: time O(n), sort to get the inorder array first 
     *   <1> refer to Leetcode -- constructBinaryTreeFromInorderAndPreorderTraversal
     */
    public static void main(String[] args) {

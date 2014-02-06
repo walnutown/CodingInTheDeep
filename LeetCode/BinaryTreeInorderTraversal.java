@@ -23,7 +23,7 @@
  * }
  */
 
-// Stack Iterative traversal. From Sophie, 2 while loops, logic is easier to understand than the wiki version.
+// Stack Iterative traversal. from Sophie. 2 while loops, logic is easier to understand than the wiki version.
 // time: O(n); space: O(h), h is the maximum height of the tree
 public class Solution {
     public ArrayList<Integer> inorderTraversal(TreeNode root) {
@@ -53,7 +53,7 @@ public class Solution {
 // Trees whose nodes use threads are called 
 // threaded trees
 
-// Morris threaded tree in-order traversal
+// Morris threaded tree in-order traversal, right plays the role of 'next'
 // Great post from AnnieKim. http://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html
 // time: O(n); space: O(1)
 public class Solution {

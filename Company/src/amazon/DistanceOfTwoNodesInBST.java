@@ -2,7 +2,7 @@ package amazon;
 
 import lib.TreeNode;
 
-public class FindDistanceOfTwoNodesInBST {
+public class DistanceOfTwoNodesInBST {
 
    /**
     * Find the distance between two nodes in a BST

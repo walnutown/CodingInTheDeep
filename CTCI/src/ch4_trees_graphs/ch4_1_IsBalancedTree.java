@@ -1,6 +1,6 @@
 package ch4_trees_graphs;
 
-public class ch4_1 {
+public class ch4_1_IsBalancedTree {
 
    /*
     * Implement a function to check if a binary tree is balanced. 

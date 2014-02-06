@@ -8,8 +8,8 @@ public class SerializationOfBinaryTree {
 
    /**
     * Design an algorithm and write code to serialize and deserialize a binary tree.
-    * Writing the tree to a file is called ‘serialization’ and reading back from the
-    * file to reconstruct the exact same binary tree is ‘deserialization’.
+    * Writing the tree to a file is called "serialization" and reading back from the
+    * file to reconstruct the exact same binary tree is "deserialization".
     * 
     * Sol1:
     * <1> use '#' to represent null node
