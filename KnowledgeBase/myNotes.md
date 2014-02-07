@@ -14,12 +14,20 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
   * BinaryTreeZigZagLevelOrderTraversal (Leetcode)
 
 #### 2. special binary trees
+* Binary Search Tree
+  * ValidateBinarySearchTree (Leetcode)
+  * RecoverBinarySearchTree (Leetcode)
 * Balanced binary tree
   * BalancedBinaryTree (Leetcode)
 * Sum binary tree
   * IsSumTree (Company/amazon)
 * Mirror binary tree
-  * IsMirrorTree (Leetcode) 
+  * IsMirrorTree (Leetcode)
+  * CreateMirrorTree (Company/amazon)
+* Symmetric Tree
+  * SymmetricTree (Leetcode)
+* Flatern Binary Tree
+  * FlaternBinaryTreeToLInkedList (Leetcode)
 
 #### 3. binary tree serialization and deserialization
 *  Sol1:
@@ -47,4 +55,4 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
 * Path of maximum value in the tree
   * BinaryTreeMaximumPathSum (Leetcode)
   
-##Total: 13
+##Total: 17
