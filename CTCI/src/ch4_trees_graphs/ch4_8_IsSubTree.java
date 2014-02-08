@@ -3,7 +3,7 @@ package ch4_trees_graphs;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ch4_8 {
+public class ch4_8_IsSubTree {
 
    /*
     * Two very large binary trees: T1 and T2, 

@@ -29,7 +29,7 @@ public class DiameterOfBinaryTree {
       diameter = Math.max(diameter, getHeight1(node.left)+getHeight1(node.right)+1);
       return Math.max(getHeight1(node.left), getHeight1(node.right))+1;
    }
-   // Accepted
+   // get diameter and height of subtree at the same time
    public static int getDiameter2(TreeNode root){
       return d(root, new int[]{0});
    }

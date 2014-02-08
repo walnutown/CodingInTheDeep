@@ -1,30 +1,15 @@
-public class Solution {
-    public int removeDuplicates(int[] A) {
-        // use Set to count freq of the elem
-        
-        if (A == null){
-            return 0;
-        }
-        if (A.length == 1){
-            return 1;
-        }
-        
-        Set<Integer> unique = new HashSet<Integer>();
-        int length = 0;
-        
-        for(int i = 0; i < A.length; i++){
-            if (!unique.contains(A[i])){
-                unique.add(A[i]);
-                A[length] = A[i];
-                length++;
-            }
-        }
-       
-        return length;
-    }
-}
+/*
+    Given a sorted array, remove the duplicates in place such that each element appear only once and return the new length.
 
-// Accepted, Dec 31
+    Do not allocate extra space for another array, you must do this in place with constant memory.
+
+    For example,
+    Given input array A = [1,1,2],
+
+    Your function should return length = 2, and A is now [1,2].
+*/
+
+// new index. time: O(n)
 public class Solution {
     public int removeDuplicates(int[] A) {
         if (A==null || A.length==0) return 0;

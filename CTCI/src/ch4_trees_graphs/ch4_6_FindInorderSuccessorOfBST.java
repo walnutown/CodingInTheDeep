@@ -1,6 +1,6 @@
 package ch4_trees_graphs;
 
-public class ch4_6 {
+public class ch4_6_FindInorderSuccessorOfBST {
 
    /*
     * Write an algorithm to find the 'next' node (i.e, in-order successor) of 

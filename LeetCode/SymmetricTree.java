@@ -63,49 +63,9 @@ public class Solution {
     }
 }
 
-// inorder traversal, iterative.
-// The inorder traversal of the tree is symmetric
-// time: O(n); space: O(h), h is the maximum height of the tree
-public class Solution {
-    public boolean isSymmetric(TreeNode root) {
-      if (root == null)
-         return true;
-      Stack<TreeNode> st = new Stack<TreeNode>();
-      ArrayList<TreeNode> nodes = new ArrayList<TreeNode>();
-      while (root != null) {
-         st.push(root);
-         root = root.left;
-      }
-      while (!st.isEmpty()) {
-         TreeNode curr = st.pop();
-         if (curr.left == null && curr.right != null) {
-            nodes.add(null);
-            nodes.add(curr);
-         } else if (curr.left != null && curr.right == null) {
-            nodes.add(curr);
-            nodes.add(null);
-         } else nodes.add(curr);
-         curr = curr.right;
-         while (curr != null) {
-            st.push(curr);
-            curr = curr.left;
-         }
-      }
-      int i = 0, j = nodes.size() - 1;
-      while (i < j){
-         if (nodes.get(i)==null || nodes.get(j)==null){
-             if (!(nodes.get(i)==null && nodes.get(j)==null))   return false;
-         }else{
-             if (nodes.get(i).val != nodes.get(j).val)   return false;
-         }
-         i++;
-         j--;
-     }
-      return true;
-   }
-}
-
-// inorder traversal, DFS
+// Serialize the tree
+// The inorder traversal array of the tree is symmetric
+// time: O(n)
 public class Solution {
     public boolean isSymmetric(TreeNode root) {
         if (root == null)   return true;

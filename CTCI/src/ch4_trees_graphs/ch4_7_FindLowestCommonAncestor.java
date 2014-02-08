@@ -1,6 +1,6 @@
 package ch4_trees_graphs;
 
-public class ch4_7_lca {
+public class ch4_7_FindLowestCommonAncestor {
 
    /**
     * Design an algorithm to find the Lowest common ancestor of two nodes in a binary tree

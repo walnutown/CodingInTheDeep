@@ -26,16 +26,6 @@ public class ch4_4 {
       }
    }
 
-   public static TreeNode buildTree(int[] arr, int start, int end) {
-      if (start > end)
-         return null;
-      int mid = (start + end) >> 1;
-      TreeNode root = new TreeNode(arr[mid]);
-      root.left = buildTree(arr, start, mid - 1);
-      root.right = buildTree(arr, mid + 1, end);
-      return root;
-   }
-
    public static ArrayList<ArrayList<Integer>> createLinkedList(TreeNode root) {
       ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
       if (root == null)
@@ -90,7 +80,7 @@ public class ch4_4 {
       return res;
    }
    
-   // DFS
+   // DFS,
    public static ArrayList<ArrayList<TreeNode>> createLinkedList3(TreeNode root){
       ArrayList<ArrayList<TreeNode>> res = new ArrayList<ArrayList<TreeNode>>();
       DFS(root, 0, res);

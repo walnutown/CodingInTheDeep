@@ -12,6 +12,7 @@ public class IntersectionOfTwoSortedArray {
       System.out.println(getIntersection(new int[]{1, 2,3,4}, new int[]{3,4,5,6}));
    }
    
+   // time: O(m+n); space: O(m+n)
    public static ArrayList<Integer> getIntersection(int[] A, int[] B){
       if (A==null || B==null)   return null;
       ArrayList<Integer> res = new ArrayList<Integer>();

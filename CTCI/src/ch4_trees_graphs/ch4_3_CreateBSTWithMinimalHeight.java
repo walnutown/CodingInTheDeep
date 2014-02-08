@@ -1,6 +1,6 @@
 package ch4_trees_graphs;
 
-public class ch4_3 {
+public class ch4_3_CreateBSTWithMinimalHeight {
 
    /*
     * Given a sorted (increasing order) array with unique integer elements, write an 

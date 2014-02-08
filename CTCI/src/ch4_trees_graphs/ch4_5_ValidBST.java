@@ -2,7 +2,7 @@ package ch4_trees_graphs;
 
 import java.util.ArrayList;
 
-public class ch4_5 {
+public class ch4_5_ValidBST {
 
    /*
     * Implement a function to check if a binary tree is a binary search tree.

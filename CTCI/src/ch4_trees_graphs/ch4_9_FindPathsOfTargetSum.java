@@ -2,7 +2,7 @@ package ch4_trees_graphs;
 
 import java.util.ArrayList;
 
-public class ch4_9 {
+public class ch4_9_FindPathsOfTargetSum {
 
    /*
     * Given a binary tree, to print all paths which sum to a given value.
