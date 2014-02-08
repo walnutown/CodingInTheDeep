@@ -1,6 +1,6 @@
 Notes of Algorithm and Data Structure
 ===============
-##Binary Tree
+##Binary Tree -- Total: 24
 basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BFS**
 #### 1. tree traversal
 * DFS (inorder, preorder, postorder in recursion) is easy, skipped
@@ -17,6 +17,8 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
 * Binary Search Tree
   * ValidateBinarySearchTree (Leetcode)
   * RecoverBinarySearchTree (Leetcode)
+  * CreateBSTWithMinimalHeight (CTCI) -- ConvertSortedArrayToBST (Leetcode)
+  * FindInorderSuccessorOfBST (Leetcode)
 * Balanced binary tree
   * BalancedBinaryTree (Leetcode)
 * Sum binary tree
@@ -52,7 +54,48 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
   * SumRootToLeafNumbers (Leetcode)
 * Path between two nodes
   * DistanceOfTwoNodesInBST (Company/amazon)
+  * FindPathsOfTargetSum (CTCI)
 * Path of maximum value in the tree
   * BinaryTreeMaximumPathSum (Leetcode)
+* Longest path between two leaves
+  * DiameterOfBinaryTree (Company/amazon)
   
-##Total: 17
+
+
+##Array -- Total:
+basic algorithms: **binary search**
+#### 1. operations between two arrays
+* Merge two arrays
+  * MergeSortedArray (Leetcode)
+* Intersection of two arrays
+  * IntersectionOfTwoSortedArray (Company/amazon)
+* Interleave array
+  * InterleavingArray (Company/microsoft)
+  * InterleavingArray2 (Company/microsoft)
+
+#### 2. find special number in the array
+* Median
+  * MedianOfTwoSortedArray (Leetcode)
+* Kth order statistic: sort, O(nlgn); heap, O(nlgk); quickSelect, O(n)
+  * FindKthLargestInArray (Company/amazon)
+
+
+#### 3. find special subarray
+* Subarray of max sum
+  * MaximumSubarray (Leetcode)
+  * 
+  
+#### 4. Duplicates
+* Remove duplicates
+  * RemoveDuplicatesFromSortedArray (Leetcode)
+  * RemoveDuplicatesFromSortedArray2 (Leetcode)
+  * 
+  
+#### 5. Rotated Array
+* binary search in roatated array
+  * SearchInRotatedArray (Leetcode)
+  * SearchInRotatedArray2 (Leetcode)
+  
+
+
+
