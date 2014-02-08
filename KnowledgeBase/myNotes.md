@@ -63,8 +63,8 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
 
 
 ##Array -- Total:
-basic algorithms: **binary search**
-#### 1. operations between two arrays
+basic algorithms: **binary search**, **in place swap**
+#### 1. Array manipulation
 * Merge two arrays
   * MergeSortedArray (Leetcode)
 * Intersection of two arrays
@@ -72,12 +72,17 @@ basic algorithms: **binary search**
 * Interleave array
   * InterleavingArray (Company/microsoft)
   * InterleavingArray2 (Company/microsoft)
+* Insertion
+  * SearchInsertPosition (Leetcode)
 
 #### 2. find special number in the array
 * Median
   * MedianOfTwoSortedArray (Leetcode)
 * Kth order statistic: sort, O(nlgn); heap, O(nlgk); quickSelect, O(n)
   * FindKthLargestInArray (Company/amazon)
+* Missing number
+  * FirstMissingPositive (Leetcode)
+  * FindMissingInteger (Company/amazon)
 
 
 #### 3. find special subarray
@@ -89,7 +94,8 @@ basic algorithms: **binary search**
 * Remove duplicates
   * RemoveDuplicatesFromSortedArray (Leetcode)
   * RemoveDuplicatesFromSortedArray2 (Leetcode)
-  * 
+* Find the one without duplicates
+  * SingleNumber (Leetcode)
   
 #### 5. Rotated Array
 * binary search in roatated array
