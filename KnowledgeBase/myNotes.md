@@ -102,8 +102,8 @@ basics: **binary search**, **in place swap**
   * SearchInRotatedArray (Leetcode)
   * SearchInRotatedArray2 (Leetcode)
   
-##String -- Total: 15
-basics: **sliding window**, **DP**, **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
+##String -- Total: 17
+basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
 #### 1. Substring
 * LongestSubstringWithoutRepeatingCharacters (Leetcode)
 * MinimumWindowSubstring (Leetcode)
@@ -125,3 +125,11 @@ basics: **sliding window**, **DP**, **toCharArray()** to make the code more eleg
 * WordSearch (Leetcode)
 * WordLadder (Leetcode)
 * WordLadder2 (Leetcode)
+
+#### 5. Palindrome
+* ValidPalindrome (Leetcode)
+* PalindromePartitioning (Leetcode)
+* PalindromePartitioning2 (Leetcode)
+
+## Math -- Total:
+* PalindromeNumber (Leetcode)
