@@ -1,7 +1,7 @@
 Notes of Algorithm and Data Structure
 ===============
 ##Binary Tree -- Total: 24
-basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BFS**
+basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BFS**
 #### 1. tree traversal
 * DFS (inorder, preorder, postorder in recursion) is easy, skipped
 * DFS (inorder, preorder, postorder in iteration, save stack space; in Morris, sapce O(1))
@@ -62,8 +62,8 @@ basic algorithms: **DFS**(inorder/preorder/postorder in recursive/iterative vers
   
 
 
-##Array -- Total:
-basic algorithms: **binary search**, **in place swap**
+##Array -- Total: 15
+basics: **binary search**, **in place swap**
 #### 1. Array manipulation
 * Merge two arrays
   * MergeSortedArray (Leetcode)
@@ -102,6 +102,34 @@ basic algorithms: **binary search**, **in place swap**
   * SearchInRotatedArray (Leetcode)
   * SearchInRotatedArray2 (Leetcode)
   
+##String -- Total: 17
+basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
+#### 1. Substring
+* LongestSubstringWithoutRepeatingCharacters (Leetcode)
+* MinimumWindowSubstring (Leetcode)
+* SubstringWithConcatenationOfAllWords (Leetcode)
 
+#### 2. String representation of Integer
+* MultiplyStrings (Leetcode)
+* StringToInteger (Leetcode)
 
+#### 3. String manipulation
+* ScrambleString (Leetcode)
+* InterleavingString (Leetcode)
+ 
+#### 4. Character/word occurances
+* CountAndSay (Leetcode)
+* CompressString (CTCI)
+* UniqueCharInString (CTCI)
+* LengthOfLastWord (Leetcode)
+* WordSearch (Leetcode)
+* WordLadder (Leetcode)
+* WordLadder2 (Leetcode)
 
+#### 5. Palindrome
+* ValidPalindrome (Leetcode)
+* PalindromePartitioning (Leetcode)
+* PalindromePartitioning2 (Leetcode)
+
+## Math -- Total:
+* PalindromeNumber (Leetcode)
