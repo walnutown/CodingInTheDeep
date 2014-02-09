@@ -113,7 +113,7 @@ basics: **sliding window**, **DP**, **toCharArray()** to make the code more eleg
 * MultiplyStrings (Leetcode)
 * StringToInteger (Leetcode)
 
-#### 3. Dynamic Programming
+#### 3. String manipulation
 * ScrambleString (Leetcode)
 * InterleavingString (Leetcode)
  
@@ -121,4 +121,7 @@ basics: **sliding window**, **DP**, **toCharArray()** to make the code more eleg
 * CountAndSay (Leetcode)
 * CompressString (CTCI)
 * UniqueCharInString (CTCI)
-* 
+* LengthOfLastWord (Leetcode)
+* WordSearch (Leetcode)
+* WordLadder (Leetcode)
+* WordLadder2 (Leetcode)
