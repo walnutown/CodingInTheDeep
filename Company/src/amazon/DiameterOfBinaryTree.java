@@ -10,25 +10,32 @@ public class DiameterOfBinaryTree {
     * 
     * Simpler version of leetcode/BinaryTreeMaxPathSum
     */
+   // try the cases in https://www.interviewstreet.com/recruit/test/view/sample/4c30cc1084e03/?randhash=81123
    public static void main(String[] args) {
-      TreeNode root = new TreeNode(new int[]{1,2,3,4,5});
+      TreeNode root = new TreeNode(1);
+      root.left = new TreeNode(2);
+      root.left.left = new TreeNode(3);
+      root.left.right = new TreeNode(4);
+      root.left.left.left = new TreeNode(5);
+      root.left.right.right = new TreeNode(6);
       System.out.println(root.printTree());
       System.out.println(getDiameter1(root));
+      System.out.println(getDiameter2(root));
    }
-   
-   // fail some cases, but don't know why
+   // use global variable
    private static int diameter = Integer.MIN_VALUE;
    public static int getDiameter1(TreeNode root){
       if (root==null)   return 0;
-      diameter = Math.max(diameter, getHeight1(root.left)+getHeight1(root.right)+1);
+      getHeight1(root);
       return diameter;
    }
-   
    public static int getHeight1(TreeNode node){
       if (node==null)   return 0;
       diameter = Math.max(diameter, getHeight1(node.left)+getHeight1(node.right)+1);
+      System.out.println(diameter);
       return Math.max(getHeight1(node.left), getHeight1(node.right))+1;
    }
+  /*------------------------------------------------------------------*/ 
    // get diameter and height of subtree at the same time
    public static int getDiameter2(TreeNode root){
       return d(root, new int[]{0});

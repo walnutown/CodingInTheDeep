@@ -11,7 +11,7 @@
 */
 
 
-// 3d DP like scrambled string, time: O(n^3); space: O(n^3)
+// 3d DP like scrambled string, time: O(m*n*k); space: O(m*n*k)
 public class Solution {
     public boolean isInterleave(String s1, String s2, String s3) {
         // omit null check

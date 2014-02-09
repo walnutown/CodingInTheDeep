@@ -1,64 +1,88 @@
-// can only record one path
+/*
+    Given two words (start and end), and a dictionary, find all shortest transformation sequence(s) from start to end, such that:
+
+    Only one letter can be changed at a time
+    Each intermediate word must exist in the dictionary
+    For example,
+
+    Given:
+    start = "hit"
+    end = "cog"
+    dict = ["hot","dot","dog","lot","log"]
+    Return
+      [
+        ["hit","hot","dot","dog","cog"],
+        ["hit","hot","lot","log","cog"]
+      ]
+    Note:
+    All words have the same length.
+    All words contain only lowercase alphabetic characters.
+*/
+
+// BFS + map(store previous ndoes)
 public class Solution {
     public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
-        if (start == null || end == null || start.length() == 0 || start.equals(end)){
-            return res;
-        }
-        
-        Map<String, String> path = new HashMap<String, String>();
-        Set<String> visited = new HashSet<String>();
-        Queue<String> qu = new LinkedList<String>();
-        int minStep = 0;
-        qu.add(start);
-        visited.add(start);
-        while (qu.size() > 0){
-            String prev = qu.poll();
-            for (String curr : adjacent(prev, dict)){
-                if (!visited.contains(curr)){
-                    visited.add(curr);
-                    qu.add(curr);
-                    path.put(curr,prev);
-                }
-                if (curr.equals(end)){
-                    ArrayList<String> pathList = new ArrayList<String>();
-                    while(curr != null){
-                        pathList.add(0, curr);
-                        curr = path.get(curr);
-                    }
-                    
-                    if (pathList.size() < minStep || minStep == 0){
-                        minStep = pathList.size();
-                        res.clear();
-                        res.add(pathList);     
-                    }
-                    else if (pathList.size() == minStep){
-                        if (!res.contains(pathList)){
-                            res.add(pathList);  
-                        }
-                    }      
-                }
-            }     
-        }
-        
-        return res;
-        
-    }
-    
-    public Set<String> adjacent(String prev, HashSet<String> dict){
-        Set<String> res = new HashSet<String>();
-        for (int i=0; i < prev.length(); i++){
-            StringBuilder sb = new StringBuilder(prev);
-            for (char c = 'a'; c <= 'z'; c++){
-                sb.setCharAt(i, c);
-                String s = sb.toString();
-                if (dict.contains(s) && !s.equals(prev)){
-                    res.add(s);
-                }
+      Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+      ArrayList<Set<String>> layers = new ArrayList<Set<String>>();
+      layers.add(new HashSet<String>());
+      layers.add(new HashSet<String>());
+      int curr = 0, next = 1;
+      dict.add(start);
+      ArrayList<ArrayList<String>> paths = new ArrayList<ArrayList<String>>();
+      layers.get(curr).add(end);// start from end, so that no need to reverse the path when
+                                // buildPaths
+      while (true) {
+         for (String w : layers.get(curr))
+            dict.remove(w);
+         Iterator<String> it = layers.get(curr).iterator();
+         while (it.hasNext()) {
+            String word = it.next();
+            for (int i = 0; i < word.length(); i++) {
+               for (char j = 'a'; j <= 'z'; j++) {
+                  StringBuilder sb = new StringBuilder(word);
+                  sb.setCharAt(i, j);
+                  if (sb.equals(word))
+                     continue;
+                  String adj = sb.toString();
+                  if (dict.contains(adj)) {
+                     layers.get(next).add(adj);
+                     if (map.containsKey(adj))
+                        map.get(adj).add(word);
+                     else {
+                        map.put(adj, new HashSet<String>());
+                        map.get(adj).add(word);
+                     }
+                  }
+               }
             }
-        }
-        return res;
-    }
+         }
+         if (layers.get(next).isEmpty() || layers.get(next).contains(start))
+            break;
+         int tmp = curr;
+         curr = next;
+         next = tmp;
+         layers.get(next).clear();
+      }
+      if (!map.isEmpty()){
+         ArrayList<String> path = new ArrayList<String>();
+         path.add(start);
+         buildPaths(start, end, map, paths, path);
+      }
+      return paths;
+   }
+
+   public void buildPaths(String curr, String end, Map<String, Set<String>> map, ArrayList<ArrayList<String>> paths, ArrayList<String> path) {
+      if (curr.equals(end)) {
+         paths.add(new ArrayList<String>(path));
+         return;
+      }
+      for (String w : map.get(curr)) {
+         path.add(w);
+         buildPaths(w, end, map, paths, path);
+         path.remove(path.size() - 1);
+      }  
+   }
 }
+
+
+

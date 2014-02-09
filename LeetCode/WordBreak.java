@@ -1,5 +1,14 @@
+/*
+    Given a string s and a dictionary of words dict, determine if s can be segmented into a space-separated sequence of one or more dictionary words.
 
-// 2d DP, time: O(n^2); space: O(n), n is the length of the string
+    For example, given
+    s = "leetcode",
+    dict = ["leet", "code"].
+
+    Return true because "leetcode" can be segmented as "leet code".
+*/
+
+// 2d DP, time: O(n^2); space: O(n), n is the length of the string s
 public class Solution {
     public boolean wordBreak(String s, Set<String> dict) {
         if (s==null || s.length()==0)   return true;

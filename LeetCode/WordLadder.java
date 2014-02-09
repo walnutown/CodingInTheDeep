@@ -53,3 +53,37 @@ public class Solution {
         return 0;
     }
 }
+
+// modified version, no need of visited set.
+public class Solution {
+    public int ladderLength(String start, String end, HashSet<String> dict) {
+        int cost = 1;
+        int curr_num = 1, next_num = 0;
+        Queue<String> qu = new LinkedList<String>();
+        qu.add(start);
+        dict.remove(start);
+        while (!qu.isEmpty()){
+            String curr = qu.poll();
+            for (int i = 0; i < start.length(); i++) {
+                for (char j = 'a'; j <= 'z'; j++) {
+                    StringBuilder sb = new StringBuilder(curr);
+                    sb.setCharAt(i, j);
+                    String adj = sb.toString();
+                    if (adj.equals(end))    return cost + 1;
+                    if (dict.contains(adj)){
+                        qu.add(adj);        
+                        dict.remove(adj);   
+                        next_num++;         
+                    }
+                }
+            }
+            curr_num--;
+            if (curr_num == 0){
+                curr_num = next_num;
+                next_num = 0;
+                cost++;
+            }
+        }
+        return 0;
+    }
+}

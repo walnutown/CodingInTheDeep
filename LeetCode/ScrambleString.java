@@ -1,3 +1,87 @@
+/*
+  Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.
+
+  Below is one possible representation of s1 = "great":
+
+      great
+     /    \
+    gr    eat
+   / \    /  \
+  g   r  e   at
+             / \
+            a   t
+  To scramble the string, we may choose any non-leaf node and swap its two children.
+
+  For example, if we choose the node "gr" and swap its two children, it produces a scrambled string "rgeat".
+
+      rgeat
+     /    \
+    rg    eat
+   / \    /  \
+  r   g  e   at
+             / \
+            a   t
+  We say that "rgeat" is a scrambled string of "great".
+
+  Similarly, if we continue to swap the children of nodes "eat" and "at", it produces a scrambled string "rgtae".
+
+      rgtae
+     /    \
+    rg    tae
+   / \    /  \
+  r   g  ta  e
+         / \
+        t   a
+  We say that "rgtae" is a scrambled string of "great".
+
+  Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.
+*/
+
+
+// Accepted, 3-array DP, modified from AnnieKim, O(n^4)
+//  'dp[k][i][j] == true' means string s1(start from i, length k) is 
+//  a scrambled string of string s2(start from j, length k).
+public class Solution {
+    public boolean isScramble(String s1, String s2){
+        if (s1==null || s2==null)   return s1==null && s2==null;
+        int len = s1.length(), l2 = s2.length();
+        if (len != l2)   return false;
+        boolean[][][] dp = new boolean[len+1][len][len];
+        for (int k=1; k<=len; k++){
+            for (int i=0; i<=len-k; i++){
+                for (int j=0; j<=len-k; j++){
+                    if (k==1)   dp[1][i][j] = (s1.charAt(i)==s2.charAt(j));
+                    for (int p=1; p<k && !dp[k][i][j]; p++)
+                        dp[k][i][j] = dp[p][i][j] && dp[k-p][i+p][j+p] || dp[k-p][i+p][j] && dp[p][i][j+k-p];
+                }
+            }
+        }
+        return dp[len][0][0];
+    }
+}
+
+
+// recursion, from Sophie, O(2^n)
+// TLE
+public class Solution {
+    public boolean isScramble(String s1, String s2){
+        if (s1==null || s2==null)   return s1==null && s2==null;
+        int len = s1.length(), l2 = s2.length();
+        if (len != l2)   return false;
+        if (s1.equals(s2))  return true;
+        for (int i=1; i<len; i++){
+            String s1l = s1.substring(0, i), s1r = s1.substring(i,len);
+            // w/o swap
+            String s2l = s2.substring(0, i), s2r = s2.substring(i, len);
+            if (isScramble(s1l, s2l) && isScramble(s1r, s2r))   return true;
+            // w/ swap
+            s2l = s2.substring(len-i); s2r = s2.substring(len-i, len);
+            if (isScramble(s1l, s2r) && isScramble(s1r, s2l))   return true;
+        }
+        return false;
+    }
+}
+
 // DP, although TLE, this solution can find all the scramble strings of s1
 // O(2^n * 2^n)
 // Submission Result: Time Limit Exceeded
@@ -50,49 +134,6 @@ public class Solution {
          }
       }
       return false;
-    }
-}
-
-// recursion, from Sophie, O(2^n)
-// TLE
-public class Solution {
-    public boolean isScramble(String s1, String s2){
-        if (s1==null || s2==null)   return s1==null && s2==null;
-        int len = s1.length(), l2 = s2.length();
-        if (len != l2)   return false;
-        if (s1.equals(s2))  return true;
-        for (int i=1; i<len; i++){
-            String s1l = s1.substring(0, i), s1r = s1.substring(i,len);
-            // w/o swap
-            String s2l = s2.substring(0, i), s2r = s2.substring(i, len);
-            if (isScramble(s1l, s2l) && isScramble(s1r, s2r))   return true;
-            // w/ swap
-            s2l = s2.substring(len-i); s2r = s2.substring(len-i, len);
-            if (isScramble(s1l, s2r) && isScramble(s1r, s2l))   return true;
-        }
-        return false;
-    }
-}
-
-// Accepted, 3-array DP, modified from AnnieKim, O(n^4)
-//  'dp[k][i][j] == true' means string s1(start from i, length k) is 
-//  a scrambled string of string s2(start from j, length k).
-public class Solution {
-    public boolean isScramble(String s1, String s2){
-        if (s1==null || s2==null)   return s1==null && s2==null;
-        int len = s1.length(), l2 = s2.length();
-        if (len != l2)   return false;
-        boolean[][][] dp = new boolean[len+1][len][len];
-        for (int k=1; k<=len; k++){
-            for (int i=0; i<=len-k; i++){
-                for (int j=0; j<=len-k; j++){
-                    if (k==1)   dp[1][i][j] = (s1.charAt(i)==s2.charAt(j));
-                    for (int p=1; p<k && !dp[k][i][j]; p++)
-                        dp[k][i][j] = dp[p][i][j] && dp[k-p][i+p][j+p] || dp[k-p][i+p][j] && dp[p][i][j+k-p];
-                }
-            }
-        }
-        return dp[len][0][0];
     }
 }
 
