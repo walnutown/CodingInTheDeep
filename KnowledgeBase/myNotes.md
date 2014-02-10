@@ -118,7 +118,8 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * BestTimeToBuyAndSellStock3 (Leetcode)
 
 #### 8. Matrix
-* 
+two ways to mark visited cells: **matrix**; **encode coordinates**
+* SetMatrixZero (Leetcode)
 
 ##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
