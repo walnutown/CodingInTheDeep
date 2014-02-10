@@ -6,7 +6,7 @@
   You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
 */
 
-// DP, sum[i] = left[i] + right[i]. time: O(n); space: O(n)
+// sum[i] = left[i] + right[i]. time: O(n); space: O(n)
 public class Solution {
     public int maxProfit(int[] prices) {
         if (prices==null || prices.length==0)   return 0;

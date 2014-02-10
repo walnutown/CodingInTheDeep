@@ -9,13 +9,11 @@ Your algorithm should run in O(n) complexity.
 */
 
 
-// cluster merge , const mem
-// http://discuss.leetcode.com/questions/1070/longest-consecutive-sequence
+// cluster merge, http://discuss.leetcode.com/questions/1070/longest-consecutive-sequence
+// time: O(n), space: O(n)
 public class Solution {
     Map<Integer, Integer> mp;
     public int longestConsecutive(int[] num) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
         if (num == null || num.length == 0)
             return 0;
         mp = new HashMap<Integer, Integer>();
@@ -40,7 +38,7 @@ public class Solution {
     }
 }
 
-// Use a set of available numbers, time: O(n), space: O(n)
+// Set, time: O(n), space: O(n)
 public class Solution {
     public int longestConsecutive(int[] num) {
         if (num==null || num.length==0) return 0;

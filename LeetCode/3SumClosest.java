@@ -1,47 +1,13 @@
+/*
+    Given an array S of n integers, find three integers in S such that the sum is closest
+    to a given number, target. Return the sum of the three integers. You may assume that 
+    each input would have exactly one solution.
 
-// #2 trial, ttraverse the array, and choose twoSum on the remaining 2 numbers in array
-public class Solution {
-    int res;
-    public int threeSumClosest(int[] num, int target) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (num == null || num.length < 3)
-            return 0;
-        Arrays.sort(num);
-        res = num[0] + num[1] + num[2];
-        for (int i = 0; i < num.length; i++){
-            twoSum(num, i, target);
-        }
-        return res;
-    }
-    
-    public void twoSum(int[] num, int thirdIndex, int target){
-        int i =0;
-        int j = num.length-1;
-        while (i < j){
-            if (i == thirdIndex){
-                i++;
-                continue;
-            }
-            if (j == thirdIndex){
-                j--;
-                continue;
-            }
-            int sum = num[thirdIndex] + num[i] + num[j];
-            if ( Math.abs(target-res) > Math.abs(target- sum))
-                res = sum;
-            if (sum > target)
-                j--;
-            else if (sum == target){
-                return;
-            }
-            else
-                i++;
-        }
-    }
-}
+    For example, given array S = {-1 2 1 -4}, and target = 1.
 
-// Accepted
+    The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
+*/
+
 public class Solution {
     public int threeSumClosest(int[] num, int target) {
         if (num==null || num.length<3) return 0;

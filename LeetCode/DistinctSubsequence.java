@@ -1,3 +1,16 @@
+/*
+    Given a string S and a string T, count the number of distinct subsequences of T in S.
+
+    A subsequence of a string is a new string which is formed from the original string by
+    deleting some (can be none) of the characters without disturbing the relative positions
+    of the remaining characters. (ie, "ACE" is a subsequence of "ABCDE" while "AEC" is not).
+
+    Here is an example:
+    S = "rabbbit", T = "rabbit"
+
+    Return 3.
+*/
+
 // DFS
 // TLE
 public class Solution {
@@ -20,26 +33,8 @@ public class Solution {
     }
 }
 
-
-// Accepted
-public class Solution {
-    public int numDistinct(String S, String T) {
-        if (S==null || T==null) return 0;
-        int m=S.length(), n=T.length();
-        int[][] dp = new int[m+1][n+1];
-        dp[0][0] = 1;
-        for (int i=1; i<=m; i++)    dp[i][0] = 1;
-        for (int j=1; j<=n; j++)    dp[0][j] = 0;
-        for (int i=1; i<=m; i++){
-            for(int j=1; j<=n; j++){
-                if (S.charAt(i-1) == T.charAt(j-1)) dp[i][j] = dp[i-1][j] + dp[i-1][j-1]; 
-                else    dp[i][j] = dp[i-1][j];
-            }
-        }
-        return dp[m][n];
-    }
-}
-//http://blog.csdn.net/u011095253/article/details/9248121
+// 2d DP, http://blog.csdn.net/u011095253/article/details/9248121
+// dp[i][j] = dp[i][j-1] + dp[i-1][j-1], delete the char, or include the char 
 public class Solution {
     public int numDistinct(String S, String T) {
         if (S==null || T==null) return 0;
@@ -48,7 +43,7 @@ public class Solution {
         dp[0][0] = 1;
         for (int i=1; i<=m; i++)    dp[i][0] = 0;
         for (int j=1; j<=n; j++)    dp[0][j] = 1;
-        for (int i=1; i<=m; i++){                   // change order here, better for undersatnding
+        for (int i=1; i<=m; i++){                   
             for(int j=1; j<=n; j++){
                 if (T.charAt(i-1) == S.charAt(j-1)) dp[i][j] = dp[i][j-1] + dp[i-1][j-1];
                 else    dp[i][j] = dp[i][j-1];
@@ -57,7 +52,7 @@ public class Solution {
         return dp[m][n];
     }
 }
-// 1d DP, know the conditions of transform from 2d DP to 1d DP, and how to transfrom 
+// 1d DP, remember the conditions of transform 2d DP to 1d DP, and how to transfrom 
 public class Solution {
     public int numDistinct(String S, String T) {
         if (S==null || T==null) return 0;

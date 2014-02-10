@@ -1,84 +1,23 @@
-// doesn't work, mainly about math deduction, but not program
-// http://fisherlei.blogspot.com/2013/04/leetcode-permutation-sequence-solution.html
-public class Solution {
-    String res;
-    StringBuilder s;
-    int count;
-    int startIndex;
-    public String getPermutation(int n, int k) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        res = "";
-        s = new StringBuilder();
-        
-        if(n < 1 || n > 9 || k < 1){
-            return res;
-        }
-        int seqLen = 1;
-        for (int i = 1; i <= n; i++){
-            seqLen *= i;
-        }
-        
-        if (k > seqLen){
-            return res;
-        }
-        
-        if (n == 1 && k != 1){
-            return res;
-        }
-        
-        if (n == 1 && k == 1){
-            return res+n;
-        }
-        
-        if (k % (n-1) == 0){
-            startIndex = k/(n-1);    
-        }else{
-            startIndex = k/(n-1) + 1;
-        }
-        
-        count = (startIndex-1) * (n-1);
-        
-        
-        permuteHelper(n, k, 1, new HashSet<Integer>());
-        return res;
-    }
-    
-    public void permuteHelper(int n, int k, int depth, Set<Integer> visited){
-        if (depth > n){
-            return;
-        }
-        
-        for (int i = 1; i <= n; i++){
-            if (depth == 1 && i != startIndex){
-                continue;
-            }
-            
-            if (visited.contains(i)){
-                continue;
-            }
-            
-            visited.add(i);
-            s.append(i);
-            if (depth == n){
-                count++;
-                if (count == k){
-                    res = s.toString();
-                }
-            }
-            
-            permuteHelper(n, k, depth+1, visited);
-            
-            visited.remove(i);
-            s.deleteCharAt(depth-1);
-        }
-    }
-}
+/*
+    The set [1,2,3,…,n] contains a total of n! unique permutations.
 
-// TLE, use nextPermutation
+    By listing and labeling all of the permutations in order,
+    We get the following sequence (ie, for n = 3):
+
+    "123"
+    "132"
+    "213"
+    "231"
+    "312"
+    "321"
+    Given n and k, return the kth permutation sequence.
+
+    Note: Given n will be between 1 and 9 inclusive.
+*/
+
+// use nextPermutation, TLE
 public class Solution {
     public String getPermutation(int n, int k) {
-        // assume 1<=n<=9
         char[] p = new char[n];
         for (int i=0; i<n; i++) p[i] = (char)(i+'1');
         int len=1;
@@ -102,18 +41,16 @@ public class Solution {
     }
 }
 
-// Accepted, from AnnieKim
+// from AnnieKim, calculate each digit one by one
 public class Solution {
     public String getPermutation(int n, int k) {
-        // assume 1<=n<=9, k<n!
-      StringBuilder num = new StringBuilder();
-      StringBuilder res = new StringBuilder();
+      StringBuilder num = new StringBuilder(), res = new StringBuilder();
       int len=1;
       for (int i=1; i<=n; i++){
           num.append(i);
           len *= i;
       }
-      k--;  
+      k--;      // notice, IMPORTANT here
       while (n > 0){
           len /= n;
           int i = k/len;
