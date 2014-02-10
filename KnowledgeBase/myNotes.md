@@ -117,6 +117,9 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * BestTimeToBuyAndSellStock2 (Leetcode)
 * BestTimeToBuyAndSellStock3 (Leetcode)
 
+#### 8. Matrix
+* 
+
 ##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
 #### 1. Substring
@@ -151,5 +154,16 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * PalindromePartitioning2 (Leetcode)
 * LongestPalindromicSubstring (Leetcode)
 
-## Math -- Total:
-* PalindromeNumber (Leetcode)
+## Math -- Total: 8
+* Digit Operation
+  * PalindromeNumber (Leetcode)
+* Permutation:
+  * Permutations (Leetcode)
+  * Permutations2 (Leetcode)
+  * PermutationSequence (Leetcode)
+  * NextPermutation (Leetcode)
+* Combination:
+  * Combinations (Leetcode)
+* Subset:
+  * Subsets (Leetcode)
+  * Subsets2 (Leetcode)
