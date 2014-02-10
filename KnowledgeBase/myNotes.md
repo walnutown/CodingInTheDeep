@@ -72,8 +72,10 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * Interleave array
   * InterleavingArray (Company/microsoft)
   * InterleavingArray2 (Company/microsoft)
-* Insertion
+* Search
   * SearchInsertPosition (Leetcode)
+  * SearchForaRange (Leetcode)
+  * Search2DMatrix (Leetcode)
 * Deletion
   * RemoveElement (Leetcode)
 * Interval
@@ -120,6 +122,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 #### 8. Matrix
 two ways to mark visited cells: **matrix**; **encode coordinates**
 * SetMatrixZero (Leetcode)
+* SurroundedRegion (Leetcode)
 
 ##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
@@ -165,6 +168,8 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
   * NextPermutation (Leetcode)
 * Combination:
   * Combinations (Leetcode)
+  * CombinationSum (Leetcode)
+  * CombinationSum2 (Leetcode)
 * Subset:
   * Subsets (Leetcode)
   * Subsets2 (Leetcode)
