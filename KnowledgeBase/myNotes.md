@@ -62,8 +62,8 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
   
 
 
-##Array -- Total: 15
-basics: **binary search**, **in place swap**
+##Array -- Total: 23
+basics: **binary search**, **in place swap**, **traverse from both sides**
 #### 1. Array manipulation
 * Merge two arrays
   * MergeSortedArray (Leetcode)
@@ -74,8 +74,13 @@ basics: **binary search**, **in place swap**
   * InterleavingArray2 (Company/microsoft)
 * Insertion
   * SearchInsertPosition (Leetcode)
+* Deletion
+  * RemoveElement (Leetcode)
+* Interval
+  * MergeIntervals (Leetcode)
+  * InsertInterval (Leetcode)
 
-#### 2. find special number in the array
+#### 2. find special element
 * Median
   * MedianOfTwoSortedArray (Leetcode)
 * Kth order statistic: sort, O(nlgn); heap, O(nlgk); quickSelect, O(n)
@@ -86,9 +91,8 @@ basics: **binary search**, **in place swap**
 
 
 #### 3. find special subarray
-* Subarray of max sum
-  * MaximumSubarray (Leetcode)
-  * 
+* MaximumSubarray (Leetcode)
+* LongestConsecutiveSubsequence (Leetcode)
   
 #### 4. Duplicates
 * Remove duplicates
@@ -102,12 +106,29 @@ basics: **binary search**, **in place swap**
   * SearchInRotatedArray (Leetcode)
   * SearchInRotatedArray2 (Leetcode)
   
-##String -- Total: 17
+#### 6. Sum
+* 2Sum (Leetcode)
+* 3Sum (Leetcode)
+* 3SumCloset (Leetcode)
+* 4Sum (Leetcode)
+
+#### 7. Stock
+* BestTimeToBuyAndSellStock (Leetcode)
+* BestTimeToBuyAndSellStock2 (Leetcode)
+* BestTimeToBuyAndSellStock3 (Leetcode)
+
+#### 8. Matrix
+* 
+
+##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
 #### 1. Substring
 * LongestSubstringWithoutRepeatingCharacters (Leetcode)
 * MinimumWindowSubstring (Leetcode)
 * SubstringWithConcatenationOfAllWords (Leetcode)
+* DistinctSubsequence (Leetcode)
+* LongestCommonPrefix (Leetcode)
+* ImplementStrStr (Leetcode)
 
 #### 2. String representation of Integer
 * MultiplyStrings (Leetcode)
@@ -125,11 +146,24 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * WordSearch (Leetcode)
 * WordLadder (Leetcode)
 * WordLadder2 (Leetcode)
+* 
 
 #### 5. Palindrome
 * ValidPalindrome (Leetcode)
 * PalindromePartitioning (Leetcode)
 * PalindromePartitioning2 (Leetcode)
+* LongestPalindromicSubstring (Leetcode)
 
-## Math -- Total:
-* PalindromeNumber (Leetcode)
+## Math -- Total: 8
+* Digit Operation
+  * PalindromeNumber (Leetcode)
+* Permutation:
+  * Permutations (Leetcode)
+  * Permutations2 (Leetcode)
+  * PermutationSequence (Leetcode)
+  * NextPermutation (Leetcode)
+* Combination:
+  * Combinations (Leetcode)
+* Subset:
+  * Subsets (Leetcode)
+  * Subsets2 (Leetcode)
