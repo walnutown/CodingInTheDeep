@@ -64,7 +64,7 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
   * MaximumDepthOfBinaryTree (Leetcode)
 
 
-##Array -- Total: 35
+##Array -- Total: 50
 basics: **binary search**, **in place swap**, **traverse from both sides**
 #### 1. Array manipulation
 * Merge two arrays
@@ -88,6 +88,12 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * InsertInterval (Leetcode)
 * Sort
   * SortColors (Leetcode)
+  * RacerRater (Company/rocketfuel)
+  * RankNumberInStream (CTCI)
+  * InsertionSort (CTCI)
+  * MergeSort (CTCI)
+  * QuickSort (CTCI)
+  * RadixSort (CTCI)
 
 #### 2. find special element
 * Median
@@ -99,10 +105,13 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * FindMissingInteger (Company/amazon)
 
 
-#### 3. find special subarray
+#### 3. find special subarray/subsequence
 * MaximumSubarray (Leetcode)
 * LongestConsecutiveSubsequence (Leetcode)
-  
+* LongestIncreasingSubsequence (CTCI)
+* LongestIncreasingSubsequence2 (CTCI)
+* LongestIncreasingSubsequence3 (CTCI)
+
 #### 4. Duplicates
 * Remove duplicates
   * RemoveDuplicatesFromSortedArray (Leetcode)
@@ -121,7 +130,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * BestTimeToBuyAndSellStock2 (Leetcode)
 * BestTimeToBuyAndSellStock3 (Leetcode)
 
-#### 8. Matrix
+#### 8. Matrix / Board Game
 two ways to mark visited cells: **matrix**; **encode coordinates**
 * SetMatrixZero (Leetcode)
 * SurroundedRegion (Leetcode)
@@ -131,6 +140,8 @@ two ways to mark visited cells: **matrix**; **encode coordinates**
 * UniquePaths2 (Leetcode)
 * MinValueOnMinSumPath (Company/amazon)
 * ValidSudoku (Leetcode)
+* SudokuSolver (Leetcode)
+* Lazer (Company/rocketfuel)
 
 ##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
@@ -171,7 +182,7 @@ two ways to check anagrams: **sort chars in word**; **compress word**
 * Anagrams (Leetcode)
 
 
-## Math -- Total: 11
+## Math -- Total: 12
 * Digit Operation
   * PalindromeNumber (Leetcode)
   * PlusOne (Leetcode)
