@@ -59,10 +59,12 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
   * BinaryTreeMaximumPathSum (Leetcode)
 * Longest path between two leaves
   * DiameterOfBinaryTree (Company/amazon)
-  
+* Depth
+  * MinimumDepthOfBinaryTree (Leetcode)
+  * MaximumDepthOfBinaryTree (Leetcode)
 
 
-##Array -- Total: 23
+##Array -- Total: 35
 basics: **binary search**, **in place swap**, **traverse from both sides**
 #### 1. Array manipulation
 * Merge two arrays
@@ -76,11 +78,16 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * SearchInsertPosition (Leetcode)
   * SearchForaRange (Leetcode)
   * Search2DMatrix (Leetcode)
+  * SearchInRotatedArray (Leetcode)
+  * SearchInRotatedArray2 (Leetcode)
+  * SearchInArrayWithEmptyStrings (CTCI)
 * Deletion
   * RemoveElement (Leetcode)
 * Interval
   * MergeIntervals (Leetcode)
   * InsertInterval (Leetcode)
+* Sort
+  * SortColors (Leetcode)
 
 #### 2. find special element
 * Median
@@ -103,11 +110,6 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * Find the one without duplicates
   * SingleNumber (Leetcode)
   
-#### 5. Rotated Array
-* binary search in roatated array
-  * SearchInRotatedArray (Leetcode)
-  * SearchInRotatedArray2 (Leetcode)
-  
 #### 6. Sum
 * 2Sum (Leetcode)
 * 3Sum (Leetcode)
@@ -123,6 +125,12 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 two ways to mark visited cells: **matrix**; **encode coordinates**
 * SetMatrixZero (Leetcode)
 * SurroundedRegion (Leetcode)
+* NQueens (Leetcode)
+* NQueens2 (Leetcode)
+* UniquePaths (Leetcode)
+* UniquePaths2 (Leetcode)
+* MinValueOnMinSumPath (Company/amazon)
+* ValidSudoku (Leetcode)
 
 ##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
@@ -158,9 +166,15 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * PalindromePartitioning2 (Leetcode)
 * LongestPalindromicSubstring (Leetcode)
 
-## Math -- Total: 8
+#### 6. Anagram 
+two ways to check anagrams: **sort chars in word**; **compress word**
+* Anagrams (Leetcode)
+
+
+## Math -- Total: 11
 * Digit Operation
   * PalindromeNumber (Leetcode)
+  * PlusOne (Leetcode)
 * Permutation:
   * Permutations (Leetcode)
   * Permutations2 (Leetcode)
@@ -170,6 +184,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
   * Combinations (Leetcode)
   * CombinationSum (Leetcode)
   * CombinationSum2 (Leetcode)
+  * MinimumCoinChange (Company/amazon)
 * Subset:
   * Subsets (Leetcode)
   * Subsets2 (Leetcode)
