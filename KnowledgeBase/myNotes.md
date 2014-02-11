@@ -59,10 +59,12 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
   * BinaryTreeMaximumPathSum (Leetcode)
 * Longest path between two leaves
   * DiameterOfBinaryTree (Company/amazon)
-  
+* Depth
+  * MinimumDepthOfBinaryTree (Leetcode)
+  * MaximumDepthOfBinaryTree (Leetcode)
 
 
-##Array -- Total: 23
+##Array -- Total: 50
 basics: **binary search**, **in place swap**, **traverse from both sides**
 #### 1. Array manipulation
 * Merge two arrays
@@ -72,13 +74,26 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * Interleave array
   * InterleavingArray (Company/microsoft)
   * InterleavingArray2 (Company/microsoft)
-* Insertion
+* Search
   * SearchInsertPosition (Leetcode)
+  * SearchForaRange (Leetcode)
+  * Search2DMatrix (Leetcode)
+  * SearchInRotatedArray (Leetcode)
+  * SearchInRotatedArray2 (Leetcode)
+  * SearchInArrayWithEmptyStrings (CTCI)
 * Deletion
   * RemoveElement (Leetcode)
 * Interval
   * MergeIntervals (Leetcode)
   * InsertInterval (Leetcode)
+* Sort
+  * SortColors (Leetcode)
+  * RacerRater (Company/rocketfuel)
+  * RankNumberInStream (CTCI)
+  * InsertionSort (CTCI)
+  * MergeSort (CTCI)
+  * QuickSort (CTCI)
+  * RadixSort (CTCI)
 
 #### 2. find special element
 * Median
@@ -90,21 +105,19 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * FindMissingInteger (Company/amazon)
 
 
-#### 3. find special subarray
+#### 3. find special subarray/subsequence
 * MaximumSubarray (Leetcode)
 * LongestConsecutiveSubsequence (Leetcode)
-  
+* LongestIncreasingSubsequence (CTCI)
+* LongestIncreasingSubsequence2 (CTCI)
+* LongestIncreasingSubsequence3 (CTCI)
+
 #### 4. Duplicates
 * Remove duplicates
   * RemoveDuplicatesFromSortedArray (Leetcode)
   * RemoveDuplicatesFromSortedArray2 (Leetcode)
 * Find the one without duplicates
   * SingleNumber (Leetcode)
-  
-#### 5. Rotated Array
-* binary search in roatated array
-  * SearchInRotatedArray (Leetcode)
-  * SearchInRotatedArray2 (Leetcode)
   
 #### 6. Sum
 * 2Sum (Leetcode)
@@ -117,8 +130,18 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * BestTimeToBuyAndSellStock2 (Leetcode)
 * BestTimeToBuyAndSellStock3 (Leetcode)
 
-#### 8. Matrix
-* 
+#### 8. Matrix / Board Game
+two ways to mark visited cells: **matrix**; **encode coordinates**
+* SetMatrixZero (Leetcode)
+* SurroundedRegion (Leetcode)
+* NQueens (Leetcode)
+* NQueens2 (Leetcode)
+* UniquePaths (Leetcode)
+* UniquePaths2 (Leetcode)
+* MinValueOnMinSumPath (Company/amazon)
+* ValidSudoku (Leetcode)
+* SudokuSolver (Leetcode)
+* Lazer (Company/rocketfuel)
 
 ##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
@@ -154,9 +177,15 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * PalindromePartitioning2 (Leetcode)
 * LongestPalindromicSubstring (Leetcode)
 
-## Math -- Total: 8
+#### 6. Anagram 
+two ways to check anagrams: **sort chars in word**; **compress word**
+* Anagrams (Leetcode)
+
+
+## Math -- Total: 12
 * Digit Operation
   * PalindromeNumber (Leetcode)
+  * PlusOne (Leetcode)
 * Permutation:
   * Permutations (Leetcode)
   * Permutations2 (Leetcode)
@@ -164,6 +193,9 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
   * NextPermutation (Leetcode)
 * Combination:
   * Combinations (Leetcode)
+  * CombinationSum (Leetcode)
+  * CombinationSum2 (Leetcode)
+  * MinimumCoinChange (Company/amazon)
 * Subset:
   * Subsets (Leetcode)
   * Subsets2 (Leetcode)
