@@ -76,6 +76,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * InterleavingArray2 (Company/microsoft)
 * Search
   * SearchInsertPosition (Leetcode)
+  * BinarySearchClosest (CTCI)
   * SearchForaRange (Leetcode)
   * Search2DMatrix (Leetcode)
   * SearchInRotatedArray (Leetcode)
