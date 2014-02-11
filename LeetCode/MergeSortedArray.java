@@ -16,6 +16,6 @@ public class Solution {
             if (A[i] > B[j])    A[index--] = A[i--];
             else    A[index--] = B[j--];
         }
-        while (j >= 0)  A[index--] = B[j--];    // no need to copy remaing elements in A, understand why
+        while (j >= 0)  A[index--] = B[j--];    // don't forget this step & no need to copy remaing elements in A, understand why
     }
 }

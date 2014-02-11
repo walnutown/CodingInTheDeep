@@ -23,7 +23,7 @@ public class Solution {
     }
 }
 
-// 1d DP, time: O(m*n); space: O(n)
+// 2d DP, time: O(m*n); space: O(n)
 public class Solution {
     public int uniquePaths(int m, int n) {
         if (m==0 || n==0)   return 0;

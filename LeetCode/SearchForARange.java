@@ -1,73 +1,22 @@
-public class Solution {
-    int[] res;
-    public int[] searchRange(int[] A, int target) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        res = new int[]{-1, -1};
-        if (A == null || A.length == 0){
-            return res;
-        }
-        searchHelper(A, 0, A.length -1 , target);
-        return res;
-    }
-    
-    public void searchHelper(int[] A, int start, int end, int target){
-        if (start > end){
-            return; 
-        }
-        int mid = start + (end-start)/2;
-        if (A[mid] == target){
-            if (res[0] == -1){
-                res[0] = mid;
-            }
-            if (mid < res[0]){
-                res[0] = mid;
-            }
-            if (mid > res[1]){
-                res[1] = mid;
-            }
-        }
-        searchHelper(A, start, mid-1, target);
-        searchHelper(A, mid+1, end, target);
-    }
-}
+/*
+    Given a sorted array of integers, find the starting and ending position of a given target value.
 
-// Not O(lgn), worst case O(n)
-public class Solution {
-    int[] res;
-    public int[] searchRange(int[] A, int target) {
-        int[] res = new int[]{-1,-1};
-        if (A == null || A.length == 0) return res;
-        finder(A, 0, A.length-1, target, res);
-        return res;
-    }
-    
-    public void finder(int[] A, int start, int end, int target, int[] res){
-        if (start > end)    return;
-        int mid = (start + end) >> 1;
-        if (A[mid] < target)    finder(A, mid+1, end, target, res);
-        else if (A[mid] > target)    finder(A, start, mid-1, target, res);
-        else{
-            if (res[0] == -1){
-                res[0] = mid;
-                res[1] = mid;
-            }else{
-                res[0] = Math.min(res[0], mid);
-                res[1] = Math.max(res[1], mid);
-            }
-            finder(A, mid+1, end, target, res);
-            finder(A, start, mid-1, target, res);
-        }
-    }
-}
+    Your algorithm's runtime complexity must be in the order of O(log n).
 
-// Accepted, binary search target-0.5 and target+0.5
+    If the target is not found in the array, return [-1, -1].
+
+    For example,
+    Given [5, 7, 7, 8, 8, 10] and target value 8,
+    return [3, 4].
+*/
+
+// binary search target-0.5 and target+0.5, time: O(lgn)
 public class Solution {
     public int[] searchRange(int[] A, int target) {
         int[] res = new int[]{-1,-1};
         if (A == null || A.length == 0) return res;
         int low = binarySearch(A, target-0.5);
-        if (low >= A.length || A[low] != target) return res;
+        if (low >= A.length || A[low] != target) return res;    // if target not found
         int high = binarySearch(A, target+0.5) - 1;
         res[0] = low;
         res[1] = high;
@@ -85,3 +34,38 @@ public class Solution {
         return start;
     }
 }
+
+// search lower and upper bounds seperately, time: O(lgn)
+public class Solution {
+    public int[] searchRange(int[] A, int target) {
+        int[] res = new int[]{-1,-1};
+        if (A == null || A.length == 0) return res;
+        int lower = getLowerBound(A, target);
+        int upper = getUpperBound(A, target);
+        if (lower>upper)    return res;
+        res[0] = lower;
+        res[1] = upper;
+        return res;
+    }
+    
+    public int getLowerBound(int[] A, double target){        
+        int start = 0, end = A.length-1;
+        while (start <= end){
+            int mid = (start + end) >> 1;
+            if (A[mid] >= target)   end = mid-1;
+            else start = mid+1;
+        }
+        return start;
+    }
+    
+    public int getUpperBound(int[] A, double target){        
+        int start = 0, end = A.length-1;
+        while (start <= end){
+            int mid = (start + end) >> 1;
+            if (A[mid] > target)   end = mid-1;
+            else start = mid+1;
+        }
+        return end;
+    }
+}
+

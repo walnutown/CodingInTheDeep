@@ -1,11 +1,11 @@
 package amazon;
 
-import java.util.Arrays;
 
-public class MinValueOnPathOfMinSum {
+public class MinValueOnMinSumPath {
 
    /**
-    * Given a board, find the min element on the path with min sum 
+    * Given a board, there're many ways from top-left to bottom-right, 
+    * find the min element on the path with min sum 
     */
    public static void main(String[] args) {
       int[][] grid = new int[][]{
@@ -16,6 +16,7 @@ public class MinValueOnPathOfMinSum {
       System.out.println(getMin(grid));
    }
    
+   // 2d DP, use a matrix to update the min vlaue
    public static int getMin(int[][] grid){
       int m=grid.length, n=grid[0].length;
       if (m==0 || n==0) return 0;

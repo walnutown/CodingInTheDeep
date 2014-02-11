@@ -13,9 +13,11 @@
     [2, 2, 3] 
 */
 
-// The same to the coin change problem: Given a set of coins, find all the ways to make a change
+// Same to the coin change problem: Given a set of coins, find all the ways to make a change
 
-// DFS
+// DFS, 
+// the candidates are unique ("Given a set of candidate numbers "), if not, we can use a set
+// here to avoid duplicates
 public class Solution {
     public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

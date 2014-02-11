@@ -1,11 +1,11 @@
-package sorting_search;
+package ch11_sorting_searching;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class longest_increasing_subsequence2 {
+public class LongestIncreasingSubsequence2 {
 
    /*
     * Find the longest increasing subsequence in an array of integers
@@ -27,7 +27,6 @@ public class longest_increasing_subsequence2 {
          mem.get(i).add(arr[i]);
          for (int j = 0; j < i; j++){
             if (arr[i] > arr[j] && mem.get(i).size() < mem.get(j).size()+1){
-               mem.get(i).clear();
                mem.put(i, new ArrayList<Integer>(mem.get(j)));
                mem.get(i).add(arr[i]);
             }

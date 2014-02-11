@@ -8,10 +8,10 @@ public class MinimumCoinChange {
     */
    public static void main(String[] args) {
       int[] A= new int[]{2,3,5};
-      int target = 9;
+      int target = 1;
       System.out.println(minimumCoinChange(A, target));
    }
-   
+   // 2d DP, time: O(m*n); space: O(m)
    public static int minimumCoinChange(int[] A, int target){
       if (A==null || A.length==0)   return 0;
       int[] dp = new int[target+1];
@@ -19,9 +19,9 @@ public class MinimumCoinChange {
       for (int i=1; i<=target; i++){
          int min = Integer.MAX_VALUE;
          for (int j=0; j<A.length; j++){
-            if (i >= A[j] && dp[i-A[j]]>=0)  min = Math.min(min, dp[i-A[j]]);
+            if (i >= A[j])  min = Math.min(min, dp[i-A[j]]);
          }
-         dp[i] = min == Integer.MAX_VALUE ? min : min+1;;   // notice overflow here
+         dp[i] = min == Integer.MAX_VALUE ? min : min+1;   // notice overflow here
       }
       return dp[target];
    }

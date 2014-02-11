@@ -15,7 +15,8 @@
     [1, 1, 6] 
 */
 
-// DFS
+// DFS, use index to avoid duplicates
+// candidates are not unique ("Given a collection of candidate numbers")
 public class Solution {
     public ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
@@ -32,7 +33,31 @@ public class Solution {
             return;
         }
         for (int i = index; i< num.length; i++){
-            if (i > index && num[i] == num[i-1])    continue;       // compare with CombinationSum, only add one sentence here
+            if (i > index && num[i] == num[i-1])    continue;   // avoid duplicates in result 
+            r.add(num[i]);
+            finder(num, i+1, target-num[i], res, r);
+            r.remove(r.size()-1);
+        }
+    }
+}
+
+// DFS, use set to avoid duplicates, worse performance than the above
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
+        Set<ArrayList<Integer>> res = new HashSet<ArrayList<Integer>>();
+        if (num == null || num.length == 0) return new ArrayList<ArrayList<Integer>>(res);
+        Arrays.sort(num);
+        finder(num, 0, target, res, new ArrayList<Integer>());
+        return new ArrayList<ArrayList<Integer>>(res);
+    }
+    
+    public void finder(int[] num, int index, int target, Set<ArrayList<Integer>> res, ArrayList<Integer> r){
+        if (target < 0) return;
+        if (target == 0){
+            res.add(new ArrayList<Integer>(r));
+            return;
+        }
+        for (int i = index; i< num.length; i++){
             r.add(num[i]);
             finder(num, i+1, target-num[i], res, r);
             r.remove(r.size()-1);

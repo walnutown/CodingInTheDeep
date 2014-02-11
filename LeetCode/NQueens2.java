@@ -1,48 +1,26 @@
-public class Solution {
-    int[] pos;
-    int count;
-    public int totalNQueens(int n) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        if (n == 0){
-            return 0;
-        }
-        count = 0;
-        pos = new int[n];
-        DFS(0, n);
-        return count;
-    }
-    
-    public void DFS(int row, int maxRow){
-        if (row >= maxRow){
-            return;
-        }
-        for (int i = 0; i < maxRow; i++){
-            pos[row] = i;
-            if (isValid(row)){
-                if (row == maxRow -1){
-                    count++;
-                }
-                DFS(row+1, maxRow);
-            }    
-            
-        }
-        
-    }
-    
-    public boolean isValid(int row){
-        for (int i = 0 ; i < row; i++){
-            if (pos[i] == pos[row] || Math.abs(pos[row]-pos[i]) == row -i){
-                return false;
-            }
-        }
-        
-        return true;
-    }
-}
+/*
+    Given an integer n, return all distinct solutions to the n-queens puzzle.
 
+    Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
 
-// Accepted, Dec 27
+    For example,
+    There exist two distinct solutions to the 4-queens puzzle:
+
+    [
+    [".Q..",  // Solution 1
+    "...Q",
+    "Q...",
+    "..Q."],
+
+    ["..Q.",  // Solution 2
+    "Q...",
+    "...Q",
+    ".Q.."]
+    ]
+    Now, instead outputting board configurations, return the total number of distinct solutions.
+*/
+
+// DFS, use a mtarix
 public class Solution {
     public int totalNQueens(int n) {
         if (n == 0) return 0;
@@ -73,6 +51,39 @@ public class Solution {
             if (board[i][j] == 1)   return false;
         for (int i=row, j=col; i>=0 && j<board[0].length; i--, j++)
             if (board[i][j] == 1)   return false;
+        return true;
+    }
+}
+
+// DFS, use an array, easier valid check
+public class Solution {
+    public int totalNQueens(int n) {
+        if (n == 0) return 0;
+        int[] num = new int[1];
+        int[] rows = new int[n];
+        Arrays.fill(rows, -1);
+        finder(rows, 0, num);
+        return num[0];
+    }
+    
+    public void finder(int[] rows, int x, int[] num){
+        if (x == rows.length){
+            num[0]++;
+            return;
+        }
+        for (int i =0; i < rows.length; i++){
+            if (isValid(rows, x, i)){
+                rows[x] = i;
+                finder(rows, x+1, num);
+                rows[x] = 0;
+            }
+        }
+    }
+    
+    public boolean isValid(int[] rows, int x, int y){
+        for (int i=0; i<x; i++){
+            if (rows[i]==y || x-i==Math.abs(rows[i]-y)) return false;
+        }
         return true;
     }
 }

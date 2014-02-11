@@ -1,8 +1,8 @@
-package sorting_search;
+package ch11_sorting_searching;
 
 import java.util.Arrays;
 
-public class longest_increasing_subsequence {
+public class LongestIncreasingSubsequence {
 
    /*
     * Find the length of the longest increasing subsequence in an array of integers

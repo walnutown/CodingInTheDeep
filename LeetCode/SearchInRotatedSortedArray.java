@@ -8,10 +8,9 @@
     You may assume no duplicate exists in the array.
 */
 
-// binaray search, check the start and end of the array
+// binaray search, no duplicates
 public class Solution {
     public int search(int[] A, int target) {
-        // no duplicates
         if (A == null || A.length == 0) return -1;
         int start = 0, end = A.length-1;
         while (start <= end){                   // notice "<=" here

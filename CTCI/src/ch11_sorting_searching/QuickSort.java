@@ -1,15 +1,14 @@
-package sorting_search;
+package ch11_sorting_searching;
 
 import java.util.Arrays;
 
 /**
  * Quick-sort is a divide and conquer algorithm. 
- * Quicksort divides a large list into two smaller sub-lists,
- * quicksort then recursively sort the sub-lists
+ * It divides a large list into two smaller sub-lists,
+ * then recursively sort the sub-lists
  */
-public class quick_sort {
+public class QuickSort {
 
-  
    public static void main(String[] args) {
       int[] arr = new int[]{20};
       quickSort(arr, 0, arr.length-1);

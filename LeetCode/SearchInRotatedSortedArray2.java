@@ -7,10 +7,9 @@
     Write a function to determine if a given target is in the array.
 */
 
-// time: average, O(lgn), worst case O(n)
+// allow duplicates. time: average, O(lgn), worst case O(n)
 public class Solution {
     public boolean search(int[] A, int target) {
-        // allow duplicates
         if (A == null || A.length == 0) return false;
         int start = 0, end = A.length-1;
         while (start <= end){

@@ -1,110 +1,25 @@
-// DFS
-public class Solution {
-   ArrayList<String[]> resList;
-   
-   int[] pos;
-   public ArrayList<String[]> solveNQueens(int n)
-   {
-      // Start typing your Java solution below
-      // DO NOT write main() function
-      resList = new ArrayList<String[]>();
-      pos = new int[n];
-      if (n == 0)
-      {
-         return resList;
-      }
+/*
+  Given an integer n, return all distinct solutions to the n-queens puzzle.
 
-      DFS(1, n);
+  Each solution contains a distinct board configuration of the n-queens' placement, where 'Q' and '.' both indicate a queen and an empty space respectively.
 
-      return resList;
-   }
+  For example,
+  There exist two distinct solutions to the 4-queens puzzle:
 
-   public void DFS(int depth, int n)
-   {
-      if (depth > n)
-      {
-         return;
-      }
+  [
+   [".Q..",  // Solution 1
+    "...Q",
+    "Q...",
+    "..Q."],
 
-      for (int i = 0; i < n; i++)
-      {
-         pos[depth-1] = i;
-         if (isValid(depth-1))
-         { 
-            if (depth == n){
-                addToList(n);
-            }
-            DFS(depth + 1, n);
+   ["..Q.",  // Solution 2
+    "Q...",
+    "...Q",
+    ".Q.."]
+  ]
+*/
 
-         }
-      }
-   }
-   
-   public boolean isValid(int index){
-       for (int i = 0; i < index; i++){
-           if (pos[i] == pos[index] || Math.abs(pos[index] - pos[i]) == index-i){
-               return false;
-           }
-       }
-       return true;
-   }
-
-   public void addToList(int n)
-   {
-      String[] res = new String[n];
-      for (int i = 0; i < n; i++){
-          StringBuilder row = new StringBuilder();
-          for (int j = 0 ; j< n; j++){
-              if (pos[i] == j){
-                  row.append('Q');
-              }
-              else{
-                  row.append('.');
-              }
-          }
-          res[i] = row.toString();
-      }
-      
-      resList.add(res);
-   }
-}
-
-// bit manipulation, O(n)
-public class Solution {
-   public ArrayList<String[]> solveNQueens(int n){
-        ArrayList<String[]> res = new ArrayList<String[]>();
-        finder(new long[n], 0, 0, 0, 0, res);
-        return res;
-   }
-   
-   public void finder(long[] rows, int curr, long row, long lDiagonal, long rDiagonal, ArrayList<String[]> res){
-        long validator = (1 << rows.length) - 1;  // 1 1 1 1 ... -> all 1s
-        if (row == validator)   buildBoard(rows, res);
-        else{
-            long candidates = ((~(row | lDiagonal | rDiagonal)) & validator);
-            while (candidates > 0){
-                // pick up lowset bit
-                long pos = (candidates & (0 - candidates));
-                // remove it from candidates
-                candidates -= pos;
-                // add to result row array
-                rows[curr] = pos;
-                finder(rows, curr+1, (row | pos), ((lDiagonal | pos) << 1), ((rDiagonal | pos) >> 1), res);
-            }
-        }
-   }
-   
-   public void buildBoard(long[] rows, ArrayList<String[]> res){
-        String[] r = new String[rows.length];
-        for (int i=0; i<rows.length; i++){
-            r[i] = Long.toBinaryString(rows[i]).replace('0', '.').replace('1', 'Q');
-            while (r[i].length() < rows.length) r[i] = '.' + r[i];  // add '.' to make the length matches
-        }
-        res.add(r);
-   }
-}
-
-// Accepted, DFS, use int[][] board to mark the position of queuens
+// DFS, use int[][] board to mark the position of queuens
 public class Solution {
    public ArrayList<String[]> solveNQueens(int n){
         ArrayList<String[]> res = new ArrayList<String[]>();
@@ -148,3 +63,35 @@ public class Solution {
        return true;
    }
 }
+
+// bit manipulation, performance improvement in valid check step
+public class Solution {
+   public ArrayList<String[]> solveNQueens(int n){
+        ArrayList<String[]> res = new ArrayList<String[]>();
+        finder( 0, 0, 0, 0, new long[n], res);
+        return res;
+   }
+   
+   public void finder(int x, long col, long lDiagonal, long rDiagonal, long[] rows, ArrayList<String[]> res){
+        if (x == rows.length){
+            String[] r = new String[rows.length];
+            for (int i=0; i<rows.length; i++){
+                r[i] = Long.toBinaryString(rows[i]).replace('0', '.').replace('1', 'Q');
+                while (r[i].length() < rows.length) r[i] = '.' + r[i];  // add '.' to fill the missing 0s
+            }
+            res.add(r);
+        }
+        else{
+            long avail = ~(col | lDiagonal | rDiagonal);
+            for (int i=0; i<rows.length; i++){
+                long pos = avail & (1<<i);
+                if (pos > 0){
+                    rows[x] = pos;
+                    finder(x+1, (col | pos), ((lDiagonal | pos) << 1), ((rDiagonal | pos) >> 1), rows, res);
+                }
+            }
+        }
+   }
+}
+
+
