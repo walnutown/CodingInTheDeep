@@ -17,16 +17,11 @@
  * }
  */
 
-// remember two key points:
-//		<1> when slow is at the entry of the loop, fast is k stpes away from the entry
-// 				which means that, entry is k steps away from the head.
-//		<2>	when slow meets fast in loop, fast is cyc_len-k steps away from the entry
-//				and it will takes fast k steps to get to entry again.
+// fast/slow pointer, time: O(n); space: O(1)
 public class Solution {
     public boolean hasCycle(ListNode head) {
         if (head==null) return false;
-        ListNode fast = head;
-        ListNode slow = head;
+        ListNode fast = head, slow = head;
         while(fast!=null && fast.next!=null){
             slow = slow.next;
             fast = fast.next.next;

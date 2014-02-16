@@ -1,3 +1,8 @@
+/*
+    Merge k sorted linked lists and return it as one sorted list. 
+    Analyze and describe its complexity.
+*/
+
 // #2 trial, merge list one by one
 // runtime error
 // Last executed input:    [{0},{1}]
@@ -196,8 +201,8 @@ public class Solution {
         // heap sort, O (nlgk)
         if (lists == null || lists.size() == 0) return null;
         Comparator<ListNode> com = new Comparator<ListNode>(){
-            public int compare(ListNode l1, ListNode l2){
-                return l1.val - l2.val;
+            public int compare(ListNode n1, ListNode n2){
+                return n1.val - n2.val;
             }
         };
         PriorityQueue<ListNode> heap = new PriorityQueue<ListNode>(lists.size(), com);
