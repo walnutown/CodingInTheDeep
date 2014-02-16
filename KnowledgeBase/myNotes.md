@@ -76,6 +76,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * InterleavingArray2 (Company/microsoft)
 * Search
   * SearchInsertPosition (Leetcode)
+  * BinarySearchClosest (CTCI)
   * SearchForaRange (Leetcode)
   * Search2DMatrix (Leetcode)
   * SearchInRotatedArray (Leetcode)
@@ -199,3 +200,14 @@ two ways to check anagrams: **sort chars in word**; **compress word**
 * Subset:
   * Subsets (Leetcode)
   * Subsets2 (Leetcode)
+
+
+## LinkedList -- Total: 
+* Cycle
+  * LinkedListCycle (Leetcode)
+  * LinkedListCycle2 (Leetcode)
+* Deletion
+  * RemoveNthNodeFormEndOfList (Leetcode)
+* Merge
+  * MergeTwoSortedList (Leetcode)
+  * MergeKSortedList (Leetcode)
