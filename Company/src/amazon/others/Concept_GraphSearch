@@ -1,0 +1,22 @@
+Graph Search:
+
+<1>	A search strategy is defined by picking the order of node expansion
+
+<2> Comparison
+b Ð max branching factor of the search tree
+d Ð depth of the least-cost solution
+m Ð max depth of the search tree (may be infinity)
+
+			BFS		UniformCost		DFS		Depth-limited		IterativeDepeending		Bidirectional
+Time		b^d			b^d			b^m			b^l					b^d						b^(d/2)
+Space		b^d			b^d			bm			bl					bd						b^(d/2)
+Optimal		Y			Y			N			N					Y							Y
+COmplete	Y			Y			N			Y(if l>=d)			Y							Y
+
+Informed search (using heuristics)
+Best-First search (greedy search)
+A* search
+
+<3> print paths of shortest path
+		create data structure of 'path'
+		use a map to store the node and list of its corresponding previous nodes

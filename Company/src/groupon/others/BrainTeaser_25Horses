@@ -1,0 +1,23 @@
+Brain Teaser -- 25 horses
+
+Given 25 horses, find the 3 fastest.
+You have no timer and can know the relative order of 5 horses in a match.
+What's the minimum number of matches you should have?
+
+A:
+Wrong: heap sort, merge 5 heaps, 5 + 3 = 8
+
+Correct: 
+Divide into 5 teams
+a1>a2>...a5
+b1>b2>...b5
+c1>c2>...c5
+d1>d2>...d5
+e1>e2>...e5
+
+with one more match, we can get the order of those horses ranking first in the match, we assume that 
+a1>b1>c1>d1>e1
+then a1 is the fastest, the candidates for second and third fastest are:
+a2,a3,b1,b2,c1
+We can get the second and third fastest by one match
+so, 5+1+1 = 7

@@ -18,7 +18,7 @@
     All words have the same length.
     All words contain only lowercase alphabetic characters.
 */
-
+// similar to print the shortest path between two nodes on a graph
 // BFS + map(store previous ndoes)
 public class Solution {
     public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {

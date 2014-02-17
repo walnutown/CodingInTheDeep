@@ -39,7 +39,7 @@ public class Solution {
                     if (dict.contains(adj) && !visited.contains(adj)){
                         qu.add(adj);        
                         visited.add(adj);   // add 'visited.add()' here, instead of below  'String curr = qu.poll()'
-                        next_num++;         // can avoid more duplicates, because size of visited increases faster 
+                        next_num++;         // can avoid more duplicates, because size of 'visited' increases faster 
                     }
                 }
             }
