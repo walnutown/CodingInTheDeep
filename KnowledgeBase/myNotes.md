@@ -112,6 +112,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 * LongestIncreasingSubsequence (CTCI)
 * LongestIncreasingSubsequence2 (CTCI)
 * LongestIncreasingSubsequence3 (CTCI)
+* GasStation (Leetcode)
 
 #### 4. Duplicates
 * Remove duplicates
@@ -119,6 +120,9 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * RemoveDuplicatesFromSortedArray2 (Leetcode)
 * Find the one without duplicates
   * SingleNumber (Leetcode)
+  * 
+#### 5. Others
+* Candy (Leetcode)
   
 #### 6. Sum
 * 2Sum (Leetcode)
@@ -170,7 +174,8 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * WordSearch (Leetcode)
 * WordLadder (Leetcode)
 * WordLadder2 (Leetcode)
-* 
+* FillBoardWithWords (Company/groupon)
+* FindWordsInBoard (Company/amazon)
 
 #### 5. Palindrome
 * ValidPalindrome (Leetcode)
@@ -179,7 +184,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * LongestPalindromicSubstring (Leetcode)
 
 #### 6. Anagram 
-two ways to check anagrams: **sort chars in word**; **compress word**
+two ways to check anagrams: **sort chars in word**; **freq count**
 * Anagrams (Leetcode)
 
 
@@ -211,3 +216,12 @@ two ways to check anagrams: **sort chars in word**; **compress word**
 * Merge
   * MergeTwoSortedList (Leetcode)
   * MergeKSortedList (Leetcode)
+* Copy
+  * CopyListWithRandomPointer (Leetcode)
+  * 
+
+## Bit Manipulation -- Total: 
+* XOR
+  * SingleNumber (Leetcode)
+* Bit Count
+  * SingleNumber2 (Leetcode)
