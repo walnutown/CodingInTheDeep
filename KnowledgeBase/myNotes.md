@@ -207,20 +207,33 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * Subsets2 (Leetcode)
 
 
-## LinkedList -- Total: 
+## LinkedList -- Total: 14
+basics: **draw the list** is the most helpful way to solve list problem; take care of **infinite loop**
 * Cycle
   * LinkedListCycle (Leetcode)
   * LinkedListCycle2 (Leetcode)
 * Deletion
   * RemoveNthNodeFormEndOfList (Leetcode)
+  * RemoveDuplicatesInList (CTCI)
+  * RemoveNodeInList (CTCI)
 * Merge
   * MergeTwoSortedList (Leetcode)
   * MergeKSortedList (Leetcode)
 * Copy
   * CopyListWithRandomPointer (Leetcode)
   * 
+* Restruct
+  * ReorderList (Leetcode)
+  * InsertionSortList (Leetcode)
+  * ReverseLinkedList2 (Leetcode)
+  * PartitionList (CTCI)
 
-## Bit Manipulation -- Total: 
+* Arithmetic
+  * AddListNumber (CTCI)
+  * 
+* LinkedListPalindrome (CTCI)
+
+## Bit Manipulation -- Total: 2
 * XOR
   * SingleNumber (Leetcode)
 * Bit Count
