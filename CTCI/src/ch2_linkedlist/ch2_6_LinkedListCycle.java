@@ -1,6 +1,6 @@
 package ch2_linkedlist;
 
-public class ch2_6 {
+public class ch2_6_LinkedListCycle {
 
    /*
     * Given a circular linked list, returns the node at the beginning of the loop

@@ -33,16 +33,10 @@ public class Solution {
             }
             r = r.next;
         }
-        while (p1 != null){
+        if(p1 != null)
             r.next = p1;
-            p1 = p1.next;
-            r = r.next;
-        }
-        while (p2 != null){
+        if(p2 != null)
             r.next = p2;
-            p2 = p2.next;
-            r = r.next;
-        }
         return dum.next;
     }
 }

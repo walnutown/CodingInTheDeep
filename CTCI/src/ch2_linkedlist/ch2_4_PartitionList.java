@@ -1,6 +1,6 @@
 package ch2_linkedlist;
 
-public class ch2_4 {
+public class ch2_4_PartitionList {
 
    /*
     * Partition a linked list around a value x, such that all 
@@ -13,31 +13,26 @@ public class ch2_4 {
       System.out.println(partitionList(head, 5).printList());
    }
    
+   // use two nodes to mark the start of left and right half of the list
    public static ListNode partitionList(ListNode head, int x){
       if (head == null || head.next == null)
          return head;
-      ListNode list_end = head;
-      while (list_end.next != null){
-         list_end = list_end.next;
-      }
-      ListNode dum = new ListNode(0);
-      dum.next = head;
-      ListNode p = head;
-      ListNode p_prev = dum;
-      ListNode q = list_end;
-      while (p.next != list_end.next){
-         if (p.val >= x){
-            p_prev.next = p.next;
-            q.next = p;
-            q = q.next;
-            q.next = null;
-            p = p_prev.next;
+      ListNode left = new ListNode(0), right = new ListNode(0);
+      ListNode l = left, r =right, p = head;
+      while (p!=null){
+         ListNode next = p.next;
+         p.next = null;        // cut the list, otherwise may cause infinite loop
+         if (p.val < x){
+            l.next = p;
+            l = l.next;
          }else{
-            p_prev = p_prev.next;
-            p = p.next;
-         }
+            r.next = p;
+            r = r.next;
+         } 
+         p = next;
       }
-      return dum.next;
+      l.next = right.next;
+      return left.next;
    }
 
 }

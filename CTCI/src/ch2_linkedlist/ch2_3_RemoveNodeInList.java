@@ -1,6 +1,6 @@
 package ch2_linkedlist;
 
-public class ch2_3 {
+public class ch2_3_RemoveNodeInList {
 
    /*
     * Delete a node in the middle of a singly linked list, given only access to that node
@@ -12,19 +12,13 @@ public class ch2_3 {
       System.out.println(node.printList());
       System.out.println(deleteNode(node).printList());
    }
-   // copy the value of next node to current node 
+   // copy the value of next node to current node
+   // time: O(1), space: O(1)
    public static ListNode deleteNode(ListNode node){
       if (node == null || node.next == null)
          return null;
-      ListNode p_prev = node;
-      ListNode p = node.next;
-      p_prev.val = p.val;
-      while (p.next != null){
-         p.val = p.next.val;
-         p = p.next;
-         p_prev = p_prev.next;
-      }
-      p_prev.next = null;
+      node.val = node.next.val;
+      node.next = node.next.next;
       return node;
    }
 

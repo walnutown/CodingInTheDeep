@@ -16,7 +16,7 @@ public class ListNode {
       this.next = node.next;
    }
    
-   public ListNode buildList(int[] arr){
+   public static ListNode buildList(int[] arr){
       ListNode head = new ListNode(arr[0]);
       ListNode p = head;
       for (int i = 1; i < arr.length; i++){

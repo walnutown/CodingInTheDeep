@@ -12,6 +12,7 @@
 */
 
 // two pointers, time: O(n), one pass, in position
+// find the N+1 node from end of list and remove the Nth node
 // Note:
 // Given n will always be valid.
 public class Solution {
@@ -19,13 +20,13 @@ public class Solution {
         if (head==null) return null;
         ListNode dum = new ListNode(0);
         dum.next = head;
-        ListNode p = head, q = dum;
-        while (n-- > 0) p = p.next;
-        while (p!=null){
-            p = p.next;
-            q = q.next;
+        ListNode l = dum, r = head;
+        while (n-- > 0) r = r.next;
+        while (r!=null){
+            r = r.next;
+            l = l.next;
         }
-        q.next = q.next.next;
+        l.next = l.next.next;
         return dum.next;
     }
 }
