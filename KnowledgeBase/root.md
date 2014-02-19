@@ -31,6 +31,24 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
       * returning the instance itself
       * implementations of java.lang.Appendable are good examples
       * Builder Vs Factory Method
-  
+* Structural Patterns
+  * Adapter: java.util.Arrays#asList()
+      * In real world we have adapters for power supplies, adapters for camera memory cards, and so on.
+  * Decorator:
+      * taking an instance of same abstract/interface type which adds additional behaviour
+      * All subclasses of java.io.InputStream, OutputStream, Reader and Writer have a constructor taking an instance of same type.
+      * java.util.Collections, the checkedXXX(), synchronizedXXX() and unmodifiableXXX() methods
+  * Composite
+      * There are times when a program needs to manipulate a tree data structure and it is necessary to treat both Branches as well as Leaf Nodes uniformly
+      * File System -- folder and file
+  * Flyweight
+      * returning a cached instance, a bit the "multiton" idea
+      * java.lang.Integer#valueOf(int) (also on Boolean, Byte, Character, Short and Long)
+      * that's why *Integer.valueOf(int)* is preferred over *new Integer(int)*
+  * Facade
+      *  internally uses instances of different independent abstract/interface types
+      *  wrap a poorly designed collection of APIs with a single well-designed API
+      *  make a software library easier to use, understand and test, since the facade has convenient methods for common tasks
+      *  [good example from wiki](http://en.wikipedia.org/wiki/Facade_pattern)
 * Observer: listener
 * Decorator: BufferedReader
