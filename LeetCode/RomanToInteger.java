@@ -34,7 +34,7 @@ public class Solution {
 }
 
 // AnnieKim, time: O(n); space: O(1)
-// This sol is better
+// easy to remember
 public class Solution {
     public int romanToInt(String s) {
         if (s == null || s.length()==0) return 0;
@@ -46,9 +46,9 @@ public class Solution {
           map.put('C', 100);
           map.put('D', 500);
           map.put('M', 1000);
-          int num = 0, m = s.length();
-          for (int i=0; i<m; i++){
-              if (i<m-1 && map.get(s.charAt(i))<map.get(s.charAt(i+1)))   num -= map.get(s.charAt(i));
+          int num = 0, N = s.length();
+          for (int i=0; i<N; i++){
+              if (i<N-1 && map.get(s.charAt(i))<map.get(s.charAt(i+1)))   num -= map.get(s.charAt(i));
               else num += map.get(s.charAt(i));
           }
           return num;

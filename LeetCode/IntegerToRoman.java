@@ -5,6 +5,7 @@
 */
 
 // time: O(5m); space: O(5m), m is the number of digits in num
+// similar to 'DivideTwoIntegers'
 public class Solution {
     public String intToRoman(int num) {
         if (num == 0)   return "";
@@ -13,7 +14,7 @@ public class Solution {
         StringBuilder res = new StringBuilder();
         int index = 0;
         while (num > 0){
-           if ((num - nums[index]) < 0) index++;
+           if (num < nums[index]) index++;
            else{
                num -= nums[index];
                res.append(romans[index]);

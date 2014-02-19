@@ -161,6 +161,8 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 #### 2. String representation of Integer
 * MultiplyStrings (Leetcode)
 * StringToInteger (Leetcode)
+* RomanToInteger (Leetcode)
+* IntegerToRoman (Leetcode)
 
 #### 3. String manipulation
 * ScrambleString (Leetcode)
@@ -205,6 +207,12 @@ two ways to check anagrams: **sort chars in word**; **freq count**
 * Subset:
   * Subsets (Leetcode)
   * Subsets2 (Leetcode)
+* Arithmetic
+  * Pow(x,n) (Leetcode)
+  * Sqrt(x) (Leetcode)
+  * EvaluateReversedPolishNotation (Leetcode)
+  * DivideTwoIntegers (Leetcode)
+  * ReverseInteger (Leetcode)
 
 
 ## LinkedList -- Total: 14
@@ -212,8 +220,8 @@ basics: **draw the list** is the most helpful way to solve list problem; take ca
 * Cycle
   * LinkedListCycle (Leetcode)
   * LinkedListCycle2 (Leetcode)
-* Deletion
-  * RemoveNthNodeFormEndOfList (Leetcode)
+* Delete
+  * RemoveNthNodeFromEndOfList (Leetcode)
   * RemoveDuplicatesInList (CTCI)
   * RemoveNodeInList (CTCI)
 * Merge
@@ -229,9 +237,10 @@ basics: **draw the list** is the most helpful way to solve list problem; take ca
   * PartitionList (CTCI)
 
 * Arithmetic
-  * AddListNumber (CTCI)
-  * 
-* LinkedListPalindrome (CTCI)
+  * AddListNumber (CTCI) -- forward order
+  * AddTwoNumbers (Leetcode) -- reverse order
+* Others
+  * LinkedListPalindrome (CTCI)
 
 ## Bit Manipulation -- Total: 2
 * XOR
