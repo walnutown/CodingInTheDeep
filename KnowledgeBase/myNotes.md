@@ -4,11 +4,11 @@ Notes of Algorithm and Data Structure
 basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BFS**
 #### 1. tree traversal
 * DFS (inorder, preorder, postorder in recursion) is easy, skipped
-* DFS (inorder, preorder, postorder in iteration, save stack space; in Morris, sapce O(1))
+* DFS (inorder, preorder, postorder in iteration, save stack space; in **Morris**, sapce O(1))
   * BinaryTreeInOrderTraversal (Leetcode)
   * BinaryTreePreOrderTraversal (Leetcode)
   * BinaryTreePostOrderTraversal (Leetcode)
-* BFS
+* BFS -- curr/next level node count
   * BinaryTreeLevelOrderTraversal (Leetcode)
   * BinaryTreeLevelOrderTraversal2 (Leetcode)
   * BinaryTreeZigZagLevelOrderTraversal (Leetcode)
@@ -65,13 +65,13 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
 
 
 ##Array -- Total: 50
-basics: **binary search**, **in place swap**, **traverse from both sides**
+basics: **binary search (iterative version)**, **in place swap**, **traverse from both sides**
 #### 1. Array manipulation
-* Merge two arrays
+* Merge
   * MergeSortedArray (Leetcode)
 * Intersection of two arrays
   * IntersectionOfTwoSortedArray (Company/amazon)
-* Interleave array
+* Restruct
   * InterleavingArray (Company/microsoft)
   * InterleavingArray2 (Company/microsoft)
 * Search
@@ -82,7 +82,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * SearchInRotatedArray (Leetcode)
   * SearchInRotatedArray2 (Leetcode)
   * SearchInArrayWithEmptyStrings (CTCI)
-* Deletion
+* Delete
   * RemoveElement (Leetcode)
 * Interval
   * MergeIntervals (Leetcode)
@@ -99,7 +99,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
 #### 2. find special element
 * Median
   * MedianOfTwoSortedArray (Leetcode)
-* Kth order statistic: sort, O(nlgn); heap, O(nlgk); quickSelect, O(n)
+* Kth **order statistic**: sort, O(nlgn); heap, O(nlgk); quickSelect, O(n)
   * FindKthLargestInArray (Company/amazon)
 * Missing number
   * FirstMissingPositive (Leetcode)
@@ -120,7 +120,7 @@ basics: **binary search**, **in place swap**, **traverse from both sides**
   * RemoveDuplicatesFromSortedArray2 (Leetcode)
 * Find the one without duplicates
   * SingleNumber (Leetcode)
-  * 
+
 #### 5. Others
 * Candy (Leetcode)
   
@@ -194,6 +194,7 @@ two ways to check anagrams: **sort chars in word**; **freq count**
 * Digit Operation
   * PalindromeNumber (Leetcode)
   * PlusOne (Leetcode)
+  * ReverseInteger (Leetcode)
 * Permutation:
   * Permutations (Leetcode)
   * Permutations2 (Leetcode)
@@ -212,11 +213,11 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * Sqrt(x) (Leetcode)
   * EvaluateReversedPolishNotation (Leetcode)
   * DivideTwoIntegers (Leetcode)
-  * ReverseInteger (Leetcode)
+  
 
 
 ## LinkedList -- Total: 14
-basics: **draw the list** is the most helpful way to solve list problem; take care of **infinite loop**
+basics: **draw the list on paper** is the most helpful way to solve list problem; take care of **infinite loop**; 'start', 'end', 'mid', 'dum' to mark pivot node in list, 'p'/'q', 'prev'/'curr'/'next' for runner pointer.
 * Cycle
   * LinkedListCycle (Leetcode)
   * LinkedListCycle2 (Leetcode)
@@ -229,13 +230,11 @@ basics: **draw the list** is the most helpful way to solve list problem; take ca
   * MergeKSortedList (Leetcode)
 * Copy
   * CopyListWithRandomPointer (Leetcode)
-  * 
 * Restruct
   * ReorderList (Leetcode)
   * InsertionSortList (Leetcode)
   * ReverseLinkedList2 (Leetcode)
   * PartitionList (CTCI)
-
 * Arithmetic
   * AddListNumber (CTCI) -- forward order
   * AddTwoNumbers (Leetcode) -- reverse order

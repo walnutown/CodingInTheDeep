@@ -22,11 +22,11 @@ public class BinarySearchClosest {
          else if (arr[mid]>target) end=mid-1;
          else return mid;
       }
-      if (start>=arr.length)    return end;
+      if (start>=arr.length)    return end; // bound check
       else if (end<0)   return start;
       else{
          if (arr[start]-target < target-arr[end])   return start;
-         else return start;
+         else return end;
       }
    }
 
