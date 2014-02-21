@@ -20,6 +20,9 @@
  * }
  */
 
+// Note:
+// no duplicate values in the BST
+
 // inorder traversal with prev value, always meet the prereq: curr > prev
 // time: O(n); space: recursion stack
 public class Solution {
