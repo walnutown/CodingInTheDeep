@@ -158,11 +158,12 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * LongestCommonPrefix (Leetcode)
 * ImplementStrStr (Leetcode)
 
-#### 2. String representation of Integer
+#### 2. Parse String
 * MultiplyStrings (Leetcode)
 * StringToInteger (Leetcode)
 * RomanToInteger (Leetcode)
 * IntegerToRoman (Leetcode)
+* ValidNumber (Leetcode)
 
 #### 3. String manipulation
 * ScrambleString (Leetcode)

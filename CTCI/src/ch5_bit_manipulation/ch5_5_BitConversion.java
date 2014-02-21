@@ -1,6 +1,6 @@
 package ch5_bit_manipulation;
 
-public class BitConversion {
+public class ch5_5_BitConversion {
 
    /**
     * calculate the number of bits that will need to be changed in order to convert an integer X
