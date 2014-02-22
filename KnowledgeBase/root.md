@@ -1,7 +1,11 @@
-Knowledge Base for Concepts related questions in coding interview
+Knowledge Base for Concepts related questions in programming interview
 ===============
 ##Java
 [notes](https://docs.google.com/document/d/1msRFUdvg1z6iNmHqUUI_KVXEWLtODc2JaZH6w2o7o9k/edit?usp=sharing)
+
+* StringBuffer Vs StringBuilder
+  * StringBufer is synchronized, while StringBuilder is not.
+  * StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization. This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer was being used by a single thread (as is generally the case). Where possible, it is recommended that this class be used in preference to StringBuffer as it will be faster under most implementations.
 
 ##Distributed System & Big Data
 
@@ -13,8 +17,45 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
 
 
 
+##Networking & Protocol
+  [What Every Web Developer Should Know About HTTP (OdeToCode Programming Series) - Allen, K. Scott](http://www.amazon.com/Developer-Should-OdeToCode-Programming-Series-ebook/dp/B0076Z6VMI)
+* URL -- Uniform Resource Locator
+    * <schema>://<host>:<port>/<path>?<query>#<frag>
+      * schema: http, https, ftp, etc
+      * host: xxx.com
+      * url path: /abc/def/109
+      * port number: the host use it to listen for http request. The default value is 80
+    * url may point to a file on host's file system or disk space (http://xxx.com/a.jpg).
+    Yet, sometimes, it doesn't refer to any file on the server(although url is a 'locator'). In this case, when the appplication receives the http request, it will build a web page  by controlling views and model (MVC)
+    * query: http://www.google.com/search?q=apple&p=banana
+      * everything after ? is known as the query.
+      * usually is a name/value pair a=b
+    * fragment:http://xxx.com/apple#google
+      * fragment is not processed by the server, only used on client-side to identify a specific section of the page (by element's id).
+    * url encode: encode **unsafe character**(whiete sapce, ^, etc.) into safe character
+      * 'my book ' -> 'my%20book'
+* Http transaction
+    * request/response
+      * build network connection and send http message
+    * content type (media type)
+      * MIME (Multiple Internet Mail Extension) standards.
+      * file extension is the last thing used to check actual content type
+    * request type
+      * Get/Post; Delete/Put/Head
+      * Get, retrieve; Post, <form>
+      * Post/Redirect/Get pattern (Post is unsafe, will modify data on the server; while Get is safe)
+    * Http Request
+      * [method][URL][version]
+        [headers]
+        [body]
+      * in ASCII text
+      * there're numerous headers defiend by the Http specification
+    * Response Status Code (200/400/500, etc)
+    * Response headers: to deal with cache and performance of the web
 
-##Design Patterns
+
+
+##OO Design Patterns
 [oodesign.com](http://www.oodesign.com/)<br>
 [SO-Examples of GoF Design Patterns](http://stackoverflow.com/questions/1673841/examples-of-gof-design-patterns/2707195#2707195) <br>
 [notes](https://docs.google.com/document/d/1tWOAhdr4QG_Y4GTpKjmx-OP6HnKFtnGp0I5KZi12LV0/edit?usp=sharing)

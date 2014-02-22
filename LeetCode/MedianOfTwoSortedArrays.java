@@ -19,10 +19,10 @@ public class Solution {
         int bm = (bs + be) >>1;
         if (A[am] > B[bm]){
             if ((am-as + bm-bs + 1) > target)  return finder(A, as, am-1, B, bs, be, target);
-            else return finder(A, as, ae, B, bm+1, be, target-(bm-bs)-1);
+            else return finder(A, as, ae, B, bm+1, be, target-(bm-bs+1));
         }else{
             if ((am-as + bm-bs + 1) > target)   return finder(A, as, ae, B, bs, bm-1, target);
-            else return finder(A, am+1, ae, B, bs, be, target-(am-as)-1);
+            else return finder(A, am+1, ae, B, bs, be, target-(am-as+1));
         }
     }
 }
