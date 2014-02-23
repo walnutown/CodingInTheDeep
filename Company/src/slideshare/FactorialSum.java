@@ -11,6 +11,14 @@ public class FactorialSum {
     * 
     * Time: O(N^2); Space: O(N)
     */
+   // sol1:
+   //    use MultiplyStrings
+   // sol2:
+   //    use Java BigInteger 
+   // sol3:
+   //    use arraylist to represent the big integer
+   // sol4:
+   //    use array to represent the big integer
    public static void main(String[] args) {
       // System.out.println(Integer.MAX_VALUE);
       long start = System.currentTimeMillis();
@@ -29,7 +37,6 @@ public class FactorialSum {
    }
 
    public static int solution1(int N) {
-      // write your code in Java SE 6
       String fact = "1";
       for (int i = 1; i <= N; i++)
          fact = multiply(fact, "" + i);
@@ -42,7 +49,6 @@ public class FactorialSum {
    }
 
    public static String multiply(String num1, String num2) {
-      // number can be arbitrarily large and non-negative
       if (num1 == null || num2 == null)
          return null;
       int l1 = num1.length(), l2 = num2.length();
@@ -71,7 +77,7 @@ public class FactorialSum {
    public static int solution2(int N) {
       BigInteger fact = BigInteger.ONE;
       for (int i = 2; i <= N; i++) {
-         fact = fact.multiply(BigInteger.valueOf(i)); // should assign the value to fact again
+         fact = fact.multiply(BigInteger.valueOf(i)); // should assign the returned value to fact 
       }
       long res = 0;
       String num = fact.toString();

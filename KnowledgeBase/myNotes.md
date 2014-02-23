@@ -170,6 +170,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 #### 3. String manipulation
 * ScrambleString (Leetcode)
 * InterleavingString (Leetcode)
+* FizzBuz (Company/slideshare)
  
 #### 4. Character/word occurances
 * CountAndSay (Leetcode)
@@ -216,6 +217,11 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * Sqrt(x) (Leetcode)
   * EvaluateReversedPolishNotation (Leetcode)
   * DivideTwoIntegers (Leetcode)
+  * SwapInPlace (CTCI)
+  * FindMaxOfTwoNumbers (CTCI)
+* Big Integer / Factorial:
+  * TrailingZerosInFactorial (CTCI)
+  * FactorialSum (Company/slideshare)
   
 
 
@@ -255,6 +261,5 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * BitConversion (CTCI)
   * SwapBits (CTCI)
   * DrawHorizontalLine (CTCI)
-
 * ToBinaryString
   * DoubleToBinaryString (CTCI)

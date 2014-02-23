@@ -37,6 +37,17 @@ public class TicTacToeState {
             if (board[i][size-1] == -1)  return State.OWin;
          }
       }
+
+      for (i=0; i<size; i++){
+         for (j=1; j<size; j++){
+            if (board[j][i] == 0)   hasBlank = true;
+            if (board[j][i] != board[j-1][i])   break;
+         }
+         if (j==size){
+            if (board[size-1][i] == 1)   return State.XWin;
+            if (board[size-1][i] == -1)  return State.OWin;
+         }
+      }
       // check two diagonals
       for (i=1; i<size; i++){
          j = i;
