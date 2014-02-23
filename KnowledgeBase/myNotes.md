@@ -182,6 +182,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * WordLadder2 (Leetcode)
 * FillBoardWithWords (Company/groupon)
 * FindWordsInBoard (Company/amazon)
+* MasterMind (CTCI)
 
 #### 5. Palindrome
 * ValidPalindrome (Leetcode)
