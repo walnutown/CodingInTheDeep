@@ -20,7 +20,7 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
 ##Networking & Protocol
   [What Every Web Developer Should Know About HTTP (OdeToCode Programming Series) - Allen, K. Scott](http://www.amazon.com/Developer-Should-OdeToCode-Programming-Series-ebook/dp/B0076Z6VMI)
 * URL -- Uniform Resource Locator
-    * <schema>://<host>:<port>/<path>?<query>#<frag>
+    * schema://host:port/path?query#frag
       * schema: http, https, ftp, etc
       * host: xxx.com
       * url path: /abc/def/109
@@ -42,7 +42,7 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
       * file extension is the last thing used to check actual content type
     * request type
       * Get/Post; Delete/Put/Head
-      * Get, retrieve; Post, <form>
+      * Get, retrieve; Post, form, input
       * Post/Redirect/Get pattern (Post is unsafe, will modify data on the server; while Get is safe)
     * Http Request
       * [method][URL][version]

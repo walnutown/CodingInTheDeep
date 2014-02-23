@@ -1,6 +1,6 @@
 package ch1_arrays_strings;
 
-public class ch1_4 {
+public class ch1_4_ReplaceSpaces {
 
    /**
     * Write a method to replace all spaces in a string with '%20'
@@ -9,7 +9,7 @@ public class ch1_4 {
     * 
     */
    public static void main(String[] args) {
-      char[] str = new char[9]{};
+      char[] str = new char[9];
       str[0] = 'a';
       str[1] = ' ';
       str[2] = 'b';

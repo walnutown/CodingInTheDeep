@@ -103,7 +103,9 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
   * FindKthLargestInArray (Company/amazon)
 * Missing number
   * FirstMissingPositive (Leetcode)
-  * FindMissingInteger (Company/amazon)
+  * FindOneMissingInteger (Company/amazon)
+  * FindTwoMissingIntegers (Company/amazon)
+  * FindMissingIntegerUsingBitManipulation (CTCI)
 
 
 #### 3. find special subarray/subsequence
@@ -247,3 +249,12 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * SingleNumber (Leetcode)
 * Bit Count
   * SingleNumber2 (Leetcode)
+* Reset bits
+  * InsertBitRange (CTCI)
+  * NumberSequence (CTCI)
+  * BitConversion (CTCI)
+  * SwapBits (CTCI)
+  * DrawHorizontalLine (CTCI)
+
+* ToBinaryString
+  * DoubleToBinaryString (CTCI)

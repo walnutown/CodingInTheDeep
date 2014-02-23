@@ -2,7 +2,7 @@ package ch1_arrays_strings;
 
 import java.util.Arrays;
 
-public class ch1_3 {
+public class ch1_3_StringPermutation {
 
    /**
     * Given two strings, write a method to decide if one is a permutation of the other

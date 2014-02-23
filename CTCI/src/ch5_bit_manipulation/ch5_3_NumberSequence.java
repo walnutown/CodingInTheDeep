@@ -62,14 +62,14 @@ public class ch5_3_NumberSequence {
       if (i == 32)
          return -1;
       int pos = c0 + c1; // position of right-most non-trailing one
-      num &= ((~0)<<(pos+1)); // Clear all bits from pos onwards
+      num &= ((~0) << (pos + 1)); // Clear all bits from pos onwards
       int mask = (1 << (c1 + 1)) - 1; // Sequence of (c1+1) ones
-      num |= (mask << (c0 - 1));  
+      num |= (mask << (c0 - 1));
       return num;
    }
 
    public static int getBit(int num, int i) {
-      return (num & (1 << i)) > 0 ? 1 : 0;
+      return (num >> i) & 1;
    }
 
 }

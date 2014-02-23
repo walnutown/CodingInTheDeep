@@ -2,7 +2,7 @@ package ch1_arrays_strings;
 
 import java.util.Arrays;
 
-public class ch1_6 {
+public class ch1_6_RotateImage {
 
    /**
     * Given an image represented by an N*N matrix, where each pixel in the image is 4 bytes

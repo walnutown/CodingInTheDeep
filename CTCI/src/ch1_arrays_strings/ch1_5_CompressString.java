@@ -1,6 +1,6 @@
 package ch1_arrays_strings;
 
-public class ch1_5 {
+public class ch1_5_CompressString {
 
    /**
     * Implement a method to perform basic string compression using the counts
