@@ -28,8 +28,7 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
   * CreateMirrorTree (Company/amazon)
 * Symmetric Tree
   * SymmetricTree (Leetcode)
-* Flatern Binary Tree
-  * FlaternBinaryTreeToLInkedList (Leetcode)
+
 
 #### 3. binary tree serialization and deserialization
 *  Sol1:
@@ -46,7 +45,9 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
     * DeserializePreorderArrayOfBST (Company/amazon)
     * ConstructBTFromInorderAndPreorderTraversal (Leetcode)
     * ConstructBTFromInorderAndPostorderTraversal (Leetcode)
-    
+    * Binary Tree to Linked List -- basically recursion, use global variable to connect the current node and previous node
+      * FlaternBinaryTreeToLInkedList (Leetcode)
+      * ConvertBinaryTreeToDoublyLinkedList (CTCI)
 
 
 #### 4. find a specific path in the tree
@@ -169,6 +170,9 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * ValidNumber (Leetcode)
 * DescribeInteger (CTCI)
 * EncodeXML (CTCI)
+* WordBreak (Leetcode)
+* WordBreak2 (Leetcode)
+* FindMinWordBreak (CTCI)
 
 #### 3. String manipulation
 * ScrambleString (Leetcode)
@@ -228,6 +232,7 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * TrailingZerosInFactorial (CTCI)
   * FactorialSum (Company/slideshare)
 * Probability
+  * RandomNumber (Company/amazon)
   
 
 
@@ -269,3 +274,16 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * DrawHorizontalLine (CTCI)
 * ToBinaryString
   * DoubleToBinaryString (CTCI)
+
+
+
+## Recursion 
+* Cores
+  * pass and return (think of the Chinese name 递归), so actually, each level will be visited twice.
+  * Need a goal state to end recursion, otherwise may be trapped in infinite loop
+* return: how to return multiple arguments?
+  * use gloable variable
+  * use wrapper class
+* debug: how to debug in recursion code? (due to recursive calls, it's difficult to track variable values using breakpoint. Breakpoint works well in sequence logic)
+  * a good way is to print out states in each level.
+  * try to use the case with a recursive tree with small depth
