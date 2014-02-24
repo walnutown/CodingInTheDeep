@@ -115,6 +115,7 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
 * LongestIncreasingSubsequence2 (CTCI)
 * LongestIncreasingSubsequence3 (CTCI)
 * GasStation (Leetcode)
+* SmallestUnsortedSubsequence (CTCI)
 
 #### 4. Duplicates
 * Remove duplicates
@@ -160,12 +161,14 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * LongestCommonPrefix (Leetcode)
 * ImplementStrStr (Leetcode)
 
-#### 2. Parse String
+#### 2. Parse/Encode String
 * MultiplyStrings (Leetcode)
 * StringToInteger (Leetcode)
 * RomanToInteger (Leetcode)
 * IntegerToRoman (Leetcode)
 * ValidNumber (Leetcode)
+* DescribeInteger (CTCI)
+* EncodeXML (CTCI)
 
 #### 3. String manipulation
 * ScrambleString (Leetcode)
@@ -173,6 +176,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * FizzBuz (Company/slideshare)
  
 #### 4. Character/word occurances
+* WordCount (CTCI)
 * CountAndSay (Leetcode)
 * CompressString (CTCI)
 * UniqueCharInString (CTCI)
@@ -223,6 +227,7 @@ two ways to check anagrams: **sort chars in word**; **freq count**
 * Big Integer / Factorial:
   * TrailingZerosInFactorial (CTCI)
   * FactorialSum (Company/slideshare)
+* Probability
   
 
 
