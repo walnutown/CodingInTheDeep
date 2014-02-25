@@ -106,4 +106,10 @@ public class TreeNode {
       return val+"";
    }
    
+   public boolean equals(TreeNode other){
+      if (this == null || other==null)
+         return this==null && other==null;
+      return this.val == other.val;
+   }
+   
 }

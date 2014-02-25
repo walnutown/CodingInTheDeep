@@ -1,6 +1,6 @@
 package lib;
 /**
- * Implement a binary search tree
+ * Implement a binary search tree (without duplicates)
  * 
  * Ref:
  *  http://pages.cs.wisc.edu/~vernon/cs367/notes/9.BST.html
@@ -94,4 +94,6 @@ public class BST {
       if (node.left==null)  return node.val;
       else  return findMin(node.left);
    }
+   
+   
 }
