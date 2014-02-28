@@ -96,10 +96,13 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
   * MergeSort (CTCI)
   * QuickSort (CTCI)
   * RadixSort (CTCI)
+* Shuffle
+  * ShuffleCards (CTCI)
 
 #### 2. find special element
 * Median
   * MedianOfTwoSortedArray (Leetcode)
+  * GetMedianOfStreamingArray (CTCI)
 * Kth **order statistic**: sort, O(nlgn); heap, O(nlgk); quickSelect, O(n)
   * FindKthLargestInArray (Company/amazon)
 * Missing number
@@ -127,6 +130,7 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
 
 #### 5. Others
 * Candy (Leetcode)
+* GetRandomSetFromArray (CTCI)
   
 #### 6. Sum
 * 2Sum (Leetcode)

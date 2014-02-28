@@ -3,7 +3,7 @@ package amazon;
 public class BitMultiplyOperation {
 
    /**
-    * @param args
+    * Implement multiplication without using '*' operators
     */
    public static void main(String[] args) {
       System.out.println(bitMultiply1(10, -8));
