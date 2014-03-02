@@ -32,7 +32,8 @@ public class Trie {
    public Set<String> getWords() {
       return root.getSuffix();
    }
-
+   // use a map to store children with different initial characters
+   // use isEnd to mark a whole word
    private class TrieNode {
       private Map<Character, TrieNode> children;
       private char value;

@@ -8,8 +8,12 @@ public class ch18_11 {
     * pixels
     */
    public static void main(String[] args) {
-      // TODO Auto-generated method stub
+      
 
+   }
+   
+   public static void findMaxSubsquare(){
+      
    }
 
 }
