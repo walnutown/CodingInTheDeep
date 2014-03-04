@@ -11,6 +11,7 @@ public class FindWordsInBorad {
     * find all the valid words in the board
     */
    // similar to WordSearch -- leetcode
+   // One optimization is to get the min and max length of words in the dict, so that we can terminate the DFS earlier 
    public static void main(String[] args) {
       char[][] board = new char[][]{
             {'a', 'p', 'p', 'l'},
@@ -21,9 +22,8 @@ public class FindWordsInBorad {
       String[] strs = new String[]{"appoc", "ecai", "pocaf", "kegop", "go", "ll"};
       Set<String> dict = new HashSet<String>(Arrays.asList(strs));
       System.out.println(findWordsInBoard(board, dict));
-      
    }
-   
+
    public static Set<String> findWordsInBoard(char[][] board, Set<String> dict){
       Set<String> words = new HashSet<String>();
       for (int i=0; i<board.length; i++){

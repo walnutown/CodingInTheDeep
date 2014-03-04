@@ -38,7 +38,7 @@ public class StringToLong {
       long res = 0;
       while (i <= j && ss[i] >= '0' && ss[i] <= '9') {
          int digit = ss[i++] - '0';
-         if (res == Long.MAX_VALUE / 10 && digit >= Long.MAX_VALUE % 10 || res > Long.MAX_VALUE)
+         if (res == Long.MAX_VALUE / 10 && digit > Long.MAX_VALUE % 10 || res > Long.MAX_VALUE/10)
             return neg == true ? Long.MIN_VALUE : Long.MAX_VALUE;
          res = res * 10 + digit;
       }

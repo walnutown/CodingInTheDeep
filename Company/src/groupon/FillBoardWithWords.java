@@ -27,7 +27,9 @@ public class FillBoardWithWords {
       fillBoardWithWords(board, charList, dict);
       printBoard(board);
    }
-
+   
+   // O(n*n*16*n)
+   // instead of set, we can also use a trie here
    public static void fillBoardWithWords(char[][] board, ArrayList<Character> charList, Set<String> dict) {
       Set<String> set = new HashSet<String>();
       for (String w : dict) {
@@ -37,7 +39,8 @@ public class FillBoardWithWords {
       }
       solver(board, charList, 0, 0, set);
    }
-
+   
+   // O(16*n), n is the size of the board
    public static boolean solver(char[][] board, ArrayList<Character> charList, int x, int y, Set<String> set) {
       if (x == SIZE)
          return true;

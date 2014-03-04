@@ -100,7 +100,4 @@ public class ch18_12_FindMaxSubmatrixSum {
       }
       return max;
    }
-   
-   
-
 }

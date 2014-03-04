@@ -1,4 +1,27 @@
-// Accepted, const mem
+/*
+    Follow up for problem "Populating Next Right Pointers in Each Node".
+
+    What if the given tree could be any binary tree? Would your previous solution still work?
+
+    Note:
+
+    You may only use constant extra space.
+    For example,
+    Given the following binary tree,
+             1
+           /  \
+          2    3
+         / \    \
+        4   5    7
+    After calling your function, the tree should look like:
+             1 -> NULL
+           /  \
+          2 -> 3 -> NULL
+         / \    \
+        4-> 5 -> 7 -> NULL
+*/
+
+// time: O(n); space: O(1)
 // devised from ponyma, http://discuss.leetcode.com/questions/282/populating-next-right-pointers-in-each-node-ii
 public class Solution {
     public static void connect(TreeLinkNode root) {
@@ -21,7 +44,7 @@ public class Solution {
    }
 }
 
-// Accepted, BFS, not const mem
+// BFS, not const mem
 public class Solution {
     public void connect(TreeLinkNode root) {
         if (root==null) return;
