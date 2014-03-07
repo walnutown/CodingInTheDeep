@@ -111,7 +111,7 @@ public class FibonacciValue {
       return c;
    }
 
-   // time: O(n); space: O(1)
+   // time: O(lgn); space: O(1)
    // we can prove it by using induction
    // http://nayuki.eigenstate.org/page/fast-fibonacci-algorithms
    public int fibMatrix(int num) {

@@ -52,7 +52,33 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
       * there're numerous headers defiend by the Http specification
     * Response Status Code (200/400/500, etc)
     * Response headers: to deal with cache and performance of the web
-
+* State and Security
+    * HTTP is a stateless protocol, how to maintain states on the website?
+    * Cookie: HTTP State Management Mechanism
+      * identify user
+      * track user requests
+      * cookie only stores a unique user identifier, the user information is stored on the server, not in cookies
+      * the UID should be encrypted to avoid security concerns
+      * Flags: **HttpOnly**
+      * types: Session cookies (exist for a single user); Persistent cookies (needs an **Expires** value)
+    * Set-Cookie:
+      * name-value pairs
+      * size limitation: 4KB
+      * Path & Domain: controls the scope using domain and path attritbutes
+        * domain: allows a cookie to span sub-domains (e.g., domain: server.com, sub-domain: pic.server.com, file.server.com, etc.)
+        * path: restrict a cookie to a specific path.
+    *Authentication
+      * Basic Authentication -- base 64 encoding
+        * encode password on client, and decode on server
+      * Digest Authentication
+        * Improvement over basic authentication
+        * client send a digest of the password, using MD5 hashing
+    *Secure HTTP -- HTTPS
+      * default port is 443, instead of 80
+      * SSL: additional security layer between HTTP and TCP
+      * All trafic over HTTPS is encrypted in the request and response, including the HTTP headers and message body.
+      * The server is authenticated to the client (through server certificate, no proxy server to redirect webpage)
+      * HTTPS doesn't authenticate clients, it's computationally expensive and need more handshakes between the client and the server
 
 
 ##OO Design Patterns
@@ -107,3 +133,34 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
       * the main draw back is that a client must understand how the Strategies differ. Since clients get exposed to implementation issues the strategy design pattern should be used only when the variation in behavior is relevant to them.
   * Chain of Responsibility
       * consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain
+
+##Analyze Algorithms -- (from CLRS)
+* Analyze in a RAM model, which means that instructions are executed one after another, with no concurrent operations.
+* Running time: the numebr of primitive operations or "stpes" executed.
+* Worst case, best case and average case. Usually, we use worst case; and sometimes, average case is used (provided that all inputs of a given size are equally likely, we can use a randomized algorithm to achieve this)
+* Order of Growth -- rate of growth of the running time
+  * We're only concerned about the highest-order term (ignore the lower-order terms), and ignote constant coefficient.
+  * e.g. in an^2 + bn + c, we only care about n^2
+* Master Theorem
+  * used to get the running time of recurrence equation
+  * 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
