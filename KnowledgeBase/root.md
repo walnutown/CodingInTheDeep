@@ -142,7 +142,7 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
   * We're only concerned about the highest-order term (ignore the lower-order terms), and ignote constant coefficient.
   * e.g. in an^2 + bn + c, we only care about n^2
 * Master Theorem
-  * used to get the running time of recurrence equation
+  * calculate the running time of recurrence equation
   * 
 
 

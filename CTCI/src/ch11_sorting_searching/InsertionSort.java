@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 /*
  * Implement in place insertion sort 
- * */
+ */
 public class InsertionSort {
 
    public static void main(String[] args) {
@@ -21,6 +21,9 @@ public class InsertionSort {
       }
    }
    
+   // we can use binary search here to optimize the running time of searching for the insertion position
+   // but we still have to move the right half elements
+   // Thus, the worst case will remian O(n^2).
    public static void insert(int[] arr, int num_index){
       int num = arr[num_index];
       int i = num_index -1;

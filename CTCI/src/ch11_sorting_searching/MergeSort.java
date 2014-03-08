@@ -7,17 +7,10 @@ public class MergeSort {
    /**
     * Implement in place merge sort
     */
-   /*
-    * Because x is positive here, in JDK source code, the implementation of mergeSort uses x >>1 to
-    * replace x/2
-    * Below is some more:
-    * First, dividing by two and shifting right by one will not yield the same result for negative
-    * numbers in all cases. (Think of (-1)>>1 )
-    * Second, where the shifted result is sufficent, its roughly 10 to 20 times faster than
-    * dividing.
-    * Third, the compiler will not optimize x/2 to x>>1 because in any non-trivial case it will be
-    * unable to prove that the shifted operand is not negative
-    */
+   
+   // one optimization: insertion sort on small arrays may be faster in practice
+   // Given n/k sublists of length k, sort each list using insertion sort and then merge all sublists using the standard merging mechanism
+   // The total running time is O(nk + nlg(n/k)), which is smaller than O(nlgn) when k<lgn
 
    public static void main(String[] args) {
       int[] arr = new int[] { -1, 2, -5, 20, 6 };
