@@ -20,7 +20,7 @@ public class CoinChange {
       System.out.println(coinChange4(A, target));
       System.out.println(coinChange5(A, target));
    }
-   // 1d DP, time: O(m*n); space: O(n)
+   // DP, time: O(m*n); space: O(n)
    public static int coinChange(int[] A, int target){
       if (A==null || A.length ==0)  return 0;
       int[] dp = new int[target+1];

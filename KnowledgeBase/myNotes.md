@@ -209,6 +209,10 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 two ways to check anagrams: **sort chars in word**; **freq count**
 * Anagrams (Leetcode)
 
+#### 7. Parentheses
+* GenerateParentheses (Leetcode)
+* ValidParentheses (Leetcode)
+
 
 ## Math -- Total: 12
 * Digit Operation
