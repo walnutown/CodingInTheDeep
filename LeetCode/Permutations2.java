@@ -6,7 +6,7 @@
   [1,1,2], [1,2,1], and [2,1,1].
 */
 
-// DFS, O(n^2)
+// DFS, O(n!)
 public class Solution {
     public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
           ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

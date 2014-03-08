@@ -75,7 +75,9 @@ public class Solution {
     }
 }
 
-// create new set based on previous set, iterative version. time: O(n!)
+// create new set based on previous set, iterative version. time: O(1+2+4+...+2^n) = O(2^n)
+// exponential running time, better than the DFS method, which takes factorial time
+// n! grows faster than 2^n
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsets(int[] S) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
@@ -91,6 +93,30 @@ public class Solution {
             }
         }
         return res;
+    }
+}
+
+// bit manipulation, each subset can be represented as a binary string
+// this solution is limited by the architecture of the OS
+// e.g. the max size of the given set is 64bit if the OS is 64bit
+// time: O(2^n * n), space: O(2^n)
+public class Solution {
+    public ArrayList<ArrayList<Integer>> subsets(int[] S) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        Arrays.sort(S);
+        int count = (1<<S.length);  // total number of susets is 2^length -1
+        for (int i=0; i<count; i++){
+            finder(i, res, new ArrayList<Integer>(), S);
+        }
+        return res;
+    }
+    
+    public void finder(int num, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r, int[] S){
+        for (int i=0; i<S.length; i++){
+            if ( ((1<<i)&num)>0 )
+                r.add(S[i]);
+        }
+        res.add(r);
     }
 }
 

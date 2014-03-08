@@ -110,6 +110,7 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
   * FindOneMissingInteger (Company/amazon)
   * FindTwoMissingIntegers (Company/amazon)
   * FindMissingIntegerUsingBitManipulation (CTCI)
+* MagicIndex (CTCI)
 
 
 #### 3. find special subarray/subsequence
@@ -131,6 +132,8 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
 #### 5. Others
 * Candy (Leetcode)
 * GetRandomSetFromArray (CTCI)
+* FibonacciValue (Company/redfin)
+* ClimbingStairs (Leetcode)
   
 #### 6. Sum
 * 2Sum (Leetcode)

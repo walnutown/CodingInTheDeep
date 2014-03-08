@@ -2,7 +2,7 @@ package ch9_recursion_dynamic_programming;
 
 import java.util.ArrayList;
 
-public class ch9_9_5 {
+public class ch9_5_StringPermutations {
 
    /*
     * Write a method to compute all permutations of a string 
@@ -11,7 +11,7 @@ public class ch9_9_5 {
       System.out.println(getPermutations("aba"));
    }
    
-   // The string is composed of unique characters or not ?
+   // The string contains duplicate characters
    public static ArrayList<String> getPermutations(String s){
       ArrayList<String> res = new ArrayList<String>();
       if (s == null || s.length() == 0)
@@ -24,7 +24,7 @@ public class ch9_9_5 {
             StringBuilder sb = new StringBuilder(res.get(j));
             for (int k = 0; k <= sb.length(); k++){
                sb.insert(k, curr);
-               if (!res.contains(sb.toString())) // support duplicare characters here
+               if (!res.contains(sb.toString())) // support duplicate characters here
                   res.add(sb.toString());
                sb.deleteCharAt(k);
             }

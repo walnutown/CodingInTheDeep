@@ -23,7 +23,7 @@ public class Solution {
     }
 }
 
-// 2d DP, time: O(m*n); space: O(n)
+// 2d DP, optimize space. time: O(m*n); space: O(n)
 public class Solution {
     public int uniquePaths(int m, int n) {
         if (m==0 || n==0)   return 0;
@@ -36,5 +36,19 @@ public class Solution {
             }
         }
         return dp[n-1];
+    }
+}
+
+// use Combination formula, time: O(m+n); space: O(m+n)
+// yet, may cause overflow when m or n is big
+// refer: http://joaoff.com/2008/01/20/a-square-grid-path-problem/
+public class Solution {
+    public int uniquePaths(int m, int n) {
+        if (m==0 || n==0)   return 0;
+        long[] F = new long[m+n+1];
+        F[1] = 1;
+        for (int i=2; i<=m+n; i++)
+            F[i] = F[i-1] * i;
+        return (int)(F[m+n]/F[m]/F[n]);
     }
 }

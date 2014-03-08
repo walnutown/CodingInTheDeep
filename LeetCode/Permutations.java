@@ -7,7 +7,7 @@
 */
 
 // DFS, skip visited numbers
-// time: O(n^2)
+// time: O(n!)
 public class Solution {
     public ArrayList<ArrayList<Integer>> permute(int[] num) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

@@ -1,12 +1,11 @@
 package ch9_recursion_dynamic_programming;
 
-public class ch9_9_1 {
+public class ch9_1_ClimbingStairs {
 
    /*
     * Climbing stairs. 1/2/3 steps each time
     */
    public static void main(String[] args) {
-      // TODO Auto-generated method stub
       int num = 30;
       System.out.println(num);
       System.out.println(climbingStairs(num));
