@@ -272,6 +272,7 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * AddTwoNumbers (Leetcode) -- reverse order
 * Others
   * LinkedListPalindrome (CTCI)
+  * FindMedianOfSortedList (CTCI)
 
 ## Bit Manipulation -- Total: 2
 * XOR
@@ -298,4 +299,4 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * use wrapper class
 * debug: how to debug in recursion code? (due to recursive calls, it's difficult to track variable values using breakpoint. Breakpoint works well in sequence logic)
   * a good way is to print out states in each level.
-  * try to use the case with a recursive tree with small depth
+  * try to use the case with a recursive tree of small depth

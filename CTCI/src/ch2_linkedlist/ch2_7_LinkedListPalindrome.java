@@ -8,7 +8,6 @@ public class ch2_7_LinkedListPalindrome {
     * Implement a function to check if a linked list is a palindrome
     */
    public static void main(String[] args) {
-      //int[] arr = new int[] { 5, 4, 5, 4, 5 };
       int[] arr = new int[] { 5, 4, 5, 4, 5 };
       ListNode head = new ListNode(arr);
       System.out.println(head.printList());
@@ -16,6 +15,7 @@ public class ch2_7_LinkedListPalindrome {
    }
 
    // reverse and compare, only need to check the first half
+   // time: O(n); space:O(1)
    public static boolean isPalindrome(ListNode head) {
       return false;
    }
@@ -32,9 +32,10 @@ public class ch2_7_LinkedListPalindrome {
          st.push(slow.val);
          fast = fast.next.next;
       }
-      if (fast == null)
+   // adjust 'slow' according to list length
+      if (fast == null) // list length is even  
          slow = slow.next;
-      else
+      else  // list length is odd
          slow = slow.next.next;
       while (slow != null) {
          if (slow.val != st.pop())

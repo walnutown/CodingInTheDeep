@@ -143,7 +143,13 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
   * e.g. in an^2 + bn + c, we only care about n^2
 * Master Theorem
   * calculate the running time of recurrence equation
-  * 
+* big O, upper bound; omega, lower bound
+  * The definitions of O-notation and o-notation are similar. The main difference
+is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant c > 0, but in f(n) = O(g(n)), the bound 0 <= f(n) < cg(n) holds for all constants c > 0
+  * O(n!) > O(2^n) > O(n^2) > O(n) > O(lgn)
+* Recurrences
+  * The recursion-tree method 
+  * The master method, works for the recurrences of the form: T(n) = aT(n/b) + f(n)
 
 
 
