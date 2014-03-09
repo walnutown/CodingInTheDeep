@@ -2,7 +2,7 @@ package ch1_arrays_strings;
 
 import java.util.Arrays;
 
-public class ch1_7 {
+public class ch1_7_SetMatrixZeros {
 
    /**
     * write an algorithm such that if an element in an M * N matrix is 0, its entire
@@ -15,7 +15,8 @@ public class ch1_7 {
       setZeros_bitVector(matrix);
       printMatrix(matrix);
    }
-
+   
+   // time: O(m*n); space: O(1)
    public static void setZeros(int[][] matrix) {
       int h = matrix.length;
       int w = matrix[0].length;
@@ -62,7 +63,8 @@ public class ch1_7 {
             matrix[i][0] = 0;
       }      
    }
-   // use bit vector to save space
+   // use bit vector, more elegant, yet limited to max bit size
+   // time: O(m*n); space(1)
    public static void setZeros_bitVector(int[][] matrix){
       int row = 0;
       int col = 0;

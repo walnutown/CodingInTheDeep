@@ -11,7 +11,7 @@ public class ch1_3_StringPermutation {
       System.out.println(isPermutation("abc", "bacd"));
       System.out.println(isPermutation_inPlace("abc", "cba"));
    }
-   // O(n)
+   // time: O(n); space: O(n)
    public static boolean isPermutation(String a, String b){
       if (a == null || b == null)
          return a == null && b == null;
@@ -30,7 +30,7 @@ public class ch1_3_StringPermutation {
       }
       return true;
    }
-   // O(nlgn)
+   // time: O(nlgn), space: O(1)
    public static boolean isPermutation_inPlace(String a, String b){
       if (a == null || b == null)
          return a == null && b == null;

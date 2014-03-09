@@ -1,6 +1,6 @@
 package ch1_arrays_strings;
 
-public class ch1_8 {
+public class ch1_8_RotationString {
 
    /**
     * Assume you have a method isSubstring which checks if one word

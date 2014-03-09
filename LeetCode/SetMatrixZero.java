@@ -41,3 +41,27 @@ public class Solution {
         }
     }
 }
+
+// use bit vector, max size of matrix should be no bigger than 32
+// time: O(m*n); space:O(1)
+public class Solution {
+    public void setZeroes(int[][] matrix) {
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (matrix[i][j] == 0) {
+                   row |= (1<< i);
+                   col |= (1<< j);
+                }
+            }
+        }
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if ((row & (1<<i)) != 0 || (col & (1<<j)) != 0) {
+                   matrix[i][j] = 0;
+                }
+            }
+        }  
+    }
+}

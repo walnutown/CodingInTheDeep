@@ -168,6 +168,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * DistinctSubsequence (Leetcode)
 * LongestCommonPrefix (Leetcode)
 * ImplementStrStr (Leetcode)
+* RotationString (CTCI)
 
 #### 2. Parse/Encode String
 * MultiplyStrings (Leetcode)
