@@ -1,5 +1,9 @@
 package ch3_stacks_queues;
 
+/*
+ * Implement the queue using LinkedList
+ */
+// keep track of the first/last node
 public class MyQueue {
    private Node first, last;
    

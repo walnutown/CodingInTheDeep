@@ -1,6 +1,9 @@
 package ch3_stacks_queues;
 
-
+/*
+ * Implement the queue using LinkedList
+ */
+// keep track of the top node
 public class MyStack {
    private Node top;
    

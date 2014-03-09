@@ -288,6 +288,12 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
 * ToBinaryString
   * DoubleToBinaryString (CTCI)
 
+## Stack&Queue
+* ImplementThreeStacksInOneArray (CTCI)
+* ImplementStackWithMinValue (CTCI)
+* ImplementQueueUsingTwoStacks (CTCI)
+* SortStack (CTCI)
+* AnimalQueue (CTCI)
 
 
 ## Recursion 
@@ -300,3 +306,4 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
 * debug: how to debug in recursion code? (due to recursive calls, it's difficult to track variable values using breakpoint. Breakpoint works well in sequence logic)
   * a good way is to print out states in each level.
   * try to use the case with a recursive tree of small depth
+* TowerOfHanoi (CTCI)

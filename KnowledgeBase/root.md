@@ -147,10 +147,16 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
   * The definitions of O-notation and o-notation are similar. The main difference
 is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant c > 0, but in f(n) = O(g(n)), the bound 0 <= f(n) < cg(n) holds for all constants c > 0
   * O(n!) > O(2^n) > O(n^2) > O(n) > O(lgn)
-* Recurrences
+* Solving Recurrences
+  * Substitution method (Guess)
+    * T(n) = T(n-1) + 1/n, O(n) = lgn
+    * T(n) = T(n-1) + lgn, O(n) = nlgn
+    * T(n) = T(n-1) + n, O(n) = n^2
   * The recursion-tree method 
   * The master method, works for the recurrences of the form: T(n) = aT(n/b) + f(n)
-
+    * compare f(n) with n^(lgba)
+    * polynomially smaller, a is smaller than b by a factor (which is b/a) of n^c for some constant c > 0. e.g. a=n, b=nlgn, b/a=lgn, which is not polynomially small.
+  * 
 
 
 

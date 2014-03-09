@@ -3,15 +3,17 @@ package ch3_stacks_queues;
 import java.util.EmptyStackException;
 import java.util.Random;
 
-public class ch3_1 {
+public class ch3_1_ImplementThreeStacksUsingOneArray {
 
    /**
     * Describe how you could use a single array to implement three stacks
     */
+   // fixed-size stack, or dynamic-size stack
+   // the following code implements 3 fixed-size stacks
+   // for the dynamic version, we have to expand the size and move elements if necessary
    public static void main(String[] args) {
       ArrayStacks<Integer> as = new ArrayStacks<Integer>(5);
-      Random rd = new Random();
-      rd.setSeed(System.currentTimeMillis());
+      Random rd = new Random(System.currentTimeMillis());
       for (int i = 0; i < 10; i++) {
          int value = rd.nextInt(10);
          int index = rd.nextInt(3);
