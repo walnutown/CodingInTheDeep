@@ -57,6 +57,7 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
 * Path between two nodes
   * DistanceOfTwoNodesInBST (Company/amazon)
   * FindPathsOfTargetSum (CTCI)
+  * FindPathsOfTargetSum2 (CTCI)
 * Path of maximum value in the tree
   * BinaryTreeMaximumPathSum (Leetcode)
 * Longest path between two leaves
@@ -277,7 +278,7 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * LinkedListPalindrome (CTCI)
   * FindMedianOfSortedList (CTCI)
 
-## Bit Manipulation -- Total: 2
+## Bit Manipulation -- Total: 8
 * XOR
   * SingleNumber (Leetcode)
 * Bit Count
@@ -291,7 +292,7 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
 * ToBinaryString
   * DoubleToBinaryString (CTCI)
 
-## Stack&Queue
+## Stack&Queue -- Total: 5
 * ImplementThreeStacksInOneArray (CTCI)
 * ImplementStackWithMinValue (CTCI)
 * ImplementQueueUsingTwoStacks (CTCI)
@@ -299,7 +300,7 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
 * AnimalQueue (CTCI)
 
 
-## Recursion 
+## Recursion -- Total: 1
 * Cores
   * pass and return (think of the Chinese name 递归), so actually, each level will be visited twice.
   * Need a goal state to end recursion, otherwise may be trapped in infinite loop

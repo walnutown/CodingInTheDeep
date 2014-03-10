@@ -26,7 +26,7 @@ public class ch5_1_InsertBitRange {
       N = clearBitRange2(N, i, j);
       return N | (M << i);
    }
-
+   // time: O(m-n) 
    public static int clearBitRange(int N, int i, int j) {
       while (i <= j) {
          N = N & ~(1 << i);
@@ -34,7 +34,7 @@ public class ch5_1_InsertBitRange {
       }
       return N;
    }
-   
+   // time: O(1)
    public static int clearBitRange2(int N, int i, int j){
       int allOnes = ~0;
       int left = allOnes << (j+1);

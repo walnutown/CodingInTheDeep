@@ -13,7 +13,8 @@ public class ch5_6_SwapBits {
 
    /*
     * <1> get all odd bits and right-shift by 1
-    * <3> get all even bits and left-shift by 1
+    * <2> get all even bits and left-shift by 1
+    * <3> a: 1010; 5:0101
     */
    public static int swapBits(int num) {
       return ((num & 0xaaaaaaaa) >> 1) | ((num & 0x55555555) << 1);

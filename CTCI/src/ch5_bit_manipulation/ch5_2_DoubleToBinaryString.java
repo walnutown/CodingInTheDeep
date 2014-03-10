@@ -11,7 +11,8 @@ public class ch5_2_DoubleToBinaryString {
       double d = 0.5;
       System.out.println(doubleToBinaryString(d));
    }
-   // left shift 1 bit each time, and check
+   // know how to convert the fractional part of a decimal number to binary number
+   // http://en.wikipedia.org/wiki/Binary_number
    public static String doubleToBinaryString(double d){
       if (d>=1 || d<=0)
          return "ERROR";

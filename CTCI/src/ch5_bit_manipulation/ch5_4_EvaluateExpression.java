@@ -7,6 +7,8 @@ public class ch5_4_EvaluateExpression {
     */
    // consider (A&B)==0
    // consider difference between A and A-1
-   // check if n is a power of 2 (or if n is 0)
+   // e.g. n=abcde1000, n-1=abcde0111
+   
+   // solution: check if n is a power of 2 (or if n is 0)
 
 }
