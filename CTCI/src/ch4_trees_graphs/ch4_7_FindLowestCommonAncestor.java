@@ -19,6 +19,7 @@ public class ch4_7_FindLowestCommonAncestor {
 
    // here, we assume that all node values are unique
    // we find a node if its value is equal to the target
+   // time: O(n); space: stack
    public static TreeNode findFirstCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
       if (root == null)
          return null;

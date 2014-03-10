@@ -12,6 +12,7 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
   * BinaryTreeLevelOrderTraversal (Leetcode)
   * BinaryTreeLevelOrderTraversal2 (Leetcode)
   * BinaryTreeZigZagLevelOrderTraversal (Leetcode)
+* IsSubTree (CTCI)
 
 #### 2. special binary trees
 * Binary Search Tree
@@ -50,7 +51,7 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
       * ConvertBinaryTreeToDoublyLinkedList (CTCI)
 
 
-#### 4. find a specific path in the tree
+#### 4. find a specific path/node in the tree
 * Root to leaf path
   * SumRootToLeafNumbers (Leetcode)
 * Path between two nodes
@@ -63,6 +64,8 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
 * Depth
   * MinimumDepthOfBinaryTree (Leetcode)
   * MaximumDepthOfBinaryTree (Leetcode)
+* LCA
+  *FindLowestCommonAncestor (CTCI)
 
 
 ##Array -- Total: 50

@@ -15,6 +15,7 @@ public class ch4_6_FindInorderSuccessorOfBST {
       System.out.println(findInorderSuccessor(root, n));
    }
    
+   // time: O(lgn); space: O(1)
    public static TreeNode findInorderSuccessor(TreeNode root, TreeNode n){
       if (n == null)
          return null;

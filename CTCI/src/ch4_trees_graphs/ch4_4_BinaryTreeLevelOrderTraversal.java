@@ -4,12 +4,13 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class ch4_4 {
+public class ch4_4_BinaryTreeLevelOrderTraversal {
 
    /*
     * Given a binary tree, design an algorithm which creates a
     * linked list of all the nodes at each depth
     */
+   // same to Leetcode -- BinaryTreeLevelOrderTraversal
    public static void main(String[] args) {
       int[] arr = new int[] { 1, 3, 5, 7, 9, 14, 23, 32 };
       TreeNode root = new TreeNode(arr);

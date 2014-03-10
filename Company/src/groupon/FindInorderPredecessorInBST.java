@@ -16,7 +16,7 @@ public class FindInorderPredecessorInBST {
       System.out.println("root: "+ root + " curr: " + curr);
       System.out.println(getPrevious(root, curr));
    }
-   
+   // time: O(lgn); space: O(1)
    static TreeNode getPrevious(TreeNode root, TreeNode curr){
       if (curr.left!=null){
           TreeNode p = curr.left;

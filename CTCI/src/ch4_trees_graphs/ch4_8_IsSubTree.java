@@ -16,7 +16,9 @@ public class ch4_8_IsSubTree {
       TreeNode t2 = new TreeNode(arr2);
       System.out.println(isSubtree(t1, t2));
    }
-  
+   
+   // BFS plus valid check
+   // time: O(n^2)
    public static boolean isSubtree(TreeNode t1, TreeNode t2){
       if (t1 == null || t2 == null)
          return t1 == null && t2 == null;
@@ -39,17 +41,4 @@ public class ch4_8_IsSubTree {
          return t1 == null && t2 == null;
       return (t1.val == t2.val) && isSameTree(t1.left, t2.left) && isSameTree(t1.right, t2.right);
    }
-   
-   // fits the small case
-   // create a string representing the in-order and pre-order traversal. If T1's pre-order traversal is a substring
-   // of T1' pre-order traversal, and T2's in-order traversal is a substring of T1's in-order traversal, then T2 is 
-   // a subtree of T1
-   // NOTE: null node should be represented by a special character to indicate the relative position
-   
-//   public static boolean isSubtree2(TreeNode t1, TreeNode t2){
-//      
-//   }
-   
-   
-
 }
