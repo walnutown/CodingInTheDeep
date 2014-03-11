@@ -8,7 +8,7 @@ Knowledge Base for Concepts related questions in programming interview
   * StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization. This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer was being used by a single thread (as is generally the case). Where possible, it is recommended that this class be used in preference to StringBuffer as it will be faster under most implementations.
 
 * Java has 8 primitive data types
-    * type                                              default value
+    * type                                             | default value
     * byte: 2^8                                            | 0 
     * short: 2^16                                          | 0 
     * int:2^32                                             | 0    
@@ -22,7 +22,7 @@ Knowledge Base for Concepts related questions in programming interview
     * static method or static instance variable is owned by the class, instead of a specific instance. In other words, static members are shared by all instances.
     * static method cannot be overriden (if you create a method with the same return type and signature, that's called method hiding)
     * static members cannot be accessed by a non-static context
-    * Static class, used in nested class, have no reference to instance of the outer class. One use case is if a class is used in 'void static main()', you ahve to declare it as static
+    * Static class, used in nested class, have no reference to instance of the outer class. One use case is if a nested class is used in static method in the outer class, you have to declare the nested class as static
 
 * Interface: 
   * an interface  is similar to a class, but there are several differences
@@ -43,7 +43,7 @@ Knowledge Base for Concepts related questions in programming interview
   * All classes in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
 
 * Nested Class
-  *Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
+  * Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
 
   <pre><code> class OuterClass {
       ...
