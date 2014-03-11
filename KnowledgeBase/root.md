@@ -46,16 +46,16 @@ Knowledge Base for Concepts related questions in programming interview
   *Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
 
   <pre><code> class OuterClass {
-    ...
-    static class StaticNestedClass {
-        ...
-    }
-    class InnerClass {
-        ...
-    }
+      ...
+      static class StaticNestedClass {
+          ...
+      }
+      class InnerClass {
+          ...
+      }
   }</code></pre>
 
-* Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class.
+  * Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class.
   * Compelling reasons for using nested classes include the following:
     * It is a way of logically grouping classes that are only used in one place: If a class is useful to only one other class, then it is logical to embed it in that class and keep the two together. Nesting such "helper classes" makes their package more streamlined.
     * It increases encapsulation: Consider two top-level classes, A and B, where B needs access to members of A that would otherwise be declared private. By hiding class B within class A, A's members can be declared private and B can access them. In addition, B itself can be hidden from the outside world.
