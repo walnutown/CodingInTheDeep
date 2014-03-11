@@ -4,7 +4,22 @@ import java.util.Map;
 
 /**
  * Basic implementation of a HashMap
- * 
+ */
+
+/*
+ * HashMap is a data structure for quick key-value pairs read and write.
+ * <1> Contain no duplicate keys (Java supports 'null' key ); each key can map to at most one value
+ * <2> It has average O(1) running time of get()/put(). The worst case of put() is O(n) (when table
+ * resize happens)
+ * <3> The basic idea is that we use a Entry[] table to store all the key-value pairs. Each bucket
+ * in the table is a LinkedList of Entries (to store the values with same hash); each key has
+ * a hash value, which is used to calculate the index of the bucket the key-value pair belongs to.
+ * <4> hashFunction should balance between two demands: 1.avoid collision; 2. evenly distribute
+ * elements among the table.
+ * <5> Table resize: mainly decided by Capacity and LoadFactor
+ */
+
+/*
  * An instance of HashMap has two parameters that affect its performance: initial capacity and load
  * factor. The capacity is the number of buckets in the hash table, and the initial capacity is
  * simply the capacity at the time the hash table is created. The load factor is a measure of how
@@ -15,7 +30,6 @@ import java.util.Map;
  * As a general rule, the default load factor (.75) offers a good tradeoff between time and space
  * costs. Higher values decrease the space overhead but increase the lookup cost (reflected in most
  * of the operations of the HashMap class, including get and put).
- * 
  * Ref:
  * http://grepcode.com/file/repository.grepcode.com/java/root/jdk/openjdk/6-b14/java/util/HashMap.
  * java#HashMap.%3Cinit%3E%28%29
@@ -58,8 +72,8 @@ public class HashMap<K, V> {
    public int size() {
       return size;
    }
-   
-   public int capacity(){
+
+   public int capacity() {
       return table.length;
    }
 

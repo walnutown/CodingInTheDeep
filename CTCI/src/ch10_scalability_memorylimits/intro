@@ -2,7 +2,7 @@ A Typical System
 	Hard Drive Space, Memory, Internet Transfer Latency
 	
 Divide up lots of data
-	<1> By order of Appearance
+	<1> By order of Occurrence
 		Ad: never use more machines than are necessary
 	<2>	By Hash Value
 		the data is stored on machine #[ mod(hash(key), N) ]. N is the number of machines

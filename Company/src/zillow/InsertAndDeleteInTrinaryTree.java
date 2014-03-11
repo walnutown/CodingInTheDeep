@@ -80,7 +80,7 @@ public class InsertAndDeleteInTrinaryTree {
       }
 
       /**
-       * Delete the 'value' in TrinaryTree if the node exist.
+       * Delete the 'value' in TrinaryTree.
        * if the node doesn't exist, return false,
        * otherwise, return true.
        */

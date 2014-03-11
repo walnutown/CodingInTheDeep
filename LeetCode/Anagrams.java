@@ -5,6 +5,7 @@
 */
 
 // Instead of sorted string, we can also use other key in map, such as string compression, aabc -> a2b1c1
+// time: O(n*mlgm), n is the number of words, m is the length of word; space: O(n*m)
 public class Solution {
     public ArrayList<String> anagrams(String[] strs) {
         ArrayList<String> res = new ArrayList<String>();
