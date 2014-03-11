@@ -33,7 +33,7 @@ public class ch18_2_ShuffleCards {
 
    // iteration
    /*
-    * How does this work?  Use deduction to prove
+    * How does this work?  Use induction to prove
     * The probability that ith element (including the last one) goes to last position is 1/n,
     * because we randomly pick an element in first iteration.
     * The probability that ith element goes to second last position can be proved to be 1/n by

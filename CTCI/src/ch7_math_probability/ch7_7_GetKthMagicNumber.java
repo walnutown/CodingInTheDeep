@@ -14,9 +14,10 @@ public class ch7_7_GetKthMagicNumber {
     */
    public static void main(String[] args) {
       System.out.println(getKthMagicNumber(15));
-      System.out.println(getKthMagicNumber2(5));
+      System.out.println(getKthMagicNumber2(10));
    }
    
+   // generate 3*k numbers first, and then sort and get the first k
    // time: O(3klgk + 3klg3k); space: O(3k)
    public static ArrayList<Integer> getKthMagicNumber(int k) {
       if (k < 0)
@@ -62,7 +63,7 @@ public class ch7_7_GetKthMagicNumber {
          r.add(qu.poll());
       return r;
    }
-   
+   // use three queues to avoid duplicates
    // time: O(k); space: O(3k)
    public static int getKthMagicNumber2(int k) {
       if (k < 0)
@@ -80,15 +81,15 @@ public class ch7_7_GetKthMagicNumber {
          if (val == v3) {
             qu3.remove();
             qu3.add(val * 3);
-            qu3.add(val * 5);
-            qu3.add(val * 7);
-         } else if (val == 5) {
+            qu5.add(val * 5);
+            qu7.add(val * 7);
+         } else if (val == v5) {
             qu5.remove();
             qu5.add(val * 5);
-            qu5.add(val * 7);
+            qu7.add(val * 7);
          } else {
-            qu5.remove();
-            qu5.add(val * 7);
+            qu7.remove();
+            qu7.add(val * 7);
          }
       }
       return val;
