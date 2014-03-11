@@ -9,14 +9,14 @@ Knowledge Base for Concepts related questions in programming interview
 
 * Java has 8 primitive data types
     * type                                              default value
-    * byte: 2^8                                             0 
-    * short: 2^16                                           0 
-    * int:2^32                                              0    
-    * long: 2^64                                            0L
-    * float: single-precision 32bit floating point;         0.0f
-    * double: double-precision 64bit floating point;        0.0d
-    * boolean:                                              false
-    * char: 16-bit unicode, from \u0000 to \uffff (0-65535) \u0000
+    * byte: 2^8                                            | 0 
+    * short: 2^16                                          | 0 
+    * int:2^32                                             | 0    
+    * long: 2^64                                           | 0L
+    * float: single-precision 32bit floating point;        | 0.0f
+    * double: double-precision 64bit floating point;       | 0.0d
+    * boolean:                                             | false
+    * char: 16-bit unicode, from \u0000 to \uffff (0-65535)| \u0000
 
 * 'Static' Keyword
     * static method or static instance variable is owned by the class, instead of a specific instance. In other words, static members are shared by all instances.
@@ -26,26 +26,26 @@ Knowledge Base for Concepts related questions in programming interview
 
 * Interface: 
   * an interface  is similar to a class, but there are several differences
-  <1> all methods in an interface are **abstract**; that is , they have a name, parameters ,and a return type, but they don’t have an implementation.
-  <2> all methods in an interface type are automatically **public**
-  <3> all interface type does not have instance variables, but can have constants (public static final) (why? because instance variable is part of the implementation)
-  <4> use the implements reserved word to indicate that a class implements an interface type.
-  <5> an interface can be implemented by a class or be extended by another interface
-  <6> interface is not part of the class hierarchy, although they work in combination with classes. It provides common features
-  <7> rewrite an interface will cause classes implementing the old interface to break because they don’t implement it anymore. (a class that implements an interface must implement all the methods declared in the interface)
+  * all methods in an interface are **abstract**; that is , they have a name, parameters ,and a return type, but they don’t have an implementation.
+  * all methods in an interface type are automatically **public**
+  * all interface type does not have instance variables, but can have constants (public static final) (why? because instance variable is part of the implementation)
+  * use the implements reserved word to indicate that a class implements an interface type.
+  * an interface can be implemented by a class or be extended by another interface
+  * interface is not part of the class hierarchy, although they work in combination with classes. It provides common features
+  * rewrite an interface will cause classes implementing the old interface to break because they don’t implement it anymore. (a class that implements an interface must implement all the methods declared in the interface)
 
 * Abstract Class Vs Interface
   * [Official Doc: Abstract Classes Compared to Interfaces](http://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
   * An abstract Class is a class that can not be instantiated. e.g. AbstractMap 
   * A Java Interface type declares methods but does not provide their implementations. e.g. Comparable, Map<K,V>, List<T>
-  <1>Abstract class differs from interface in an important way - they can have instance variable, and they have concrete methods and constructors
-  <2> A class can implement multiple interfaces, while only extend one abstract class
-  <3> All classes in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
+  * Abstract class differs from interface in an important way - they can have instance variable, and they have concrete methods and constructors
+  * A class can implement multiple interfaces, while only extend one abstract class
+  * All classes in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
 
 * Nested Class
-Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
+  *Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
 
-class OuterClass {
+  <pre><code> class OuterClass {
     ...
     static class StaticNestedClass {
         ...
@@ -53,18 +53,18 @@ class OuterClass {
     class InnerClass {
         ...
     }
-}
+  }</code></pre>
 
-<1> Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class.
-<2> Compelling reasons for using nested classes include the following:
-It is a way of logically grouping classes that are only used in one place: If a class is useful to only one other class, then it is logical to embed it in that class and keep the two together. Nesting such "helper classes" makes their package more streamlined.
-It increases encapsulation: Consider two top-level classes, A and B, where B needs access to members of A that would otherwise be declared private. By hiding class B within class A, A's members can be declared private and B can access them. In addition, B itself can be hidden from the outside world.
-It can lead to more readable and maintainable code: Nesting small classes within top-level classes places the code closer to where it is used.
-<3> when the OuterClass is compiled, two separate files will be generated:
-  * OuterClass.class
-  * OuterClass$InnerClass.class
-<4> How to create an inner class object from outside the outer class code
-  * OuterClass.InnerClass inner = outClass.new InnerClass();
+* Non-static nested classes (inner classes) have access to other members of the enclosing class, even if they are declared private. Static nested classes do not have access to other members of the enclosing class.
+  * Compelling reasons for using nested classes include the following:
+    * It is a way of logically grouping classes that are only used in one place: If a class is useful to only one other class, then it is logical to embed it in that class and keep the two together. Nesting such "helper classes" makes their package more streamlined.
+    * It increases encapsulation: Consider two top-level classes, A and B, where B needs access to members of A that would otherwise be declared private. By hiding class B within class A, A's members can be declared private and B can access them. In addition, B itself can be hidden from the outside world.
+    * It can lead to more readable and maintainable code: Nesting small classes within top-level classes places the code closer to where it is used.
+  * when the OuterClass is compiled, two separate files will be generated:
+    * OuterClass.class
+    * OuterClass$InnerClass.class
+  * How to create an inner class object from outside the outer class code
+    * OuterClass.InnerClass inner = outClass.new InnerClass();
 
 
 
