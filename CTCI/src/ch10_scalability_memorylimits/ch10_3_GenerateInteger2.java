@@ -46,7 +46,7 @@ public class ch10_3_GenerateInteger2 {
       in = new Scanner(file);
       while (in.hasNext()) {
          int num = in.nextInt();
-         if (num > start && num < end) {
+         if (num >= start && num < end) {
             avail[(num - start) / 8] |= (1 << (num - start) % 8);
          }
       }
