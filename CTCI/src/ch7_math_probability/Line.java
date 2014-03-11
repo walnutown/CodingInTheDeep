@@ -27,7 +27,7 @@ public class Line {
       }
    }
    
-   public double getFlooredSlope(){         // 相当于保留到小数点后多少位, but there may exist epsilon difference if 位数多于epsilon的位数
+   public double getFlooredSlope(){     // floor the fractional part to the specific floating digits
       int r = (int) (this.slope/this.epsilon);
       return ((double)r * this.epsilon);
    }

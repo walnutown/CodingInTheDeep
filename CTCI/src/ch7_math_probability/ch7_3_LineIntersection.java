@@ -1,12 +1,11 @@
 package ch7_math_probability;
 
-public class ch7_3 {
+public class ch7_3_LineIntersection {
 
    /**
     * Given two lines on Cartesian plane, determine whether the two lines would intersect
     */
    public static void main(String[] args) {
-      // TODO Auto-generated method stub
       Line l1 = new Line(0.1, 5);
       Line l2 = new Line(0.1, 6);
       System.out.println(l1.intersect(l2));

@@ -2,17 +2,17 @@ package ch7_math_probability;
 
 import java.util.ArrayList;
 
-public class ch7_4 {
+public class ch7_4_MultiplyTwoIntegers {
 
    /**
     * Write methods to implement the multiply, subtract, and divide operations
     * for integers. Use only add operator
     */
    public static void main(String[] args) {
-      // TODO Auto-generated method stub
       System.out.println(multiply(10,-21));
    }
-   
+   // take care of signs; cache tmp results
+   // time: O(lgm), m is the value of num2
    public static long multiply (int num1, int num2){
       if (num1==0 || num2==0)   return 0;
       long a = Math.abs((long)num1);
@@ -35,5 +35,8 @@ public class ch7_4 {
       } 
       return (num1>0) ^ (num2>0) ? -mul : mul; 
    }
+   
+   // subtract, add num1 + neg(num2)
+   // divide, see Leetcode -- DivideTwoIntegers, similar to multiply
 
 }

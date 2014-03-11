@@ -100,6 +100,7 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
   * MergeSort (CTCI)
   * QuickSort (CTCI)
   * RadixSort (CTCI)
+  * GetKthMagicNumber (CTCI)
 * Shuffle
   * ShuffleCards (CTCI)
 
@@ -242,6 +243,7 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * Sqrt(x) (Leetcode)
   * EvaluateReversedPolishNotation (Leetcode)
   * DivideTwoIntegers (Leetcode)
+  * MultiplyTwoIntegers (CTCI)
   * SwapInPlace (CTCI)
   * FindMaxOfTwoNumbers (CTCI)
 * Big Integer / Factorial:
@@ -249,6 +251,15 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * FactorialSum (Company/slideshare)
 * Probability
   * RandomNumber (Company/amazon)
+  * AntCollision (CTCI)
+  * BasketballShot (CTCI)
+* Geometry
+  * LineIntersection (CTCI)
+  * MaxPointsOnALine (Leetcode)
+* Prime Number
+  * IsPrimeNumber (CTCI)
+  * PrimeNumberGenerator (Company/microsoft)
+  * NextPrimeNumber (Company/microsoft)
   
 
 

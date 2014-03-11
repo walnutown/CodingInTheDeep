@@ -1,6 +1,6 @@
 package ch7_math_probability;
 
-public class ch7_2 {
+public class ch7_2_AntCollision {
 
    /**
     * There are three ants on different vertices of a triangle. What is the probability

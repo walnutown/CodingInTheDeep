@@ -1,18 +1,13 @@
 package ch7_math_probability;
 
-public class ch7_5 {
+public class ch7_5_CutSquares {
 
    /**
     * Given two squares on a two-dimensional plane, find a line that
     * would cut these two squares in half. Assume that the top and
     * the bottom sides of the square run parallel to the x-axis.
     */
-   public static void main(String[] args) {
-      Line l = new Line(8.82035, 8);
-      double tmp = l.getFlooredSlope();
-      System.out.println(tmp);
-   }
-    
+   // use the middle points of two squares
    public static class Square{
       Point p1;
       Point p2;

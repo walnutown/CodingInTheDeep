@@ -1,6 +1,6 @@
 package ch7_math_probability;
 
-public class ch7_1 {
+public class ch7_1_BasketballShot {
 
    /**
     * Play two games with basketball hoop

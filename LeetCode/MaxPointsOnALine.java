@@ -1,4 +1,7 @@
-// didn't take care of floating point precison
+/*
+    Given n points on a 2D plane, find the maximum number of points that lie on the same straight line.
+*/
+
 /**
  * Definition for a point.
  * class Point {
@@ -8,6 +11,8 @@
  *     Point(int a, int b) { x = a; y = b; }
  * }
  */
+// take care of the case that slope is infinite, and the case of same points
+// time: O(n^2)
 public class Solution {
     public int maxPoints(Point[] points) {
         if (points==null)   return 0;
@@ -38,7 +43,7 @@ public class Solution {
                 sum = Math.max(num, sum);
             }
             max = Math.max(max, sum+base);
-            map.clear();
+            map.clear();  
         }
         return max;
     }

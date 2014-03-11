@@ -1,6 +1,7 @@
 Prime Numbers:
 	every positive integers can be decomposed into a product of primes
 	84 = 2^2 * 3^1 * 5^0 * 7^1 * 11^0 ...
+	I think that's why they're called prime numbers
 	
 Probability:
 	P (A^B) = P (A|B) * P(B)
