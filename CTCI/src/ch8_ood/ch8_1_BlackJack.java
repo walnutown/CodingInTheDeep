@@ -8,7 +8,7 @@ public class ch8_1_BlackJack {
     * Design the data structures for a generic deck of cards. Explain how you would subclass the
     * data structures to implement blackjack.
     */
-
+   
    /*
     * Value of cards:
     * In blackjack, the cards are valued as follows:
@@ -22,6 +22,8 @@ public class ch8_1_BlackJack {
     * Ace and any ten-valued card, with the additional requirement that these be your first two
     * cards
     */
+   
+   // for rules, refer http://www.blackjackinfo.com/blackjack-rules.php
 
    /*-----------------------------standard deck implementation--------------------------------------*/
    // the deck is a standard 52-card set, like you might see used in a blackjack or poker game.

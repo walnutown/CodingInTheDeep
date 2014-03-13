@@ -66,6 +66,58 @@ Knowledge Base for Concepts related questions in programming interview
   * How to create an inner class object from outside the outer class code
     * OuterClass.InnerClass inner = outClass.new InnerClass();
 
+* Garbage Collector
+  * Mark and Sweep algorithm
+    * look up the heap memory
+    * identify unused objects and delete them
+    * unused objects are defined as unreferenced objects (there’s no part in the program that holds a pointer to that object)
+  * Reference counting
+  * Stop the execution of program while GC
+  * Can select different GC
+
+* Method Overloading Vs Override
+  * Method overriding is a run-time phenomenon that is the driving force behind polymorphism. Implement the inherited method in a different way
+    * same signature as the inherited method
+    * happens at run time
+
+  * Method overloading is a compile-time phenomenon. There’re two or more methods in the class that has the same method name but different parameters
+    * Conditions for method overloading:
+      * number of parameters are different in two methods
+      * parameter type are different
+    * Unqualified for method overloading:
+      * change return type
+      * change parameter name
+    * Overloading happens at compile time, compiler determines whether a given method is correctly overloaded, if not, error
+
+* Data Structure
+  * Collection, the root interface in the collection hierarchy
+    * issues: duplicates, order, synchronize
+    * extends Iterable<E>
+  * List, is an interface
+    * an ordered collection
+    * extends Collections<E>
+  * Set, a collection that contains no duplicates
+    * contain at most one null element
+    * extends Collection<E>
+  * Vector, a growable array of objects
+    * extends AbstractList<E>, implements List<E>, RandomAccess, Cloneable
+    * iterator, fail-fast, will throw ConcurrentModificationException if the vector is structurally modified at any time after the iterator is created
+    * Synchronized
+    * When the array is full, it has to resize to support insertion operation. Thus, the worst case for insertion is O(n)
+  * Stack, a class
+    * extends Vector<E>
+  * Queue, an interface
+    * extends Collection<E>
+  * LinkedList
+    * extends AbstractSequentialList<E>, implements List<E>, Deque<E>, Cloneable
+    * permits null
+    * can be used as a stack, queue, or double-ended queue
+    * Unsynchronized, use Collections.synchronizedList(new LinkedList()), which add mutex to each method (synchronzied(lock);)
+  * ArrayList
+    * extends AbstractList<E>, implements List<E>, RandomAccess, Cloneable
+    * Resizable-array implementation of the List interface.
+    * permits null
+    * roughly equivalent to Vector, except that it's unsynchronized
 
 
 ##Distributed System & Big Data
@@ -141,6 +193,9 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
       * The server is authenticated to the client (through server certificate, no proxy server to redirect webpage)
       * HTTPS doesn't authenticate clients, it's computationally expensive and need more handshakes between the client and the server
 
+##OO Design
+* Use MVC framework to help quickly setup elementary classes
+* Note the usage of enum (how to initialize the enum with initial value)
 
 ##OO Design Patterns
 [oodesign.com](http://www.oodesign.com/)<br>
@@ -195,7 +250,7 @@ Given a large number (millons or billons) of records (integers, IPs, URLs, query
   * Chain of Responsibility
       * consisting of a source of command objects and a series of processing objects. Each processing object contains logic that defines the types of command objects that it can handle; the rest are passed to the next processing object in the chain
 
-##Analyze Algorithms -- (from CLRS)
+##Analyze Running Time -- (from CLRS)
 * Analyze in a RAM model, which means that instructions are executed one after another, with no concurrent operations.
 * Running time: the numebr of primitive operations or "stpes" executed.
 * Worst case, best case and average case. Usually, we use worst case; and sometimes, average case is used (provided that all inputs of a given size are equally likely, we can use a randomized algorithm to achieve this)
@@ -217,8 +272,24 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * The master method, works for the recurrences of the form: T(n) = aT(n/b) + f(n)
     * compare f(n) with n^(lgba)
     * polynomially smaller, a is smaller than b by a factor (which is b/a) of n^c for some constant c > 0. e.g. a=n, b=nlgn, b/a=lgn, which is not polynomially small.
-  * 
 
+##Data Structure -- (from CLRS)
+* Dynamic Set
+  * Dictionary: a dynamic set that supports insertion, deletion and lookup (test membership in a set)
+  * Ordering Set: supports operations like getMin(), getMax(), getPrev(), getNext()
+* Stack
+  * implementation
+    * Array, push(), pop(), peek(), empty(), average O(1) if don't consider overflow
+    * LinkedList, push(), pop(), peek(), empty(), all O(1)
+* Queue
+  * implementation
+    * Array, one circular array, two pointers (head/tail)
+    * LinkedList, two pointers (head/tail)
+* LinkedList
+  * when cascade multiple pointers, rememebr to check null. e.g. node.next.next, should check if (node.next==null) in advance
+  * Sentinel, a dummy object that allows us to simplify boundary conditions
+    * make the code clean, should be used judiciously when the list is small (memory cost)
+  * [XOR LinkedList](http://en.wikipedia.org/wiki/XOR_linked_list)
 
 
 
