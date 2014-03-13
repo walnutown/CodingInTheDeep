@@ -79,7 +79,6 @@ Knowledge Base for Concepts related questions in programming interview
   * Method overriding is a run-time phenomenon that is the driving force behind polymorphism. Implement the inherited method in a different way
     * same signature as the inherited method
     * happens at run time
-
   * Method overloading is a compile-time phenomenon. There’re two or more methods in the class that has the same method name but different parameters
     * Conditions for method overloading:
       * number of parameters are different in two methods
@@ -118,6 +117,28 @@ Knowledge Base for Concepts related questions in programming interview
     * Resizable-array implementation of the List interface.
     * permits null
     * roughly equivalent to Vector, except that it's unsynchronized
+
+* Generics
+  * added in J2SE 5.0
+  * Adds complie-time type safety (each collection can only have one type of parameter) to the Collections Framework, and eliminates the drudgery of casting. (Compile-time error is easy to detect than run-time error)
+  * In the following case, line 2 will fire a complie error. In general, if Foo is a subtype (subclass or subinterface) of Bar, and G is some generic type declaration, it is not the case that G<Foo> is a subtype of G<Bar>. This is probably the hardest thing you need to learn about generics, because it goes against our deeply held intuitions.
+  <pre><code>
+    List<String> ls = new ArrayList<String>(); // 1
+    List<Object> lo = ls; // 2 
+  </code></pre>
+  * So what is the supertype of all kinds of collections? It's written Collection<?> (pronounced "collection of unknown"), that is, a collection whose element type matches anything. It's called a **wildcard type**
+  * List<? extends Shape> is an example of a **bounded wildcard**. drawAll() will accept lists of any subclass of Shape.
+  <pre><code>
+  public void drawAll(List<? extends Shape> shapes) {
+    ...
+  }
+  </code></pre>
+  That price to be paid for the flexibility of using wildcards is that it is now illegal to write into shapes in the body of the method. For instance, this is not allowed:
+  <pre><code>
+  public void addRectangle(List<? extends Shape> shapes) {
+    shapes.add(0, new Rectangle()); // Compile-time error!
+  }
+  </code></pre>
 
 
 ##Distributed System & Big Data

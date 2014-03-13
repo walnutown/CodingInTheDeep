@@ -186,6 +186,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * WordBreak (Leetcode)
 * WordBreak2 (Leetcode)
 * FindMinWordBreak (CTCI)
+* DescribeString (CTCI)
 
 #### 3. String manipulation
 * ScrambleString (Leetcode)
@@ -315,6 +316,7 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
 * Cores
   * pass and return (think of the Chinese name 递归), so actually, each level will be visited twice.
   * Need a goal state to end recursion, otherwise may be trapped in infinite loop
+* May throw StackOverFlowException if the recursion tree is deep. (stack and heap collides)
 * return: how to return multiple arguments?
   * use gloable variable
   * use wrapper class

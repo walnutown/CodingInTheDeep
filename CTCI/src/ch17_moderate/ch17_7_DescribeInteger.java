@@ -3,8 +3,8 @@ package ch17_moderate;
 public class ch17_7_DescribeInteger {
 
    /**
-    * Given any integer, print an English phase that describes the integer (e.g.
-    * "One Thousand, Two Hundred Thirty Four")
+    * Given any integer, print an English phase that describes the integer
+    * (e.g. 1234, "One Thousand, Two Hundred Thirty Four")
     */
    public static void main(String[] args) {
       int num = -103406389;
@@ -64,6 +64,8 @@ public class ch17_7_DescribeInteger {
             { "", "Thousand", "Million", "Billion" }, };
       int count = 0;
       while (num > 0) {
+         // StringBuilder.insert() takes O(n). To optimize running time, we can
+         // store the block string separately and finally combine them.
          if (num % 1000 > 0)
             res.insert(0, convert(num % 1000, map) + map[3][count] + ", ");
          num /= 1000;
