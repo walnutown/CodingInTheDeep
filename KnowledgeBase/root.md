@@ -73,6 +73,7 @@ Knowledge Base for Concepts related questions in programming interview
     * unused objects are defined as unreferenced objects (there’s no part in the program that holds a pointer to that object)
   * Reference counting
   * Stop the execution of program while GC
+  * Calls finalize() method in an object before the obejct is finally destroyed
   * Can select different GC
 
 * Method Overloading Vs Override
@@ -137,6 +138,43 @@ Knowledge Base for Concepts related questions in programming interview
   }
   </code></pre>
 
+* instanceof
+  * the type comparison operator
+  * (obj1 instanceof Parent)
+  * for the following code, no error, the output is *Cat Kitty*
+  <pre><code>
+   public void testArrayListOfDifferentSubtypes() {
+      ArrayList<Animal> an = new ArrayList<Animal>();
+      Animal cat = new Cat("Kitty");
+      Animal dog = new Dog("Wangwang");
+      an.add(cat);
+      an.add(dog);
+      for (Animal a : an){
+         if (a instanceof Cat)
+            System.out.println(a.print());
+      }
+   }
+
+   abstract class Animal {
+      protected String name;
+
+      public String print() {
+         return name;
+      }
+   }
+
+   class Cat extends Animal {
+      public Cat(String str) {
+         name = "Cat " + str;
+      }
+   }
+
+   class Dog extends Animal {
+      public Dog(String str) {
+         name = "Dog " + str;
+      }
+   }   
+  </pre></code>
 
 ##Distributed System & Big Data
 
