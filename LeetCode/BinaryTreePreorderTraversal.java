@@ -13,24 +13,8 @@
     Note: Recursive solution is trivial, could you do it iteratively?
 */
 
-// Stack Iterative traversal.
-// time: O(n); space: O(h), h is the maximum height of the tree
-public class Solution {
-    public ArrayList<Integer> preorderTraversal(TreeNode root) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (root == null)   return res;
-        Stack<TreeNode> st = new Stack<TreeNode>();
-        while (root != null || !st.isEmpty()){
-            if (root == null)   root = st.pop();
-            res.add(root.val);
-            if (root.right != null) st.push(root.right);
-            root = root.left;
-        }
-        return res;
-    }
-}
-
-// Stack Iterative traversal, from Sophie. 2 while loops, logic is easier to understand.
+// Stack Iterative traversal, 
+// time: O(n); space: O(h), 
 // Refer to BinaryTreeInorderTraversal, only position of 'res.add()'' changes
 public class Solution{
     public ArrayList<Integer> preorderTraversal(TreeNode root) {

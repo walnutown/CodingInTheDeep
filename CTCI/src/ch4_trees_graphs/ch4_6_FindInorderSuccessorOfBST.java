@@ -21,18 +21,17 @@ public class ch4_6_FindInorderSuccessorOfBST {
          return null;
       // has right subtree
       if (n.right != null)
-         return findLeftMostNode(n.right);
+         return getTreeMin(n.right);
       // track back until on the left subtree of parent node or to the root 
-      TreeNode curr = n;
-      TreeNode parent = curr.parent;
-      while (parent != null && parent.left != curr){
+      TreeNode curr = n, parent = curr.parent;
+      while (parent != null && parent.right == curr){
          curr = parent;
          parent = curr.parent;
       }
       return parent;
    }
    
-   public static TreeNode findLeftMostNode(TreeNode root){
+   public static TreeNode getTreeMin(TreeNode root){
       if (root == null)
          return null;
       TreeNode p = root;

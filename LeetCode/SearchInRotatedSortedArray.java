@@ -7,8 +7,9 @@
 
     You may assume no duplicate exists in the array.
 */
-
-// binaray search, no duplicates
+// Assertion: no duplicates in the array
+// Binary Search, at least one of the two halves is ordered in each dividing step of the search
+// time: O(lgn); space: O(1)
 public class Solution {
     public int search(int[] A, int target) {
         if (A == null || A.length == 0) return -1;

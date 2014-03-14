@@ -9,22 +9,17 @@ public class CountInversionsInArray {
    // reference:
    // http://www.geeksforgeeks.org/counting-inversions/
    // CLSR, Chapter2
-   
+
    // we can modify merge sort to solve this problem
    // each inversion implies one merge-inversion in the merge step.
-   // If l<r, no merge; if l>r, we need a merge-inversion, and there're mid-l inversions
-   
-   public static void main(String[] args) {
-      int[] A = new int[]{2,3,8,6,1};
-      int count = mergeSort(A, 0, A.length-1);
-      System.out.println(count);
+   // If l<r, no merge; if l>r, we need a merge-inversion, and the number of inversions is mid-l+1
+   // (why? because r will be moved to the position before l, there're mid-l+1 merge-inversions
+   // here)
 
-   }
-   
    public static int mergeSort(int[] arr, int start, int end) {
       if (start >= end)
          return 0; // notice >= here, because in 'mergeSort(arr,start,mid)', 'mid' keep the same. if
-                 // start>end, may cause dead loop
+                   // start>end, may cause dead loop
       int count = 0;
       int mid = (start + end) >> 1;
       count += mergeSort(arr, start, mid);
@@ -42,9 +37,9 @@ public class CountInversionsInArray {
       while (i <= mid && j <= end) {
          if (helper[i] < helper[j])
             arr[index++] = helper[i++];
-         else{
+         else {
             arr[index++] = helper[j++];
-            count += mid-i+1;      // key step here
+            count += mid - i + 1;      // key step here
          }
       }
       while (i <= mid) {
@@ -54,6 +49,13 @@ public class CountInversionsInArray {
          arr[index++] = helper[j++];
       }
       return count;
+   }
+
+   public static void main(String[] args) {
+      int[] A = new int[] { 2, 3, 8, 6, 1 };
+      int count = mergeSort(A, 0, A.length - 1);
+      System.out.println(count);
+
    }
 
 }

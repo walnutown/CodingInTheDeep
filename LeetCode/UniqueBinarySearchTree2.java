@@ -1,3 +1,17 @@
+/*
+    Given n, generate all structurally unique BST's (binary search trees) that store values 1...n.
+
+    For example,
+    Given n = 3, your program should return all 5 unique BST's shown below.
+
+       1         3     3      2      1
+        \       /     /      / \      \
+         3     2     1      1   3      2
+        /     /       \                 \
+       2     1         2                 3
+    confused what "{1,#,2,3}" means?
+*/
+
 /**
  * Definition for binary tree
  * public class TreeNode {
@@ -7,51 +21,8 @@
  *     TreeNode(int x) { val = x; left = null; right = null; }
  * }
  */
-public class Solution {
-    public ArrayList<TreeNode> generateTrees(int n) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        ArrayList<TreeNode> res = new ArrayList<TreeNode>();
-        res.add(null);
-        if (n == 0){
-            return new ArrayList<TreeNode>(res);
-        }
-        res.clear();
-        res.add(new TreeNode(1));
-        if (n == 1){
-            return res;
-        }
-        return helper(1, n);
-    }
-    
-    public ArrayList<TreeNode> helper(int start, int end){
-        ArrayList<TreeNode> sub = new ArrayList<TreeNode>();
-        if (start > end){
-            sub.add(null);
-            return sub;
-        }
-        
-        for (int i = start; i<= end; i++){
-            ArrayList<TreeNode> right = helper(i+1, end);
-            ArrayList<TreeNode> left = helper(start, i-1);
-            for(int k = 0; k < right.size(); k++){
-                for(int j = 0; j < left.size(); j++){
-                    TreeNode curr = new TreeNode(i);
-                    TreeNode l = left.get(j);
-                    TreeNode r = right.get(k);
-                    curr.left = l;
-                    curr.right = r;
-                    sub.add(curr);
-                }
-            }
-            
-        }
-        return sub;
-    }
-}
 
-
-// Accepted, DP
+// DP, memoization
 public class Solution {
     public ArrayList<TreeNode> generateTrees(int n) {
         Map<Integer, ArrayList<TreeNode>> dp = new HashMap<Integer, ArrayList<TreeNode>>();
@@ -73,6 +44,7 @@ public class Solution {
         }
         return dp.get(n);
     }
+    // generate nodes using DFS
     public TreeNode genNode(TreeNode n, int inc){
         if (n==null)    return null;
         TreeNode res = new TreeNode(n.val+inc);

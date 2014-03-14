@@ -23,8 +23,12 @@
  * }
  */
 
-// Stack Iterative traversal. from Sophie. 2 while loops, logic is easier to understand than the wiki version.
+// Recursion. Time: O(n), each node is accessed at most twice
+
+
+// Stack Iterative traversal, include two parts: 1 call to getMin(), and n-1 calls to getSucessor()
 // time: O(n); space: O(h), h is the maximum height of the tree
+// refer to CLRS 12.2-7
 public class Solution {
     public ArrayList<Integer> inorderTraversal(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<Integer>();
@@ -62,20 +66,20 @@ public class Solution {
         if (root == null)   return res;
         TreeNode curr =root;
         while (curr != null){
-            if (curr.left != null){
+            if (curr.left != null){ 
                 TreeNode prev = curr.left;
                 // find predecessor 
                 while (prev.right!=null && prev.right!=curr)    prev = prev.right;
-                if (prev.right == curr){    
+                if (prev.right == curr){    // thread is used
                     res.add(curr.val);
                     curr = curr.right;
-                    prev.right = null;
+                    prev.right = null;  // disconnect threads
                 }
                 else{                  
-                    prev.right = curr;
+                    prev.right = curr;  // build threads
                     curr = curr.left;
                 }
-            }else{
+            }else{  
                 res.add(curr.val);
                 curr = curr.right;
             }

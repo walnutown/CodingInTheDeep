@@ -15,6 +15,7 @@ public class QuickSort {
       quickSort2(arr, 0, arr.length - 1);
       System.out.println(Arrays.toString(arr));
    }
+   
    // from CTCI
    public static void quickSort(int[] arr, int start, int end) {
       if (arr == null || arr.length <= 1 || start >= end)
@@ -47,6 +48,7 @@ public class QuickSort {
       arr[l] = arr[r];
       arr[r] = tmp;
    }
+   
    // from CLRS, easier to deal with index
    public static void quickSort2(int[] arr, int start, int end) {
       if (arr == null || arr.length <= 1 || start >= end)
@@ -64,7 +66,7 @@ public class QuickSort {
             swap(arr,++i,j);
          }
       }
-      swap(arr, i+1, end);
+      swap(arr, i+1, end);  // put last element into right position
       return i+1;
    }
 

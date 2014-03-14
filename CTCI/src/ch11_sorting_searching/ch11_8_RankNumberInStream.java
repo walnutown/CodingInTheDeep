@@ -10,8 +10,8 @@ public class ch11_8_RankNumberInStream {
     */
    // questions to note : whether we have duplicates in the stream?
    
-   // tree + attribute to track the number of left-substree nodes
-   // get the rank while insert the new node
+   // binary search tree + attribute to track the number of left-substree nodes
+   // update the rank when inserting the new node
    public static void main(String[] args) {
       int[] arr = new int[] { 1, 20, -3, 5, 9, 4, 200 };
       RankNode root = new RankNode(arr[0]);
@@ -57,11 +57,11 @@ public class ch11_8_RankNumberInStream {
       /*
        * If x is node.data
        *    return node.left_size
-       * If x is on left of node
+       * If x is on left subtree of node
        *    return getRank(node.lfet, x)
-       * If x is on right of node
+       * If x is on right subtree of node
        *    return node.left_size + 1 + getRank(node.right, x)
-       * */
+       */
       public int getRank(int d) {
           if (d == data) {
               return left_size+1;

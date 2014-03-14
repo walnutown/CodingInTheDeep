@@ -6,6 +6,8 @@
     The number of elements initialized in A and B are m and n respectively.
 */
 
+// <1> compare sort from the end of array
+// <2> copy remaning parts of array B to array A
 // time: O(n); space: O(1)
 public class Solution {
     public void merge(int A[], int m, int B[], int n) {

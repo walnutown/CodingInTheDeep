@@ -15,7 +15,8 @@
     Given target = 3, return true.
 */
 
-// binary search both col and row. time: O(lgm+lgn)
+// binary search both col and row
+// time: O(lgm+lgn)
 public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int w = matrix[0].length;
@@ -41,7 +42,8 @@ public class Solution {
         return false;
     }
 }
-// the 2d matrix is actually a 1d array, transform it and binary search, time: O(lg(m*n))
+// the 2d matrix can be transformed into an ordered 1d array. Transform it and then binary search the 1d array
+// time: O(lg(m*n))
 public class Solution {
     public boolean searchMatrix(int[][] matrix, int target) {
         int w = matrix[0].length;

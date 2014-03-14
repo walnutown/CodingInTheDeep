@@ -7,7 +7,9 @@
     Write a function to determine if a given target is in the array.
 */
 
-// allow duplicates. time: average, O(lgn), worst case O(n)
+// Assertion: allow duplicates
+// Binary Search
+// time: average O(lgn), worst case O(n); space: O(1)
 public class Solution {
     public boolean search(int[] A, int target) {
         if (A == null || A.length == 0) return false;
@@ -21,7 +23,8 @@ public class Solution {
             }else if (A[start] > A[mid]){
                 if (A[mid] < target && target <= A[end])    start = mid+1;
                 else end = mid-1;
-            }else   start++;
+            }else  // A[start] == A[mid], A[start]!=target
+                start++;
         }
         return false;
     }

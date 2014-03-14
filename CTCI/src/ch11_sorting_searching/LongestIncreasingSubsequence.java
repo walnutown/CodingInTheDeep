@@ -18,7 +18,7 @@ public class LongestIncreasingSubsequence {
          return 0;
       int[] mem = new int[arr.length];
       mem[0] = 0;
-      mem[1] = 1; // mem[i]: the longest increasing subsequence including arr[i]
+      mem[1] = 1; // mem[i]: the length of longest increasing subsequence (including arr[i])
       for (int i = 2; i < arr.length ; i++){
          for (int j = 0; j < i; j++){
             if (arr[i] > arr[j])

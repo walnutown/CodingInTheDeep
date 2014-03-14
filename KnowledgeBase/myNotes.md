@@ -20,6 +20,8 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
   * RecoverBinarySearchTree (Leetcode)
   * CreateBSTWithMinimalHeight (CTCI) -- ConvertSortedArrayToBST (Leetcode)
   * FindInorderSuccessorOfBST (Leetcode)
+  * UniqueBinartSearchTree (Leetcode)
+  * UniqueBinarySearchTree2 (Leetcode)
 * Balanced binary tree
   * BalancedBinaryTree (Leetcode)
 * Sum binary tree
@@ -84,6 +86,7 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
   * BinarySearchClosest (CTCI)
   * SearchForaRange (Leetcode)
   * Search2DMatrix (Leetcode)
+  * SearchMatrix (CTCI)
   * SearchInRotatedArray (Leetcode)
   * SearchInRotatedArray2 (Leetcode)
   * SearchInArrayWithEmptyStrings (CTCI)
@@ -101,6 +104,7 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
   * QuickSort (CTCI)
   * RadixSort (CTCI)
   * GetKthMagicNumber (CTCI)
+  * ExternalSort (CTCI)
 * Shuffle
   * ShuffleCards (CTCI)
 
