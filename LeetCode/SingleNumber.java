@@ -5,7 +5,8 @@
     Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
 */
 
-// xor. time: O(n); space: O(1)
+// Bit manipulation, xor. a^a = 0;
+// time: O(n); space: O(1)
 public class Solution {
     public int singleNumber(int[] A) {
 

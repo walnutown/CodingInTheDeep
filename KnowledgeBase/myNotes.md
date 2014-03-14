@@ -107,6 +107,8 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
   * ExternalSort (CTCI)
 * Shuffle
   * ShuffleCards (CTCI)
+* Inversion
+  * CountInversionsInArray (CTCI)
 
 #### 2. find special element
 * Median
@@ -265,7 +267,7 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * IsPrimeNumber (CTCI)
   * PrimeNumberGenerator (Company/microsoft)
   * NextPrimeNumber (Company/microsoft)
-  
+* EquilibriumIndexOfArray (Company/slideshare)
 
 
 ## LinkedList -- Total: 14

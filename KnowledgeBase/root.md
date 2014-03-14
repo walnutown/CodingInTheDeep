@@ -7,6 +7,20 @@ Knowledge Base for Concepts related questions in programming interview
   * StringBufer is synchronized, while StringBuilder is not.
   * StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization. This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer was being used by a single thread (as is generally the case). Where possible, it is recommended that this class be used in preference to StringBuffer as it will be faster under most implementations.
 
+* Private Constructor
+  * use cases: Singleton pattern, enum
+
+* TryCatchFinally
+  * The finally block always executes when the try block exits.
+  * the finally block is a key tool for preventing resource leaks
+  * Case that finally will execute:
+     * an unexpected exception occurs.  
+     * return, continue, or break in try and catch, finally code will execute before return
+  * Case that finally will not execute:
+     * if the JVM exits while the try or catch code is being executed
+     * the thread executing the try or catch code is interrupted or killed
+     * forever loop in try or catch
+
 * Java has 8 primitive data types
     * type                                             | default value
     * byte: 2^8                                            | 0 
@@ -134,7 +148,7 @@ Knowledge Base for Concepts related questions in programming interview
   </code></pre>
   That price to be paid for the flexibility of using wildcards is that it is now illegal to write into shapes in the body of the method. For instance, this is not allowed:
   <pre><code>public void addRectangle(List<? extends Shape> shapes) {
-    shapes.add(0, new Rectangle()); // Compile-time error!
+      shapes.add(0, new Rectangle()); // Compile-time error!
   }
   </code></pre>
 
@@ -142,37 +156,33 @@ Knowledge Base for Concepts related questions in programming interview
   * the type comparison operator
   * (obj1 instanceof Parent)
   * for the following code, no error, the output is *Cat Kitty*
-  <pre><code>
-   public void testArrayListOfDifferentSubtypes() {
-      ArrayList<Animal> an = new ArrayList<Animal>();
-      Animal cat = new Cat("Kitty");
-      Animal dog = new Dog("Wangwang");
-      an.add(cat);
-      an.add(dog);
-      for (Animal a : an){
-         if (a instanceof Cat)
-            System.out.println(a.print());
-      }
+  <pre><code>public void testArrayListOfDifferentSubtypes() {
+        ArrayList<Animal> an = new ArrayList<Animal>();
+        Animal cat = new Cat("Kitty");
+        Animal dog = new Dog("Wangwang");
+        an.add(cat);
+        an.add(dog);
+        for (Animal a : an){
+           if (a instanceof Cat)
+              System.out.println(a.print());
+        }
    }
-
    abstract class Animal {
-      protected String name;
+        protected String name;
 
-      public String print() {
-         return name;
-      }
+        public String print() {
+           return name;
+        }
    }
-
    class Cat extends Animal {
-      public Cat(String str) {
-         name = "Cat " + str;
-      }
+        public Cat(String str) {
+           name = "Cat " + str;
+        }
    }
-
    class Dog extends Animal {
-      public Dog(String str) {
-         name = "Dog " + str;
-      }
+        public Dog(String str) {
+           name = "Dog " + str;
+        }
    }   
   </pre></code>
 

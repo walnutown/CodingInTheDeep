@@ -1,6 +1,6 @@
 package slideshare;
 
-public class EquilibriumIndex {
+public class EquilibriumIndexOfArray {
 
    /**
     * A zero-indexed array A consisting of N integers is given. An equilibrium index of this array
