@@ -3,9 +3,29 @@ Knowledge Base for Concepts related questions in programming interview
 ##Java
 [notes](https://docs.google.com/document/d/1msRFUdvg1z6iNmHqUUI_KVXEWLtODc2JaZH6w2o7o9k/edit?usp=sharing)
 
-* StringBuffer Vs StringBuilder
-  * StringBufer is synchronized, while StringBuilder is not.
-  * StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization. This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer was being used by a single thread (as is generally the case). Where possible, it is recommended that this class be used in preference to StringBuffer as it will be faster under most implementations.
+* Comparisons:
+  * StringBuffer Vs StringBuilder
+    * StringBufer is synchronized, while StringBuilder is not.
+    * StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization. This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer was being used by a single thread (as is generally the case). Where possible, it is recommended that this class be used in preference to StringBuffer as it will be faster under most implementations.
+  * Abstract Class Vs Interface
+    * [Official Doc: Abstract Classes Compared to Interfaces](http://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
+    * An abstract Class is a class that can not be instantiated. e.g. AbstractMap 
+    * A Java Interface type declares methods but does not provide their implementations. e.g. Comparable, Map<K,V>, List<T>
+    * Abstract class differs from interface in an important way - they can have instance variable, and they have concrete methods and constructors
+    * A class can implement multiple interfaces, while only extend one abstract class
+    * All classes in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
+  * Method Overloading Vs Override
+    * Method overriding is a run-time phenomenon that is the driving force behind polymorphism. Implement the inherited method in a different way
+      * same signature as the inherited method
+      * happens at run time
+    * Method overloading is a compile-time phenomenon. There’re two or more methods in the class that has the same method name but different parameters
+      * Conditions for method overloading:
+        * number of parameters are different in two methods
+        * parameter type are different
+      * Unqualified for method overloading:
+        * change return type
+        * change parameter name
+      * Overloading happens at compile time, compiler determines whether a given method is correctly overloaded, if not, error
 
 * Private Constructor
   * use cases: Singleton pattern, enum
@@ -48,13 +68,7 @@ Knowledge Base for Concepts related questions in programming interview
   * interface is not part of the class hierarchy, although they work in combination with classes. It provides common features
   * rewrite an interface will cause classes implementing the old interface to break because they don’t implement it anymore. (a class that implements an interface must implement all the methods declared in the interface)
 
-* Abstract Class Vs Interface
-  * [Official Doc: Abstract Classes Compared to Interfaces](http://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
-  * An abstract Class is a class that can not be instantiated. e.g. AbstractMap 
-  * A Java Interface type declares methods but does not provide their implementations. e.g. Comparable, Map<K,V>, List<T>
-  * Abstract class differs from interface in an important way - they can have instance variable, and they have concrete methods and constructors
-  * A class can implement multiple interfaces, while only extend one abstract class
-  * All classes in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
+
 
 * Nested Class
   * Nested classes are divided into two categories: static and non-static. Nested classes that are declared static are called **static nested classes**. Non-static nested classes are called **inner classes**.
@@ -90,18 +104,7 @@ Knowledge Base for Concepts related questions in programming interview
   * Calls finalize() method in an object before the obejct is finally destroyed
   * Can select different GC
 
-* Method Overloading Vs Override
-  * Method overriding is a run-time phenomenon that is the driving force behind polymorphism. Implement the inherited method in a different way
-    * same signature as the inherited method
-    * happens at run time
-  * Method overloading is a compile-time phenomenon. There’re two or more methods in the class that has the same method name but different parameters
-    * Conditions for method overloading:
-      * number of parameters are different in two methods
-      * parameter type are different
-    * Unqualified for method overloading:
-      * change return type
-      * change parameter name
-    * Overloading happens at compile time, compiler determines whether a given method is correctly overloaded, if not, error
+
 
 * Data Structure
   * Collection, the root interface in the collection hierarchy
@@ -364,8 +367,13 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
       * has no child
       * has one child
       * has two children
-
-
+* [Red Black Tree](http://www.geeksforgeeks.org/red-black-tree-set-1-introduction-2/)
+  * a self-balancing binary search tree with one extra bit of storage per node: color (either RED or BLACK)
+* [AVL tree](http://www.geeksforgeeks.org/avl-tree-set-1-insertion/)
+  * a self-balancing binary search tree
+  * the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done by **tree rotations**(constant time)
+  * running time of all basic bst operations are O(lgn)
+  * The AVL trees are more balanced compared to Red Black Trees, but they may cause more rotations during insertion and deletion. So if your application involves many frequent insertions and deletions, then Red Black trees should be preferred. And if the insertions and deletions are less frequent and search is more frequent operation, then AVL tree should be preferred over Red Black Tree.
 
 
 

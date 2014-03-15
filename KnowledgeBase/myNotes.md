@@ -267,8 +267,12 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * IsPrimeNumber (CTCI)
   * PrimeNumberGenerator (Company/microsoft)
   * NextPrimeNumber (Company/microsoft)
-* EquilibriumIndexOfArray (Company/slideshare)
-
+* Equilibrium
+  * EquilibriumIndexOfArray (Company/slideshare)
+  * EquilibriumIndexOfMatrix (Company/twitter)
+* Array
+  * EvenParisInArray (Company/twitter)
+  * ShortestAdditionChain (Company/twitter)
 
 ## LinkedList -- Total: 14
 basics: **draw the list on paper** is the most helpful way to solve list problem; take care of **infinite loop**; 'start', 'end', 'mid', 'dum' to mark pivot node in list, 'p'/'q', 'prev'/'curr'/'next' for runner pointer.
@@ -301,6 +305,7 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * SingleNumber (Leetcode)
 * Bit Count
   * SingleNumber2 (Leetcode)
+  * MaxBinaryGap (Company/twitter)
 * Reset bits
   * InsertBitRange (CTCI)
   * NumberSequence (CTCI)

@@ -12,7 +12,10 @@ public class ch18_3_GetRandomSetFromArray {
    public static void main(String[] args) {
       int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7 };
       System.out.println(Arrays.toString(getRandomSet1(A, 4, A.length - 1)));
-      System.out.println(Arrays.toString(getRandomSet2(A, 4)));
+      int[] B = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+      System.out.println(Arrays.toString(getRandomSet2(B, 4)));
+      int[] C = new int[] { 1, 2, 3, 4, 5, 6, 7 };
+      System.out.println(Arrays.toString(getRandomSet3(C, 4)));
    }
 
    private static Random r = new Random(System.currentTimeMillis());
@@ -32,7 +35,7 @@ public class ch18_3_GetRandomSetFromArray {
    }
 
    // iteration
-   // proof : use deduction
+   // proof : use induction
    // probability we need: m/n
    // case1: if the element is in the left part, p = p(stay in set)
    // m/(m+1) * (m+1)/(m+2)...(n-1)/n = m/n
@@ -46,6 +49,18 @@ public class ch18_3_GetRandomSetFromArray {
             set[k] = A[i];
       }
       return set;
+   }
+   
+   // similar to ShuffleCards
+   public static int[] getRandomSet3(int[] A, int m) {
+      for (int i = A.length-1; i >= A.length-m; i--) {
+         int j = rand(0, i);
+         int tmp = A[i];
+         A[i] = A[j];
+         A[j] = tmp;
+      }
+      int[] res = Arrays.copyOfRange(A, A.length-m, A.length);
+      return res;
    }
 
    // both lower, higher inclusive
