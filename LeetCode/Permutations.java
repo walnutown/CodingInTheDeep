@@ -31,25 +31,29 @@ public class Solution {
 }
 
 // Iteration, put the same element at different positions
-// time: O(n*n!)
+// time: O(n*n!), ArrayList.add() may take worst case O(n)
 public class Solution {
     public ArrayList<ArrayList<Integer>> permute(int[] num) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-        if (num == null || num.length == 0) return res;
+        if (num==null || num.length==0)
+            return res;
         ArrayList<Integer> r = new ArrayList<Integer>();
         r.add(num[0]);
         res.add(r);
         for (int i=1; i<num.length; i++){
-            int value = num[i], size=res.size();
-            for (int j=0; j<size; j++){
-                for (int k=0; k<=res.get(j).size(); k++){
-                    r = new ArrayList<Integer>(res.get(j));
-                    r.add(k, value);
-                    res.add(r);
-                }
+            res = insert(res, num[i]);
+        }
+        return res;
+    }
+    
+    public ArrayList<ArrayList<Integer>> insert(ArrayList<ArrayList<Integer>> lists, int val){
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        for (ArrayList<Integer> p : lists){
+            for (int i=0; i<=p.size(); i++){    // notice i<=p.size() here
+                ArrayList<Integer> r = new ArrayList<Integer>(p);
+                r.add(i, val);
+                res.add(r);
             }
-            for (int j=0; j<size; j++)
-                res.remove(0);
         }
         return res;
     }
