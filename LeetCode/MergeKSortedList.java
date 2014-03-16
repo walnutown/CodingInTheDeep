@@ -3,10 +3,6 @@
     Analyze and describe its complexity.
 */
 
-// #2 trial, merge list one by one
-// runtime error
-// Last executed input:    [{0},{1}]
-
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -19,7 +15,8 @@
  * }
  */
 
-// heap sort, time: O(nlgk), space: O(k) (k is the number of lists, n is the number of nodes)
+// heap sort, 
+// time: O(nlgk), space: O(k) (k is the number of lists, n is the number of nodes)
 public class Solution {
     public ListNode mergeKLists(ArrayList<ListNode> lists) {
         // heap sort, O (nlgk)
