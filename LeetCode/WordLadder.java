@@ -22,68 +22,30 @@
 // shortest path problem. When the edge cost is 1 unit, uniform cost search is equal to BFS
 public class Solution {
     public int ladderLength(String start, String end, HashSet<String> dict) {
-        Set<String> visited = new HashSet<String>();
-        int cost = 1;
-        int curr_num = 1, next_num = 0;
-        Queue<String> qu = new LinkedList<String>();
-        qu.add(start);
-        visited.add(start);
-        while (!qu.isEmpty()){
-            String curr = qu.poll();
-            for (int i = 0; i < start.length(); i++) {
-                for (char j = 'a'; j <= 'z'; j++) {
-                    StringBuilder sb = new StringBuilder(curr);
-                    sb.setCharAt(i, j);
-                    String adj = sb.toString();
-                    if (adj.equals(end))    return cost + 1;
-                    if (dict.contains(adj) && !visited.contains(adj)){
-                        qu.add(adj);        
-                        visited.add(adj);   // add 'visited.add()' here, instead of below  'String curr = qu.poll()'
-                        next_num++;         // can avoid more duplicates, because size of 'visited' increases faster 
+        int count = 2;
+        ArrayList<String> prev = new ArrayList<String>();
+        prev.add(start);
+        while (!prev.isEmpty()){
+            ArrayList<String> curr = new ArrayList<String>();
+            for (String w : prev){
+                for (int i=0; i<w.length(); i++){
+                    StringBuilder sb = new StringBuilder(w);
+                    for (char j='a'; j<='z'; j++){
+                        sb.setCharAt(i, j);
+                        String s = sb.toString();
+                        if (end.equals(s))
+                            return count;
+                        if (dict.contains(s)){
+                            curr.add(s);
+                            dict.remove(s);
+                        }
                     }
                 }
             }
-            curr_num--;
-            if (curr_num == 0){
-                curr_num = next_num;
-                next_num = 0;
-                cost++;
-            }
+            count++;
+            prev = curr;
         }
         return 0;
     }
-}
-
-// modified version, no need of visited set.
-public class Solution {
-    public int ladderLength(String start, String end, HashSet<String> dict) {
-        int cost = 1;
-        int curr_num = 1, next_num = 0;
-        Queue<String> qu = new LinkedList<String>();
-        qu.add(start);
-        dict.remove(start);
-        while (!qu.isEmpty()){
-            String curr = qu.poll();
-            for (int i = 0; i < start.length(); i++) {
-                for (char j = 'a'; j <= 'z'; j++) {
-                    StringBuilder sb = new StringBuilder(curr);
-                    sb.setCharAt(i, j);
-                    String adj = sb.toString();
-                    if (adj.equals(end))    return cost + 1;
-                    if (dict.contains(adj)){
-                        qu.add(adj);        
-                        dict.remove(adj);   
-                        next_num++;         
-                    }
-                }
-            }
-            curr_num--;
-            if (curr_num == 0){
-                curr_num = next_num;
-                next_num = 0;
-                cost++;
-            }
-        }
-        return 0;
-    }
+        
 }

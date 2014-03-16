@@ -22,7 +22,7 @@ public class ch4_9_FindPathsOfTargetSum {
    // through the path to check if path sum meets goal
    // time: O(nlgn); space: O(lgn)
    // this method doesn't consider all the cases. It only consider all the sub-paths starting from
-   // root.
+   // root. For the solution covers all paths, see FindPathsOfTargetSum2
    public static ArrayList<ArrayList<TreeNode>> getPaths(TreeNode root, int sum) {
       ArrayList<ArrayList<TreeNode>> paths = new ArrayList<ArrayList<TreeNode>>();
       if (root == null)
