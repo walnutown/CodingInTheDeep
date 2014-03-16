@@ -131,7 +131,7 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
 * LongestIncreasingSubsequence2 (CTCI)
 * LongestIncreasingSubsequence3 (CTCI)
 * GasStation (Leetcode)
-* SmallestUnsortedSubsequence (CTCI)
+* ShortestUnsortedSubsequence (CTCI)
 
 #### 4. Duplicates
 * Remove duplicates

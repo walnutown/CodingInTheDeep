@@ -26,12 +26,12 @@ Return the sum = 12 + 13 = 25.
  * }
  */
 
-// DFS, time: O(n)
+// DFS
+// time: O(n)
 public class Solution {
     public int sumNumbers(TreeNode root) {
         if (root == null)   return 0;
-        // mem[0] -> sum
-        int[] mem = new int[1];
+        int[] mem = new int[1]; // mem[0] -> sum
         findPath(root, mem, 0);
         return mem[0];
     }
@@ -47,4 +47,32 @@ public class Solution {
     }
 }
 
-// iterative version, need additional space to store the sum vlaue at each node
+// BFS, modify the node value
+// time: O(n); space: O(n)
+public class Solution {
+    public int sumNumbers(TreeNode root) {
+        if (root==null)
+            return 0;
+        int sum = 0;
+        ArrayList<TreeNode> prev = new ArrayList<TreeNode>();
+        prev.add(root);
+        while (!prev.isEmpty()){
+            ArrayList<TreeNode> curr = new ArrayList<TreeNode>();
+            for (int i=0; i<prev.size(); i++){
+                TreeNode n = prev.get(i);
+                if (n.left==null && n.right==null)
+                    sum += n.val;
+                if (n.left!=null){
+                    n.left.val += n.val*10;
+                    curr.add(n.left);
+                }
+                if (n.right!=null){
+                    n.right.val += n.val*10;
+                    curr.add(n.right);
+                }
+            }
+            prev = curr;
+        }
+        return sum;
+    }
+}

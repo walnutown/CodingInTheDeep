@@ -6,17 +6,8 @@ public class ch2_5_AddListNumber {
     * Two numbers represented by a linked list in reverse order
     * Add the two numbers and return the sum as a linked list
     */
-   public static void main(String[] args) {
-      int[] arr1 = new int[] { 1, 6, 2 };
-      int[] arr2 = new int[] { 9, 2, 8 };
-      ListNode num1 = new ListNode(arr1);
-      ListNode num2 = new ListNode(arr2);
-      System.out.println(num1.printList());
-      System.out.println(num2.printList());
-      System.out.println(addListNumberInReversedOrder(num1, num2).printList());
-      System.out.println(addListNumberInForwardOrder(num1, num2).printList());
-   }
-
+   // merge two lists with carry
+   // time: O(n); space(n)
    public static ListNode addListNumberInReversedOrder(ListNode num1, ListNode num2) {
       ListNode sum = new ListNode(0);
       ListNode s = sum, p = num1, q = num2;
@@ -48,6 +39,12 @@ public class ch2_5_AddListNumber {
 
    // FOLLOW UP:
    // suppose the digits are stored in forward order
+
+   // one solution is to reverse both lists,addListNumberInReversedOrder(), then reverse the result
+   // time: O(n); space:O(n), n is the length of the result list
+
+   // recursion, need a wrapper class to return two parameters(previous node and carry) in recursive call
+   // time: O(n); sapce: O(n + n-m), n is the length of the longer list, m is the length of another list
    public static ListNode addListNumberInForwardOrder(ListNode num1, ListNode num2) {
       int len1 = getLength(num1), len2 = getLength(num2);
       if (len1 < len2)
@@ -109,5 +106,17 @@ public class ch2_5_AddListNumber {
       res.next = node;
       return res;
    }
+
+   public static void main(String[] args) {
+      int[] arr1 = new int[] { 1, 6, 2 };
+      int[] arr2 = new int[] { 9, 2, 8 };
+      ListNode num1 = new ListNode(arr1);
+      ListNode num2 = new ListNode(arr2);
+      System.out.println(num1.printList());
+      System.out.println(num2.printList());
+      System.out.println(addListNumberInReversedOrder(num1, num2).printList());
+      System.out.println(addListNumberInForwardOrder(num1, num2).printList());
+   }
+
 
 }

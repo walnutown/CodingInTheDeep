@@ -6,50 +6,9 @@ public class ch17_7_DescribeInteger {
     * Given any integer, print an English phase that describes the integer
     * (e.g. 1234, "One Thousand, Two Hundred Thirty Four")
     */
-   public static void main(String[] args) {
-      int num = -103406389;
-      System.out.println(describeInteger(num));
-      System.out.println(describeInteger2(num));
-   }
 
-   // consider 0 and negative numbers
-   public static String describeInteger(int num) {
-      if (num == 0)
-         return "Zero";
-      else if (num < 0)
-         return "Negative " + describeInteger(-num);
-      StringBuilder res = new StringBuilder();
-      String[][] map = new String[][] {
-            { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" },
-            { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
-                  "Eighteen", "Nineteen" },
-            { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" },
-            { "", "Thousand", "Million", "Billion" }, };
-      int digit = 0;
-      while (num > 0) {
-         int value = num % 10;
-         if (digit % 3 == 0) {
-            res.insert(0, map[3][digit / 3] + ", ");
-            if ((num / 10) % 10 != 1 && value > 0)
-               res.insert(0, map[0][value] + " ");
-            else if ((num / 10) % 10 == 1)
-               res.insert(0, map[1][value] + " ");
-            if ((num / 10) % 10 > 1)
-               res.insert(0, map[2][(num / 10) % 10] + " ");
-            num /= 100;
-            digit += 2;
-         } else if (digit % 3 == 2) {
-            if (num % 10 > 0)
-               res.insert(0, map[0][value] + " Hundred ");
-            num /= 10;
-            digit++;
-         }
-      }
-      res.delete(res.length() - 2, res.length());
-      return res.toString();
-   }
-
-   // convert(19,323,984) = convert(19) + " million, " + convert(323) + " thousand " + convert(984)
+   // cut the num into blocks (each block contains 3 digits), describe each block separately
+   // e.g. convert(19,323,984) = convert(19) + " million, " + convert(323) + " thousand " + convert(984)
    public static String describeInteger2(int num) {
       if (num == 0)
          return "Zero";
@@ -91,6 +50,49 @@ public class ch17_7_DescribeInteger {
             sb.append(map[0][num % 10] + " ");
       }
       return sb.toString();
+   }
+
+   // consider 0 and negative numbers
+   public static String describeInteger(int num) {
+      if (num == 0)
+         return "Zero";
+      else if (num < 0)
+         return "Negative " + describeInteger(-num);
+      StringBuilder res = new StringBuilder();
+      String[][] map = new String[][] {
+            { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine" },
+            { "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen",
+                  "Eighteen", "Nineteen" },
+            { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" },
+            { "", "Thousand", "Million", "Billion" }, };
+      int digit = 0;
+      while (num > 0) {
+         int value = num % 10;
+         if (digit % 3 == 0) {
+            res.insert(0, map[3][digit / 3] + ", ");
+            if ((num / 10) % 10 != 1 && value > 0)
+               res.insert(0, map[0][value] + " ");
+            else if ((num / 10) % 10 == 1)
+               res.insert(0, map[1][value] + " ");
+            if ((num / 10) % 10 > 1)
+               res.insert(0, map[2][(num / 10) % 10] + " ");
+            num /= 100;
+            digit += 2;
+         } else if (digit % 3 == 2) {
+            if (num % 10 > 0)
+               res.insert(0, map[0][value] + " Hundred ");
+            num /= 10;
+            digit++;
+         }
+      }
+      res.delete(res.length() - 2, res.length());
+      return res.toString();
+   }
+
+   public static void main(String[] args) {
+      int num = -103406389;
+      System.out.println(describeInteger(num));
+      System.out.println(describeInteger2(num));
    }
 
 }

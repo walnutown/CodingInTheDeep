@@ -189,13 +189,19 @@ Knowledge Base for Concepts related questions in programming interview
    }   
   </pre></code>
 
-##Distributed System & Big Data
+##System & Scalability
 
 [Nootcod3r: Count Occurences](http://n00tc0d3r.blogspot.com/2013/07/big-data-count-occurrences.html)<br>
-Given a large number (millons or billons) of records (integers, IPs, URLs, query key words, etc.),
-* find out top k most frequent records;
-* find out duplicates;
-* find out whether a given number x is in the set or not.
+* Given a large number (millons or billons) of records (integers, IPs, URLs, query key words, etc.),
+  * find out top k most frequent records;
+  * find out duplicates;
+  * find out whether a given number x is in the set or not.
+* LRUCache
+  * single machine
+  * multiple machine
+* Social Graph
+  * Facebook/LinkedIn connections
+
 
 
 

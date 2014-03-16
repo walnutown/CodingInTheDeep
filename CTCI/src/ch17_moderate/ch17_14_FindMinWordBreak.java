@@ -26,14 +26,6 @@ public class ch17_14_FindMinWordBreak {
     * "JESS looked just like TIM her brother". This parsing has seven unrecognized characters, which
     * we have capitalized for clarity.
     */
-   @Test
-   public void test() {
-      String str = "jesslookedjustliketimherbrother";
-      // String str = "her";
-      String[] ss = new String[] { "looked", "just", "like", "her", "brother" };
-      Set<String> dict = new HashSet<String>(Arrays.asList(ss));
-      System.out.println(findMinWordBreak(str, dict));
-   }
 
    public String findMinWordBreak(String str, Set<String> dict) {
       if (str == null || str.length() == 0)
@@ -43,11 +35,12 @@ public class ch17_14_FindMinWordBreak {
    }
 
    /**
+    * choose to break or not break at each character
     * @param map stores the min-break of str.substring(start)
     * @param start/end marks a single word
     */
    public R finder(String str, Set<String> dict, int start, int end, Map<Integer, R> map) {
-      if (end == str.length())
+      if (end == str.length()) // this termination state is IMPORTANT
          return new R(end - start, str.substring(start).toUpperCase());
       if (map.containsKey(start))
          return map.get(start);
@@ -101,6 +94,15 @@ public class ch17_14_FindMinWordBreak {
       public String toString() {
          return invalidNum + " " + value;
       }
+   }
+
+   @Test
+   public void test() {
+      String str = "jesslookedjustliketimherbrother";
+      // String str = "her";
+      String[] ss = new String[] { "looked", "just", "like", "her", "brother" };
+      Set<String> dict = new HashSet<String>(Arrays.asList(ss));
+      System.out.println(findMinWordBreak(str, dict));
    }
 
 }

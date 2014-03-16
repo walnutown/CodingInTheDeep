@@ -17,11 +17,7 @@ public class ch17_5_MasterMind {
     * guess GGRR, you have one hit and one pseudo-hit. Write a method that, give a guess and a
     * solution, return the number of hits and pseudo-hits.
     */
-   public static void main(String[] args) {
-      char[] solution = new char[] { 'G', 'G', 'Y', 'B' };
-      char[] guess = new char[] { 'G', 'B', 'Y', 'B' };
-      System.out.println(Arrays.toString(solveMasterMind(solution, guess)));
-   }
+
    // <1> traverse solution and count hit, as well as the frequency of not matched characters
    // <2> traverse guess and count the pseudoHit
    public static int[] solveMasterMind(char[] solution, char[] guess) {
@@ -47,5 +43,11 @@ public class ch17_5_MasterMind {
          }
       }
       return new int[] { hit, pseudoHit };
+   }
+
+   public static void main(String[] args) {
+      char[] solution = new char[] { 'G', 'G', 'Y', 'B' };
+      char[] guess = new char[] { 'G', 'B', 'Y', 'B' };
+      System.out.println(Arrays.toString(solveMasterMind(solution, guess)));
    }
 }
