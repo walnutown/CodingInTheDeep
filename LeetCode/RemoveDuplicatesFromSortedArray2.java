@@ -8,7 +8,8 @@
     Your function should return length = 5, and A is now [1,1,2,2,3].
 */
 
-// Use variable to count freq. time: O(n); space: (1)
+// Use variable to count occurrence of each element. 
+// time: O(n); space: (1)
 public class Solution {
     public int removeDuplicates(int[] A) {
         if (A==null || A.length==0) return 0;
@@ -24,7 +25,8 @@ public class Solution {
     }
 }
 
-// Without using 'count', from AnnieKim. time: O(n); space: O(1)
+// Without using 'count', from AnnieKim. 
+// time: O(n); space: O(1)
 public class Solution {
     public int removeDuplicates(int[] A) {
         if (A==null || A.length==0) return 0;

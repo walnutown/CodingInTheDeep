@@ -221,6 +221,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 #### 6. Anagram 
 two ways to check anagrams: **sort chars in word**; **freq count**
 * Anagrams (Leetcode)
+* AnagramOfPalindrome (Company/twitter)
 
 #### 7. Parentheses
 * GenerateParentheses (Leetcode)
@@ -281,7 +282,9 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * LinkedListCycle2 (Leetcode)
 * Delete
   * RemoveNthNodeFromEndOfList (Leetcode)
-  * RemoveDuplicatesInList (CTCI)
+  * RemoveDuplicatesFromSortedList (Leetcode)
+  * RemoveDuplicatesFromSortedList2 (Leetcode)
+  * RemoveDuplicatesFromUnsortedList (CTCI)
   * RemoveNodeInList (CTCI)
 * Merge
   * MergeTwoSortedList (Leetcode)
@@ -291,6 +294,7 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
 * Restruct
   * ReorderList (Leetcode)
   * InsertionSortList (Leetcode)
+  * ReverseLinkedList (CTCI)
   * ReverseLinkedList2 (Leetcode)
   * PartitionList (CTCI)
 * Arithmetic

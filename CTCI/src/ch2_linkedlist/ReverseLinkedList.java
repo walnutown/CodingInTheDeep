@@ -33,12 +33,30 @@ public class ReverseLinkedList {
       head.next = null;
       return r; // r is always pointing to the last node of the list
    }
+   
+   // recursive version 2
+   private ListNode res;
+   public ListNode reverse3(ListNode head){
+      reverseList(head);
+      return res;
+   }
+   
+   public void reverseList(ListNode node){
+      if (node==null || node.next==null){
+         res= node;
+         return;
+      }
+      reverseList(node.next);
+      node.next.next= node;
+      node.next = null;
+   }
 
    @Test
    public void testReverseLinkedList() {
       int[] A = new int[] { 2, 3, 4, 5, 1, 6 };
       ListNode head = new ListNode(A);
       // System.out.println(reverse(head).printList());
-      System.out.println(reverse2(head).printList());
+      //System.out.println(reverse2(head).printList());
+      System.out.println(reverse3(head).printList());
    }
 }
