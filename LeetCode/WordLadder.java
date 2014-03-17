@@ -32,12 +32,12 @@ public class Solution {
                     StringBuilder sb = new StringBuilder(w);
                     for (char j='a'; j<='z'; j++){
                         sb.setCharAt(i, j);
-                        String s = sb.toString();
-                        if (end.equals(s))
+                        String adj = sb.toString();
+                        if (end.equals(adj))
                             return count;
-                        if (dict.contains(s)){
-                            curr.add(s);
-                            dict.remove(s);
+                        if (dict.contains(adj)){
+                            curr.add(adj);
+                            dict.remove(adj);
                         }
                     }
                 }

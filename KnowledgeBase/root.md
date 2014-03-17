@@ -381,6 +381,11 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * running time of all basic bst operations are O(lgn)
   * The AVL trees are more balanced compared to Red Black Trees, but they may cause more rotations during insertion and deletion. So if your application involves many frequent insertions and deletions, then Red Black trees should be preferred. And if the insertions and deletions are less frequent and search is more frequent operation, then AVL tree should be preferred over Red Black Tree.
 
+* Trie
+  * a prefix tree, e.g. store all the words in a dictionary
+* Suffix Tree
+  * e.g. store all the suffix substrings in a string
+
 
 
 

@@ -12,21 +12,6 @@ public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
     */
 
    // similar to leetcode -- FlaternBinaryTreeToLinkedList
-   public static void main(String[] args) {
-      BiNode root = new BiNode(3);
-      root.node1 = new BiNode(1);
-      root.node1.node1 = new BiNode(0);
-      root.node1.node2 = new BiNode(2);
-      root.node2 = new BiNode(5);
-      root.node2.node1 = new BiNode(4);
-      root.node2.node2 = new BiNode(6);
-      //BiNode newRoot = convertBinaryTreeToDoublyLinkedList(root);
-      BiNode newRoot = convertBinaryTreeToDoublyLinkedList2(root);
-      while (newRoot != null) {
-         System.out.print(newRoot);
-         newRoot = newRoot.node2;
-      }
-   }
 
    // is actually an in-order tree traversal
    static BiNode prev;
@@ -53,7 +38,7 @@ public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
       prev = node;
       converter(node.node2);
    }
-   
+
    // use a wrapper class to hold the head and tail of the sub list
    public static BiNode convertBinaryTreeToDoublyLinkedList2(BiNode root) {
       if (root == null || root.node1 == null && root.node2 == null)
@@ -71,8 +56,8 @@ public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
       if (right != null)
          connect(node, right.head);
       WrapperNode ret = new WrapperNode();
-      ret.head = left==null? node : left.head;
-      ret.tail = right==null? node : right.tail;
+      ret.head = left == null ? node : left.head;
+      ret.tail = right == null ? node : right.tail;
       return ret;
    }
 
@@ -106,6 +91,22 @@ public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
 
       public String toString() {
          return value + " ";
+      }
+   }
+
+   public static void main(String[] args) {
+      BiNode root = new BiNode(3);
+      root.node1 = new BiNode(1);
+      root.node1.node1 = new BiNode(0);
+      root.node1.node2 = new BiNode(2);
+      root.node2 = new BiNode(5);
+      root.node2.node1 = new BiNode(4);
+      root.node2.node2 = new BiNode(6);
+      // BiNode newRoot = convertBinaryTreeToDoublyLinkedList(root);
+      BiNode newRoot = convertBinaryTreeToDoublyLinkedList2(root);
+      while (newRoot != null) {
+         System.out.print(newRoot);
+         newRoot = newRoot.node2;
       }
    }
 

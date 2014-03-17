@@ -6,44 +6,35 @@ import java.util.Map;
 
 import org.junit.Test;
 
-
 public class ch18_8_LocateSubstrings {
 
    /**
     * Given a string s and an array of smaller strings T, design a method to search s for each small
     * string in T
     */
+
+   // In leetcode-- ImplementStrStr, we only need to call the search method once
+   // in this question, we ahve to call the search method multiple times. So, we use different
+   // approaches.
    
    // use suffix tree
-   // think of leetcode-- ImplementStrStr, only need to call the search method once 
-   // in this question, call the search method multiple times. So, we use different approaches.
-   @Test
-   public void test() {
-      String testString = "mississippi";
-      String[] stringList = {"is", "sip", "hi", "sis"};
-      SuffixTree tree = new SuffixTree();
-      tree.build(testString);
-      for (String s : stringList) {
-          ArrayList<Integer> list = tree.search(s);
-          if (list != null) {
-              System.out.println(s + ": " + list.toString());
-          }
-      }
-   }
 
    public class SuffixTree {
-      SuffixTreeNode root; 
-      public SuffixTree(){
+      SuffixTreeNode root;
+
+      public SuffixTree() {
          root = new SuffixTreeNode('0');
       }
+
       // O(n!), n is the length of s
-      public void build(String s){
-         for (int i=0; i<s.length(); i++){
-            root.insertString(s.substring(i), i);
+      public void build(String s) {
+         for (int i = 0; i < s.length(); i++) { // build suffix tree from different starting index
+            root.insertSuffix(s.substring(i), i);
          }
       }
+
       // O(n), n is the length of s
-      public ArrayList<Integer> search(String s){
+      public ArrayList<Integer> search(String s) {
          return root.search(s);
       }
    }
@@ -57,7 +48,7 @@ public class ch18_8_LocateSubstrings {
          this.value = value;
       }
 
-      public void insertString(String s, int index) {
+      public void insertSuffix(String s, int index) {
          if (s == null || s.length() == 0)
             return;
          indexes.add(index);
@@ -66,7 +57,7 @@ public class ch18_8_LocateSubstrings {
             SuffixTreeNode child = new SuffixTreeNode(v);
             children.put(v, child);
          }
-         children.get(v).insertString(s.substring(1), index);
+         children.get(v).insertSuffix(s.substring(1), index);
       }
 
       public ArrayList<Integer> search(String s) {
@@ -76,6 +67,20 @@ public class ch18_8_LocateSubstrings {
          if (children.containsKey(v))
             return children.get(v).search(s.substring(1));
          return null;
+      }
+   }
+
+   @Test
+   public void test() {
+      String testString = "mississippi";
+      String[] stringList = { "is", "sip", "hi", "sis" };
+      SuffixTree tree = new SuffixTree();
+      tree.build(testString);
+      for (String s : stringList) {
+         ArrayList<Integer> list = tree.search(s);
+         if (list != null) {
+            System.out.println(s + ": " + list.toString());
+         }
       }
    }
 

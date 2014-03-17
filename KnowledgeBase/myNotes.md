@@ -178,7 +178,6 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * SubstringWithConcatenationOfAllWords (Leetcode)
 * DistinctSubsequence (Leetcode)
 * LongestCommonPrefix (Leetcode)
-* ImplementStrStr (Leetcode)
 * RotationString (CTCI)
 
 #### 2. Parse/Encode String
@@ -211,6 +210,7 @@ basics: **sliding window**; **DP**; **toCharArray()** to make the code more eleg
 * FillBoardWithWords (Company/groupon)
 * FindWordsInBoard (Company/amazon)
 * MasterMind (CTCI)
+* FindDistanceOfWordsInFile (CTCI)
 
 #### 5. Palindrome
 * ValidPalindrome (Leetcode)
@@ -227,12 +227,17 @@ two ways to check anagrams: **sort chars in word**; **freq count**
 * GenerateParentheses (Leetcode)
 * ValidParentheses (Leetcode)
 
+#### 8. String Search
+* ImplementStrStr() (Leetcode)
+* LongestWord (CTCI)
+* LocateSubStrings (CTCI)
 
 ## Math -- Total: 12
 * Digit Operation
   * PalindromeNumber (Leetcode)
   * PlusOne (Leetcode)
   * ReverseInteger (Leetcode)
+  * CountTwo (CTCI)
 * Permutation:
   * Permutations (Leetcode)
   * Permutations2 (Leetcode)

@@ -9,15 +9,6 @@ public class ch18_11_FindMaxSubsqaure {
     * algorithm to find the maximum subsquare such that all four borders are filled with black
     * pixels
     */
-   @Test
-   // 1 for black, 0 for white
-   public void testSubSquare() {
-      int[][] square = new int[][] { { 1, 1, 1, 1 }, { 1, 1, 0, 1 }, { 1, 0, 1, 1 },
-            { 1, 1, 1, 1 }, };
-      System.out.println(findMaxSubsquare(square));
-      System.out.println(findMaxSubsquare2(square));
-
-   }
 
    // naive, O(n^4)
    // iteratively find the square of size N*N, (N-1)*(N-1), ...
@@ -165,6 +156,16 @@ public class ch18_11_FindMaxSubsqaure {
       public void setZerosBelow(int below) {
          blacksBelow = below;
       }
+   }
+
+   @Test
+   // 1 for black, 0 for white
+   public void testSubSquare() {
+      int[][] square = new int[][] { { 1, 1, 1, 1 }, { 1, 1, 0, 1 }, { 1, 0, 1, 1 },
+            { 1, 1, 1, 1 }, };
+      System.out.println(findMaxSubsquare(square));
+      System.out.println(findMaxSubsquare2(square));
+
    }
 
 }

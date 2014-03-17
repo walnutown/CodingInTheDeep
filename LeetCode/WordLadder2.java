@@ -84,5 +84,63 @@ public class Solution {
    }
 }
 
+// TLE, but this version's structure is more similar to WordLadder
+public class Solution {
+    public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
+      Map<String, Set<String>> map = new HashMap<String, Set<String>>();
+      ArrayList<ArrayList<String>> paths = new ArrayList<ArrayList<String>>();
+      ArrayList<String> prev = new ArrayList<String>();
+      prev.add(end);
+      dict.remove(end);
+        boolean done = false;
+      while (!prev.isEmpty() && !done) {
+         ArrayList<String> curr = new ArrayList<String>();
+         for (int k=0; k<prev.size(); k++) {
+            String word = prev.get(k);
+            for (int i = 0; i < word.length(); i++) {
+               for (char j = 'a'; j <= 'z'; j++) {
+                  StringBuilder sb = new StringBuilder(word);
+                  sb.setCharAt(i, j);
+                  String adj = sb.toString();
+                  if (start.equals(adj))
+                    done = true;
+                  if (word.equals(adj))
+                     continue;
+                  if (dict.contains(adj)) {
+                     curr.add(adj);
+                     if (map.containsKey(adj))
+                        map.get(adj).add(word);
+                     else {
+                        map.put(adj, new HashSet<String>());
+                        map.get(adj).add(word);
+                     }
+                  }
+               }
+            }
+         }
+         for (String s : curr) // move the visited words
+            dict.remove(s);
+         prev = curr;
+      }
+      if (!map.isEmpty()){
+         ArrayList<String> path = new ArrayList<String>();
+         path.add(start);
+         buildPaths(start, end, map, paths, path);
+      }
+      return paths;
+   }
+
+   public void buildPaths(String curr, String end, Map<String, Set<String>> map, ArrayList<ArrayList<String>> paths, ArrayList<String> path) {
+      if (curr.equals(end)) {
+         paths.add(new ArrayList<String>(path));
+         return;
+      }
+      for (String w : map.get(curr)) {
+         path.add(w);
+         buildPaths(w, end, map, paths, path);
+         path.remove(path.size() - 1);
+      }  
+   }
+}
 
 

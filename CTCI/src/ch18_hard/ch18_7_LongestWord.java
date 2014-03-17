@@ -13,12 +13,6 @@ public class ch18_7_LongestWord {
     * Given a list of words, write a program to find the longest word made of other words in the
     * list.
     */
-   public static class LengthComparator implements Comparator<String>{
-      @Override
-      public int compare(String word1, String word2) {
-         return word1.length() - word2.length();
-      }
-   }
    
    // use map to cache the word that can be divided, and also the word cannot
    // Traverse each word and divide it into left and right half, then check the validity of left and
@@ -29,7 +23,7 @@ public class ch18_7_LongestWord {
       Set<String> dict = new HashSet<String>();
       for (String w : words)
          dict.add(w);
-      Arrays.sort(words, new LengthComparator());
+      Arrays.sort(words, new LengthComparator()); // start from short words
       String longest = "";
       for (String w : words){
          if (canBuildWord(w,map, dict) && w.length() > longest.length())
@@ -38,7 +32,7 @@ public class ch18_7_LongestWord {
       return longest;
    }
    
-   // average O(n!), best single access O(1)
+   // average O(n!)
    public static boolean canBuildWord(String word, Map<String, Boolean> map, Set<String> dict){
       if (map.containsKey(word))
          return map.get(word);
@@ -53,6 +47,12 @@ public class ch18_7_LongestWord {
       return false;
    }
    
+   public static class LengthComparator implements Comparator<String>{
+      @Override
+      public int compare(String word1, String word2) {
+         return word1.length() - word2.length();
+      }
+   }
    
    public static void main(String[] args) {
       //String[] words = new String[]{"app", "google", "pin", "facebook", "twitter", "appgoogle", "appgooglepin"};

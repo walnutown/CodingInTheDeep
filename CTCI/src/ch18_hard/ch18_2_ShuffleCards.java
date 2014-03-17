@@ -17,6 +17,7 @@ public class ch18_2_ShuffleCards {
 
    // recursion
    // shuffle the first n-1 elements, then the new element n
+   // time: O(n)
    public static int[] shuffler1(int[] cards, int index) {
       if (index == 0)
          return cards;
@@ -45,6 +46,7 @@ public class ch18_2_ShuffleCards {
     * picked in previous iteration) x (probability that ith element is picked in this iteration)
     * So the probability = ((n-1)/n) x (1/(n-1)) = 1/n
     */
+   // time: O(n); space: O(1)
    public static int[] shuffler2(int[] cards) {
       for (int i = cards.length - 1; i > 0; i--) {
          int k = rand(0, i);

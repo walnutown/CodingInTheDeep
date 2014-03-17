@@ -71,7 +71,9 @@ public class ch18_12_FindMaxSubmatrixSum {
    }
    
    // Solution3
-   // based on MaxSubArray, O(n^3)
+   // get the sum of each column in sub-matrix first
+   // then, get MaxSubArray of the columnSum array 
+   // time: O(n^3)
    public int findMaxSubmatrixSum2(int[][] matrix) {
       int max = Integer.MIN_VALUE;
       int rowNum = matrix.length, colNum = matrix[0].length;
