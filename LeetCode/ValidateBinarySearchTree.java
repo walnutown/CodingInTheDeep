@@ -50,3 +50,4 @@ public class Solution {
         return checker(root.left, min, root.val) && checker(root.right, root.val, max);
     }
 }
+// optimize

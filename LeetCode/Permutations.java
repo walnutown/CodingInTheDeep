@@ -6,6 +6,11 @@
     [1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], and [3,2,1].
 */
 
+// A permutation is an ordered combination, order does matter in permutation.
+// e.g. [1,1,2] and [1,2,1] is different
+// while order does not matter in permutation
+// e.g. [1,1,2] and [1,2,1] are the same
+
 // DFS, put different elements at the same position
 // time: O(n!)
 public class Solution {

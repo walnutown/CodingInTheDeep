@@ -18,6 +18,9 @@
 // 1) when to add res to resList
 // 2) order of elements in the res, notice requirement for descending or non-descending
 // 3) create new arrayList when add res to resList
+
+// DFS
+// time: O(n!)
 public class Solution {
     public ArrayList<ArrayList<Integer>> combine(int n, int k) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

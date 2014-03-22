@@ -50,3 +50,49 @@ public class Solution {
       return positive ? value : 0 - value;
    }
 }
+
+// use long to avoid overflow, and ood style code
+// time: O(n)
+public class Solution {
+    public int atoi(String str) {
+        if (str==null || str.length()==0)
+            return 0;
+        String s = trim(str);
+        if (s.length()==0)
+            return 0;
+        boolean isNeg = false;
+        if (s.charAt(0)=='-'){
+            s = s.substring(1);
+            isNeg = true;
+        }
+        if (s.charAt(0)=='+')
+            s = s.substring(1);
+        long value=0;
+        for (int i=0; i<s.length(); i++){
+            if (!isNumeric(s.charAt(i)))
+                break;
+            int digit = s.charAt(i)-'0';
+            value = value*10 + digit;
+        }
+        if (!isNeg && value >Integer.MAX_VALUE)
+            return Integer.MAX_VALUE;
+        if (isNeg && (value-1) > Integer.MAX_VALUE)
+            return Integer.MIN_VALUE;
+        int res = (int) value;
+        return isNeg? 0-res : res;
+    }
+    
+    public boolean isNumeric(char ch){
+        return ch>='0' && ch<='9';
+    }
+   
+    public String trim(String str){
+        int N = str.length();
+        int i=0, j=N-1;
+        while (i<N && str.charAt(i)==' ')
+            i++;
+        while (j>i && str.charAt(j)==' ')
+            j--;
+        return str.substring(i,j+1);
+    }
+}

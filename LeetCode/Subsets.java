@@ -19,11 +19,6 @@
     ]
 */
 
-// A permutation is an ordered combination, order does matter in permutation.
-// e.g. [1,1,2] and [1,2,1] is different
-// while order does not matter in permutation
-// e.g. [1,1,2] and [1,2,1] are the same
-
 // DFS, time: O(n!)
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsets(int[] S) {

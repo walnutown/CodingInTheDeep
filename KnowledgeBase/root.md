@@ -13,7 +13,8 @@ Knowledge Base for Concepts related questions in programming interview
     * A Java Interface type declares methods but does not provide their implementations. e.g. Comparable, Map<K,V>, List<T>
     * Abstract class differs from interface in an important way - they can have instance variable, and they have concrete methods and constructors
     * A class can implement multiple interfaces, while only extend one abstract class
-    * All classes in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
+    * All methods in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
+    * In an interface, no need to use the "abstract" keyword
   * Method Overloading Vs Override
     * Method overriding is a run-time phenomenon that is the driving force behind polymorphism. Implement the inherited method in a different way
       * same signature as the inherited method
@@ -269,8 +270,15 @@ Knowledge Base for Concepts related questions in programming interview
       * HTTPS doesn't authenticate clients, it's computationally expensive and need more handshakes between the client and the server
 
 ##OO Design
+* Cores
+  * Abstraction
+  * Inheritance
+  * Polymorphism
+  * Encapsulation
+* UML legend
 * Use MVC framework to help quickly setup elementary classes
 * Note the usage of enum (how to initialize the enum with initial value)
+
 
 ##OO Design Patterns
 [oodesign.com](http://www.oodesign.com/)<br>
@@ -360,6 +368,11 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * implementation
     * Array, one circular array, two pointers (head/tail)
     * LinkedList, two pointers (head/tail)
+* Double-ended Queue
+
+
+* Heap (Priority Queue)
+
 * LinkedList
   * when cascade multiple pointers, rememebr to check null. e.g. node.next.next, should check if (node.next==null) in advance
   * Sentinel, a dummy object that allows us to simplify boundary conditions
@@ -380,11 +393,22 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done by **tree rotations**(constant time)
   * running time of all basic bst operations are O(lgn)
   * The AVL trees are more balanced compared to Red Black Trees, but they may cause more rotations during insertion and deletion. So if your application involves many frequent insertions and deletions, then Red Black trees should be preferred. And if the insertions and deletions are less frequent and search is more frequent operation, then AVL tree should be preferred over Red Black Tree.
-
 * Trie
   * a prefix tree, e.g. store all the words in a dictionary
 * Suffix Tree
   * e.g. store all the suffix substrings in a string
+* [Segment Tree](http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/)
+  * a tree data structure (balanced binary tree) for storing intervals, or segments.
+  * Provide efficient query for range values
+  * Construction: O(n), total 2*n-1 nodes; Lookup, O(lgn); Update, O(lgn). (n is the number of elements in given array, also the number of leaf nodes)
+  * One usage is in search engine. (e.g. [Lucene](http://blog.mikemccandless.com/2013/12/fast-range-faceting-using-segment-trees.html))
+
+* LinkedHashMap
+  * Hash table and linked list implementation of the Map interface, with predictable iteration order, and without incurring the increased cost associate with TreeMap.
+  * Maintains a doubly-linked list running through all of its entries. Thus, it defines the iteration ordering. There're two kinds of orders: access order, insertion order (which cen be decided in constructor)
+  * it provides constant-time performance for the basic operations (add, contains and remove), assuming the hash function disperses elements properly among the buckets. Performance is likely to be just slightly below that of HashMap, due to the added expense of maintaining the linked list, with one exception: Iteration over the collection-views of a LinkedHashMap requires time proportional to the size of the map, regardless of its capacity. Iteration over a HashMap is likely to be more expensive, requiring time proportional to its capacity.
+
+
 
 
 

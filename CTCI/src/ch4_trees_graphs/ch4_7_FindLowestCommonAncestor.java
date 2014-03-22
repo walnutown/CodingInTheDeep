@@ -6,20 +6,15 @@ public class ch4_7_FindLowestCommonAncestor {
     * Design an algorithm to find the Lowest common ancestor of two nodes in a binary tree
     * Avoid sorting additional nodes in a data structure
     */
-   public static void main(String[] args) {
-      int[] arr = new int[] { 1, 3, 5, 7, 9, 14, 23, 32 };
-      TreeNode root = new TreeNode(arr);
-      TreeNode a = root.left;
-      TreeNode b = root.left;
-      System.out.println(root.printTree());
-      System.out.println("Node a: " + a);
-      System.out.println("Node b: " + b);
-      System.out.println("First Common Ancestor: " + findFirstCommonAncestor(root, a, b));
-   }
+   
+   // the naive solution is to check the subtree of each node from top to bottom of the tree,
+   // find the node that has one given node in one child-subtree, and another given node in 
+   // another child-subtree
+   // time: O(n^2)
 
-   // here, we assume that all node values are unique
-   // we find a node if its value is equal to the target
-   // time: O(n); space: stack
+   // the bottom-up solution, avoid the duplicate check of some nodes
+   // http://leetcode.com/2011/07/lowest-common-ancestor-of-a-binary-tree-part-i.html
+   // time: O(n)
    public static TreeNode findFirstCommonAncestor(TreeNode root, TreeNode a, TreeNode b) {
       if (root == null)
          return null;
@@ -32,9 +27,10 @@ public class ch4_7_FindLowestCommonAncestor {
       return left != null ? left : right;
    }
 
+   // Lowest Common Ancestor in BST
    // if this is a BST, we could modify the find operation for the two nodes and see where the paths
    // diverge
-   // Lowest Common Ancestor in BST, time: O(n); space: O(1)
+   // time: O(n); space: O(1)
    public static TreeNode findLCA(TreeNode root, int a, int b) {
       if (root == null)
          return null;
@@ -48,4 +44,16 @@ public class ch4_7_FindLowestCommonAncestor {
       }
       return root;
    }
+
+   public static void main(String[] args) {
+      int[] arr = new int[] { 1, 3, 5, 7, 9, 14, 23, 32 };
+      TreeNode root = new TreeNode(arr);
+      TreeNode a = root.left;
+      TreeNode b = root.left;
+      System.out.println(root.printTree());
+      System.out.println("Node a: " + a);
+      System.out.println("Node b: " + b);
+      System.out.println("First Common Ancestor: " + findFirstCommonAncestor(root, a, b));
+   }
+
 }
