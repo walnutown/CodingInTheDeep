@@ -169,6 +169,8 @@ two ways to mark visited cells: **matrix**; **encode coordinates**
 * ValidSudoku (Leetcode)
 * SudokuSolver (Leetcode)
 * Lazer (Company/rocketfuel)
+* SpiralMatrix (Leetcode)
+* SpiralMatrix2 (Leetcode)
 
 ##String -- Total: 21
 basics: **sliding window**; **DP**; **toCharArray()** to make the code more elegant, O(n) in Java to call System.arraycopy()
@@ -269,6 +271,7 @@ two ways to check anagrams: **sort chars in word**; **freq count**
 * Geometry
   * LineIntersection (CTCI)
   * MaxPointsOnALine (Leetcode)
+  * PythagoreanTriple (Company/amazon)
 * Prime Number
   * IsPrimeNumber (CTCI)
   * PrimeNumberGenerator (Company/microsoft)

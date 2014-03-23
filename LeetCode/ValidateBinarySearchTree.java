@@ -50,4 +50,20 @@ public class Solution {
         return checker(root.left, min, root.val) && checker(root.right, root.val, max);
     }
 }
-// optimize
+
+// The foolowing code is less efficient than the above, understand why
+public class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return checker(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+    }
+    public boolean checker(TreeNode root, int min, int max){
+        if (root.val <= min || root.val >= max)
+            return false;
+        boolean isValid = true;
+        if (root.left!=null)
+            isValid = isValid && checker(root.left, min, root.val); // this can be optimized
+        if (root.right!=null)
+            isValid = isValid && checker(root.right, root.val, max);
+        return  isValid; 
+    }
+}

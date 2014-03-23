@@ -8,7 +8,8 @@
       ["4", "13", "5", "/", "+"] -> (4 + (13 / 5)) -> 6
 */
 
-// stack the numbers, time: O(n), space: O(n)
+// Use a stack
+// time: O(n), space: O(n)
 public class Solution {
     public int evalRPN(String[] tokens) {
         if (tokens==null || tokens.length==0)   return 0;

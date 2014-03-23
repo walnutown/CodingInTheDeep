@@ -12,7 +12,7 @@
     You should return [1,2,3,6,9,8,7,4,5].
 */
 
-// Iterative, update the four borders of the matrix.
+// Iterative version, use 4 variables to mark the 4 borders of the matrix.
 // time: O(n); space:(1)
 public class Solution {
     public ArrayList<Integer> spiralOrder(int[][] matrix) {
@@ -22,7 +22,7 @@ public class Solution {
         while (left <= right && top <=bottom){
             for (int i=left; i<=right; i++)  
                 res.add(matrix[top][i]);
-            if (++top > bottom) break;          // need to break immediately, otherwise will influence the value of 'right' and 'left'
+            if (++top > bottom) break;          // need to break immediately, otherwise will produce duplicates
             for (int i=top; i<=bottom; i++) 
                 res.add(matrix[i][right]);
             if (--right < left) break;

@@ -15,36 +15,6 @@ import org.junit.Test;
  */
 public class TestSegmentTree {
 
-   @Test
-   public void testBuildTree() {
-      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-      System.out.println("testBuildTree()");
-      SegmentTree st = new SegmentTree(A);
-      System.out.println(st.toString());
-   }
-
-   @Test
-   public void testGetSum() {
-      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-      SegmentTree st = new SegmentTree(A);
-      System.out.println("testGetSum()");
-      System.out.println(st.printRange(0, 5));
-      System.out.println(st.getSum(0, 5));
-   }
-
-   @Test
-   public void testUpdateValue() {
-      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-      SegmentTree st = new SegmentTree(A);
-      System.out.println("testUpdateValue()");
-      System.out.println(st.printRange(0, 5));
-      System.out.println(st.getSum(0, 5));
-      st.updateValue(1, 20);
-      System.out.println(st.toString());
-      System.out.println(st.printRange(0, 5));
-      System.out.println(st.getSum(0, 5));
-   }
-
    public class SegmentTree {
       private int[] ST;
       private int[] A;
@@ -137,6 +107,36 @@ public class TestSegmentTree {
       public String toString() {
          return Arrays.toString(ST);
       }
-
    }
+
+   @Test
+   public void testBuildTree() {
+      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+      System.out.println("testBuildTree()");
+      SegmentTree st = new SegmentTree(A);
+      System.out.println(st.toString());
+   }
+
+   @Test
+   public void testGetSum() {
+      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+      SegmentTree st = new SegmentTree(A);
+      System.out.println("testGetSum()");
+      System.out.println(st.printRange(0, 5));
+      System.out.println(st.getSum(0, 5));
+   }
+
+   @Test
+   public void testUpdateValue() {
+      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+      SegmentTree st = new SegmentTree(A);
+      System.out.println("testUpdateValue()");
+      System.out.println(st.printRange(0, 5));
+      System.out.println(st.getSum(0, 5));
+      st.updateValue(1, 20);
+      System.out.println(st.toString());
+      System.out.println(st.printRange(0, 5));
+      System.out.println(st.getSum(0, 5));
+   }
+
 }

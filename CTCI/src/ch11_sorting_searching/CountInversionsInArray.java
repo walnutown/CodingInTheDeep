@@ -1,5 +1,7 @@
 package ch11_sorting_searching;
 
+import java.util.Arrays;
+
 public class CountInversionsInArray {
 
    /**
@@ -29,17 +31,16 @@ public class CountInversionsInArray {
    }
 
    public static int merge(int[] arr, int mid, int start, int end) {
-      int[] helper = new int[arr.length];
+      int[] helper = Arrays.copyOfRange(arr, 0, arr.length);
       int count = 0;
-      for (int i = start; i <= end; i++)
-         helper[i] = arr[i];
       int i = start, j = mid + 1, index = start;
       while (i <= mid && j <= end) {
          if (helper[i] < helper[j])
             arr[index++] = helper[i++];
          else {
             arr[index++] = helper[j++];
-            count += mid - i + 1;      // key step here
+            // key step here, the element in left sub-array after i will also form inversion with j
+            count += mid - i + 1;
          }
       }
       while (i <= mid) {

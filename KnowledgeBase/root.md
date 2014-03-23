@@ -191,7 +191,7 @@ Knowledge Base for Concepts related questions in programming interview
   </pre></code>
 
 ##System & Scalability
-
+[NEU-CS 6240: Parallel Data Processing in MapReduce](http://www.ccs.neu.edu/home/mirek/classes/2011-F-CS6240/)
 [Nootcod3r: Count Occurences](http://n00tc0d3r.blogspot.com/2013/07/big-data-count-occurrences.html)<br>
 * Given a large number (millons or billons) of records (integers, IPs, URLs, query key words, etc.),
   * find out top k most frequent records;
@@ -203,7 +203,11 @@ Knowledge Base for Concepts related questions in programming interview
 * Social Graph
   * Facebook/LinkedIn connections
 
-
+##Streaming Algorithm / Online Algorithm
+* Streaming Algorithm  
+  * algorithms for processing data streams in which the input is presented as a sequence of items and can be examined in only a few passes (typically just one). 
+  * limited memory available to them (much less than the input size)
+  * limited processing time per item
 
 
 ##Networking & Protocol
@@ -394,9 +398,22 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * running time of all basic bst operations are O(lgn)
   * The AVL trees are more balanced compared to Red Black Trees, but they may cause more rotations during insertion and deletion. So if your application involves many frequent insertions and deletions, then Red Black trees should be preferred. And if the insertions and deletions are less frequent and search is more frequent operation, then AVL tree should be preferred over Red Black Tree.
 * Trie
-  * a prefix tree, e.g. store all the words in a dictionary
+  * a prefix tree, keys are usually strings
+  * lookup, insertion, deletion, all O(m) m is the length of the key
+  * Usage: e.g. Longest Prefix Matching, AutoComplete, SpellChecking
+  * Advantages over balanced BST:
+    * Lookup key is faster: 
+      * trie, worst case O(m), m is the length of the key
+      * balanced BST, worst case O(mlgn) (compare each key until end), n is the number of nodes in the tree
+    * Space efficient
+  * Advantages over hashmap
+    * support ordered iteration, getSuccessor and getPredecessor
+    * Hash tables are commonly said to have expected O(1) insertion and deletion times, but this is only true when considering computation of the hash of the key to be a constant time operation. When hashing the key is taken into account, hash tables have expected O(k) insertion and deletion times, but may take longer in the worst-case depending on how collisions are handled. Trie have worst-case O(k) insertion and deletion
+* [Radix Tree](http://en.wikipedia.org/wiki/Radix_tree)
+  * a space optimized trie, where each node with only one child is merged with its child
+  * Efficient for small sets (especially if the strings are long) and for sets of strings that share long prefixes
 * Suffix Tree
-  * e.g. store all the suffix substrings in a string
+  * Usage: e.g. Longest Common Substring
 * [Segment Tree](http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/)
   * a tree data structure (balanced binary tree) for storing intervals, or segments.
   * Provide efficient query for range values
