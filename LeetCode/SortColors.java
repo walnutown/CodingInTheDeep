@@ -17,11 +17,12 @@
 public class Solution {
     public void sortColors(int[] A) {
         if (A==null || A.length==0) return;
-        int r=0, b=A.length-1, i=0;
-        while (i <= b){
-            int color = A[i];
-            if (color == 0) swap(A, i++, r++); // notice 'i++', understand why
-            else if (color == 2) swap(A, i, b--); 
+        int r=0, b=A.length-1, w=0;
+        while (w <= b){ // at this time, b ahsn't been filled by blue yet, so we need "=" here
+            // if 2, swap to blue subarray (which is out of order), the swapped value may be 0, which cause another swap
+            // if 0, swap to red subarray (which has been ordered), the swapped value will not be 2, we can move w to next
+            if (A[w] == 0) swap(A, i++, r++); 
+            else if (A[w] == 2) swap(A, i, b--); 
             else i++;
         }
     }

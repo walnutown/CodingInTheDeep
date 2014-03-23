@@ -95,8 +95,9 @@ basics: **binary search (iterative version)**, **in place swap**, **traverse fro
 * Interval
   * MergeIntervals (Leetcode)
   * InsertInterval (Leetcode)
-* Sort
+* Partition
   * SortColors (Leetcode)
+* Sort
   * RacerRater (Company/rocketfuel)
   * RankNumberInStream (CTCI)
   * InsertionSort (CTCI)
