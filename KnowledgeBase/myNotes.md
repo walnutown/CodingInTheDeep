@@ -257,6 +257,7 @@ two ways to check anagrams: **sort chars in word**; **freq count**
   * Pow(x,n) (Leetcode)
   * Sqrt(x) (Leetcode)
   * EvaluateReversedPolishNotation (Leetcode)
+  * InfixNotationEvaluation (Company/twitter)
   * DivideTwoIntegers (Leetcode)
   * MultiplyTwoIntegers (CTCI)
   * SwapInPlace (CTCI)
