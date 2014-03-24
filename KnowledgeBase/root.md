@@ -31,6 +31,46 @@ Knowledge Base for Concepts related questions in programming interview
 * Private Constructor
   * use cases: Singleton pattern, enum
 
+* Synchronized
+  * two basic synchronization idioms: synchronized methods and synchronized statements
+  * synchronized methods
+  <pre><code>public class SynchronizedCounter {
+      private int c = 0;
+
+      public synchronized void increment() {
+          c++;
+      }
+
+      public synchronized void decrement() {
+          c--;
+      }
+
+      public synchronized int value() {
+          return c;
+      }
+  }</code></pre>
+  * synchronized statements
+    * synchronized statements must specify the object that provides the intrinsic lock
+  <pre><code>public class MsLunch {
+      private long c1 = 0;
+      private long c2 = 0;
+      private Object lock1 = new Object();
+      private Object lock2 = new Object();
+
+      public void inc1() {
+          synchronized(lock1) {
+              c1++;
+          }
+      }
+
+      public void inc2() {
+          synchronized(lock2) {
+              c2++;
+          }
+      }
+  }</code></pre>
+
+
 * TryCatchFinally
   * The finally block always executes when the try block exits.
   * the finally block is a key tool for preventing resource leaks
@@ -136,6 +176,11 @@ Knowledge Base for Concepts related questions in programming interview
     * Resizable-array implementation of the List interface.
     * permits null
     * roughly equivalent to Vector, except that it's unsynchronized
+  * TreeMap
+    * A red-black tree based NavigableMap implementation
+    * lookup, get, put, remove, O(lgn)
+    * not synchronized,  
+    <pre><code>SortedMap m = Collections.synchronizedSortedMap(new TreeMap(...));</code></pre>
 
 * Generics
   * added in J2SE 5.0

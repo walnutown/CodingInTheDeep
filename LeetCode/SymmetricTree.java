@@ -28,7 +28,8 @@
  * }
  */
 
-// recursion, time: O(nlgn); space: recursive stack
+// recursion
+// time: O(n); space: recursive stack
 public class Solution {
     public boolean isSymmetric(TreeNode root) {
         if (root == null)   return true;

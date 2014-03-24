@@ -37,7 +37,7 @@ public class Solution {
         else    return (finder(A, B, (m+n)/2) + finder(A, B, (m+n)/2+1))/2.0;
     }
     
-    public double finder(int A[], int[] B, int k){
+    public double findKthSmallestInTwoArrays(int A[], int[] B, int k){ 
         // assume k is always valid
       if (A == null || A.length == 0)
          return B[k - 1];

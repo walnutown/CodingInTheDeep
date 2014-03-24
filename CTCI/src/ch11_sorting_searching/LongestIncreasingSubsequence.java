@@ -13,7 +13,7 @@ public class LongestIncreasingSubsequence {
     */
    
    /*
-    * Cache the LIS ending at index i, and then traverse to get max
+    * DP, memoize the LIS ending at index i, and then traverse to get max
     * time: O(n^2); space: O(n)
     */
    public int findLIS(int[] arr) {
@@ -64,7 +64,7 @@ public class LongestIncreasingSubsequence {
    private int ceilIndex(int[] tails, int start, int end, int key){
       while (start<end){
          int mid = (start+end)>>1;
-         if (tails[mid]<key)
+         if (tails[mid]root<key)
             start = mid+1;
          else
             end = mid;
