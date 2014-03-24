@@ -5,14 +5,14 @@ import java.util.ArrayList;
 public class IntersectionOfTwoSortedArray {
 
    /**
-    * Find the intersection of two sorted arrays
-    * intersection here means the same element
+    * Find the intersection of two sorted arrays.
+    * Intersection here means the same element
     */
    public static void main(String[] args) {
       System.out.println(getIntersection(new int[]{1, 2,3,4}, new int[]{3,4,5,6}));
    }
    
-   // time: O(m+n); space: O(m+n)
+   // time: O(m+n); space: O(1)
    public static ArrayList<Integer> getIntersection(int[] A, int[] B){
       if (A==null || B==null)   return null;
       ArrayList<Integer> res = new ArrayList<Integer>();

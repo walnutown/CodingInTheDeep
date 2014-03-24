@@ -93,7 +93,7 @@ public class Solution {
 
 // bit manipulation, each subset can be represented as a binary string
 // this solution is limited by the architecture of the OS
-// e.g. the max size of the given set is 64bit if the OS is 64bit
+// e.g. the max size of the given set is 64 if the OS is 64bit
 // time: O(2^n * n), space: O(2^n)
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsets(int[] S) {
@@ -101,12 +101,13 @@ public class Solution {
         Arrays.sort(S);
         int count = (1<<S.length);  // total number of susets is 2^length -1
         for (int i=0; i<count; i++){
-            finder(i, res, new ArrayList<Integer>(), S);
+            finder(i, res, S);
         }
         return res;
     }
     
-    public void finder(int num, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r, int[] S){
+    public void finder(int num, ArrayList<ArrayList<Integer>> res, int[] S){
+        ArrayList<Integer> r = new ArrayList<Integer>();
         for (int i=0; i<S.length; i++){
             if ( ((1<<i)&num)>0 )
                 r.add(S[i]);
