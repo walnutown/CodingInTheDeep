@@ -5,6 +5,7 @@
 */
 
 // recursive
+// time: O(n)
 public class Solution {
     public int maxDepth(TreeNode root) {
         if (root == null)   return 0;
@@ -12,7 +13,8 @@ public class Solution {
     }
 }
 
-// DFS
+// DFS, traverse all the leaf nodes and find the max
+// time: O(n)
 public class Solution {
     public int maxDepth(TreeNode root) {
         if (root==null) return 0;
@@ -27,6 +29,31 @@ public class Solution {
         }
         if (root.left != null)  finder(root.left, len+1, max);
         if (root.right != null) finder(root.right, len+1, max);
+    }
+}
+
+// BFS, level order traversal
+// time: O(n)
+public class Solution {
+    public int maxDepth(TreeNode root) {
+        if (root == null)   return 0;
+        ArrayList<TreeNode> prev = new ArrayList<TreeNode>();
+        prev.add(root);
+        int dep = 1;
+        while (!prev.isEmpty()){
+            ArrayList<TreeNode> curr = new ArrayList<TreeNode>();
+            for (TreeNode node:prev){
+                if (node.left!=null)
+                    curr.add(node.left);
+                if (node.right!=null)
+                    curr.add(node.right);
+            }
+            if (curr.isEmpty())
+                break;
+            prev = curr;
+            dep++;
+        }
+        return dep;
     }
 }
 

@@ -15,6 +15,7 @@
  */
 
 // recursion, notice the diff between maxDep and minDep
+// time: O(n)
 public class Solution {
     public int minDepth(TreeNode root) {
         if (root==null) return 0;

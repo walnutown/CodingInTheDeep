@@ -54,6 +54,10 @@ basics: **DFS**(inorder/preorder/postorder in recursive/iterative version), **BF
 
 
 #### 4. find a specific path/node in the tree
+* Notice two kinds of path sum:
+  * the numebr of nodes on the path
+  * the sum of valus of eahc node on the path
+
 * Root to leaf path
   * SumRootToLeafNumbers (Leetcode)
 * Path between two nodes

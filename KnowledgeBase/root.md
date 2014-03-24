@@ -205,6 +205,14 @@ Knowledge Base for Concepts related questions in programming interview
 * Consistent hashing
   * a special kind of hashing such that when a hash table is resized, only K/n keys need to be remapped on average, where K is the number of keys, and n is the number of slots. In contrast, in most traditional hash tables, a change in the number of array slots causes nearly all keys to be remapped.
   * [Nootcod3r](http://n00tc0d3r.blogspot.com/2013/09/big-data-consistent-hashing.html)
+* Log
+  * append-only, totally-ordered sequence of records ordered by time
+  * two-types: 
+    * System and Application daemon logs
+    * Event logs
+      * Kafka -- Linkedin
+        * publish-subscribe messaging rethought as a distributed commit log
+      * Scribe -- Facebook
 
 ##Streaming Algorithm / Online Algorithm
 * Streaming Algorithm  

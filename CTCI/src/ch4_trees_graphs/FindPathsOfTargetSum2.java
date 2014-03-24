@@ -8,7 +8,8 @@ public class FindPathsOfTargetSum2 {
 
    /*
     * Given a binary tree, to print all paths which sum to a given value.
-    * The path does not need to start or end at the root or a leaf
+    * The path does not need to start or end at the root or a leaf. The value of a path is described
+    * as the sum of node values on the path
     */
 
    // refer:
@@ -38,6 +39,7 @@ public class FindPathsOfTargetSum2 {
    }
 
    // use path as key (instead of integer) here to ensure unique
+   // return all paths (top-down) starting at node
    public static Map<ArrayList<TreeNode>, Integer> getPathsStartingAtNode(TreeNode node) {
       if (node == null)
          return null;

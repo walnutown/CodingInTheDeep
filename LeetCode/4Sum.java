@@ -13,7 +13,8 @@
         (-2,  0, 0, 2)
 */
 
-// Use set to avoid duplicates. time: O(n^4)
+// Use set to avoid duplicates. 
+// time: O(n^3); space: O(n^3)
 public class Solution {
     public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
         Set<ArrayList<Integer>> res = new HashSet<ArrayList<Integer>>();
@@ -37,5 +38,50 @@ public class Solution {
             }
         }
         return new ArrayList<ArrayList<Integer>>(res);
+    }
+}
+
+// avoid duplicates without using set
+// time: O(n^3); space: O(n^3)
+public class Solution {
+    public ArrayList<ArrayList<Integer>> fourSum(int[] num, int target) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (num==null || num.length<=3)
+            return res;
+        Arrays.sort(num);
+        int N = num.length;
+        for (int a=0; a<N; a++){
+            if (a>0 && num[a]==num[a-1]) // notice
+                continue;
+            for (int b=a+1; b<N; b++){
+                if (b>(a+1) && num[b]==num[b-1])    // notice
+                    continue;
+                int c = b+1, d = N-1;
+                while (c<d){
+                    int sum = num[a] + num[b] + num[c] + num[d];
+                    if ( sum == target){
+                        ArrayList<Integer> r = new ArrayList<Integer>();
+                        r.add(num[a]);
+                        r.add(num[b]);
+                        r.add(num[c]);
+                        r.add(num[d]);
+                        res.add(r);
+                        while (c<d && num[c+1]==num[c])
+                            c++;
+                        while (c<d && num[d-1]==num[d])
+                            d--;
+                        if (c>=d)
+                            break;
+                        c++;    // don't forget to move to the next element with different value
+                        d--;
+                    }else if (sum < target){
+                        c++;
+                    }else{
+                        d--;
+                    }
+                }
+            }
+        }
+        return res;
     }
 }
