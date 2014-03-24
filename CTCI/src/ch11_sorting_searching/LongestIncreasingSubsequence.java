@@ -11,7 +11,7 @@ public class LongestIncreasingSubsequence {
     * This subsequence is not necessarily contiguous.
     * e.g. [1,9,2], [1,2] or [1,9] is the longest increasing subsequence
     */
-
+   
    /*
     * Cache the LIS ending at index i, and then traverse to get max
     * time: O(n^2); space: O(n)
@@ -36,30 +36,36 @@ public class LongestIncreasingSubsequence {
    }
 
    /*
-    * Patience Sorting
+    * Patience Sorting. Maintain potential longest increasing subsequences and update their tail elements
+    * the list at index i has i+1 elements
+    * refer: http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
     * time: O(nlgn)
     */
    public int findLIS2(int[] A){
       if (A==null || A.length==0)
          return 0;
-      int N = A.length, len=1;
+      int N = A.length;
       int[] tails = new int[N];
-      for (int i=0; i<N; i++){
+      tails[0] = A[0];
+      int len = 1;
+      for (int i=1; i<N; i++){
          if (A[i]<tails[0])
             tails[0] = A[i];
          else if (A[i] > tails[len-1])
             tails[len++] = A[i];
          else
             tails[ceilIndex(tails, -1, len-1, A[i])] = A[i];
+         System.out.println(Arrays.toString(tails));
       }
       return len;
    }
    
+   // binary search the index of list and update its tail element
    private int ceilIndex(int[] tails, int start, int end, int key){
-      while (end-start>1){
+      while (start<end){
          int mid = (start+end)>>1;
          if (tails[mid]<key)
-            start = mid;
+            start = mid+1;
          else
             end = mid;
       }
