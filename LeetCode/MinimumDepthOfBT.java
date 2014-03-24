@@ -24,3 +24,27 @@ public class Solution {
         else return 1 + Math.min(minDepth(root.left), minDepth(root.right));
     }
 }
+
+// BFS, level order traversal, terminate when find one node without children
+public class Solution {
+    public int minDepth(TreeNode root) {
+        if (root == null)   return 0;
+        ArrayList<TreeNode> prev = new ArrayList<TreeNode>();
+        prev.add(root);
+        int dep = 1;
+        while (!prev.isEmpty()){
+            ArrayList<TreeNode> curr = new ArrayList<TreeNode>();
+            for (TreeNode node:prev){
+                if (node.left==null && node.right==null)
+                    return dep;
+                if (node.left!=null)
+                    curr.add(node.left);
+                if (node.right!=null)
+                    curr.add(node.right);
+            }
+            prev = curr;
+            dep++;
+        }
+        return dep;
+    }
+}
