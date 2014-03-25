@@ -1,0 +1,31 @@
+Threads in Java
+	[1] Main thread: when a stand-alone application is run, a user thread is automatically created to execute the main() thread.
+	This thread is called the main thread.
+	[2] Start a new thread:
+		<1> create a class A implements runnable interface, instantiate a new thread with 'new Thread(A);', call start() on the thread
+		<2> create a class extend Thread, instantiate the thread and call start()
+	[3] Synchronization and locks: why need locks? threads in the same process share resources, we need locks to 
+	control access to the shared resources
+	[4] synchronized keyword:
+		<1> can be applied to methods or code blocks to prevent multiple threads from executing the code simultaneously on the same object
+		<2> synchronized method & static synchronized method, multiple threads cannot simultaneously execute synchronized static methods
+		 on the same class, even if they're calling different static synchronized methods.
+		<3> synchronized block: need to provide the object
+	[5] Lock:
+		public class LockedClass{
+			private Lock lock;
+			public void foo(){
+				lock.lock();
+				...
+				lock.unlock();
+			}
+		} 
+	[6] Deadlock & Deadlock prevention
+		<1> Deadlock: multiple threads are in circular waiting of resources held by other threads
+		<2> four conditions for deadlock:
+			* mutual exclusion: only one thread can access a resource at a time
+			* hold and wait: threads already hold a resource can request additional resources, without
+			relinquishing their current resources
+			* No preemption: one thread cannot forcibly remove another thread's resource
+			* Circular wait
+		<3> deadlock prevention: lock hierarchy, which aims to remove the condition#4 above
