@@ -29,3 +29,30 @@ Threads in Java
 			* No preemption: one thread cannot forcibly remove another thread's resource
 			* Circular wait
 		<3> deadlock prevention: lock hierarchy, which aims to remove the condition#4 above
+		<4> Starvation: describes a situation where a thread is unable to gain regular access to shared
+		resources and is unable to make progress. This happens when shared resources are made unavailable
+		for long periods by "greedy" threads
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

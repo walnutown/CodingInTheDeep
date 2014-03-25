@@ -353,3 +353,6 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
   * a good way is to print out states in each level.
   * try to use the case with a recursive tree of small depth
 * TowerOfHanoi (CTCI)
+
+## Dynamic Programming
+* PaintHouse (Company/LinkedIn)
