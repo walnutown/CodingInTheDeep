@@ -29,10 +29,13 @@ public class BestTimeToBuyAndSellStocks4 {
       return maxProfit;
    }
 
+   // we can use segment tree to query the range maximal
+   // time: O(nlgn); sapce: O(n)
+
    // If there's later price that is higher than the current price, we can buy a transaction.
    // And in order to max this transaction, we have to sell it at the highest price in later time.
    // The trick is that we maintain a maxHeap to track the highest price after the current
-   // time: O(n); space: O(n)
+   // time: O(nlgn); space: O(n), heap sort takes O(nlgn), traversal on the original array takes O(n)
    public int findMaxProfit2(int[] A){
       if (A==null || A.length==0)
          return 0;
