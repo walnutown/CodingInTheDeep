@@ -15,9 +15,13 @@ CTCI/.classpath
 
 CTCI/.project
 
+CTCI/bin/
+
 Company/.classpath
 
 Company/.project
+
+Company/bin/
 
 *.pdf
 
