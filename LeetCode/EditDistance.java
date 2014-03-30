@@ -8,7 +8,12 @@
     c) Replace a character
 */
 
-// 2d DP, time: O(m*n); space: O(m*n)
+// DP
+// word1.substring(0, i) can be converted into word2.substring(0, j) using mem[i][j] steps
+// mem[i][j] = mem[i][j-1], denotes a insertion operation in word1.substring
+// mem[i][j] = mem[i-1][j], denotes an insertion operation in word2.substring
+// mem[i][j] = mem[i-1][j-1], denotes an replace operation in word2.substring
+// time: O(m*n); space: O(m*n)
 public class Solution {
     public int minDistance(String word1, String word2) {
         if (word1==null || word2==null){
