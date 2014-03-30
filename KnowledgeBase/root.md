@@ -109,6 +109,9 @@ Knowledge Base for Concepts related questions in programming interview
   * interface is not part of the class hierarchy, although they work in combination with classes. It provides common features
   * rewrite an interface will cause classes implementing the old interface to break because they don’t implement it anymore. (a class that implements an interface must implement all the methods declared in the interface)
 
+* Sort:
+  * Arrays.sort: uses tuned quicksort, if array size is small (<7), use insertion sort; otherwise, use quicksort.
+  * Collections.sort: convert the ArrayList to array. Arrays.sort() the array, and reset the values in ArrayList
 
 
 * Nested Class
