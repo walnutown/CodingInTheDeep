@@ -1,16 +1,16 @@
 package amazon;
 
+import org.junit.Test;
+
 public class BitMultiplyOperation {
 
    /**
-    * Implement multiplication without using '*' operators
+    * Implement multiplication without using '+', '-', '*' operators
     */
-   public static void main(String[] args) {
-      System.out.println(bitMultiply1(10, -8));
-      System.out.println(bitMultiply2(10, -8));
-   }
-
-   public static int bitMultiply1(int a, int b) {
+  
+   // add multiplicand iteratively by multiplier times
+   // time: O(m), m is the value of multiplier
+   public int bitMultiply1(int a, int b) {
       int multiplier = a < 0 ? negative(a) : a;
       int multiplicand = b < 0 ? negative(b) : b;
       int count = 0, res = 0;
@@ -21,7 +21,10 @@ public class BitMultiplyOperation {
       return (a ^ b) < 0 ? negative(res) : res;
    }
 
-   public static int bitMultiply2(int a, int b) {
+   // peasant/ binary multiplication
+   // refer to http://en.wikipedia.org/wiki/Multiplication_algorithm#Peasant_or_binary_multiplication
+   // time: O(32)
+   public int bitMultiply2(int a, int b) {
       int multiplier = a < 0 ? negative(a) : a;
       int multiplicand = b < 0 ? negative(b) : b;
       int res = 0;
@@ -34,12 +37,19 @@ public class BitMultiplyOperation {
       return (a ^ b) < 0 ? negative(res) : res;
    }
 
-   public static int negative(int num) {
+   public int negative(int num) {
       return bitAdd(~num, 1);
    }
 
-   public static int bitAdd(int a, int b) {
+   public int bitAdd(int a, int b) {
       return b == 0 ? a : bitAdd(a ^ b, (a & b) << 1); // (a&b)<<1 is the carry
    }
+   
+   @Test
+   public void test() {
+      System.out.println(bitMultiply1(10, -8));
+      System.out.println(bitMultiply2(10, -8));
+   }
+
 
 }
