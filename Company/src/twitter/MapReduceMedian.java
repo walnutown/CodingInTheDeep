@@ -15,8 +15,7 @@ public class MapReduceMedian {
    // <1> Assign each node with a range of numbers
    // e.g. Node#1 - [0,99], Node#2 - [100, 199] ... 
    // <2> map each number to the corresponding node
-   // <3> Calculate the node includes the median number, and index of the median number
-   // we can get the size of numbers on each node, and then the total size of numbers,
-   // then we get the #node that the median is on
-   // <4> QuickSelect the median number
+   // <3> get the size of numbers on each node, the total size of numbers, and the order of median
+   // <4> Calculate the node containing the median number
+   // <5> QuickSelect the median number
 }
