@@ -19,21 +19,33 @@
   isMatch("aab", "c*a*b") → true
 */
 
-// Recursion
-// http://discuss.leetcode.com/questions/175/regular-expression-matching
+// Recursion, note following cases
+// [1] p==""
+// [2] s==""
+// [3] s=="aXXXX", p=="aXXXX" or p==".XXXX"
+// [4] s=="aXXXX", p=="bXXX", (X here represents a random character)
+// use char array to save sapce
 public class Solution {
     public boolean isMatch(String s, String p) {
-        if (s==null || p==null) return s==null && p==null;
+        if (s==null || p==null)
+            return s==null && p==null;
         return m(s.toCharArray(), p.toCharArray(), 0, 0);
     }
-    public boolean m(char[] s, char[] p, int i, int j){
-        if(j == p.length) return i == s.length;   
-        if(j == p.length - 1 || p[j + 1] != '*'){
-            if(i == s.length) return false;   
-            return (p[j] == '.' || s[i] == p[j]) && m(s, p, i+1, j+1);
-        }
-        while(i < s.length && (p[j] == '.' || s[i] == p[j]))  // p[j+1] == '*'
-            if (m(s, p, i++, j + 2)) return true;
-        return m(s, p, i, j + 2);   
+    
+    private boolean m(char[] s, char[] p, int i, int j){
+        if (j==p.length)
+            return i==s.length;
+        if (i==s.length)
+            return j+1<p.length && p[j+1]=='*' && m(s,p,i,j+2);
+        if (s[i]==p[j] || p[j]=='.'){
+            boolean isMatch = false;
+            if (j+1<p.length && p[j+1]=='*')
+                isMatch = isMatch || m(s,p,i+1,j) || m(s,p,i,j+2);
+            return isMatch || m(s,p,i+1,j+1);
+        }else
+            return j+1<p.length && p[j+1]=='*' && m(s,p,i,j+2);
     }
+    
 }
+
+
