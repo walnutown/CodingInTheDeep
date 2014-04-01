@@ -93,6 +93,15 @@ Knowledge Base for Concepts related questions in programming interview
     * boolean:                                             | false
     * char: 16-bit unicode, from \u0000 to \uffff (0-65535)| \u0000
 
+* Operator Precedence
+    * from highest to lowest, just some common ones, [see all](http://introcs.cs.princeton.edu/java/11precedence/)
+      * [],()
+      * ++,--
+      * *, /
+      * +, -
+      * >>, <<
+      * ==, !=
+
 * 'Static' Keyword
     * static method or static instance variable is owned by the class, instead of a specific instance. In other words, static members are shared by all instances.
     * static method cannot be overriden (if you create a method with the same return type and signature, that's called method hiding)

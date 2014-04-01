@@ -35,48 +35,46 @@ public class Solution {
 
 // Pre-processing time is O(m), worst case matching time is O(n)
 // time: O(m+n)
-public class Solution {
+ 
+ public class Solution {
     public String strStr(String haystack, String needle) {
+        // KMP alogrithm, O(n + m)
         if (needle == null || haystack == null)
             return null;
         if (needle.length() == 0)
             return haystack;
+        // needle.length() > 0 ,here
         if (haystack.length() == 0)
             return null;
-        char[] S = haystack.toCharArray(), W = needle.toCharArray();
-        int[] T = buildKMPTable(W);
-        int m = 0, i = 0;
-        while (m + i < S.length){
-            if (S[m+i] == W[i]){
-                if (i == W.length-1)
-                    return haystack.substring(m);
+        char[] H = haystack.toCharArray(), N = needle.toCharArray();
+        int[] T = buildKMPTable(N);
+        int i=0, j=0;
+        while (i < H.length){
+            if (H[i]==N[j]){
+                i++; j++;
+            }else if (j>0)
+                j = T[j-1];
+            else
                 i++;
-            }else{
-                m = m + i - T[i];
-                i = T[i] > -1 ? T[i] : 0;
-            }
+            if (j==N.length)
+                return haystack.substring(i-j);
         }
         return null;
     }
     
-    public int[] buildKMPTable(char[] W){
-        int[] T = new int[W.length];
-        T[0] = -1;
-        if (W.length <= 1)   // avoid IndexOutOfBoundException
-            return T;
-        T[1] = 0;
-        int i = 2, j = 0;
-        while (i < W.length) {
-            if (W[i - 1] == W[j]) { // match continues
-                T[i] = ++j;
+    // find match patterns in String N itself
+    private int[] buildKMPTable(char[] N){
+        int[] T = new int[N.length];
+        int i=1, j=0;
+        while (i<N.length){
+            if (N[i]==N[j]){
+                T[i++] = ++j;
+            }else if (j>0)
+                j = T[j-1];
+            else
                 i++;
-            } else {
-                if (j > 0) // no match, but we can fall back
-                    j = T[j];
-                else // run out of candidates
-                    T[i++] = 0; 
-            }
         }
         return T;
     }
-}
+}   
+    

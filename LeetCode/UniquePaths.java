@@ -39,6 +39,8 @@ public class Solution {
     }
 }
 
+// transform the problem to the following:
+// How many different strings of size m+n, consisting of m Rs and n Ds, are there?
 // use Combination formula, time: O(m+n); space: O(m+n)
 // yet, may cause overflow when m or n is big
 // refer: http://joaoff.com/2008/01/20/a-square-grid-path-problem/

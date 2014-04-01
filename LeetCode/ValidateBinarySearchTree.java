@@ -51,7 +51,7 @@ public class Solution {
     }
 }
 
-// The foolowing code is less efficient than the above, understand why
+// The following code is less efficient than the above, understand why
 public class Solution {
     public boolean isValidBST(TreeNode root) {
         return checker(root, Integer.MIN_VALUE, Integer.MAX_VALUE);
