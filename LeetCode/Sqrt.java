@@ -5,6 +5,7 @@
 */
 
 // binary search
+// time: O(lgn)
 public class Solution {
     public int sqrt(int x) {
         if (x < 2)  return x;
