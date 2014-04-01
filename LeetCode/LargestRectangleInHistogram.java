@@ -1,36 +1,15 @@
-// recursion, no pass large judge
-public class Solution {
-    
+/*
+    Given n non-negative integers representing the histogram's bar height where the width of each bar is 1, find the area of largest rectangle in the histogram.
 
-    public int largestRectangleArea(int[] height) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int len = height.length;
-        if (len == 0){
-            return 0;
-        }
-        
-        return findMax(height, 0, len-1);
-    }
-    
-    public int findMax(int[] height, int start, int end){
-        if (start > end){
-            return 0;
-        }
-        int minHeight = height[start];
-        int minIndex = start;
-        for(int i = start+1; i <= end; i++){
-            if ( height[i] < minHeight){
-                minHeight = height[i];
-                minIndex = i;
-            }
-        }
-        return Math.max(minHeight * (end-start+1), Math.max(findMax(height, start, minIndex-1), findMax(height, minIndex+1, end)));
-    }
-}
+    For example,
+    Given height = [2,1,5,6,2,3],
+    return 10.
+*/
 
-
-// Accepted
+// use Stack to store the continuous sub-array in ascending order
+// when the ascending sub-array terminates, calcualte the area that
+// uses top element in stack as left border, and current element as right border
+// time: O(n); sapce: O(n)
 public class Solution {
     public int largestRectangleArea(int[] height) {
         if (height == null || height.length == 0)
@@ -40,7 +19,7 @@ public class Solution {
         while (r < height.length) {
             if (left.isEmpty() || height[r] >= height[left.peek()])
                 left.push(r++);
-            else {      // Calculate the local max in [lef, r)
+            else {      // Calculate the local max in [left, r)
                 int h = height[left.pop()];
                 int len = left.isEmpty() ? r : r - left.peek() - 1;   
                 max = Math.max(max, h * len);
