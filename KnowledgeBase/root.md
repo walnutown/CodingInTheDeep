@@ -441,6 +441,11 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
     * Array, one circular array, two pointers (head/tail)
     * LinkedList, two pointers (head/tail)
 * Double-ended Queue
+  * deque (pronounced deck), an abstract data type that generalizes a queue
+  * elements can be added or removed from either the head or tail
+  * implementation
+    * dynamic array
+    * doubly linked list
 
 
 * Heap (Priority Queue)
@@ -450,6 +455,8 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * Sentinel, a dummy object that allows us to simplify boundary conditions
     * make the code clean, should be used judiciously when the list is small (memory cost)
   * [XOR LinkedList](http://en.wikipedia.org/wiki/XOR_linked_list)
+  * Doubly Linked List: two pointers, prev and next, easy for reverse traversal. The head and tail node are typically sentinel node or null to facilitate traversal of the list.
+  * Circular Doubly Linked List: the head and tail are connected to form a circle.
 * Binary Search Tree 
   * Query operations: search(), getMin(), getMax(), getPredecessor(), getSuccessor(), worst case O(h) (h is the height of the tree). In a balanced bst, worst case is O(lgn) (n is the number of nodes)
   * Modification operation

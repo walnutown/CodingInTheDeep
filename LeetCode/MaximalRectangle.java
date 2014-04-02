@@ -1,4 +1,13 @@
-// Accepted, O(m*n)
+/*
+    Given a 2D binary matrix filled with 0's and 1's, 
+    find the largest rectangle containing all ones and return its area.
+*/
+
+// Based on Leetcode/LargestRectangleInHistogram
+// [1] Maintain an array holding the heights of a row.
+// [2] Calculate the largest rectangle in the area above the current row
+// [3] Extend the area gradually until we reach the last row
+// time: O(m*n); space: O(n)
 public class Solution {
     public int maximalRectangle(char[][] matrix) {
         if (matrix==null || matrix.length==0 || matrix[0].length==0) return 0;
