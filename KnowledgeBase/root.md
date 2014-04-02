@@ -262,6 +262,7 @@ Knowledge Base for Concepts related questions in programming interview
 * Consistent hashing
   * a special kind of hashing such that when a hash table is resized, only K/n keys need to be remapped on average, where K is the number of keys, and n is the number of slots. In contrast, in most traditional hash tables, a change in the number of array slots causes nearly all keys to be remapped.
   * [Nootcod3r](http://n00tc0d3r.blogspot.com/2013/09/big-data-consistent-hashing.html)
+  * The key point is that we change the one-one mapiing between N%k and server# to multi-one
 * Log
   * append-only, totally-ordered sequence of records ordered by time
   * two-types: 
@@ -350,6 +351,18 @@ Knowledge Base for Concepts related questions in programming interview
 * UML legend
 * Use MVC framework to help quickly setup elementary classes
 * Note the usage of enum (how to initialize the enum with initial value)
+* Dependency Injection
+  * testing technique
+  * Basically means giving an obejct its instance variables (dependency), instead of letting the object itself construct those instance variables
+  * See comparison below
+  <pre><code>// originally
+    public someClass(){
+      myObject = Factory.getObject();
+    }
+    public someClass(MyClass myObject){
+      this.myObject = myObejct;
+    }
+  </pre></code>
 
 
 ##OO Design Patterns

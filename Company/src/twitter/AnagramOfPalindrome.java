@@ -2,8 +2,9 @@ package twitter;
 
 public class AnagramOfPalindrome {
    /*
-    * A String A is a palindrome if it has exactly the same sequence of characters when read left to right
-    * as it has when read right-to-left.For example, the following strings are palindrome 
+    * A String A is a palindrome if it has exactly the same sequence of characters when read left to
+    * right
+    * as it has when read right-to-left.For example, the following strings are palindrome
     * kayak",
     * "codilitytilidoc",
     * "neveroddoreven".
@@ -27,16 +28,20 @@ public class AnagramOfPalindrome {
     * expected worst-case space complexity is O(1) (not counting the storage required for input
     * arguments).
     */
-   
-   public boolean isAnagramOfPalindrome(String S){
+
+   // if the string is a palindrome, each character should appear twice, except the middle character
+   // when the length is odd. So, we only need to check the number of characters that has odd
+   // occurrences
+   // time: O(n); space: O(1)
+   public boolean isAnagramOfPalindrome(String S) {
       int digits = 0;
-      for (int i=0; i<S.length(); i++){
-         int ch = S.charAt(i)-'a';
-         digits ^= (1<<ch);
+      for (int i = 0; i < S.length(); i++) {
+         int ch = S.charAt(i) - 'a';
+         digits ^= (1 << ch);
       }
       int count = 0;
-      for (int i=0; i<26; i++){
-         if (((digits>>i)&1)==1)
+      for (int i = 0; i < 26; i++) {
+         if (((digits >> i) & 1) == 1)
             count++;
       }
       return count >= 2;
