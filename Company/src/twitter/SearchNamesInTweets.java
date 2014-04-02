@@ -23,12 +23,15 @@ public class SearchNamesInTweets {
    // with punctuation, and then convert all words into lowercase.
    // B. Index takes O(n), query takes O(1) runnint time
    // C. requires O(n) space
+   // D. so, what if we want to search multiple keywords? we just need to query each keyword separately
+   // E. waht if we want to search multiple continuous keywords? Get the index list of each keyword.
+   // sort all the indexes, find whether there's continuous sub-array matches the pattern.
    // [3] If we have a list of words to query multiple files. We can use Trie!
    // A. trie is more space efficient than map. For example 'author', 'authority', and 'authorize'.
    // Hashtable index uses 6+9+9=24 characters but trie uses only 6+3+2=11, leading to 55%
    // compression.
    // B. query takes O(k) running time, k is the average length of words in text files. Average
    // number of characters in an English word is around 4-5, and most of them are shorter than 15.
-   // Which means it’ll generally take around 4-5 operations, and mostly less than 15, to find a
+   // Which means it'll generally take around 4-5 operations, and mostly less than 15, to find a
    // word in the trie independent of the number of words stored
 }
