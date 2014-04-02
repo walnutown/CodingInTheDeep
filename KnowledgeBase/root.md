@@ -498,12 +498,106 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
 
 ## Android
 [tests for Android knowledge base](http://skillgun.com/Questions.aspx?p_id=0&Qbc_id=17&Topicname=Android&typeid=0&count=0&QbMT_id=17&usrSubmit_qtn=0&chptrname=All&FAQ_Type=2)
+* APK (Application Package File)
+  * the package file format used to distribute and install application software and middleware onto Google's Android operating system
+  * An APK file contains all of that program's code (such as .dex files), resources, assets, certificates, and manifest file
 
+* Low Level Architecture
+  * Android is an operating system based on Linux kernel, uses DVM (Dalvik Virtual Machine). DVM sits on library layer
+    * .java -> .class -> .dex
+  * Android team preferred DVM over JVM because of below given reasons.
+    * 1. Though JVM is free it was under GPU license, which is not good for Android as most of the Android is under Apache license. 
+    * 2. JVM was designed by keep desktops in mind. So it is too heavy for embedded devices.
+    * 3. DVM takes less memory, runs & loads faster compared to JVM.
+    * 4. Since mobile devices have lots of limitations like low CPU speed and less Memory, it is always better not to use heavy components like JVM.
+  * Top two layers (application, and Framework layers) are written in Java, whereas drivers layer and library layer are written in C and C++.
 
+* Support different devices (use resources in res/)
+  * Language
+    create additional values directories inside res/ that include a hyphen and the ISO country code at the end of the directory name. For example, **values-es/** is the directory containing simple resourcess for the Locales with the language code "es"
+  * Screen
+    create a unique layout XML file for each screen size you want to support. Each layout should be saved into the appropriate resources directory, named with a -<screen_size> suffix. For example, a unique layout for large screens should be saved under **res/layout-large/**
+  * Platform version
+    Specify minimum and target API in Manifest
 
+* Activity
+  *  a single screen in an application, each activity has a corresponding <activity> declaration in manifest file.
+  * Lifecycle: onCreate -> onStart -> onResume -> onPause -> onStop -> onDestroy
+    * onPause: the activity is partially obscured by another activity. eg, pops up one dialog. Save data into locale storage or database in onPause()
+    * onStop: the activity is completely hidden and not visible to the user
+  * Decalre a launcher activity in manifest 
 
+* Fragment
+  * Introduced in Android 3.0 (API 11)
+  * Decompose application functionality and UI into reusable modules
+  * Create a fragment
+    * static, declare <fragment> in res/layout
+    * dynamic, use FragmentManager
+  * Communication with activity
+    * frag -> act : define interface in frag, and implement interface in activity
+    * act -> frag: fragment.setArguments(Bundle)
+  * Lifecycle:
+    * create: onAttach -> onCreate -> onCreateView -> onActivityCreated
+    * start: onStart
+    * resume: onResume
+    * pause: onPause
+    * destroy: onDestroyView -> onDestroy -> onDetach
 
+* ActionBar
+  * first introduced with API level 11 (Android 3.0) 
+  * can use action bar on devices running Android 2.1 or higher by importing supported library
 
+* Intent
+  * An Intent is a messaging object you can use to request an action from another app component
+  * 3 basic use-cases: start an activity, start a service, deliver a broadcast
+  * implicit and explicit intent
+  * put data into intent
+  * get result from intent
+
+* Manifest
+  * Every application must have an AndroidManifest.xml file (with precisely that name) in its root directory. The manifest file presents essential information about your app to the Android system, information the system must have before it can run any of the app's code
+  * It names the Java package for the application. The package name serves as a unique identifier for the application.
+  * It describes the components of the application — the activities, services, broadcast receivers, and content providers
+  * It declares processes
+  * It declares permissions
+  * It declares API level
+
+* Permission
+  * Declare
+    * <uses-permission> in Manifest
+  * Usage:
+    * To restrict access to costly operations.
+    * To restrict access to device hardware features.
+    * To restrict access to user data.
+
+* Service
+  * A Service is an application component that can perform long-running operations in the background and does not provide a user interface
+  * Not a process, not a thread. It runs in the main thread of the application that hosts it, by default
+  * A service can allow other components to bind to it, in order to interact with it and perform interprocess communication
+
+* Content Provider
+  * Content providers manage access to a structured set of data. 
+  * You don't need to develop your own provider if you don't intend to share your data with other applications
+  * eg, Calendar Provider, Contacts Provider
+
+* Configuration change
+  * Some device configurations can change during runtime (such as screen orientation, keyboard availability, and language)
+  * Android restarts the running Activity (onDestroy()is called, followed by onCreate())
+  * The restart behavior is designed to help your application adapt to new configurations by automatically reloading your application with alternative resources that match the new device configuration
+
+* Broadcast Receiver
+  * A broadcast is a message that any app can receive
+  * You can deliver a broadcast to other apps by passing an Intent to sendBroadcast(),
+
+* ANR: Application Not Responding
+  * Application has to respond to main UI thread in 5 seconds
+
+* Context
+  * allows access to application-specific resources and classes, as well as up-calls for application-level operations such as launching activities, broadcasting and receiving intents
+  * two kinds of Context, Activity and Application
+  * to avoid context-related memory leaks, remember the following:
+    * Do not keep long-lived references to a context-activity (a reference to an activity should have the same life cycle as the activity itself, otherwise, the reference will prevent GC from collecting the activity)
+    * Try using the context-application instead of a context-activity
 
 
 
