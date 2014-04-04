@@ -193,6 +193,12 @@ Knowledge Base for Concepts related questions in programming interview
     * lookup, get, put, remove, O(lgn)
     * not synchronized,  
     <pre><code>SortedMap m = Collections.synchronizedSortedMap(new TreeMap(...));</code></pre>
+  * HashMap
+    * provide quick access to key-value pairs
+    * is basically an array of buckets, each bucket holds a list of entires
+    * we calculate hash code from the key, and get the index to store key-value pairs
+    * if two keys have the same hash code, they're mapped into the same bucket, and chined using linked list.
+    * when we resize the hashmap, the hash code of each key remains the same, but they're mapped to different index in the array. This will take O(n).
 
 * Generics
   * added in J2SE 5.0
@@ -372,7 +378,22 @@ Knowledge Base for Concepts related questions in programming interview
 * Creational Patterns
   * Singleton:  java.lang.Runtime
       * how to implement? (private constructor)
-      * how to ensure multithread safe? (enum)
+      * how to ensure multithread safe? (enum, synchronized)
+      * <pre><code>public class Singleton{
+        private static Singleton sRef;
+        private Singelton(){
+
+        }
+        public static Singelton getInstance(){
+          if (sRef==null){
+            synchronized(this){
+              if (sRef==null)
+                sRef = new Singleton();
+            }
+          }
+          return sRef;
+        }
+      }</pre></code>
   * Abstract Factory / Factory Method
       * Abstract Factory returning the factory itself which in turn can be used to create another abstract/interface type
       * Factory Method returning an implementation of an abstract/interface type
@@ -462,6 +483,8 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
 
 
 * Heap (Priority Queue)
+  * parent node is always 'larger'(depends on comparator) than the child nodes 
+  * getMax(), O(1); insert(), O(lgn); removeMax(), O(lgn);
 
 * LinkedList
   * when cascade multiple pointers, rememebr to check null. e.g. node.next.next, should check if (node.next==null) in advance
