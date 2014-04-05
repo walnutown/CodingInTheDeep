@@ -199,6 +199,11 @@ Knowledge Base for Concepts related questions in programming interview
     * we calculate hash code from the key, and get the index to store key-value pairs
     * if two keys have the same hash code, they're mapped into the same bucket, and chined using linked list.
     * when we resize the hashmap, the hash code of each key remains the same, but they're mapped to different index in the array. This will take O(n).
+    * In Java source code, hash code is int type, so we can have maximum 2^32 different hashcodes.
+  * BitSet
+    * basically an array of long, if the array size is n, we can represent 64n different integers
+    * BitSet.set(int), BitSet only supports non negative integers.
+    * If the integer set is sparse, BitSet will waste a lot of space. An example is an integer set of only one integer 1,000,000,000, this will take 2^30/64 = 16MB space. In this case, Set<Integer> is a better choice
 
 * Generics
   * added in J2SE 5.0

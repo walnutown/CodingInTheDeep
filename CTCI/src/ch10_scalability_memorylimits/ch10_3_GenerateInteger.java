@@ -14,9 +14,7 @@ public class ch10_3_GenerateInteger {
     * an integer which is not contained in the file. Assume you have 1GB of memory available for
     * this task.
     */
-   // FOLLOW UP
-   // what if you have only 10MB memory? Assume that all the values are distinct and we now have no
-   // more than one billion non-negative integers
+   
 
    /*
     * <1> There're a total of 2^32, or 4 billion, distinct integers (and 2^31 non-negative integers)
