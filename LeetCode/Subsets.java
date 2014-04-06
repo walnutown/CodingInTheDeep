@@ -72,7 +72,7 @@ public class Solution {
 
 // create new set based on previous set, iterative version. time: O(1+2+4+...+2^n) = O(2^n)
 // exponential running time, better than the DFS method, which takes factorial time
-// n! grows faster than 2^n
+// Note: n! grows faster than 2^n
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsets(int[] S) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

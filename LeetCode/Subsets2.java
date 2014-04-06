@@ -17,6 +17,8 @@
     ]
 */
 
+// DFS
+// time: O(n!); space: O(n!)
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] S) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
@@ -40,12 +42,14 @@ public class Solution {
 }
 
 // iterative
+// Add new element to existing subsets to create new subsets
+// time: O(2^n)
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
         res.add(new ArrayList<Integer>());
         if(num.length==0)   return res;
-        Arrays.sort(num);
+        Arrays.sort(num); // subset must be in non-descending order
         int start = 0;
         for(int i = 0; i < num.length; i++)
         {
