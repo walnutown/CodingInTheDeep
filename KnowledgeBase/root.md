@@ -28,6 +28,30 @@ Knowledge Base for Concepts related questions in programming interview
         * change parameter name
       * Overloading happens at compile time, compiler determines whether a given method is correctly overloaded, if not, error
 
+* String
+  * String pool: comes from the idea that all already defined string are stored in same 'pool'(heap) and before creating String using "", compiler checks if such string is already defined. This is called [string interning](http://www.programcreek.com/2014/03/create-java-string-by-double-quotes-vs-by-constructor/)
+  <pre><code>String s = "a" + "bc";
+    String t = "ab" + "c";
+    System.out.println(s == t); // true, have same reference.
+    System.out.println(s.equals(t)); // true, have same value
+
+    String c = "abcd";
+    String d = new String("abcd");
+    System.out.println(c == d);  // False, new String() create a new object
+    System.out.println(c.equals(d)); // True
+  </pre></code>
+  * String immutability
+    * Immutable objects cannot be modified once it's created. Any modification in immutable objects result in new objects
+    * Why String is immutable in Java?
+      * String pool, one obejct may have several references. If String is mutable, modify the object will influence all the references.
+  * Substring
+    * in JDK6, T = S.substring() reference to the original String object S. This will easily cause memory leak. Why? GC will not collect S even when it's not used, because T has a reference to it.
+    * in JDK7, T = S.substring() will create a new String object. Thus solve this issue.
+
+* Pass By Value
+  * Java Passes everything by values
+  * Objects and arrays are passed by values. The value here is a variable storing the memory address of the object/array (In short, value stores the reference to object)
+
 * Private Constructor
   * use cases: Singleton pattern, enum
 
@@ -157,6 +181,36 @@ Knowledge Base for Concepts related questions in programming interview
   * Calls finalize() method in an object before the obejct is finally destroyed
   * Can select different GC
 
+* Autoboxing & Unboxing
+  * Autoboxing: 
+    *the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes
+    * Classic use of autoboxing is adding primitive types into Collections
+  * Unboxing: 
+    * Converting an object of a wrapper type (Integer) to its corresponding primitive (int) value is called unboxing
+    * Classic use of unboxing is when Wrapper class are doing arithmetic operations (>=, <=, >, <, not including ==)
+  * Compiler uses valueOf() method to convert primitive to Object and uses intValue(), doubleValue() etc to get primitive value from Object.
+    * Integer.valueOf: Returns an Integer instance representing the specified int value. Uses cached obejcts when value>=-128 && value<=127, otherwise, create new Integer.
+  <pre><code>int i1 = 1;
+        int i2 = 1;
+        System.out.println("i1==i2 : " + (i1 == i2)); // true
+
+        // Example 2: equality operator mixing object and primitive
+        Integer num1 = 1; // autoboxing
+        int num2 = 1;
+        System.out.println("num1 == num2 : " + (num1 == num2)); // true
+
+        // Example 3: special case - arises due to autoboxing in Java
+        Integer obj1 = 1; // autoboxing will call Integer.valueOf()
+        Integer obj2 = 1; // same call to Integer.valueOf() will return same
+                            // cached Object
+
+        System.out.println("obj1 == obj2 : " + (obj1 == obj2)); // true
+
+        // Example 4: equality operator - pure object comparison
+        Integer one = new Integer(1); // no autoboxing
+        Integer anotherOne = new Integer(1);
+        System.out.println("one == anotherOne : " + (one == anotherOne)); // false
+  </pre></code>
 
 
 * Data Structure

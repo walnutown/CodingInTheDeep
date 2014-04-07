@@ -88,7 +88,7 @@ public class BinaryHeap<E> {
    private void siftUpComparable(int k, E x) {
       Comparable<? super E> key = (Comparable<? super E>) x;
       while (k > 0) {
-         int parent = (k - 1) >>> 1; // unsigned left shift operator
+         int parent = (k - 1) >>> 1; // unsigned right shift operator
          Object e = queue[parent];
          if (key.compareTo((E) e) >= 0)
             break;
