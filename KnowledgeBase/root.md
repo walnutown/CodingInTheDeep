@@ -55,6 +55,12 @@ Knowledge Base for Concepts related questions in programming interview
 * Private Constructor
   * use cases: Singleton pattern, enum
 
+* Stack & Heap
+  * Stack stores local variables. Deep recursion may cause StackOverFlow exception
+  * Heap stores global variables. May cause OutOfMemory exception
+  * In jave, size of stack is smaller than size of heap, although both can be adjusted. Thus, it's a good habit to put large space object on heap
+  * Variables stored in stacks are only visible to the owner Thread, while objects created in heap are visible to all thread.
+
 * Synchronized
   * two basic synchronization idioms: synchronized methods and synchronized statements
   * synchronized methods
@@ -193,19 +199,15 @@ Knowledge Base for Concepts related questions in programming interview
   <pre><code>int i1 = 1;
         int i2 = 1;
         System.out.println("i1==i2 : " + (i1 == i2)); // true
-
         // Example 2: equality operator mixing object and primitive
         Integer num1 = 1; // autoboxing
         int num2 = 1;
         System.out.println("num1 == num2 : " + (num1 == num2)); // true
-
         // Example 3: special case - arises due to autoboxing in Java
         Integer obj1 = 1; // autoboxing will call Integer.valueOf()
         Integer obj2 = 1; // same call to Integer.valueOf() will return same
                             // cached Object
-
         System.out.println("obj1 == obj2 : " + (obj1 == obj2)); // true
-
         // Example 4: equality operator - pure object comparison
         Integer one = new Integer(1); // no autoboxing
         Integer anotherOne = new Integer(1);
@@ -260,23 +262,40 @@ Knowledge Base for Concepts related questions in programming interview
     * If the integer set is sparse, BitSet will waste a lot of space. An example is an integer set of only one integer 1,000,000,000, this will take 2^30/64 = 16MB space. In this case, Set<Integer> is a better choice
 
 * Generics
-  * added in J2SE 5.0
-  * Adds complie-time type safety (each collection can only have one type of parameter) to the Collections Framework, and eliminates the drudgery of casting. (Compile-time error is easy to detect than run-time error)
+  * added in JDK5
+  * Use case: Collections, generic method, generic class
   * In the following case, line 2 will fire a complie error. In general, if Foo is a subtype (subclass or subinterface) of Bar, and G is some generic type declaration, it is not the case that G<Foo> is a subtype of G<Bar>. This is probably the hardest thing you need to learn about generics, because it goes against our deeply held intuitions.
   <pre><code>List<String> ls = new ArrayList<String>(); // 1
     List<Object> lo = ls; // 2 
   </code></pre>
-  * So what is the supertype of all kinds of collections? It's written Collection<?> (pronounced "collection of unknown"), that is, a collection whose element type matches anything. It's called a **wildcard type**
-  * List<? extends Shape> is an example of a **bounded wildcard**. drawAll() will accept lists of any subclass of Shape.
-  <pre><code>public void drawAll(List<? extends Shape> shapes) {
-    ...
-  }
-  </code></pre>
-  That price to be paid for the flexibility of using wildcards is that it is now illegal to write into shapes in the body of the method. For instance, this is not allowed:
-  <pre><code>public void addRectangle(List<? extends Shape> shapes) {
-      shapes.add(0, new Rectangle()); // Compile-time error!
-  }
-  </code></pre>
+  * Bounded and Unbounded wildcards
+    * So what is the supertype of all kinds of collections? It's written Collection<?> (pronounced "collection of unknown"), that is, a collection whose element type matches anything. It's called a **wildcard type**
+    * List<? extends Shape> is an example of a **bounded wildcard**. drawAll() will accept lists of any subclass of Shape.
+    <pre><code>public void drawAll(List<? extends Shape> shapes) {
+      ...
+    }
+    </code></pre>
+    That price to be paid for the flexibility of using wildcards is that it is now illegal to write into shapes in the body of the method. For instance, this is not allowed:
+    <pre><code>public void addRectangle(List<? extends Shape> shapes) {
+        shapes.add(0, new Rectangle()); // Compile-time error!
+    }
+    </code></pre>
+  * Type Erasure: remove all type-related information at compile-time (remove code with generics). This means that generics in Java is syntactic sugar
+  * Type Inference:Generics in Java does not support type inference while calling constructor or creating instance of Generic Types until JDK7
+  <pre><code>//prior to JDK 7
+  HashMap<String, Set<Integer>> contacts = new HashMap<String, Set<Integer>>();
+  //JDK 7 diamond operator
+  HashMap<String, Set<Integer>> contacts = new HashMap<>();
+  </pre></code>
+
+Read more: http://javarevisited.blogspot.com/2011/09/generics-java-example-tutorial.html#ixzz2yDjrbi00
+
+Read more: http://javarevisited.blogspot.com/2011/09/generics-java-example-tutorial.html#ixzz2yDji7VcV
+  * Ads:
+    * Type-safety, provide clean and robust code
+    * No casting when get element from the Collection 
+  * Limitations:
+    * Generics cannot be applied to primitive types(int), should use wrapper class(Integer)
 
 * instanceof
   * the type comparison operator
@@ -416,6 +435,17 @@ Knowledge Base for Concepts related questions in programming interview
 * UML legend
 * Use MVC framework to help quickly setup elementary classes
 * Note the usage of enum (how to initialize the enum with initial value)
+  <pre><code>public enum Currency {
+        PENNY(1), NICKLE(5), DIME(10), QUARTER(25);
+        private int value;
+
+        private Currency(int value) {
+                this.value = value;
+        }
+  };
+  </pre></code>   
+
+Read more: http://javarevisited.blogspot.com/2011/08/enum-in-java-example-tutorial.html#ixzz2yDcZfRHF
 * Dependency Injection
   * testing technique
   * Basically means giving an obejct its instance variables (dependency), instead of letting the object itself construct those instance variables
@@ -579,6 +609,13 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * Advantages over hashmap
     * support ordered iteration, getSuccessor and getPredecessor
     * Hash tables are commonly said to have expected O(1) insertion and deletion times, but this is only true when considering computation of the hash of the key to be a constant time operation. When hashing the key is taken into account, hash tables have expected O(k) insertion and deletion times, but may take longer in the worst-case depending on how collisions are handled. Trie have worst-case O(k) insertion and deletion
+  * Implementation
+  <pre><code>TrieNode{
+    char value;
+    boolean isEnd;
+    Map<Character, TrieNode> children;
+  }
+  </pre></code>
 * [Radix Tree](http://en.wikipedia.org/wiki/Radix_tree)
   * a space optimized trie, where each node with only one child is merged with its child
   * Efficient for small sets (especially if the strings are long) and for sets of strings that share long prefixes
@@ -589,6 +626,10 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * Provide efficient query for range values
   * Construction: O(n), total 2*n-1 nodes; Lookup, O(lgn); Update, O(lgn). (n is the number of elements in given array, also the number of leaf nodes)
   * One usage is in search engine. (e.g. [Lucene](http://blog.mikemccandless.com/2013/12/fast-range-faceting-using-segment-trees.html))
+* [Ternary Search Tree](http://en.wikipedia.org/wiki/Ternary_search_tree)
+  * A type of Trie.
+  * 
+  * Space efficient compared to standard compared to prefix trees, at the cost of speed
 
 * LinkedHashMap
   * Hash table and linked list implementation of the Map interface, with predictable iteration order, and without incurring the increased cost associate with TreeMap.

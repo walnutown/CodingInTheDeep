@@ -20,3 +20,18 @@ public class Solution {
         return end;   // understand why 'end', instead of 'start'. 
     }
 }
+
+// Newton's Method
+public class Solution {
+    public int sqrt(int x) {
+        if (x<=1)
+            return x;
+        double r = 1; // need to use double here, otherwise, sqrt(2) may fall in endless loop
+        while (true){
+            double r0 = (r+x/r)/2;
+            if (Math.abs(r-r0)<1)
+                return (int)r0;
+            r = r0;
+        }
+    }
+}

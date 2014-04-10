@@ -42,8 +42,10 @@ public class Solution {
 }
 
 // iterative
-// Add new element to existing subsets to create new subsets
-// time: O(2^n)
+// Add new element to all the existing subsets.
+// If the newly-added element is equal to the previously-added element, we only add this
+// new element to a part of the exisitng subsets to avoid duplicates
+// time: O(2^n), each time, the number of subsets is multiplied by 2 (in average)
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
