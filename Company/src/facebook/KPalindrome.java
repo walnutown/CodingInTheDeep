@@ -28,9 +28,9 @@ public class KPalindrome {
    // time: O(2^k)
    // This can be optimized using memoization
 
-   // Sol2: Dynamic Programming
+   // Sol2: Dynamic Programming, similar to dp solution of Leetcode/LongestPalindromicSubstring
    // dp[i][j] - number of deletions to make s.substring(i,j+1) a palindrome
-   // time: O(N^2); sapce: O(N^2)
+   // time: O(N^2); space: O(N^2)
    public boolean isKPalindrome(String s, int k) {
       if (s == null || s.length() == 0)
          return false;
@@ -62,20 +62,20 @@ public class KPalindrome {
          return false;
       int N = s.length();
       String sr = new StringBuilder(s).reverse().toString();
-      int[][] dp = new int[N+1][N+1];
-      for (int[] row:dp)
+      int[][] dp = new int[N + 1][N + 1];
+      for (int[] row : dp)
          Arrays.fill(row, Integer.MAX_VALUE); // Other cells are impossible, set them to MAX_VALUE
-      for (int i=0; i<=N; i++){
+      for (int i = 0; i <= N; i++) {
          dp[0][i] = i;
          dp[i][0] = i;
       }
       for (int i = 1; i <= N; i++) {
          int start = Math.max(1, i - k), end = Math.min(N, i + k);
          for (int j = start; j <= end; j++) {
-            if (s.charAt(i-1) == sr.charAt(j-1))
-               dp[i][j] = dp[i-1][j - 1];
+            if (s.charAt(i - 1) == sr.charAt(j - 1))
+               dp[i][j] = dp[i - 1][j - 1];
             else
-               dp[i][j] = Math.min(dp[i-1][j], dp[i][j - 1]) + 1;
+               dp[i][j] = Math.min(dp[i - 1][j], dp[i][j - 1]) + 1;
          }
       }
       return dp[N][N] <= 2 * k;

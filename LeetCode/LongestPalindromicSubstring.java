@@ -16,33 +16,22 @@
 // case, each substring is checked exactly once
 // time: O(n^2); space: O(n^2)
 
-// need to be judged
-
 public class Solution {
     public String longestPalindrome(String s) { 
         if (s==null || s.length()==0)
             return "";
         int N = s.length();
-        char[] ss = s.toCharArray();
         boolean[][] isP = new boolean[N][N]; // whether the substring [i,j] is a palindrome
         String max = s.substring(0,1);
         // substrings of length 1 are palindrome
         for (int i=0; i<N; i++)
             isP[i][i] = true;
-        // check substrings of length 2
-        for (int i=0; i<N-1; i++){
-            if (ss[i]==ss[i+1]){
-                isP[i][i+1] = true;
-                max = s.substring(i,i+2);
-            } 
-        }
-        // check for lengths greater than 2
-        for (int k=3; k<=N; k++){
-            for (int i=0; i<N-(k-1); i++){
-                int j = i+k-1;
-                if (ss[i]==ss[j] && isP[i+1][j-1]){
+        // check for lengths greater than 1
+        for (int len=2; len<=N; len++){
+            for (int i=0, j=i+len-1; j<N; i++, j++){
+                if (s.charAt(i)==s.charAt(j) && (i+1>j-1 || isP[i+1][j-1])){
                     isP[i][j] = true;
-                    if (k>max.length())
+                    if (len>max.length())
                         max = s.substring(i, j+1);
                 }
             }
