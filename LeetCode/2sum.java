@@ -10,7 +10,8 @@
     Output: index1=1, index2=2
 */
 
-// use map to store index, then traverse form both sides. time: O(n); space: O(n)
+// use map to store value-index, then traverse form both sides. 
+// time: O(nlgn); space: O(n)
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int[] result = new int[2];
@@ -37,25 +38,36 @@ public class Solution {
     }
 }
 
-// use map to find the pair. time: O(n); space: O(n)
+// use map to find the index of 'target-value'
+// Note that we may have two indices have the same value, so we need a list
+// time: O(n); space: O(n)
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
-        Map<Integer, Integer> index_map = new HashMap<Integer, Integer>();
-        int[] res = new int[2];
-        if (numbers == null || numbers.length <= 1)
+        if (numbers==null || numbers.length<=1)
             return null;
-        for (int i = 0; i < numbers.length; i++){
-            index_map.put(numbers[i], i+1);
+        Map<Integer, ArrayList<Integer>> map = new HashMap<Integer, ArrayList<Integer>>();
+        int N = numbers.length;
+        for (int i=0; i<N; i++){
+            int num = numbers[i];
+            if (!map.containsKey(num)){
+                ArrayList<Integer> lists = new ArrayList<Integer>();
+                map.put(num, lists);
+            }
+            map.get(num).add(i+1);
         }
-        for (int i = 0; i < numbers.length; i++){
-            int second = target - numbers[i];
-            if (index_map.containsKey(second) && index_map.get(second) != i+1){   // cannot be the same element
-                res[0] = i+1;
-                res[1] = index_map.get(second);
-                Arrays.sort(res);
-                break;
+        for (int i=0; i<N; i++){
+            int num = numbers[i];
+            if (!map.containsKey(target-num))
+                continue;
+            for (int index : map.get(target-num)){
+                if (index!=i+1){ // can not be itself
+                    int[] res = new int[2];
+                    res[0] = i+1; res[1] = index;
+                    Arrays.sort(res);
+                    return res;
+                }
             }
         }
-        return res;
+        return null;
     }
 }
