@@ -2,6 +2,8 @@
     Given an integer, convert it to a roman numeral.
 
     Input is guaranteed to be within the range from 1 to 3999.
+    I, V, X, L,  C,  D,   M
+    1, 5, 10,50,100,500, 1000
 */
 
 // time: O(5m); space: O(5m), m is the number of digits in num
@@ -41,5 +43,65 @@ public class Solution {
             i--;
         }
         return sb.toString();
+    }
+}
+
+
+// no use of map, constant space
+public class Solution {
+    public String getRomanBase(int num) {
+        String romanBase = "";
+        switch(num) {
+            case 1:
+                romanBase = "I";
+                break;
+            case 5:
+                romanBase = "V";
+                break;
+            case 10:
+                romanBase = "X";
+                break;
+            case 50:
+                romanBase = "L";
+                break;
+            case 100:
+                romanBase = "C";
+                break;
+            case 500:
+                romanBase = "D";
+                break;
+            case 1000:
+                romanBase = "M";
+                break;
+        }
+        return romanBase;
+    }
+    
+    public String intToRoman(int num) {
+        int romanBase = 1000;
+        StringBuilder roman = new StringBuilder();
+        while(romanBase > 0) {
+            int digit = num / romanBase;
+            if(digit == 9) {
+                roman.append(getRomanBase(romanBase));
+                roman.append(getRomanBase(romanBase * 10));
+            }
+            else if(digit >= 5) {
+                roman.append(getRomanBase(romanBase * 5));
+                for(int i = 0; i < digit - 5; i++)
+                    roman.append(getRomanBase(romanBase));
+            }
+            else if(digit == 4) {
+                roman.append(getRomanBase(romanBase));
+                roman.append(getRomanBase(romanBase * 5));
+            }
+            else {
+                for(int i = 0; i < digit; i++)
+                    roman.append(getRomanBase(romanBase));
+            }
+            num = num % romanBase;
+            romanBase /= 10;
+        }
+        return roman.toString();
     }
 }

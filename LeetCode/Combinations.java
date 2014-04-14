@@ -20,7 +20,7 @@
 // 3) create new arrayList when add res to resList
 
 // DFS
-// time: O(n!)
+// time: O(Combination(n,k)), Combination(n,k) = (n!)/(k!*(n-k)!
 public class Solution {
     public ArrayList<ArrayList<Integer>> combine(int n, int k) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();

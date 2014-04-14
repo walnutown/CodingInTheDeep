@@ -28,7 +28,7 @@ public class Solution {
       while (root != null) {
          TreeLinkNode next = null;  // the first node of next level
          TreeLinkNode prev = null;   // previous node on the same level
-         for (; root!=null; root=root.next) {
+         while (root!=null){
             if (next == null)   next = root.left!=null ? root.left : root.right;
             if (root.left != null) {
                if (prev != null)    prev.next = root.left;
@@ -38,13 +38,15 @@ public class Solution {
                if (prev != null)    prev.next = root.right;
                prev = root.right;
             }
+            root = root.next;
          }
          root = next;
       }
    }
 }
 
-// BFS, not const mem
+// BFS
+// time: O(n); space: O(n)
 public class Solution {
     public void connect(TreeLinkNode root) {
         if (root==null) return;

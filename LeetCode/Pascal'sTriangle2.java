@@ -1,45 +1,31 @@
-public class Solution {
-    public ArrayList<Integer> getRow(int rowIndex) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        res.add(1);
-        if (rowIndex == 0){
-            return res;
-        }
-        
-        res.add(1);
-        if (rowIndex == 1){
-            return res;
-        }
-        
-        ArrayList<Integer> prev = new ArrayList<Integer>(res);
-        ArrayList<Integer> curr = new ArrayList<Integer>();
-        for(int i = 0; i <= rowIndex; i++){
-            curr.add(1);
-        }
-        for(int i = 2; i <= rowIndex; i++){
-            for(int j = i-1; j >= 1; j--){
-                curr.set(j, prev.get(j-1) + prev.get(j));
-            }
-            prev = curr;
-        }
-        
-        return curr;
-    }
-}
+/*
+    /*Given an index k, return the kth row of the Pascal's triangle.
 
-// Accepted
+    For example, given k = 3,
+    Return [1,3,3,1].
+
+    Note:
+    Could you optimize your algorithm to use only O(k) extra space?
+*/
+
+// Initialzie a array of size n at first
+// In each level, we update the values in range of [1...level]
+// Note we have to update from the end of the array. 
+// time: O(n^2); space: O(n)
 public class Solution {
     public ArrayList<Integer> getRow(int rowIndex) {
         ArrayList<Integer> res = new ArrayList<Integer>();
-        if (rowIndex < 0)  return res;
-        for (int i=0; i<=rowIndex; i++) res.add(1);
-        for (int i=1; i<=rowIndex; i++){
-            for (int j=i-1; j>=0; j--){             // from i-1 to 1, if from 1 to i-1, wrong. we have to ensure that the j-1 is not overriden
-                res.set(j, res.get(j) + res.get(j-1));
+        int[] row = new int[rowIndex+1];
+        row[0] = 1;
+        int i = 0;
+        while (i<=rowIndex){
+            for (int j=i;j>=1; j--){
+                row[j] = row[j-1] + row[j];
             }
+            i++;
         }
+        for (int num: row)
+           res.add(num);
         return res;
     }
 }

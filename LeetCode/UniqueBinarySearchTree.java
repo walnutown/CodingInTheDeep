@@ -25,3 +25,25 @@ public class Solution {
         return dp[n];
     }
 }
+
+// Recursion + memoization
+// time: O(n^2); space: O(n) + recursive stack
+public class Solution {
+    
+    public int numTrees(int n) {
+        int[] mem = new int[n+2];
+        Arrays.fill(mem, -1);
+        mem[0] = 1;mem[n+1]=1;
+        return count(n, mem);
+    }
+    private int count(int n, int[] mem){
+        if (mem[n]!=-1)
+            return mem[n];
+        int c = 0;
+        for (int i=1; i<=n; i++){
+            c += count(i-1, mem) * count(n-i, mem);
+        }
+        mem[n] = c;
+        return c;
+    }
+}

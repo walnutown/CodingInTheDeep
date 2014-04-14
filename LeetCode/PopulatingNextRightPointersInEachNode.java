@@ -30,6 +30,7 @@
 */
 
 // Recursion
+// time: O(n); space: recursive stack
 public class Solution {
     public void connect(TreeLinkNode root) {
         if (root == null || root.left==null && root.right==null)   return;
@@ -40,7 +41,8 @@ public class Solution {
     }
 }
 
-// While loop, time: O(n); space: O(1) 
+// Iterative version
+// time: O(n); space: O(1) 
 public class Solution {
     public void connect(TreeLinkNode root) {
         TreeLinkNode first = root;

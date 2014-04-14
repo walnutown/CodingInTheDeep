@@ -10,7 +10,8 @@
     [1,3,5,6], 0 → 0
 */
 
-// binary search
+// binary search, the key is to return 'start' or 'end' when the element is not found
+// time: O(lgn)
 public class Solution {
     public int searchInsert(int[] A, int target) {
         if (A==null || A.length==0) return 0;

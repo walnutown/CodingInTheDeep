@@ -194,15 +194,15 @@ Knowledge Base for Concepts related questions in programming interview
   * Unboxing: 
     * Converting an object of a wrapper type (Integer) to its corresponding primitive (int) value is called unboxing
     * Classic use of unboxing is when Wrapper class are doing arithmetic operations (>=, <=, >, <, not including ==)
-  * Compiler uses valueOf() method to convert primitive to Object and uses intValue(), doubleValue() etc to get primitive value from Object.
-    * Integer.valueOf: Returns an Integer instance representing the specified int value. Uses cached obejcts when value>=-128 && value<=127, otherwise, create new Integer.
+  * Compiler uses valueOf() method to convert primitive data to Object and uses intValue(), doubleValue() etc to get primitive value from Object.
+    * Integer.valueOf: Returns an Integer instance representing the specified int value. Uses cached obejcts when value>=-128 && value<=127; otherwise, create new Integer.
   <pre><code>int i1 = 1;
         int i2 = 1;
         System.out.println("i1==i2 : " + (i1 == i2)); // true
         // Example 2: equality operator mixing object and primitive
         Integer num1 = 1; // autoboxing
         int num2 = 1;
-        System.out.println("num1 == num2 : " + (num1 == num2)); // true
+        System.out.println("num1 == num2 : " + (num1 == num2)); // true, num1 unboxing
         // Example 3: special case - arises due to autoboxing in Java
         Integer obj1 = 1; // autoboxing will call Integer.valueOf()
         Integer obj2 = 1; // same call to Integer.valueOf() will return same
@@ -253,11 +253,28 @@ Knowledge Base for Concepts related questions in programming interview
     * provide quick access to key-value pairs
     * is basically an array of buckets, each bucket holds a list of entires
     * we calculate hash code from the key, and get the index to store key-value pairs
-    * if two keys have the same hash code, they're mapped into the same bucket, and chined using linked list.
+    * if two keys have the same hash code, they're mapped into the same bucket, and chained using linked list.
     * when we resize the hashmap, the hash code of each key remains the same, but they're mapped to different index in the array. This will take O(n).
     * In Java source code, hash code is int type, so we can have maximum 2^32 different hashcodes.
+    * equal & hashcode
+      * hashcode() in Object.class: return distinct integers for distinct objects. (This is typically implemented by converting the internal address of the object into an integer)
+      * When we use our own created class as keys in hashmap, we need to overwrite the hashcode() method in Object.class. There're two contracts:
+        * if two objects are equal(), they should have the same hashcode()
+        * if two objets have the same hashcode(), they may be equal() or not equal
+      * To get the hashcode of a primitive data type, we can use its wrapper class's hashcode.eg, Integer.valueOf(10).hashcode()
+      * examples in Java source code.
+      <pre><code>// Integer.class
+        public int hashcode(){
+        return value;
+      }
+      // String.class
+      // Returns a hash code for this string. The hash code for a String object is
+      // computed as s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1] using int arithmetic,
+      // where s[i] is the ith character of the string, n is the length of the string, 
+      // and ^ indicates exponentiation
+
   * BitSet
-    * basically an array of long, if the array size is n, we can represent 64n different integers
+    * basically an array of long, if the array size is n, we can represent 64*n different integers
     * BitSet.set(int), BitSet only supports non negative integers.
     * If the integer set is sparse, BitSet will waste a lot of space. An example is an integer set of only one integer 1,000,000,000, this will take 2^30/64 = 16MB space. In this case, Set<Integer> is a better choice
 
@@ -287,10 +304,6 @@ Knowledge Base for Concepts related questions in programming interview
   //JDK 7 diamond operator
   HashMap<String, Set<Integer>> contacts = new HashMap<>();
   </pre></code>
-
-Read more: http://javarevisited.blogspot.com/2011/09/generics-java-example-tutorial.html#ixzz2yDjrbi00
-
-Read more: http://javarevisited.blogspot.com/2011/09/generics-java-example-tutorial.html#ixzz2yDji7VcV
   * Ads:
     * Type-safety, provide clean and robust code
     * No casting when get element from the Collection 
@@ -445,7 +458,6 @@ Read more: http://javarevisited.blogspot.com/2011/09/generics-java-example-tutor
   };
   </pre></code>   
 
-Read more: http://javarevisited.blogspot.com/2011/08/enum-in-java-example-tutorial.html#ixzz2yDcZfRHF
 * Dependency Injection
   * testing technique
   * Basically means giving an obejct its instance variables (dependency), instead of letting the object itself construct those instance variables

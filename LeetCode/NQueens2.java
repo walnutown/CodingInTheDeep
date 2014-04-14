@@ -20,7 +20,9 @@
     Now, instead outputting board configurations, return the total number of distinct solutions.
 */
 
-// DFS, use a mtarix
+// DFS, use rowNum as the depth
+// In each depth, we search through all columns to find valid one and do next recursive call
+// time: O(n^3); space: O(n^2)
 public class Solution {
     public int totalNQueens(int n) {
         if (n == 0) return 0;
@@ -44,6 +46,7 @@ public class Solution {
         }
     }
     
+    // time: O(n)
     public boolean isValid(int[][] board, int row, int col){
         for (int i=0; i <= row; i++)
             if (board[i][col] == 1) return false;

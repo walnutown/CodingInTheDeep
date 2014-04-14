@@ -9,7 +9,7 @@ import org.junit.Test;
 
 public class SumOfContinuousSubsequence {
    /*
-    * Given an array write a function to print all continuous subsequences in the array which sum of
+    * Given an array, write a function to print all continuous subsequences in the array which sum of
     * 0.
     * e.g:
     * Input:
@@ -18,7 +18,12 @@ public class SumOfContinuousSubsequence {
     * -1, -3, 4
     */
 
+   // Naive solution is to form all the continuous subsequences, and sum all its values to check whether it's 0
+   // time: O(n^3); space:O(n^3)
+
    // Dynamic Programming
+   // Note that in the naive solution, there're lots of duplicate calculations in the sum step,
+   // we can reduce those duplicate calculations using DP.
    // Get the sum of all subsequences using DP, then find sum of 0 subsequences
    // time: O(n^2); space: O(n^2)
    public ArrayList<int[]> getSubsequence(int[] A) {
@@ -44,12 +49,12 @@ public class SumOfContinuousSubsequence {
       return res;
    }
 
-   // Get a sum array S, S[i] = Sum(A[0...i])
+   // Build an array S, S[i] = Sum(A[0...i])
    // There're two cases indicating a subsequence of sum 0:
    // [1] S[i] == 0, [0,i] is a subsequence of sum 0
    // [2] S[i] == S[j], [i+1,j] is a subsequence of sum 0
-   // We can use a map to store sum value and list of indices
-   // add (0, -1) initially to make things easier
+   // We can use a map to store sum value and list of indices.
+   // Besides, add (0, -1) initially to make things easier
    // time: average case < O(n^2), worst case O(n^2); space: O(n)
    public ArrayList<int[]> getSubsequence2(int[] A) {
       ArrayList<int[]> res = new ArrayList<int[]>();

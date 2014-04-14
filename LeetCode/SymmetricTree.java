@@ -64,7 +64,6 @@ public class Solution {
     }
 }
 
-// Serialize the tree
 // The inorder traversal array of the tree is symmetric
 // time: O(n)
 public class Solution {

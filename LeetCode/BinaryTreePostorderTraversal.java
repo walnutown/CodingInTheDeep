@@ -44,15 +44,15 @@ public class Solution {
 // post-order: left -> right -> curr
 // pre-order: curr -> left -> right
 // mirror of pre-order: curr -> right -> left. Reverse to get the post-order
+// And in this solution, we use Collections.reverse() instead of Stack to get the reversed result
 public class Solution{
     public ArrayList<Integer> postorderTraversal(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<Integer>();
         if (root == null) return res;
         Stack<TreeNode> st = new Stack<TreeNode>();
-        Stack<Integer> reverse = new Stack<Integer>();
         while (root != null){
             st.push(root);
-            reverse.push(root.val);
+            res.add(root.val);
             root = root.right;
         }
         while (!st.isEmpty()){
@@ -60,11 +60,11 @@ public class Solution{
             curr = curr.left;
             while (curr != null){
                 st.push(curr);
-                reverse.push(curr.val);
+                res.add(curr.val);
                 curr = curr.right;
             }
         }
-        while (reverse.size() > 0)  res.add(reverse.pop());
+        Collections.reverse(res);
         return res;
     }
 }   

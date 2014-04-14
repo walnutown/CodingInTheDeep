@@ -21,9 +21,9 @@ public class KthSmallestInTwoSortedArrays {
    // time: O(lg(m+n)); space: O(1)
    public int findKthLargest(int[] A, int[] B, int k) {
       // assume k is always valid
-      if (A == null || A.length == 0)
+      if (A == null)
          return B[k - 1];
-      if (B == null || B.length == 0)
+      if (B == null)
          return A[k - 1];
       int as = 0, ae = A.length - 1, bs = 0, be = B.length - 1;
       while (as <= ae && bs <= be) {

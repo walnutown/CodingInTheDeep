@@ -9,15 +9,18 @@
     Your function should return length = 2, and A is now [1,2].
 */
 
-// new index. time: O(n)
+// Maintain two pointers, one for current index, and one for result index
+// time: O(n); space:O(1)
 public class Solution {
     public int removeDuplicates(int[] A) {
         if (A==null || A.length==0) return 0;
-        int i=0, j=0;
-        for (j=1; j<A.length; j++){
-            if (A[j] == A[i])   continue;
-            else    A[++i] = A[j];
+        int i=1, j=1, N =A.length;
+        while (j< N){
+            if (A[j] == A[j-1])
+                j++;
+            else
+                A[i++] = A[j++];
         }
-        return i+1;
+        return i;
     }
 }

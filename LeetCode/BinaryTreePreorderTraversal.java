@@ -48,22 +48,22 @@ public class Solution {
         if (root == null)   return res;
         TreeNode curr =root;
         while (curr != null){
-            if (curr.left != null){
-                TreeNode prev = curr.left;
+            if (curr.left==null){
+                res.add(curr.val);
+                curr = curr.right;
+            }
+            else{
                 // find predecessor 
+                TreeNode prev = curr.left;
                 while (prev.right!=null && prev.right!=curr)    prev = prev.right;
-                if (prev.right == curr){    
-                    curr = curr.right;
-                    prev.right = null;
-                }
-                else{                  
+                if (prev.right ==null ){  // conenct the predecessor
                     res.add(curr.val);
                     prev.right = curr;
                     curr = curr.left;
+                }else {    
+                    prev.right = null;
+                    curr = curr.right;
                 }
-            }else{
-                res.add(curr.val);
-                curr = curr.right;
             }
         }
         return res;

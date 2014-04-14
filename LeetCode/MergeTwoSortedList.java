@@ -15,6 +15,8 @@
  * }
  */
 
+// Maintain two pointers on two lists
+// In each step, compare the two vlaues and move forward the corresponding pointer
 // time: O(n)
 public class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {

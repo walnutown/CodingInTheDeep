@@ -5,24 +5,26 @@
 
 // http://fisherlei.blogspot.com/2012/12/leetcode-median-of-two-sorted-arrays.html
 // Binary search and prune, recursion.
+// Basic idea is to prune left or right half of array A and B in each recursive call, so 
+// that we can narrow down the search range in next recursive step
 // time: O(lg(m+n))
 public class Solution {
     public double findMedianSortedArrays(int A[], int B[]) {
         int m = A.length, n = B.length;
-        if (((m+n)&0x01) > 0)   return finder(A, 0, m-1, B, 0, n-1, (m+n)/2);
-        else    return (finder(A, 0, m-1, B, 0, n-1, (m+n)/2) + finder(A, 0, m-1, B, 0, n-1, (m+n)/2-1))/2.0;
+        if (((m+n)&0x01) > 0)   return finder(A, 0, m-1, B, 0, n-1, (m+n)/2+1);
+        else    return (finder(A, 0, m-1, B, 0, n-1, (m+n)/2) + finder(A, 0, m-1, B, 0, n-1, (m+n)/2+1))/2.0;
     }
     
     public double finder(int A[], int as, int ae, int[] B, int bs, int be, int target){
-        if (as > ae)    return B[bs + target];
-        if (bs > be)    return A[as + target];
+        if (as > ae)    return B[bs + target-1];
+        if (bs > be)    return A[as + target-1];
         int am = (as + ae) >>1;
         int bm = (bs + be) >>1;
         if (A[am] > B[bm]){
-            if ((am-as + bm-bs + 1) > target)  return finder(A, as, am-1, B, bs, be, target);
+            if ((am-as + bm-bs + 2) > target)  return finder(A, as, am-1, B, bs, be, target);
             else return finder(A, as, ae, B, bm+1, be, target-(bm-bs+1));
         }else{
-            if ((am-as + bm-bs + 1) > target)   return finder(A, as, ae, B, bs, bm-1, target);
+            if ((am-as + bm-bs + 2) > target)   return finder(A, as, ae, B, bs, bm-1, target);
             else return finder(A, am+1, ae, B, bs, be, target-(am-as+1));
         }
     }
@@ -32,17 +34,17 @@ public class Solution {
 // time: O(lg(m+n))
 public class Solution {
     public double findMedianSortedArrays(int A[], int B[]) {
+        // assume k is always valid
+        if (A == null)
+           return B[k - 1];
+        if (B == null)
+           return A[k - 1];
         int m = A.length, n = B.length;
         if (((m+n)&0x01) > 0)   return finder(A, B, (m+n)/2+1);
         else    return (finder(A, B, (m+n)/2) + finder(A, B, (m+n)/2+1))/2.0;
     }
     
-    public double findKthSmallestInTwoArrays(int A[], int[] B, int k){ 
-        // assume k is always valid
-      if (A == null || A.length == 0)
-         return B[k - 1];
-      if (B == null || B.length == 0)
-         return A[k - 1];
+    public double finder(int A[], int[] B, int k){   
       int as = 0, ae = A.length - 1, bs = 0, be = B.length - 1;
       while (as <= ae && bs <= be) {
          int am = (as + ae) >> 1, bm = (bs + be) >> 1;

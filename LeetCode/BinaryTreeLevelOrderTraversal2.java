@@ -17,35 +17,29 @@
 
 */
 
-// same as binaryTreeLevelOrderTraversal, plus reverse step, time: O(n); space: O(b^d)
+// same as binaryTreeLevelOrderTraversal, plus reverse step
+// time: O(n); space: O(b^d)
 public class Solution {
     public ArrayList<ArrayList<Integer>> levelOrderBottom(TreeNode root) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-        if (root==null) return res;
-        int curr_num =1, next_num = 0;
-        Stack<ArrayList<Integer>> st = new Stack<ArrayList<Integer>>();
-        Queue<TreeNode> qu = new LinkedList<TreeNode>();
-        qu.add(root);
-        ArrayList<Integer> r = new ArrayList<Integer>();
-        while (!qu.isEmpty()){
-            TreeNode curr = qu.poll();
-            r.add(curr.val);
-            if (curr.left != null){ 
-                qu.add(curr.left);
-                next_num++;
+        if (root==null)
+            return res;
+        ArrayList<TreeNode> prev = new ArrayList<TreeNode>();
+        prev.add(root);
+        while (!prev.isEmpty()){
+            ArrayList<TreeNode> curr = new ArrayList<TreeNode>();
+            ArrayList<Integer> nums = new ArrayList<Integer>();
+            for (TreeNode node : prev){
+                nums.add(node.val);
+                if (node.left!=null)
+                    curr.add(node.left);
+                if (node.right!=null)
+                    curr.add(node.right);
             }
-            if (curr.right != null){  
-                qu.add(curr.right);
-                next_num++;
-            }
-            if (--curr_num==0){
-                curr_num = next_num;
-                next_num = 0;
-                st.push(new ArrayList<Integer>(r));
-                r.clear();
-            }
+            res.add(nums);
+            prev = curr;
         }
-        while (!st.isEmpty())   res.add(st.pop());
+        Collections.reverse(res);
         return res;
     }
 }

@@ -1,74 +1,27 @@
+/*
+    You are given an n x n 2D matrix representing an image.
+
+    Rotate the image by 90 degrees (clockwise).
+
+    Follow up:
+    Could you do this in-place?
+*/
+
+// Rotate the matrix by layers, from outer layer to inner layer
+// Each time, we swap the four borders in a layer in clockwise direction
+// time: O(n); space: O(1)
 public class Solution {
     public void rotate(int[][] matrix) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        int len = matrix.length;
-        if (len == 0){
+        if (matrix==null || matrix.length==0 || matrix[0].length==0)
             return;
-        }
-        
-        for (int layer = 0; layer < len/2; layer++){
-            int first = layer;
-            int last = len-1- layer;
-            for (int i = first; i< last; i++){
-                int offset = i-first;
-                // save top
-                int top = matrix[first][i];
-                // left -> top
-                matrix[first][i] = matrix[last-offset][first];
-                // bottom -> left
-                matrix[last-offset][first] = matrix[last][last-offset];
-                // right -> bottom
-                matrix[last][last-offset] = matrix[i][last];
-                // top -> right
-                matrix[i][last] = top;
-            }
-        }
-    }
-}
-
-
-int start = 0, end = matrix.length -1;
-        while(start < end){
-            for(int i=0; i<end - start; i++){
-                int temp =matrix[start+i][end];
-                matrix[start+i][end]= matrix[start][start+i];
-                matrix[start][start+i]= matrix[end-i][start]; 
-                matrix[end -i][start]= matrix[end][end-i];
-                matrix[end][end-i]=temp;
-            }
-            start++;
-            end--;
-        }
-
-// Wrong answer
-public class Solution {
-    public void rotate(int[][] matrix) {
-        int n = matrix.length;
-        for (int level=0; level<n/2; level++){
-            int offset = n - level - 2;
-            for (int i=0; i<=offset; i++){          // change one line here
-                int tmp = matrix[level][i];
-                matrix[level][i] = matrix[n-1-i][level];
-                matrix[n-1-i][level] = matrix[n-1-level][n-1-i];
-                matrix[n-1-level][n-1-i] = matrix[i][n-1-level];
-                matrix[i][n-1-level] = tmp;
-            }
-        }
-    }
-}
-// Accepted, Dec 28
-public class Solution {
-    public void rotate(int[][] matrix) {
-        int n = matrix.length;
-        for (int level=0; level<n/2; level++){
-            int offset = n - level - 2;
-            for (int i=level; i<=offset; i++){
-                int tmp = matrix[level][i];
-                matrix[level][i] = matrix[n-1-i][level];
-                matrix[n-1-i][level] = matrix[n-1-level][n-1-i];
-                matrix[n-1-level][n-1-i] = matrix[i][n-1-level];
-                matrix[i][n-1-level] = tmp;
+        int N = matrix.length;
+        for (int layer=0; layer<N/2; layer++){
+            for (int i=layer; i<= N-2-layer; i++){
+                int tmp = matrix[layer][i]; // cache left border
+                matrix[layer][i] = matrix[N-1-i][layer];
+                matrix[N-1-i][layer] = matrix[N-1-layer][N-1-i];
+                matrix[N-1-layer][N-1-i] = matrix[i][N-1-layer];
+                matrix[i][N-1-layer] = tmp;
             }
         }
     }

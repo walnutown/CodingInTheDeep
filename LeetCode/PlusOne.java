@@ -2,7 +2,12 @@
     Given a number represented as an array of digits, plus one to the number.
 */
 
-// 
+// Maintain a varialble to hold the carry
+// Traverse from the least significant digit to the most significant digit
+// Finally, we have to check 'carry' to know whether we have to resize the array
+// One interesting thing is that if we have to resize the array, actually we don't have
+// to copy vlaues from original array to new array, because all the values are zero
+// time: O(n); space: O(n)
 public class Solution {
     public int[] plusOne(int[] digits) {
         if (digits==null || digits.length==0)   return digits;

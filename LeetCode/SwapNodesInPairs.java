@@ -18,19 +18,23 @@
  *     }
  * }
  */
+// Basic idea is to maintain 4 pointers,
+// two pointers for pair nodes, prev pointer for node before the pair, 
+// next pointer for node after the pair
+// time: O(n); space: O(1)
 public class Solution {
     public ListNode swapPairs(ListNode head) {
         if (head==null || head.next==null)
             return head;
         ListNode dum = new ListNode(0);
         dum.next = head;
-        ListNode p = head, pp = dum;
+        ListNode p = head, prev = dum;
         while (p!=null && p.next!=null){
             ListNode first = p, second = p.next, next = second.next;
-            pp.next =second;
+            prev.next =second;
             second.next = first;
             first.next = next;
-            pp = first;
+            prev = first;
             p = next;
         }
         return dum.next;

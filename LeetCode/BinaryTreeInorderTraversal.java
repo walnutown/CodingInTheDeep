@@ -60,28 +60,28 @@ public class Solution {
 // Morris threaded tree in-order traversal, right plays the role of 'next'
 // Great post from AnnieKim. http://www.cnblogs.com/AnnieKim/archive/2013/06/15/morristraversal.html
 // time: O(n); space: O(1)
+// Two points to remember:
+// [1] If left child is null or predecessor node has been connected, go to right child in next step
 public class Solution {
     public ArrayList<Integer> inorderTraversal(TreeNode root) {
         ArrayList<Integer> res = new ArrayList<Integer>();
-        if (root == null)   return res;
-        TreeNode curr =root;
-        while (curr != null){
-            if (curr.left != null){ 
-                TreeNode prev = curr.left;
-                // find predecessor 
-                while (prev.right!=null && prev.right!=curr)    prev = prev.right;
-                if (prev.right == curr){    // thread is used
-                    res.add(curr.val);
-                    curr = curr.right;
-                    prev.right = null;  // disconnect threads
-                }
-                else{                  
-                    prev.right = curr;  // build threads
-                    curr = curr.left;
-                }
-            }else{  
+        TreeNode curr = root;
+        while (curr!=null){
+            if (curr.left==null){
                 res.add(curr.val);
                 curr = curr.right;
+            }else{
+                TreeNode prev = curr.left;
+                while (prev.right!=null && prev.right!=curr)
+                    prev = prev.right;
+                if (prev.right==null){
+                    prev.right = curr;
+                    curr = curr.left;
+                }else{
+                    prev.right = null;
+                    res.add(curr.val);
+                    curr = curr.right;
+                }
             }
         }
         return res;

@@ -12,6 +12,7 @@
  * }
  */
 // binary search the array to build tree
+// time: O(n); sapce: recursive stack
 public class Solution {
     public TreeNode sortedArrayToBST(int[] num) {
         if (num == null || num.length == 0) return null;

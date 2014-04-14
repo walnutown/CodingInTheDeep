@@ -8,7 +8,9 @@
     You may assume no duplicate exists in the array.
 */
 // Assertion: no duplicates in the array
-// Binary Search, at least one of the two halves is ordered in each dividing step of the search
+// Binary Search, at least one of the two halves is ordered in each step of the search
+// We find the ordered half first and then check whether the target is in thr range, if yes,
+// binary search in the half; otherwise, binary search in the unordered half
 // time: O(lgn); space: O(1)
 public class Solution {
     public int search(int[] A, int target) {

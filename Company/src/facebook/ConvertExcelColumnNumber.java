@@ -9,32 +9,34 @@ public class ConvertExcelColumnNumber {
     */
 
    // Basically, is convert base10 to base26.
+   // The challenge is that A-1, Z-26, 
+   // So, we have 1-A, 26-Z, 27-AA
    public String intToStr(int N) {
       if (N <= 0)
          throw new IllegalArgumentException("N should be a positive integer");
       StringBuilder sb = new StringBuilder();
       while (N > 0) {
-         int r = (N - 1) % 26 + 1; // need to map 0-A,... 26-Z 
-         char ch = (char) (r - 1 + 'A');
+         N--;
+         int r = N % 26;
+         char ch = (char) (r + 'A');
          sb.append(ch);
-         N = (N - r) / 26;
+         N = N / 26;
       }
       return sb.reverse().toString();
    }
-   
-   public int strToInt(String s){
+
+   public int strToInt(String s) {
       int num = 0;
-      for (int i=0; i<s.length(); i++){
-         num = num*26 + (s.charAt(i)-'A'+1);
+      for (int i = 0; i < s.length(); i++) {
+         num = num * 26 + (s.charAt(i) - 'A' + 1);
       }
       return num;
    }
 
    @Test
    public void test() {
-      for (int i = 1; i < 100; i++){
-         System.out.println(intToStr(i));
-         System.out.println(strToInt(intToStr(i)));
+      for (int i = 1; i < 1000; i++) {
+         System.out.println(intToStr(i) + " : " + strToInt(intToStr(i)));
       }
    }
 }

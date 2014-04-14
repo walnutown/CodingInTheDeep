@@ -5,7 +5,9 @@
     Given [0,1,0,2,1,0,1,3,2,1,2,1], return 6.
 */
 
-// get the highest left and right bar, and then calcualte how much water we can trap
+// In order to trap more water, we should find the highest left bar and highest right bar
+// And our final bar will be the samller one of the two
+// The water that can be trapped in current index = bar height - current height
 // time: O(n); space:O(n)
 public class Solution {
     public int trap(int[] A) {
@@ -22,7 +24,7 @@ public class Solution {
             L[i] = lmax;
             lmax = Math.max(A[i], lmax);
             int bar = Math.min(L[i], R[i]);
-            if (bar>A[i])
+            if (bar>A[i])   // if current height is higher than the bar, don't add
                 sum += bar - A[i];
         }
         return sum;

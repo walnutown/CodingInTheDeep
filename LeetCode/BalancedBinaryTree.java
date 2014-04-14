@@ -22,7 +22,8 @@
 // Yet, actually, we can check whether the subtree is balanced when we recurse through the subtree. Then, we can reduce the
 // big O to O(n), and the space complexity is O(H), where H is the height of the tree.
 
-// Recursion, time: O(n); space: O(h), h is the largest height of the tree
+// Recursion
+// time: O(n); space: O(h), h is the largest height of the tree
 public class Solution {
     public boolean isBalanced(TreeNode root) {
         if (root==null) return true;
@@ -34,3 +35,19 @@ public class Solution {
         return Math.abs(l-r)>1 || l<0 || r<0 ? -1 : Math.max(l, r) + 1 ;
     }
 }
+
+// optimization
+public class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if (root==null) return true;
+        return getHeight(root) > -1;
+    }
+    public int getHeight(TreeNode node){
+        if (node==null)  return 0;
+        int l = getHeight(node.left);
+        if (l<0)  return -1;            // can skip checking of right child here
+        int r = getHeight(node.right);
+        return Math.abs(l-r)>1 || r<0 ? -1 : Math.max(l, r) + 1 ;
+    }
+}
+

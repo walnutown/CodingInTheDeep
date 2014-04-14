@@ -8,15 +8,18 @@
     If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 */
 
-
-// DP, time: O(n); space: O(1)
+// Dynamic Programming
+// In each day, we check the previous max, if max>0, we add current value to the subarray
+// if max<0, we choose current day as a new starting point for subarray
+// time: O(n); space: O(1)
 public class Solution {
     public int maxSubArray(int[] A) {
         if (A==null || A.length==0) return 0;
         int max = Integer.MIN_VALUE;
         int sum = 0;
         for (int i=0; i<A.length; i++){
-            sum = Math.max(A[i], sum+A[i]);
+            // if sum+A[i] < A[i], sum should be less than zero, then we should set A[i] as the new starting point
+            sum = Math.max(A[i], sum+A[i]); 
             max = Math.max(sum, max);
         }
         return max;
