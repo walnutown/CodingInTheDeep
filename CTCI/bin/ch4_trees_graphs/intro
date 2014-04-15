@@ -21,6 +21,4 @@ Graph Traversal:
 	DFS
 	BFS
 	remember to mark the visited node to avoid cycle
-
-As to the graph traversal, DFS uses less space compared to BFS
 	

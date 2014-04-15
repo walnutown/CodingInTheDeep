@@ -8,6 +8,14 @@
     c) Replace a character
 */
 
+// Levenshtein distance 
+// a string metric for measuring the difference
+// between two sequences. Informally, the Levenshtein distance between two
+// words is the minimum number of single-character edits (i.e. insertions,
+// deletions or substitutions) required to change one word into the other. The
+// phrase edit distance is often used to refer specifically to Levenshtein
+// distance
+
 // DP
 // word1.substring(0, i) can be converted into word2.substring(0, j) using mem[i][j] steps
 // mem[i][j] = mem[i][j-1], denotes a insertion operation in word1.substring

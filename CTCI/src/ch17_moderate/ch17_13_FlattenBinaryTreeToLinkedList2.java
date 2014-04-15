@@ -2,7 +2,7 @@ package ch17_moderate;
 
 import org.junit.Test;
 
-public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
+public class ch17_13_FlattenBinaryTreeToLinkedList2 {
 
    /**
     * Consider a simple node-like data structure called BiNode, which has pointers to two other
@@ -11,6 +11,11 @@ public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
     * node and ndoe2 is the next node), Implement a method to convert a binary tree
     * (implemented with BiNode) into a doubly linked list. The values should be kept in order and
     * the operation should be performed in place.
+    * eg,
+    *       3
+    *   1       5
+    * 0   2   4   6
+    * 0<->1<->2<->3<->4<->5<->6
     */
 
    public class BiNode {
@@ -28,10 +33,11 @@ public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
    }
 
    // similar to leetcode -- FlaternBinaryTreeToLinkedList
+   // The difference lies in the order of the list, in-order or pre-order
 
    // Inorder traverse the binary tree and maintain the previous node to
    // connect list
-   // time: O(n); space: O(1)
+   // time: O(n); space: recursive stack
    BiNode prev;
 
    public BiNode convertBinaryTreeToDoublyLinkedList(BiNode root) {
@@ -57,6 +63,8 @@ public class ch17_13_ConvertBinaryTreeToDoublyLinkedList {
       prev = node;
       converter(node.node2);
    }
+   
+   
 
    // PostOrder traverse the binary tree, and use a wrapper class to hold the head and tail of the
    // sub list

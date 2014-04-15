@@ -11,22 +11,25 @@
 public class Solution {
     public ArrayList<String> anagrams(String[] strs) {
         ArrayList<String> res = new ArrayList<String>();
-        if (strs == null || strs.length == 0) return res;
         Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-        for (String str : strs){
-            char[] ch_arr = str.toCharArray();
-            Arrays.sort(ch_arr);
-            String sorted_str = String.valueOf(ch_arr);
-            if (map.containsKey(sorted_str))   map.get(sorted_str).add(str);
-            else{
-                ArrayList<String> r = new ArrayList<String>();
-                r.add(str);
-                map.put(sorted_str, r);
+        for (String s : strs){
+            String key = sort(s);
+            if (!map.containsKey(key)){
+                ArrayList<String> values = new ArrayList<String>();
+                map.put(key, values);
             }
+            map.get(key).add(s);
         }
-        for (ArrayList<String> r : map.values())
-            if (r.size() > 1)   res.addAll(r);
+        for (ArrayList<String> r: map.values()){
+            if (r.size()>1)
+                res.addAll(r);
+        }
         return res;
     }
+    
+    private String sort(String s){
+        char[] ss = s.toCharArray();
+        Arrays.sort(ss);
+        return new String(ss);
+    }
 }
-

@@ -25,6 +25,8 @@ public class BitAddOperation {
    public static void main(String[] args) {
       System.out.println(bitAdd1(-8, 10));
       System.out.println(bitAdd2(-8, 10));
+      System.out.println(bitAdd2(-8, 1));
+      System.out.println(bitAdd2(0, 1));
    }
 
 }

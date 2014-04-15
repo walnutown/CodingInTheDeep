@@ -2,7 +2,7 @@ package amazon;
 
 import org.junit.Test;
 
-public class BitDividOperation {
+public class BitDivideOperation {
 
    /**
     * Implement multiplication without using '/', '%', '*', '+', '-' operators

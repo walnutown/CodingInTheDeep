@@ -1,5 +1,7 @@
 package ch18_hard;
 
+import java.util.Arrays;
+
 import org.junit.Test;
 
 public class ch18_12_FindMaxSubmatrixSum {
@@ -8,25 +10,18 @@ public class ch18_12_FindMaxSubmatrixSum {
     * Given an N*N matrix of positive and negative integers, write code to find the sub-matrix with
     * the largest possible sum.
     */
-   @Test
-   public  void test() {
-      int[][] matrix = new int[][]{
-            {1,1,1,-1},
-            {1,2,1,-1},
-            {1,1,1,1},
-            {-1,-1,-1,1},
-      };
-      System.out.println(findMaxSubmatrixSum(matrix));
-      System.out.println(findMaxSubmatrixSum2(matrix));
-   }
-
+  
    // Solution1
-   // brute force, iterate through O(n^4) sub-matrices and it takes O(n^2) to compute the area of
-   // each, total O(n^6)
+   // brute force
+   // Two diagonal points can represent a submatrix, there're n^2 points, thus (n^2)^2=n^4 submatrix,
+   // iterate through O(n^4) sub-matrices and it takes O(n^2) to compute the area of each
+   // time: O(n^6); space: O(1)
 
    // Solution2
-   // Dynamic Programming, O(n^4)
+   // Dynamic Programming
+   // Pre-calcualte the area of submatrix [(0,0), (i,j)], this takes O(n^2) time
    // reduce the computation time of sub-matrix sum from O(n^2) to O(1)
+   // time: O(n^4); space: O(n^2)
    public int findMaxSubmatrixSum(int[][] matrix) {
       int max = Integer.MIN_VALUE;
       int rowNum = matrix.length, colNum = matrix[0].length;
@@ -72,28 +67,24 @@ public class ch18_12_FindMaxSubmatrixSum {
    
    // Solution3
    // get the sum of each column in sub-matrix first
-   // then, get MaxSubArray of the columnSum array 
-   // time: O(n^3)
+   // then, get MaxSubArray of the columnSum array
+   // time: O(n^3); space: O(n)
    public int findMaxSubmatrixSum2(int[][] matrix) {
       int max = Integer.MIN_VALUE;
-      int rowNum = matrix.length, colNum = matrix[0].length;
-      int[] partialSum = new int[colNum];
-      for (int rs=0; rs<rowNum; rs++){
-         clearArray(partialSum);
-         for (int rd=rs; rd<rowNum; rd++){
-            for (int i=0; i<colNum; i++)
-               partialSum[i] += matrix[rd][i];
-            max = Math.max(max, maxSubArray(partialSum));
+      int M = matrix.length, N = matrix[0].length;
+      int[] columnSum = new int[N];
+      for (int rs=0; rs<M; rs++){ // rs is the upper border, rd is the bottom border
+         Arrays.fill(columnSum, 0);
+         for (int rd=rs; rd<M; rd++){
+            for (int i=0; i<N; i++) // update columnSum array
+               columnSum[i] += matrix[rd][i];
+            max = Math.max(max, maxSubArray(columnSum));
          }
       }
       return max;
    }
    
-   public void clearArray(int[] A){
-      for (int i=0; i<A.length; i++)
-         A[i] = 0;
-   }
-   
+   // time: O(n)
    public int maxSubArray(int[] A){
       int max = Integer.MIN_VALUE, sum=0;
       for (int i=0; i<A.length; i++){
@@ -102,4 +93,17 @@ public class ch18_12_FindMaxSubmatrixSum {
       }
       return max;
    }
+   
+   @Test
+   public  void test() {
+      int[][] matrix = new int[][]{
+            {1,1,1,-1},
+            {1,2,1,-1},
+            {1,1,1,1},
+            {-1,-1,-1,1},
+      };
+      System.out.println(findMaxSubmatrixSum(matrix));
+      System.out.println(findMaxSubmatrixSum2(matrix));
+   }
+
 }

@@ -27,33 +27,30 @@ public class Solution {
     }
 }
 
-
 // Handle capitalization and punctuation by writing methods
+// time: O(n), one pass; space: O(1)
 public class Solution {
     public boolean isPalindrome(String s) {
         if (s==null || s.length()==0)
             return true;
-        String ss = parse(s);
-        int i=0, j=ss.length()-1;
+        int i=0, j = s.length()-1;
         while (i<j){
-            if (ss.charAt(i)!=ss.charAt(j))
+            while (i<j && !isLetter(s.charAt(i)))
+                i++;
+            while (i<j && !isLetter(s.charAt(j)))
+                j--;
+            if (!isEqual(s.charAt(i), s.charAt(j)))
                 return false;
-            i++;
-            j--;
+            i++; j--;
         }
         return true;
     }
     
-    private String parse(String s){
-        StringBuilder sb = new StringBuilder();
-        for (int i=0; i<s.length(); i++){
-            if (isLetter(s.charAt(i)))
-                sb.append(Character.toLowerCase(s.charAt(i)));
-        }
-        return sb.toString();
+    private boolean isLetter(char ch){
+        return ch>='A' && ch<='Z' || ch>='0' && ch<='9' || ch>='a' && ch<='z';
     }
     
-    private boolean isLetter(char ch){
-        return ch>='0' && ch<='9' || ch>='a' && ch<='z' || ch>='A' && ch<='Z';
+    private boolean isEqual(char a, char b){
+        return Character.toLowerCase(a) == Character.toLowerCase(b);
     }
 }

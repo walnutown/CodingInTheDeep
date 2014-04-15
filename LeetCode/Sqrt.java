@@ -21,7 +21,7 @@ public class Solution {
     }
 }
 
-// Newton's Method
+// Newton's Method, better than binary search
 public class Solution {
     public int sqrt(int x) {
         if (x<=1)
@@ -30,7 +30,7 @@ public class Solution {
         while (true){
             double r0 = (r+x/r)/2;
             if (Math.abs(r-r0)<1)
-                return (int)r0;
+                return (int)r0; // remember to cast here
             r = r0;
         }
     }

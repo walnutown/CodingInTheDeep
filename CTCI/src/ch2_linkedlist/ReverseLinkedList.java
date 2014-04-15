@@ -6,7 +6,11 @@ public class ReverseLinkedList {
    /*
     * Reverse a LinkedList
     */
+
    // iterative version
+   // Maintain two pointers, one for the new head of the reversed list, here we create a sentinel
+   // to ease the border cases; and one for the old head of the list
+   // In each step, we insert oldHead.next before the newHead (which is sentinel.next)
    // time: O(n); space: O(1)
    public ListNode reverse(ListNode head) {
       if (head == null || head.next == null)
@@ -23,15 +27,18 @@ public class ReverseLinkedList {
       return dum.next;
    }
 
-   // recursive version, hard to imagine, better to draw the recursive process
-   // O(n); space: O(n)
+   // recursive version
+   // Each time, we reverse the list after current node first
+   // append current node to the end of the reversed list
+   // and always return new head of the reversed list
+   // time: O(n); space: recursive stack
    public ListNode reverse2(ListNode head) {
       if (head == null || head.next == null)
          return head;
       ListNode r = reverse2(head.next);
       head.next.next = head;
       head.next = null;
-      return r; // r is always pointing to the last node of the list
+      return r; // r is always pointing to the new head of the reversed list
    }
    
    // recursive version 2

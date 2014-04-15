@@ -33,6 +33,8 @@ public class Solution {
 // Pattern search is frequently used when you press Ctrl+F. The running time of naive 
 // solution is O(n*(n-m+1))
 
+// Each time, when we find a mismatch, we try to find the last longest matched prefix (llmp),
+// and start next comparison from the end of llmp.
 // Pre-processing time is O(m), worst case matching time is O(n)
 // time: O(m+n)
  
@@ -52,12 +54,11 @@ public class Solution {
         while (i < H.length){
             if (H[i]==N[j]){
                 i++; j++;
-            }else if (j>0)
-                j = T[j-1];
-            else
-                i++;
-            if (j==N.length)
-                return haystack.substring(i-j);
+            }else{
+                if (j>0)    j = T[j-1]; 
+                else    i++;
+            }
+            if (j==N.length)    return haystack.substring(i-j);
         }
         return null;
     }
@@ -67,12 +68,12 @@ public class Solution {
         int[] T = new int[N.length];
         int i=1, j=0;
         while (i<N.length){
-            if (N[i]==N[j]){
-                T[i++] = ++j;
-            }else if (j>0)
-                j = T[j-1];
-            else
-                i++;
+            if (N[i]==N[j])
+                T[i++] = ++j; // since we start next comparison after the end of llmp, we need to increment j fisrt
+            else{
+                if (j>0)    j = T[j-1];
+                else    i++;
+            }
         }
         return T;
     }

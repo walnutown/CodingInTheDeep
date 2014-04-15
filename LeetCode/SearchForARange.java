@@ -55,7 +55,7 @@ public class Solution {
             if (A[mid] >= target)   end = mid-1;
             else start = mid+1;
         }
-        return start;
+        return end+1; // why? because end will decrement until A[mid]<target, which is one position left off
     }
     
     public int getUpperBound(int[] A, double target){        
@@ -65,7 +65,7 @@ public class Solution {
             if (A[mid] > target)   end = mid-1;
             else start = mid+1;
         }
-        return end;
+        return start-1;
     }
 }
 

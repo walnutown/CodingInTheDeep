@@ -41,13 +41,9 @@ SQL statements:
 		INNER JOIN table2
 		ON table1.col = table2.col
 	<10> LEFT JOIN, RIGHT JOIN, FULL JOIN
-			LEFT JOIN: may have null value if there's no matching row in right table
-			Predicate: the column to connect two tables (ON keyword)
 	<11> AS 
 		 SELECT col AS alias_name
 		 FROM table
-	<12> GROUP BY
-		used in conjunction with the aggregate functions to group the result-set by one or more columns.
 
 SQL Functions
 	<1>	COUNT  :  return the number of values of a specified col
@@ -59,7 +55,6 @@ SQL Functions
 		WHERE col operator value
 		GROUP BY col
 		HAVING aggregate_function(col)	operator value
-
 	
 	
 	

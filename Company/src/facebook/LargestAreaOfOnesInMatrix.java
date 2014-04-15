@@ -1,7 +1,5 @@
 package facebook;
 
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 public class LargestAreaOfOnesInMatrix {
@@ -21,31 +19,33 @@ public class LargestAreaOfOnesInMatrix {
       boolean[][] visited = new boolean[M][N];
       for (int i = 0; i < M; i++) {
          for (int j = 0; j < N; j++) {
-            if (matrix[i][j] == 1 && !visited[i][j]) {
-               ArrayList<Integer> r = new ArrayList<Integer>();
-               dfs(matrix, i, j, visited, r);
-               max = Math.max(max, r.size());
-            }
+            if (matrix[i][j] == 1 && !visited[i][j])
+               max = Math.max(max, dfs(matrix, i, j, visited));
          }
       }
       return max;
    }
 
-   private void dfs(int[][] matrix, int i, int j, boolean[][] visited, ArrayList<Integer> r) {
+   private int dfs(int[][] matrix, int i, int j, boolean[][] visited) {
       if (i < 0 || i >= matrix.length || j < 0 || j >= matrix[0].length || visited[i][j] || matrix[i][j] == 0)
-         return;
-      r.add(matrix[i][j]);
+         return 0;
       visited[i][j] = true;
-      dfs(matrix, i - 1, j, visited, r);
-      dfs(matrix, i, j - 1, visited, r);
-      dfs(matrix, i + 1, j, visited, r);
-      dfs(matrix, i, j + 1, visited, r);
+      int count = 1;
+      count += dfs(matrix, i - 1, j, visited);
+      count += dfs(matrix, i, j - 1, visited);
+      count += dfs(matrix, i + 1, j, visited);
+      count += dfs(matrix, i, j + 1, visited);
+      return count;
    }
 
    @Test
    public void test() {
-      int[][] matrix = new int[][] { { 1, 1, 0, 0 }, { 1, 0, 0, 0 }, { 1, 0, 1, 1 },
-            { 1, 0, 1, 1 }, };
+      int[][] matrix = new int[][] { 
+            { 1, 1, 0, 0 }, 
+            { 1, 0, 0, 0 }, 
+            { 1, 0, 1, 1 },
+            { 1, 0, 1, 1 }, 
+      };
       System.out.println(getMaxArea(matrix));
    }
 

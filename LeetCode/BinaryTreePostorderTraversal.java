@@ -67,4 +67,34 @@ public class Solution{
         Collections.reverse(res);
         return res;
     }
+} 
+
+// Morris traversal
+// mirror preorder morris traversal and finally reverse the result
+public class Solution{
+    public ArrayList<Integer> postorderTraversal(TreeNode root) {
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        TreeNode curr = root;
+        while (curr!=null){
+            if (curr.right==null){
+                res.add(curr.val);
+                curr = curr.left;
+            }else{
+                TreeNode prev = curr.right;
+                while (prev.left!=null && prev.left!=curr)
+                    prev = prev.left;
+                if (prev.left==null){
+                    prev.left = curr;
+                    res.add(curr.val);
+                    curr = curr.right;
+                }else{
+                    prev.left = null;
+                    curr = curr.left;
+                }
+            }
+        }
+        Collections.reverse(res);
+        return res;
+    }
 }   
+

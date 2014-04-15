@@ -13,6 +13,7 @@
     The number of ways decoding "12" is 2.
 */
 
+// Dynamic Programming
 // check whether the single char is between 1-9, or the continuous two chars is betwen 10-26
 // time: O(n); space: O(n)
 public class Solution {
@@ -21,20 +22,13 @@ public class Solution {
             return 0;
         int N = s.length();
         int[] dp = new int[N+1];
-        char[] ss = s.toCharArray();
-        dp[0] = 1;
-        dp[1] = ss[0]=='0'? 0:1;
-        for (int i=2; i<=N; i++){
-            if (ss[i-1]=='0'){
-                if (ss[i-2]!='1' && ss[i-2]!='2')   // cannot be decoded
-                    return 0;
-                else
-                    dp[i] = dp[i-2];
-            }else{
-                dp[i] = dp[i-1];
-                if (ss[i-2]=='1' || (ss[i-2]=='2' && ss[i-1]>='0' && ss[i-1]<='6'))
-                    dp[i] += dp[i-2];
-            }
+        dp[0] = 1;      // Note the initialization step here, should be 1, not 0
+        for (int i=1; i<=N; i++){
+            if (s.charAt(i-1)>='1' && s.charAt(i-1)<='9')
+                dp[i] += dp[i-1];
+            if (i>=2 && (s.charAt(i-2)=='1' && s.charAt(i-1)>='0' && s.charAt(i-1)<='9'
+                || s.charAt(i-2)=='2' && s.charAt(i-1)>='0' && s.charAt(i-1)<='6'))
+                dp[i] += dp[i-2];
         }
         return dp[N];
     }

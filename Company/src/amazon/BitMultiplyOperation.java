@@ -25,7 +25,9 @@ public class BitMultiplyOperation {
    // refer to http://en.wikipedia.org/wiki/Multiplication_algorithm#Peasant_or_binary_multiplication
    // time: O(32)
    public int bitMultiply2(int a, int b) {
-      int multiplier = a < 0 ? negative(a) : a;
+      // Note, we need to convert all to positive integers first, because (-1)>>1 remains -1
+      // which will cause a endless loop
+      int multiplier = a < 0 ? negative(a) : a; 
       int multiplicand = b < 0 ? negative(b) : b;
       int res = 0;
       while (multiplicand > 0) {
@@ -36,7 +38,7 @@ public class BitMultiplyOperation {
       }
       return (a ^ b) < 0 ? negative(res) : res;
    }
-
+   
    public int negative(int num) {
       return bitAdd(~num, 1);
    }
