@@ -40,7 +40,7 @@ public class Solution {
         if (s[i]==p[j] || p[j]=='.'){
             boolean isMatch = false;
             if (j+1<p.length && p[j+1]=='*')
-                isMatch = isMatch || m(s,p,i+1,j) || m(s,p,i,j+2);
+                isMatch = isMatch || m(s,p,i+1,j) || m(s,p,i,j+2); // Note m(s,p, i+1, j+2), understand why skip it here
             return isMatch || m(s,p,i+1,j+1);
         }else
             return j+1<p.length && p[j+1]=='*' && m(s,p,i,j+2);

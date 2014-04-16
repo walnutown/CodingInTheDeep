@@ -3,10 +3,10 @@ package facebook;
 public class ImplementReadLine {
    /*
     * Give you a function char* read4096(), return a string which has <= 4096 characters
-    * If the string less than 4096 characters which means reached the end of file Ó
+    * If the string is less than 4096 characters, this means we've reached the end of file EOF
     * Use API read4096(), write a function char* readline()
     * Requirement:
-    * #1 readline() returns when reading Ô\nÕ or Ó;
+    * #1 readline() returns when reading Ô\nÕ or EOF;
     * #2 readline() may be called multiple times on a file, the return value should be correct.
     * #3 readline() may return char array longer than 4096 chars.
     */

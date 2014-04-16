@@ -34,3 +34,39 @@ public class Solution {
       }
 }
 
+
+// In place swap, swap different values to current position
+// if same value is encountered, skip it
+public class Solution {
+    public ArrayList<ArrayList<Integer>> permuteUnique(int[] num) {
+          ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+          Arrays.sort(num);
+          perm(num, 0, res);
+          return res;
+    }
+     
+    private void perm(int[] num, int index, ArrayList<ArrayList<Integer>> res){
+        if (index==num.length){
+            ArrayList<Integer> r = new ArrayList<Integer>();
+            for (int val:num)   r.add(val);
+            res.add(r);
+            return;
+        }
+        Set<Integer> set = new HashSet<Integer>();
+        for (int i=index; i<num.length; i++){
+            if (set.contains(num[i])) // avoid same value
+                continue;
+            swap(num, index, i);
+            perm(num, index+1, res);
+            swap(num, index, i);
+            set.add(num[i]);
+        }
+    }  
+    
+    private void swap(int[] A, int i, int j){
+        int tmp = A[i];
+        A[i] = A[j];
+        A[j] = tmp;
+    }
+}
+

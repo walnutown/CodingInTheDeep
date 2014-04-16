@@ -3,6 +3,8 @@ package facebook;
 import java.util.Arrays;
 import java.util.Comparator;
 
+import lib.Interval;
+
 import org.junit.Test;
 
 public class WeightedIntervalScheduling {
@@ -14,16 +16,6 @@ public class WeightedIntervalScheduling {
    // [1] Sort all the jobs according to their start and end time, O(nlgn)
    // [2] Build a table to store the closest compatible previous job, O(n^2)
    // [3] Dynamic Programming to find the max weight, O(n)
-   public class Interval{
-      int start;
-      int end;
-      int cost;
-      Interval(int start, int end, int cost){
-         this.start = start;
-         this.end = end;
-         this.cost = cost;
-      }
-   }
    
    public int getMaxWeight(Interval[] intervals){
       Arrays.sort(intervals, new Comparator<Interval>(){

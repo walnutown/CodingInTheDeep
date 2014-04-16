@@ -24,18 +24,18 @@
 public class Solution {
     public ArrayList<ArrayList<Integer>> combine(int n, int k) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-        finder(n, k, 0, 0, res, new ArrayList<Integer>());
+        finder(n, 0, k, res, new ArrayList<Integer>());
         return res;
     }
     
-    public void finder(int n, int k, int index, int dep, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r){
-        if (dep == k){
+    public void finder(int n, int index, int k, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r){
+        if (k==0){
             res.add(new ArrayList<Integer>(r));
             return;
         }
         for (int i = index+1; i <= n; i++){
             r.add(i);
-            finder(n, k, i, dep+1, res, r);
+            finder(n, i+1, k-1, res, r);
             r.remove(r.size()-1);
         }
     }

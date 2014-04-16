@@ -2,6 +2,8 @@ package ch11_sorting_searching;
 
 import java.util.Arrays;
 
+import org.junit.Test;
+
 public class CountInversionsInArray {
 
    /**
@@ -12,13 +14,17 @@ public class CountInversionsInArray {
    // http://www.geeksforgeeks.org/counting-inversions/
    // CLSR, Chapter2
 
+   // The naive solution is to check all pairs. Each pair needs two index, so we have n^2 pairs
+   // time: O(n^2)
+
    // we can modify merge sort to solve this problem
    // each inversion implies one merge-inversion in the merge step.
    // If l<r, no merge; if l>r, we need a merge-inversion, and the number of inversions is mid-l+1
-   // (why? because r will be moved to the position before l, there're mid-l+1 merge-inversions
-   // here)
+   // (why? because r will be moved to the position before l, elements in the range[l+1, mid] will
+   // also form an inversion with r
 
-   public static int mergeSort(int[] arr, int start, int end) {
+   // time: O(nlgn)
+   public int mergeSort(int[] arr, int start, int end) {
       if (start >= end)
          return 0; // notice >= here, because in 'mergeSort(arr,start,mid)', 'mid' keep the same. if
                    // start>end, may cause dead loop
@@ -30,7 +36,7 @@ public class CountInversionsInArray {
       return count;
    }
 
-   public static int merge(int[] arr, int mid, int start, int end) {
+   public int merge(int[] arr, int mid, int start, int end) {
       int[] helper = Arrays.copyOfRange(arr, 0, arr.length);
       int count = 0;
       int i = start, j = mid + 1, index = start;
@@ -52,7 +58,8 @@ public class CountInversionsInArray {
       return count;
    }
 
-   public static void main(String[] args) {
+   @Test
+   public void test() {
       int[] A = new int[] { 2, 3, 8, 6, 1 };
       int count = mergeSort(A, 0, A.length - 1);
       System.out.println(count);
