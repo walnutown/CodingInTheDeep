@@ -46,6 +46,8 @@ public class ch18_2_ShuffleCards {
     * picked in previous iteration) x (probability that ith element is picked in this iteration)
     * So the probability = ((n-1)/n) x (1/(n-1)) = 1/n
     */
+   // An easy way to understand this method is to think of the question: take n balls from a bag of n balls
+   // We can get balls out in different order, this process is like shuffling the cards
    // time: O(n); space: O(1)
    public static int[] shuffler2(int[] cards) {
       for (int i = cards.length - 1; i > 0; i--) {

@@ -352,7 +352,20 @@ basics: **draw the list on paper** is the most helpful way to solve list problem
 * debug: how to debug in recursion code? (due to recursive calls, it's difficult to track variable values using breakpoint. Breakpoint works well in sequence logic)
   * a good way is to print out states in each level.
   * try to use the case with a recursive tree of small depth
-* TowerOfHanoi (CTCI)
+* Questions
+  * TowerOfHanoi (CTCI)
 
 ## Dynamic Programming
 * PaintHouse (Company/LinkedIn)
+
+## Backtracking
+* Backtracking is a general algorithm for finding solutions to the problem, that incrementally builds candidates to the solutions, and abandons each partial candidate c ("backtracks") as soon as it determines that c cannot possibly be completed to a valid solution.
+* Implemented using DFS.
+* Questions
+  * Combinatorial Optimization
+
+
+## Directed Acyclic Graph (DAG)
+* a directed graph with no directed cycles. That is, it is formed by a collection of vertices and directed edges, each edge connecting one vertex to another, such that there is no way to start at some vertex v and follow a sequence of edges that eventually loops back to v again.
+* Questions:
+  * 

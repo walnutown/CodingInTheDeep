@@ -32,6 +32,9 @@
  * };
  */
 
+// Basic idea is to use memoization to reduce duplicate computation and avoid cycles
+// Maintain a map<oldNode, newNode>, if the oldNode is in the map, get newNode from the map directly;
+// otherwise, create a new node
 
 // DFS
 public class Solution {
@@ -54,22 +57,19 @@ public class Solution {
 public class Solution {
     public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         if (node==null) return null;
-        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
         Queue<UndirectedGraphNode> qu = new LinkedList<UndirectedGraphNode>();
+        Map<UndirectedGraphNode, UndirectedGraphNode> map = new HashMap<UndirectedGraphNode, UndirectedGraphNode>();
         qu.add(node);
-        map.put(node, new UndirectedGraphNode(node.label));
         while (!qu.isEmpty()){
             UndirectedGraphNode curr = qu.poll();
-            UndirectedGraphNode new_node = map.get(curr);
-            for (UndirectedGraphNode n : curr.neighbors){
-                if (map.containsKey(n))
-                    new_node.neighbors.add(map.get(n));
-                else{
-                    UndirectedGraphNode new_n = new UndirectedGraphNode(n.label);
-                    new_node.neighbors.add(new_n);
-                    map.put(n, new_n);
-                    qu.add(n);
+            if (!map.containsKey(curr))
+                map.put(curr, new UndirectedGraphNode(curr.label));
+            for (UndirectedGraphNode adj : curr.neighbors){
+                if (!map.containsKey(adj)){
+                    map.put(adj, new UndirectedGraphNode(adj.label));
+                    qu.add(adj);
                 }
+                map.get(curr).neighbors.add(map.get(adj));
             }
         }
         return map.get(node);

@@ -7,7 +7,7 @@
 
 // In order to trap more water, we should find the highest left bar and highest right bar
 // And our final bar will be the samller one of the two
-// The water that can be trapped in current index = bar height - current height
+// The water that can be trapped in current index = final bar height - current height
 // time: O(n); space:O(n)
 public class Solution {
     public int trap(int[] A) {

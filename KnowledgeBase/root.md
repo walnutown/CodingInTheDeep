@@ -582,7 +582,6 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
     * dynamic array
     * doubly linked list
 
-
 * Heap (Priority Queue)
   * parent node is always 'larger'(depends on comparator) than the child nodes 
   * getMax(), O(1); insert(), O(lgn); removeMax(), O(lgn);
@@ -640,7 +639,6 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * One usage is in search engine. (e.g. [Lucene](http://blog.mikemccandless.com/2013/12/fast-range-faceting-using-segment-trees.html))
 * [Ternary Search Tree](http://en.wikipedia.org/wiki/Ternary_search_tree)
   * A type of Trie.
-  * 
   * Space efficient compared to standard compared to prefix trees, at the cost of speed
 
 * LinkedHashMap
@@ -648,7 +646,33 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * Maintains a doubly-linked list running through all of its entries. Thus, it defines the iteration ordering. There're two kinds of orders: access order, insertion order (which cen be decided in constructor)
   * it provides constant-time performance for the basic operations (add, contains and remove), assuming the hash function disperses elements properly among the buckets. Performance is likely to be just slightly below that of HashMap, due to the added expense of maintaining the linked list, with one exception: Iteration over the collection-views of a LinkedHashMap requires time proportional to the size of the map, regardless of its capacity. Iteration over a HashMap is likely to be more expensive, requiring time proportional to its capacity.
 
+* Graph -- (from CLRS)
+  * G = (V, E), V for vertex, E for edge
+  * Representation of graph:
+    * Object and pointer
+    * Adjacency list, for sparse graph |E| < |V|^2
+    * Adjacency matrices
+  * Graph Searching Algorithms
+    * DFS, BFS
+    * Shortest path in unweighted undirected graph
+      * BFS
+    * Shortest path in weighted directed path (edge weight may be negative)
+      * Bellman-Ford, O(VE)
+        * return FALSE if there's negative cycle
+    * Shortest path in weighted directed path (edge weight is non-negative)
+      * Dijkstra, O(E + VlgV)
+    * Shortest path in DAG
+      * Topological sort, O(V+E)
+    * Topological Sort in DAG (Direct Acyclic Graph)
+      * DFS
+    * Minimum Spinning Tree 
+      * Kruskal, is a greedy algorithm, add edge of least weight incrementally, and UNION the disjoint sets if possible
+      * Prim, similar to Dijkstra, is a greedy algorithm, add adjacent edge of least weight to the already-connect tree
+      * An application is Travelling Salesman Problem
 
+## Sorting
+  * Comparison sort: requires O(nlgn) worst case
+    * merge sort, quick sort, insertion sort, selection sort/bubble sort
 
 
 ## Android

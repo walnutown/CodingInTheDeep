@@ -27,10 +27,10 @@ public class Solution {
             return "";
         int[] need = new int[256], find = new int[256];
         for (int i=0; i<N; i++)
-            need[T.charAt(i)-'0']++;
+            need[(int)T.charAt(i)]++;
         int start = 0, minStart = -1, minEnd = M; // make sure the initial value of minEnd-minStart is big enough
         for (int i=0; i<M; i++){
-            int ch = S.charAt(i)-'0';
+            int ch = (int) S.charAt(i);
             if (find[ch]<need[ch])
                 N--;
             find[ch]++;
@@ -44,10 +44,9 @@ public class Solution {
         return minStart==-1?"": S.substring(minStart, minEnd+1);
     }
     
-    private int getStartIndex(int[] need, int[] find, String S, int oldStart){
-        int i = oldStart;
+    private int getStartIndex(int[] need, int[] find, String S, int i){
         for (; i<S.length(); i++){
-            int ch = S.charAt(i)-'0';
+            int ch = (int) S.charAt(i);
             if (find[ch]>need[ch])
                 find[ch]--;
             else
@@ -57,27 +56,43 @@ public class Solution {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// TLE, use a string to store min window, easy for update
+public class Solution {
+    public String minWindow(String S, String T) {
+        if (S==null || T==null)
+            return "";
+        int M = S.length(), N = T.length();
+        if (M<N)
+            return "";
+        int[] need = new int[256], find = new int[256];
+        for (int i=0; i<N; i++)
+            need[(int)T.charAt(i)]++;
+        String min = "";
+        int i = 0;
+        for (int j=0; j<M; j++){
+            int ch = (int) S.charAt(j);
+            if (find[ch]<need[ch])
+                N--;
+            find[ch]++;
+            if (N==0){
+                i = getStartIndex(need, find, S, i);
+                String s = S.substring(i, j+1);
+                if (min.equals("") || min.length()<s.length())
+                    min = s;
+            }
+        }
+        return min;
+    }
+    
+    private int getStartIndex(int[] need, int[] find, String S, int i){
+        for (; i<S.length(); i++){
+            int ch = (int) S.charAt(i);
+            if (find[ch]>need[ch])
+                find[ch]--;
+            else
+                break;
+        }
+        return i;
+    }
+}
 

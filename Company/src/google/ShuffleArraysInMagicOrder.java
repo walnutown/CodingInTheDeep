@@ -4,12 +4,13 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class SortArraysInMagicOrder {
+public class ShuffleArraysInMagicOrder {
    /*
     * Given an unordered array, sort it so that
     * a1 <= a2 >= a3 <= a4
     */
    
+   // Sol1
    // Sort the array in ascending order, and then merge left and right half to 
    // form the target array
    // time: O(nlgn); space: O(1)
@@ -28,12 +29,20 @@ public class SortArraysInMagicOrder {
       return res;
    }
    
-   // Traverse the array, if the two adjacent values are not in magic order, swap them
+   // Sol2
+   // Actually we don't need to sort the array, we only need to find partition the first
+   // n/2 elements to left, this can be done using quick select in O(n)
+   // Then we can merge the two parts
+   // time: O(n); space: O(1)
+   
+   // Sol3
+   // Traverse the array,
+   // if index is odd, we should have A[i]<=A[i+1], otherwise swap the two
+   // if index is even, we should have A[i]>=A[i+1], otherwise swap the two
    // eg, 1,2,3,4
    // 1: 1,2,3,4
    // 2: 1,3,2,4
    // 3: 1,3,2,4
-   // Use the transitive relation
    // time: O(n); space: O(1)
    public int[] sortArraysInMagicOrder2(int[] A){
       int N = A.length;
@@ -51,6 +60,13 @@ public class SortArraysInMagicOrder {
       A[i] = A[j];
       A[j] = tmp;
    }
+   
+   // Proof of Sol3, use induction
+   // if i is odd, we should already have A[i-1]>=A[i], 
+   //    if A[i]<=A[i+1], just move to next element
+   //    if A[i]>A[i+1], use transitive relation, we have A[i-1]>A[i+1],
+   //       after swap, we have A[i-1]>A[i+1]<A[i]
+   // if i is even, the same
    
    @Test
    public void test(){

@@ -52,6 +52,7 @@ public class ch18_3_GetRandomSetFromArray {
    }
    
    // similar to ShuffleCards
+   // Terminate after m times selection
    public static int[] getRandomSet3(int[] A, int m) {
       for (int i = A.length-1; i >= A.length-m; i--) {
          int j = rand(0, i);

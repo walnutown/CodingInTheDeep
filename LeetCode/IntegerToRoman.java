@@ -6,8 +6,9 @@
     1, 5, 10,50,100,500, 1000
 */
 
-// time: O(5m); space: O(5m), m is the number of digits in num
 // similar to 'DivideTwoIntegers'
+// time: O(5m); space: O(5m), m is the number of digits in num
+// why? index will stop at each digit for at most 5 times
 public class Solution {
     public String intToRoman(int num) {
         if (num == 0)   return "";

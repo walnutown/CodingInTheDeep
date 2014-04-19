@@ -2,7 +2,9 @@
     Implement pow(x, n).
 */
 
-// recursion, time: O(lgn)
+// recursion, the terminate condition of the recursion is n==0
+// Note to handle positive and negative x
+// time: O(lgn)
 public class Solution {
     public double pow(double x, int n) {
         return power(x, (long) n);

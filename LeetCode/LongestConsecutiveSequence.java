@@ -8,53 +8,30 @@
     Your algorithm should run in O(n) complexity.
 */
 
+// The naive solution is to sort the array and get the longest sequence, yet this takes O(nlgn),
+// which doesn't meet the time requirement of O(n)
 
-// cluster merge, http://discuss.leetcode.com/questions/1070/longest-consecutive-sequence
+
+// Add all elements into a set.
+// Pick a random number N from set as starting point (through iterator),
+// We extend the subarray's left and right border if they're in the set.
+// Once a number is visited, we remove it from the set. When the extension terminates,
+// we pick another random number from the remaining set
 // time: O(n), space: O(n)
-public class Solution {
-    Map<Integer, Integer> mp;
-    public int longestConsecutive(int[] num) {
-        if (num == null || num.length == 0)
-            return 0;
-        mp = new HashMap<Integer, Integer>();
-        int max = 1;
-        for (int n : num){
-            if (mp.containsKey(n)) continue;
-            mp.put(n,1);
-            if (mp.containsKey(n-1))
-                max = Math.max(max, merge(n-1, n)); // n is not in the map, so is not in the range of (n-1). Thus, we're sure that the range of n-1 is left range, but not right range
-            if (mp.containsKey(n+1))
-                max = Math.max(max, merge(n, n+1));
-        }  
-        return max;
-    }
-    public int merge(int left, int right){
-        int start = left - mp.get(left) + 1;
-        int end = right + mp.get(right) - 1;
-        int len = end- start + 1;
-        mp.put(start, len); // here, len denotes length of left range
-        mp.put(end, len);   // here, len denotes length of right range
-        return len;
-    }
-}
-
-// Set, time: O(n), space: O(n)
 public class Solution {
     public int longestConsecutive(int[] num) {
         if (num==null || num.length==0) return 0;
         Set<Integer> set = new HashSet<Integer>();
-        for (int i=0; i<num.length; i++){
-            set.add(num[i]);
-        }
-        int max_len = Integer.MIN_VALUE;
+        for(int val:num)    set.add(val);
+        int max = Integer.MIN_VALUE;
         while (!set.isEmpty()){
             int mid = set.iterator().next();        // to get the next available value in the set
             set.remove(mid);
             int start = mid, end=mid;
             while (!set.isEmpty() && set.contains(start-1)) set.remove(--start);
             while(!set.isEmpty() && set.contains(end+1))    set.remove(++end);
-            max_len = Math.max(max_len, end-start+1);
+            max = Math.max(max, end-start+1);
         }
-        return max_len;
+        return max;
     } 
 }
