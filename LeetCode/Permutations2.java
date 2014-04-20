@@ -57,7 +57,7 @@ public class Solution {
             if (set.contains(num[i])) // avoid same value
                 continue;
             swap(num, index, i);
-            perm(num, index+1, res);
+            perm(num, index+1, res);  // Note: index+1, not i+1
             swap(num, index, i);
             set.add(num[i]);
         }

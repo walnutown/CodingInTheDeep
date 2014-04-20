@@ -2,36 +2,40 @@ package ch1_arrays_strings;
 
 import java.util.Arrays;
 
-public class ch1_3_StringPermutation {
+import org.junit.Test;
+
+public class ch1_3_IsStringPermutation {
 
    /**
     * Given two strings, write a method to decide if one is a permutation of the other
     */
-   public static void main(String[] args) {
-      System.out.println(isPermutation("abc", "bacd"));
-      System.out.println(isPermutation_inPlace("abc", "cba"));
-   }
+
+   // Sol1
+   // Count occurrence of each character in two words and compare
    // time: O(n); space: O(n)
-   public static boolean isPermutation(String a, String b){
+   public boolean isPermutation(String a, String b) {
       if (a == null || b == null)
          return a == null && b == null;
       if (a.length() != b.length())
          return false;
       int[] freq = new int[256];
-      for (int i = 0; i < a.length(); i++){
+      for (int i = 0; i < a.length(); i++) {
          freq[a.charAt(i)]++;
       }
-      for (int i = 0; i < b.length(); i++){
+      for (int i = 0; i < b.length(); i++) {
          freq[b.charAt(i)]--;
       }
-      for (int f : freq){
+      for (int f : freq) {
          if (f != 0)
             return false;
       }
       return true;
    }
+
+   // Sol2
+   // Sort two words and compare
    // time: O(nlgn), space: O(1)
-   public static boolean isPermutation_inPlace(String a, String b){
+   public boolean isPermutation2(String a, String b) {
       if (a == null || b == null)
          return a == null && b == null;
       if (a.length() != b.length())
@@ -40,11 +44,17 @@ public class ch1_3_StringPermutation {
       char[] B = b.toCharArray();
       Arrays.sort(A);
       Arrays.sort(B);
-      for (int i = 0; i < A.length; i++){
+      for (int i = 0; i < A.length; i++) {
          if (A[i] != B[i])
             return false;
       }
       return true;
+   }
+
+   @Test
+   public void test() {
+      System.out.println(isPermutation("abc", "bacd"));
+      System.out.println(isPermutation2("abc", "cba"));
    }
 
 }

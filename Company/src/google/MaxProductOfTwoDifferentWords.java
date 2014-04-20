@@ -11,6 +11,10 @@ public class MaxProductOfTwoDifferentWords {
     * Here the pair satisfying the property mentioned in problem will be ("abc", "efh").
     */
    
+   // If we want to get the max product of two words share common characters, we can use
+   // a map<Character, List<Word>>, eg, c -> ["abc", "cde"]
+   // time: O(n*m*lgn)
+   
    // Sol1
    // The naive solution is to get all pairs of words (n^2, n is the number of words), 
    // and for each pair, we have to check whether they have common characters (a, a is

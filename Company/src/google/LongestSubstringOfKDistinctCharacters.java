@@ -10,6 +10,7 @@ public class LongestSubstringOfKDistinctCharacters {
     * input: S = "DCABBBBBBACCC", k= 2
     * output: "ABBBBBBA"
     */
+   
    // Maintain two pointers of sliding window's left and right border
    // Maintain a table to count the number of each distinct characters
    // When there're exactly k distinct characters, update the max substring

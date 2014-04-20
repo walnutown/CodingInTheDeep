@@ -24,6 +24,13 @@ public class BuildTreeFromNodePairs {
     * [space][space]f
     * [space][space]g
     */
+   
+   // Build the B-tree first, then print it
+   // In the build step, we maintain a map of label->node, and fill each nodes's children list
+   // In the print step, we use a pre-order traversal
+   
+   // Actually we don't need to build the tree, use one map<Character, List<Character>>
+   
    class BTreeNode {
       char val;
       ArrayList<BTreeNode> children;

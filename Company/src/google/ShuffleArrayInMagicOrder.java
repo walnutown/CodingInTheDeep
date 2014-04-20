@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class ShuffleArraysInMagicOrder {
+public class ShuffleArrayInMagicOrder {
    /*
     * Given an unordered array, sort it so that
     * a1 <= a2 >= a3 <= a4
