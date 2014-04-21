@@ -5,6 +5,12 @@ public class Interval {
    public int end;
    public int cost;
 
+   public Interval(int start, int end) {
+      this.start = start;
+      this.end = end;
+      cost = 0;
+   }
+
    public Interval(int start, int end, int cost) {
       this.start = start;
       this.end = end;
