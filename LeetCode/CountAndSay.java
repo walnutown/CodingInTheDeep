@@ -10,6 +10,8 @@
     Note: The sequence of integers will be represented as a string.
 */
 
+// This is called Run-Length Encoidng (without numeric in given string)
+// Maintain a counter
 // time: O(n^2); space: O(n^2)
 public class Solution {
     public String countAndSay(int n) {
