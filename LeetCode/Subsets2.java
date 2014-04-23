@@ -41,28 +41,26 @@ public class Solution {
     }
 }
 
-// iterative
-// Add new element to all the existing subsets.
+// Iteratively add new element to all the existing subsets.
 // If the newly-added element is equal to the previously-added element, we only add this
 // new element to a part of the exisitng subsets to avoid duplicates
 // time: O(2^n), each time, the number of subsets is multiplied by 2 (in average)
 public class Solution {
     public ArrayList<ArrayList<Integer>> subsetsWithDup(int[] num) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (num==null || num.length==0)
+            return res;
+        Arrays.sort(num);
         res.add(new ArrayList<Integer>());
-        if(num.length==0)   return res;
-        Arrays.sort(num); // subset must be in non-descending order
-        int start = 0;
-        for(int i = 0; i < num.length; i++)
-        {
+        int N = num.length, start = 0;
+        for (int i=0; i<N; i++){
             int size = res.size();
-            for(int j = start; j < size; j++)
-            {
-                ArrayList<Integer> sub = new ArrayList<Integer>(res.get(j));
-                sub.add(num[i]);
-                res.add(sub);
+            for (int j=start; j<size; j++){
+                ArrayList<Integer> r =  new ArrayList<Integer>(res.get(j));
+                r.add(num[i]);
+                res.add(r);
             }
-            start = i < num.length - 1 && num[i+1]==num[i] ? size:0;
+            start = (i<N-1 && num[i]==num[i+1])? size:0;
         }
         return res;
     }

@@ -27,23 +27,31 @@
  * }
  */
 
-// DFS, time: O(n)
+
+// Backtracking
+// The core algorithm of this question is easy, the difficulty lies in the termination condition of dfs
+// Note that it should be a root ot leaf path with the given sum (sum may be negative)
+// time: O(n); sapce: recursive stack
 public class Solution {
     public ArrayList<ArrayList<Integer>> pathSum(TreeNode root, int sum) {
-        ArrayList<ArrayList<Integer>> paths = new ArrayList<ArrayList<Integer>>();
-        if (root==null) return paths;
-        finder(root, sum, paths, new ArrayList<Integer>());
-        return paths;
+        ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+        if (root==null)   return res;
+        dfs(root, res, new ArrayList<Integer>(), sum);
+        return res;
     }
-    public void finder(TreeNode root, int sum, ArrayList<ArrayList<Integer>> paths, ArrayList<Integer> path){
-        if (root==null)    return;
-        path.add(root.val);
-        if (root.left==null && root.right==null){                   // notice the logics here, easy to make mistake
-            if (sum == root.val)   paths.add(new ArrayList<Integer>(path));
-        }else{
-            finder(root.left, sum-root.val, paths, path);
-            finder(root.right, sum-root.val, paths, path);
+    
+    private void dfs(TreeNode node, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r, int sum){
+        if (node==null)   return;
+        sum -= node.val;
+        r.add(node.val);
+        if (node.left==null && node.right==null){
+            if (sum==0)   res.add(new ArrayList<Integer>(r));
+            r.remove(r.size()-1);   // Remember to remove last node from the path before return
+            return;
         }
-        path.remove(path.size()-1);
+        dfs(node.left, res, r, sum);
+        dfs(node.right, res, r, sum);
+        r.remove(r.size()-1);
     }
+   
 }

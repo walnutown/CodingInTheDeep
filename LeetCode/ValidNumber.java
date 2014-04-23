@@ -12,41 +12,37 @@
 */
 
 // mark the character appeared and do state check
+// time: O(n)
 public class Solution {
     public boolean isNumber(String s) {
-        if (s == null || s.length() == 0)   return false;
-        boolean sign = false;
-        boolean dot = false;
-        boolean num = false;
-        boolean exp = false;
-        int len = s.length();
-        int i = 0;
-        while (i < len && s.charAt(i) == ' ')  i++;
-        while (i < len){
-            char curr = s.charAt(i);
-            if (curr == ' '){
-                while (i < len && s.charAt(i) == ' ') i++;
-                if (i == s.length()) return num;
-                else return false;
-            }else if (curr == '-' || curr == '+'){
-                if (sign)    return false;
-                sign = true;
-            }else if (curr >= '0' && curr <= '9'){
+        if (s==null || s.length()==0)
+            return false;
+        boolean sign = false, dot = false, exp = false, num = false;
+        int N = s.length(), i = 0, j=N-1;
+        while (i<j && s.charAt(i)==' ') i++;    // trim leading whitespace
+        while (i<j && s.charAt(j)==' ') j--;    // trim trailing whitespace
+        if (i>j)   return false;    // all whitespace
+        while(i<=j){
+            char ch = s.charAt(i);
+            if (ch>='0' && ch<='9'){
                 num = true;
-                sign = true;    // no sign after num
-            }else if (curr == '.'){
+                sign = true;        // no sign after num
+            }else if (ch=='+' || ch=='-'){
+                if (sign)   return false;
+                sign = true;        
+            }else if (ch=='.'){
                 if (dot)    return false;
                 dot = true;
-                sign = true;    // no sign after dot
-            }else if (curr == 'e' || curr == 'E'){
+                sign = true;        // no sign after num
+            }else if (ch=='e' || ch=='E'){
                 if (exp || !num)    return false;
-                exp = true;    
-                num = false;
-                sign = false;
-                dot = true;     // no dot after exp
+                exp = true;         
+                sign = false;       // allow sign after e
+                num = false;        
+                dot = true;         // no dot after e
             }else   return false;
             i++;
         }
-        return num;
+        return num; // should have numeric characters
     }
 }

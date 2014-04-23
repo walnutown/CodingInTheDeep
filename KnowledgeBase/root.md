@@ -187,6 +187,11 @@ Knowledge Base for Concepts related questions in programming interview
   * Calls finalize() method in an object before the obejct is finally destroyed
   * Can select different GC
 
+* Reference
+  * Weak reference: GC will collect the weak reachable object in a GC cycle
+  * Soft reference: GC only collect when there's memory limit and need to reclaim memory
+  * Strong reference: defualt reference, GC will not collect the strong reachable onject if there's any strong reference to it.
+
 * Autoboxing & Unboxing
   * Autoboxing: 
     *the automatic conversion that the Java compiler makes between the primitive types and their corresponding object wrapper classes
@@ -256,13 +261,13 @@ Knowledge Base for Concepts related questions in programming interview
     * if two keys have the same hash code, they're mapped into the same bucket, and chained using linked list.
     * when we resize the hashmap, the hash code of each key remains the same, but they're mapped to different index in the array. This will take O(n).
     * In Java source code, hash code is int type, so we can have maximum 2^32 different hashcodes.
-    * equal & hashcode
+    * equals & hashcode
       * hashcode() in Object.class: return distinct integers for distinct objects. (This is typically implemented by converting the internal address of the object into an integer)
       * When we use our own created class as keys in hashmap, we need to overwrite the hashcode() method in Object.class. There're two contracts:
         * if two objects are equal(), they should have the same hashcode()
         * if two objets have the same hashcode(), they may be equal() or not equal
       * To get the hashcode of a primitive data type, we can use its wrapper class's hashcode.eg, Integer.valueOf(10).hashcode()
-      * examples in Java source code.
+      * example of hashcode() in Java source code.
       <pre><code>// Integer.class
         public int hashcode(){
         return value;
@@ -272,6 +277,16 @@ Knowledge Base for Concepts related questions in programming interview
       // computed as s[0]*31^(n-1) + s[1]*31^(n-2) + ... + s[n-1] using int arithmetic,
       // where s[i] is the ith character of the string, n is the length of the string, 
       // and ^ indicates exponentiation
+      * example of equals()
+      <pre><code>@override
+      public boolean equals(Object other){
+        if (other == this)  
+          return true;
+        if (other==null || other.getClass()!=this.getClass())
+          return flase;
+        MyClass c = (MyClass) other;
+        return this.value == c.value;
+      }</pre></code>
 
   * BitSet
     * basically an array of long, if the array size is n, we can represent 64*n different integers
@@ -281,6 +296,32 @@ Knowledge Base for Concepts related questions in programming interview
 * Generics
   * added in JDK5
   * Use case: Collections, generic method, generic class
+  * Generic Type:
+    * A generic type is a generic class or interface that is parameterized over types. eg, Comparator<T>
+    * A type variable can be any non-primitive type (class type, interface type, array type...)
+    * Declaration:
+      *  class name<T1, T2, ..., Tn>{}
+    * Example:
+    <pre><code>// Class without generic type
+    public class Box{
+      private Object obj;
+      public void set(Object obj){this.obj = obj;}
+      public Object get(){return obj;}
+    }
+    // Class with generic type
+    public class Box<T>{
+      private T t;
+      public void set(T t){this.t = t;}
+      public T get(){return t;}
+    }
+    </pre></code>
+  * Generic Method
+    * Similar to generic class, but the scope of the type parameter is limited to the method.
+    * Example
+    <pre><code>// compare() in Comparator<T>
+    @override
+    public int compare(T o1, T o2)
+    </pre></code>
   * In the following case, line 2 will fire a complie error. In general, if Foo is a subtype (subclass or subinterface) of Bar, and G is some generic type declaration, it is not the case that G<Foo> is a subtype of G<Bar>. This is probably the hardest thing you need to learn about generics, because it goes against our deeply held intuitions.
   <pre><code>List<String> ls = new ArrayList<String>(); // 1
     List<Object> lo = ls; // 2 
@@ -670,10 +711,20 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
       * Prim, similar to Dijkstra, is a greedy algorithm, add adjacent edge of least weight to the already-connect tree
       * An application is Travelling Salesman Problem
 
+## NP (Nondeterministic-Polynomial)
+  * P : problems can be solved in polymonial time
+  * NP: problems don't necessarily run in a polymonial time on a regular computer, but do run in polymonial time on a nondeterministic Turing machine. (P is included in NP)
+  * NP-hard: problems can be reduced from any problem in NP
+  * NP-complete: both in NP-hard and NP
+  * Decision problem & Optimization problem
+    * eg, path of cost k exist? find the shortest path
+  * Classic questions:
+    * Travelling Salesman Problem
+
 ## Sorting
   * Comparison sort: requires O(nlgn) worst case
     * merge sort, quick sort, insertion sort, selection sort/bubble sort
-
+  * Counting sort
 
 ## Android
 [tests for Android knowledge base](http://skillgun.com/Questions.aspx?p_id=0&Qbc_id=17&Topicname=Android&typeid=0&count=0&QbMT_id=17&usrSubmit_qtn=0&chptrname=All&FAQ_Type=2)

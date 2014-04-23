@@ -8,10 +8,9 @@
     Although the above answer is in lexicographical order, your answer could be in any order you want.
 */
 
-// DFS
+// Backtracking
 // time: O(n*m), n is the number of digits, m is the average size of digit's mapping letters
 public class Solution {
-    ArrayList<String> res; 
     public ArrayList<String> letterCombinations(String digits) {
         ArrayList<String> res = new ArrayList<String>();
         if (digits == null || digits.length() == 0){   
@@ -33,7 +32,7 @@ public class Solution {
         return res;
     }
     
-    public void finder(String digits, int index, ArrayList<String> res, StringBuilder sb, Map<Integer, String> map){
+    private void finder(String digits, int index, ArrayList<String> res, StringBuilder sb, Map<Integer, String> map){
         if (index == digits.length()){
             res.add(sb.toString());
             return;
@@ -45,6 +44,33 @@ public class Solution {
             finder(digits, index+1, res, sb, map);
             sb.deleteCharAt(sb.length()-1);
         }
-    }
-    
+    } 
 }
+
+// BFS
+public ArrayList<String> letterCombinations2(String digits) {
+        ArrayList<String> result = new ArrayList<String>();
+        if(digits == null) return result;
+        LinkedList<StringBuilder> queue = new LinkedList<StringBuilder>();
+        // initial
+        queue.add(new StringBuilder());
+        // bfs
+        for(int i = 0; i < digits.length(); i++) {
+            LinkedList<StringBuilder> tmp = new LinkedList<StringBuilder>();
+            // for every path so far
+            for(StringBuilder sb : queue) {
+                // for every possibile letters
+                for(char letter : getLetters(digits.charAt(i))) {
+                    StringBuilder nsb = new StringBuilder(sb);
+                    nsb.append(letter);
+                    tmp.add(nsb);
+                }
+            }
+            queue = tmp;
+        }
+        // result
+        for(StringBuilder sb : queue) {
+            result.add(sb.toString());
+        }
+        return result;
+    }

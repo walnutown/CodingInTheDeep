@@ -18,7 +18,9 @@
     Note: m and n will be at most 100.
 */
 
-// 2d DP, time: O(m*n); space: O(m*n)
+// 2d DP
+// When we encounter an obstacle, set number of paths to it to 0 
+// time: O(m*n); space: O(m*n)
 public class Solution {
     public int uniquePathsWithObstacles(int[][] obstacleGrid) {
         int w = obstacleGrid[0].length;

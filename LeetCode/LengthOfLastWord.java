@@ -10,29 +10,18 @@
     return 5.
 */
 
-// time: O(n)
+// Trim trailing whitespace and then count the length
+// time: O(n); space: O(1)
 public class Solution {
     public int lengthOfLastWord(String s) {
-        if (s==null || s.length()==0)   return 0;
-        int i=s.length()-1;
-        while (i>=0 && s.charAt(i)==' ') i--;
-        if (i==-1)   return 0;
-        int len=0;
-        while (i>=0 && s.charAt(i)!=' '){
-            len++;
+        if (s==null || s.length()==0)
+            return 0;
+        int len = 0, N = s.length(), i = N-1;
+        while (i>=0 && s.charAt(i)==' ') // trim trailing whitespace
             i--;
-        }
-        return len;
-    }
-}
-// From AnnieKim, more elegant
-public class Solution {
-    public int lengthOfLastWord(String s) {
-        if (s==null || s.length()==0)   return 0;
-        int len=0;
-        for (int i=s.length()-1; i>=0; i--){
-            if (s.charAt(i) != ' ') len++;
-            else if (s.charAt(i)==' ' && len>0) break;
+        while (i>=0 && s.charAt(i)!=' '){
+            i--;
+            len++;
         }
         return len;
     }

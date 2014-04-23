@@ -10,32 +10,8 @@
     return [3, 4].
 */
 
-// binary search target-0.5 and target+0.5, time: O(lgn)
-public class Solution {
-    public int[] searchRange(int[] A, int target) {
-        int[] res = new int[]{-1,-1};
-        if (A == null || A.length == 0) return res;
-        int low = binarySearch(A, target-0.5);
-        if (low >= A.length || A[low] != target) return res;    // if target not found
-        int high = binarySearch(A, target+0.5) - 1;
-        res[0] = low;
-        res[1] = high;
-        return res;
-    }
-    
-    public int binarySearch(int[] A, double target){        // the return value is the index of the number after the target
-        int start = 0, end = A.length-1;
-        while (start <= end){
-            int mid = (start + end) >> 1;
-            if (A[mid] == target)   return mid;
-            else if (A[mid] > target)   end = mid-1;
-            else start = mid+1;
-        }
-        return start;
-    }
-}
-
-// search lower and upper bounds seperately, time: O(lgn)
+// search lower and upper bounds seperately
+// time: O(lgn)
 public class Solution {
     public int[] searchRange(int[] A, int target) {
         int[] res = new int[]{-1,-1};
@@ -48,7 +24,7 @@ public class Solution {
         return res;
     }
     
-    public int getLowerBound(int[] A, double target){        
+    private int getLowerBound(int[] A, double target){        
         int start = 0, end = A.length-1;
         while (start <= end){
             int mid = (start + end) >> 1;
@@ -58,7 +34,7 @@ public class Solution {
         return end+1; // why? because end will decrement until A[mid]<target, which is one position left off
     }
     
-    public int getUpperBound(int[] A, double target){        
+    private int getUpperBound(int[] A, double target){        
         int start = 0, end = A.length-1;
         while (start <= end){
             int mid = (start + end) >> 1;
@@ -67,5 +43,31 @@ public class Solution {
         }
         return start-1;
     }
+}
+
+// binary search target-0.5 and target+0.5
+// time: O(lgn)
+public class Solution {
+    public int[] searchRange(int[] A, int target) {
+       int[] res = new int[]{-1,-1};
+       int left = binarySearch(A, target-0.5)+1, right = binarySearch(A, target+0.5);
+       if (left>right)  return res; // invlid
+       res[0] = left;
+       res[1] = right;
+       return res;
+    }   
+    private int binarySearch(int[] A, double target){   // Note target type here is double
+        int start = 0, end = A.length-1;
+        while (start<=end){
+            int mid = start + (end-start)/2;
+            if (A[mid] == target)
+                return mid;
+            else if (A[mid]>target)
+                end = mid-1;
+            else
+                start = mid+1;
+        }
+        return end; 
+    }   
 }
 

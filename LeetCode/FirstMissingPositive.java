@@ -20,6 +20,7 @@ public int firstMissingPositive(int[] A){
 }
 
 // an interesting case is [1,1,1,1,1,1,1,1,2]
+// time: O(n)
 public class Solution {
     public int firstMissingPositive(int[] A) {
         if (A==null || A.length==0) return 1;       // notice return 1 here

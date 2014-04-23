@@ -48,4 +48,44 @@ public class Solution {
     
 }
 
+class Solution4 {
+    public boolean isMatch(String s, String p) {
+        if(s == null) return p == null;
+        if (p.isEmpty()) return s.isEmpty();
+        int N = s.length(), M = p.length();
+        Stack<Integer>[] cache = new Stack[M];
+        for(int i = 0; i < M; i++) cache[i] = new Stack<Integer>(); // initial
+        int sIt = 0, pIt = 0;
+        while(pIt >= 0 && pIt < M) {  // matching
+          if(pIt + 1 < M && p.charAt(pIt + 1) == '*') { // next is *
+            while(sIt < N && p.charAt(pIt) == s.charAt(sIt)) {  // try to match
+              if(pIt + 2 < M) cache[pIt + 2].push(sIt); // store possibile
+              sIt++;
+            }
+            if(p.charAt(pIt) == '.') {  // match any
+              while(sIt < N) {
+                if(pIt + 2 < M) cache[pIt + 2].push(sIt); // store possibile
+                sIt++;
+              }
+            }
+            pIt += 2;
+          }
+          else if(sIt < N && (p.charAt(pIt) == s.charAt(sIt) || p.charAt(pIt) == '.')) {  // match
+            pIt++; sIt++;
+          }
+          else {  // not match
+            while(pIt >= 0) {
+              if(!cache[pIt].isEmpty()) break;
+              pIt--;
+            }
+            if(pIt >= 0)
+              sIt = (int)(cache[pIt].pop());
+          }
+          if(pIt == M && sIt == N) return true;
+        }
+        return false;
+    }
+}
+
+
 
