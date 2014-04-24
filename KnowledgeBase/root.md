@@ -5,8 +5,13 @@ Knowledge Base for Concepts related questions in programming interview
 
 * Comparisons:
   * StringBuffer Vs StringBuilder
-    * StringBufer is synchronized, while StringBuilder is not.
+    * StringBufer is **synchronized**, while StringBuilder is not.
     * StringBuilder provides an API compatible with StringBuffer, but with no guarantee of synchronization. This class is designed for use as a drop-in replacement for StringBuffer in places where the string buffer was being used by a single thread (as is generally the case). Where possible, it is recommended that this class be used in preference to StringBuffer as it will be faster under most implementations.
+  * Array Vs Linkedlist
+    * Size: array is fixed size, while linkedlist is dynamic size
+    * Iteration: array provides random access, while linkedlsit can only be iterated one by one
+    * Operation: array provides O(n) deletion and insertion, while linkedlist provides O(1)
+    * Address sapce: array is stored as an object with continuous address, while linkedlist has to allocate extra space for separate listnode.
   * Abstract Class Vs Interface
     * [Official Doc: Abstract Classes Compared to Interfaces](http://docs.oracle.com/javase/tutorial/java/IandI/abstract.html)
     * An abstract Class is a class that can not be instantiated. e.g. AbstractMap 
@@ -16,10 +21,10 @@ Knowledge Base for Concepts related questions in programming interview
     * All methods in an interface should be public (since they’re all abstract methods); while in an abstract class, you can have different access control to the methods
     * In an interface, no need to use the "abstract" keyword
   * Method Overloading Vs Override
-    * Method overriding is a run-time phenomenon that is the driving force behind polymorphism. Implement the inherited method in a different way
+    * Method overriding is a **run-time** phenomenon that is the **driving force behind polymorphism**. Implement the inherited method in a different way
       * same signature as the inherited method
       * happens at run time
-    * Method overloading is a compile-time phenomenon. There’re two or more methods in the class that has the same method name but different parameters
+    * Method overloading is a **compile-time** phenomenon. There’re two or more methods in the class that has the same method name but different parameters
       * Conditions for method overloading:
         * number of parameters are different in two methods
         * parameter type are different

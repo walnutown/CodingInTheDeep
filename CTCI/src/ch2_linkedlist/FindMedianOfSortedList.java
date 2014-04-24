@@ -1,20 +1,18 @@
 package ch2_linkedlist;
 
+import org.junit.Test;
+
 public class FindMedianOfSortedList {
 
    /**
     * Given a singly sorted linked list, find the median of the list
     * In constant space
     */
-   public static void main(String[] args) {
-      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7 , 8};
-      ListNode head = new ListNode(A);
-      System.out.println(findMedianOfSortedList(head));
-      System.out.println(findMedianOfSortedList2(head));
-   }
 
    // fast/slow pointers
-   public static double findMedianOfSortedList(ListNode head) {
+   // Note fast/slow have different initial position
+   // time: O(n); space: O(1)
+   public double findMedianOfSortedList(ListNode head) {
       if (head == null)
          return 0;
       ListNode slow = head, fast = head.next.next;
@@ -29,9 +27,10 @@ public class FindMedianOfSortedList {
       // here 'fast.next == null', should check 'fast==null' first, otherwise, NullPointerException
       return slow.next.val;
    }
-   
+
    // count length first, then get median
-   public static double findMedianOfSortedList2(ListNode head) {
+   // time: O(n); space: O(1)
+   public double findMedianOfSortedList2(ListNode head) {
       if (head == null)
          return 0;
       int len = 0;
@@ -46,6 +45,14 @@ public class FindMedianOfSortedList {
          q = q.next;
       }
       return len % 2 == 0 ? (q.val + q.next.val) / 2.0 : q.next.val;
+   }
+
+   @Test
+   public void test() {
+      int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+      ListNode head = new ListNode(A);
+      System.out.println(findMedianOfSortedList(head));
+      System.out.println(findMedianOfSortedList2(head));
    }
 
 }

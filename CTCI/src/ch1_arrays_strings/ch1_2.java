@@ -7,4 +7,6 @@ public class ch1_2 {
     * reverses a null-terminated string
     */
    
+   
+   
 }
