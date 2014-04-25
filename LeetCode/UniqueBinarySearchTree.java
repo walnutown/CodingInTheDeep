@@ -10,6 +10,17 @@
         /     /       \                 \
        2     1         2                 3
 */
+
+// The result of this combinational problem is called Catalan number
+// http://en.wikipedia.org/wiki/Catalan_number
+// Cn = (2n)!/[(n+1)!*n!] = 1/(n+1)*Com(2n, n)
+// Another combinational example of Catalan number: the number of valid expressions in n pairs of parenthesis
+
+// Number of unique binary tress given n nodes is  N! * Catalan
+// Why? Catalan number calcualte the number of binary trees given the array [1...n]
+// The array has n! permutaions, each can get Catalan number of binary trees. 
+
+// Dynamic Programming
 // cut array[1,2,...n] into 3 parts, [1...j-1],j,[j+1...n], use left and right half to construct bst
 // time: O(n^2); space: O(n)
 public class Solution {

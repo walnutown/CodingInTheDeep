@@ -9,6 +9,8 @@ public class MinimumCoinChange {
     * if there's no way to make change, return Integer.MAX_VALUE
     */
 
+   /* Think why this dp works here, but not in CoinChange problem */
+
    // 2d DP, for each value, we find the minimum number of coins from all the possible combinations
    // time: O(m*n); space: O(m)
    public int minimumCoinChange(int[] A, int target) {

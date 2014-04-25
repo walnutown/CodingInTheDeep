@@ -15,29 +15,65 @@
 
 // Same to the Company/amazon/CoinChange
 
-// Recursion, 
+// Recursion, easy for print all combinations. The time optimized version is below.
 // In this question, the candidates are unique ("Given a set of candidate numbers "), 
-// if not, we can use a set to avoid duplicates
-// time: O()
+// if not, we can use a set to avoid duplicates.
 public class Solution {
     public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
-        if (candidates == null || candidates.length == 0)   return res;
+        if (candidates==null || candidates.length==0)
+            return res;
         Arrays.sort(candidates);
-        finder(candidates, 0, target, res, new ArrayList<Integer>());
+        dfs(candidates, 0, res, target, new ArrayList<Integer>());
         return res;
     }
     
-    public void finder(int[] candidates, int index, int target, ArrayList<ArrayList<Integer>> res, ArrayList<Integer> r){
-        if (target < 0)   return;
-        if (target == 0){
+    private void dfs(int[] candidates, int dep, ArrayList<ArrayList<Integer>> res, int target, ArrayList<Integer> r){
+        if (target==0){
             res.add(new ArrayList<Integer>(r));
             return;
         }
-        for (int i = index; i < candidates.length; i++){
+        if (dep==candidates.length || target<0)
+            return;
+        for (int i=dep; i<candidates.length; i++){
             r.add(candidates[i]);
-            finder(candidates, i, target - candidates[i], res, r);
+            dfs(candidates, i, res, target-candidates[i], r);
             r.remove(r.size()-1);
         }
     }
+}
+
+// Dynamic Programming
+// Based on Sol5 in Company/amazon/CoinChange
+// http://blog.csdn.net/zyfo2/article/details/8592955
+// time: O(m*n); space: O()
+public class Solution {
+    public ArrayList<ArrayList<Integer>> combinationSum(int[] candidates, int target) {
+      if (candidates == null || candidates.length == 0)
+         return new ArrayList<ArrayList<Integer>>();
+      Arrays.sort(candidates);
+      Map<Integer, ArrayList<ArrayList<Integer>>> dp = new HashMap<Integer, ArrayList<ArrayList<Integer>>>();
+      for (int i=0; i<=target; i++)
+         dp.put(i, new ArrayList<ArrayList<Integer>>());
+      dp.get(0).add(new ArrayList<Integer>());
+      int N = candidates.length;
+      for (int i = 0; i < N; i++) {
+         for (int j = candidates[i]; j <= target; j++) {
+            ArrayList<ArrayList<Integer>> lists = clone(dp.get(j - candidates[i]));
+            for (ArrayList<Integer> list : lists)
+               list.add(candidates[i]);
+            dp.get(j).addAll(lists);
+         }
+      }
+      return dp.get(target);
+   }
+
+   private ArrayList<ArrayList<Integer>> clone(ArrayList<ArrayList<Integer>> lists) {
+      ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
+      for (ArrayList<Integer> list : lists) {
+         ArrayList<Integer> r = new ArrayList<Integer>(list);
+         res.add(r);
+      }
+      return res;
+   }
 }

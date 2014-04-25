@@ -8,6 +8,8 @@
     The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 */
 
+// Similar to 3Sum, the difference lies in that we need to update the closest result all the time
+// time: O(n^2); sapce: O(1)
 public class Solution {
     public int threeSumClosest(int[] num, int target) {
         if (num==null || num.length<3) return 0;

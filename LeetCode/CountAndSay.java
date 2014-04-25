@@ -10,23 +10,29 @@
     Note: The sequence of integers will be represented as a string.
 */
 
-// Maintain a counter
+// Maintain a counter. Increment the counter if there's repeating characters,
+// otherwise, reset the counter to 1.
+// Each time, buuld the current string based on previous string
 // time: O(n^2); space: O(n^2)
 public class Solution {
     public String countAndSay(int n) {
-        if (n<1)    return "";
-        StringBuilder prev = new StringBuilder(); prev.append(1);
-        for (int j=2; j<=n; j++){
+        if (n==0)   return "";
+        StringBuilder prev = new StringBuilder();
+        prev.append(1);
+        while (n>1){
             StringBuilder curr = new StringBuilder();
             int count = 1;
-            for (int i=1; i<=prev.length(); i++){
-                if (i < prev.length() && prev.charAt(i-1)==prev.charAt(i))   count++;
+            for (int i=0; i<prev.length(); i++){
+                if (i+1<prev.length() && prev.charAt(i)==prev.charAt(i+1))
+                    count++;
                 else{
-                    curr.append(count); curr.append(prev.charAt(i-1));
-                    count=1;
+                    curr.append(count);   
+                    curr.append(prev.charAt(i));
+                    count = 1;
                 }
             }
             prev = curr;
+            n--;
         }
         return prev.toString();
     }

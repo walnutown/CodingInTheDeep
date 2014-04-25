@@ -15,8 +15,13 @@
     [1, 1, 6] 
 */
 
-// DFS, use index to avoid duplicates
+// This is known as SubsetSum problem, a NP-complete problem
+// http://en.wikipedia.org/wiki/Subset_sum_problem
+
+// Backtracking
+// The challenge mainly lies in how to avoid duplicates
 // candidates are not unique ("Given a collection of candidate numbers")
+// time: O(2^n) why? There're 2^n subsets, we almost check each one.
 public class Solution {
     public ArrayList<ArrayList<Integer>> combinationSum2(int[] num, int target) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<ArrayList<Integer>>();
