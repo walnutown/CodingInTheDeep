@@ -12,7 +12,10 @@
     ]
 */
 
-// DFS, time: O(n^2); space: recursive stack
+// Basic Backtracking
+// We can cut or not cut at each character, thus there're 2^n combinations.
+// Each combination calls isPalindrome, which takes O(n)
+// time: O(n*2^n); space: recursive stack
 public class Solution {
     public ArrayList<ArrayList<String>> partition(String s) {
         ArrayList<ArrayList<String>> res = new ArrayList<ArrayList<String>>();
@@ -43,4 +46,42 @@ public class Solution {
             if (w.charAt(i++) != w.charAt(j--)) return false;
         return true;
     }
+}
+
+// Dynamic Programming
+// dp[i] -- all the valid partions in s.substring(0, i)
+// We can also use a boolean matrix here to reduce palindrome checking time from O(n) to O(1)
+// time: O(n*2^n); space: O(2^n)
+public class Solution {
+    public ArrayList<ArrayList<String>> partition(String s) {
+        if (s==null || s.length()==0)
+            return new ArrayList<ArrayList<String>>();;
+        Map<Integer, ArrayList<ArrayList<String>>> dp = new HashMap<Integer, ArrayList<ArrayList<String>>>();
+        int N = s.length();
+        for (int i=0; i<=N; i++)
+            dp.put(i, new ArrayList<ArrayList<String>>());
+        dp.get(0).add(new ArrayList<String>());
+        for (int i=1; i<=N; i++){
+            for (int j=1; j<=i; j++){
+                String sub = s.substring(j-1, i);
+                if (isPalindrome(sub)){
+                    for (ArrayList<String> list:dp.get(j-1)){
+                        ArrayList<String> r = new ArrayList<String>(list);
+                        r.add(sub);
+                        dp.get(i).add(r);
+                    }
+                }
+            }
+        }
+        return dp.get(N);
+    }      
+    private boolean isPalindrome(String s){
+        if (s==null || s.length()==0)
+            return false;
+        for (int i=0, j=s.length()-1; i<j; i++, j--){
+            if (s.charAt(i)!=s.charAt(j))
+                return false;
+        }
+        return true;
+    }   
 }

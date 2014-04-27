@@ -17,7 +17,7 @@
 // than the previous one. That pair is actually the two element we are looking for.
 
 
-// Iterative DFS, the two wsapped nodes are hte first and last node in the arraylsit
+// Iterative DFS, the two wsapped nodes are the first and last node in the arraylsit
 // no matter there're two pairs or just one pair of swapped nodes
 // time: O(n); space: O(b^d)
 public class Solution {
@@ -46,5 +46,49 @@ public class Solution {
        int tmp = nodes.get(0).val;
        nodes.get(0).val = nodes.get(nodes.size()-1).val;
        nodes.get(nodes.size()-1).val = tmp;
+    }
+}
+
+// Morris Traversal
+// Maintain a prev pointer
+// Write the morris traversal first, then add code to find swapped nodes
+// time: O(n); space: O(1)
+public class Solution {
+    public void recoverTree(TreeNode root) {
+        if (root==null) return;
+        TreeNode curr = root, prev = null, n1=null, n2=null;
+        while (curr!=null){
+            if (curr.left==null){
+                if (prev!=null && prev.val > curr.val){
+                    n2 = curr;
+                    if (n1==null)   n1 = prev;
+                }
+                prev = curr;
+                curr = curr.right;
+            }else{
+                TreeNode p = curr.left;
+                while (p.right != null && p.right != curr)
+                   p = p.right;
+                if (p.right == null) {
+                   p.right = curr;
+                   curr = curr.left;
+                } else {
+                   p.right = null;
+                   if (prev != null && prev.val > curr.val) {
+                      n2 = curr;
+                      if (n1 == null)
+                         n1 = prev;
+                   }
+                   prev = curr;
+                   curr = curr.right;
+                }
+            }
+        }
+        swap(n1, n2);
+    }
+    private void swap(TreeNode n1, TreeNode n2){
+        int tmp = n1.val;
+        n1.val = n2.val;
+        n2.val = tmp;
     }
 }

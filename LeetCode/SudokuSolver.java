@@ -6,13 +6,19 @@
     You may assume that there will be only one unique solution.
 */
 
-// DFS
+// BackTracking, 
+// Use the combination of x and y to represent the depth of the dfs
+// We can actually print the baord when we find a vlid solution.
+// Yet, due to limitation of OJ, we can only reverse the board when we find a valid one.
+// In this case, we have to find a way to skip the backtrack step if we find a valid baord.
+// That's why we return boolean in method solver.
+// time: O(9^9); space: O(1)
 public class Solution {
     public void solveSudoku(char[][] board) {
         if (board==null || board.length!=9) return;
         solver(board, 0, 0);
     }
-    public boolean solver(char[][] board, int x, int y){            // important to return boolean type here
+    public boolean solver(char[][] board, int x, int y){            
         if (x>= board.length)   return true;
         if (y==board[0].length) return solver(board, x+1, 0);
         if (board[x][y] != '.') return solver(board, x, y+1);
@@ -31,7 +37,7 @@ public class Solution {
             if(nums[i]==0){
                 board[x][y] = (char)(i + '0');                      // need cast here
                 if (solver(board, x, y+1))  return true;            // only one solution exit, if the result is found in this path, just return
-                board[x][y] = '.';                                  // so that the board will not be clanend again
+                board[x][y] = '.';                                  // so that we skip the backtrack step
             }
         }
         return false;

@@ -11,44 +11,25 @@
     1 ≤ m ≤ n ≤ length of list.
 */
 
-// get the head and tail of the sublist to be reversed, and then reverse the sublist.
-// time: O(n); space: in place
+// Find starting node to reverse and then do normal reverseLinkedList
+// time: O(n); space: O(1)
 public class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        if (head==null || head.next==null || m==n)  return head;
-        ListNode dum = new ListNode(0); dum.next=head;
-        int index = 0;
-        ListNode l=dum, r=dum;
-        while (n-->=m)   r=r.next;
-        while (m-->1){
-            l=l.next; r=r.next;
+        if (head==null || head.next==null)
+            return head;
+        ListNode sen = new ListNode(0); sen.next = head;
+        ListNode prev = sen, curr = sen.next;
+        int k = n-m;
+        while (--m>0){
+            prev = prev.next;
+            curr = curr.next;
         }
-        ListNode prev=l, curr=prev.next, end=r.next;
-        while (curr.next != end){
+        while (k-->0){
             ListNode next = curr.next;
             curr.next = next.next;
             next.next = prev.next;
             prev.next = next;
         }
-        return dum.next;
-    }
-}
-
-// AnnieKim, count reverse times
-// time: O(n); space: in place
-public class Solution {
-    public ListNode reverseBetween(ListNode head, int m, int n) {
-        if (head==null || head.next==null || m==n)  return head;
-        ListNode dum = new ListNode(0); dum.next=head;
-        ListNode prev = dum;
-        for (int i=0; i<m-1; i++)   prev=prev.next;
-        ListNode curr = prev.next;
-        for (int i=0; i<n-m; i++){
-            ListNode next = curr.next;
-            curr.next = next.next;
-            next.next = prev.next;
-            prev.next = next;
-        }
-        return dum.next;
+        return sen.next;
     }
 }

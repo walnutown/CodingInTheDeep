@@ -18,51 +18,61 @@
     ".Q.."]
   ]
 */
-
-// DFS, use int[][] board to mark the position of queuens
+// Basic Backtracking
+// Note, we use a int matrix to mark the position of Queen and build board finally.
+// Becuase operations on int array is easy than on string array
+// time: O()
 public class Solution {
    public ArrayList<String[]> solveNQueens(int n){
         ArrayList<String[]> res = new ArrayList<String[]>();
-        if (n == 0) return res;
-        int[][] board = new int[n][n];
-        finder(n, 0, res, board);
+        if (n<=0)   return res;
+        dfs(new int[n][n], 0, res);
         return res;
    }
    
-   public void finder(int n, int row, ArrayList<String[]> res, int[][] board){
-       if (row == n){
-           String[] str = new String[board.length];
-           for (int i = 0; i<board.length; i++){
-               str[i] = new String();
-               for (int j=0; j<board[0].length; j++){
-                   if (board[i][j] == 1)    str[i] += "Q";
-                   else str[i] += ".";
-               }
-           }
-           res.add(str);
+   private void dfs(int[][] M, int rowNum, ArrayList<String[]> res){
+       if (rowNum == M.length){
+           res.add(buildBoard(M));
            return;
        }
-       for (int i=0; i<board[0].length; i++){
-           if (isValid(board, row, i)){
-                board[row][i] = 1;
-                finder(n, row+1, res, board);
-                board[row][i] = 0;
+       int N = M.length;
+       for (int i=0; i<N; i++){
+           if (isValid(M, rowNum, i)){
+               M[rowNum][i] = 1;
+               dfs(M, rowNum+1, res);
+               M[rowNum][i] = 0;
            }
        }
    }
    
-   public boolean isValid(int[][] board, int row, int col){
-       // check the same column
-       for (int i=0; i<=row; i++)
-           if (board[i][col] == 1)  return false;
-       // check diagonal
-       for (int i=row, j=col; i>=0 && j>=0; i--, j--)
-           if (board[i][j] == 1)    return false;
-       for (int i=row, j=col; i>=0 && j<board[0].length; i--, j++)
-           if (board[i][j] == 1)    return false;
+   private String[] buildBoard(int[][] M){
+       int N = M.length;
+       String[] board = new String[N];
+       for (int i=0; i<N; i++){
+           StringBuilder sb = new StringBuilder();
+           for (int j=0; j<N; j++){
+               if (M[i][j]==0)  sb.append('.');
+               else    sb.append('Q');
+           }
+           board[i] = sb.toString();
+       }
+       return board;
+   }
+   
+   private boolean isValid(int[][] M, int rowNum, int colNum){
+       for (int i=0; i<rowNum; i++){
+           if (M[i][colNum]==1) return false;
+       }
+       for (int i=rowNum-1, j=colNum-1; i>=0 && j>=0; i--,j--){
+           if (M[i][j]==1)  return false;
+       }
+       for (int i=rowNum-1, j=colNum+1; i>=0 && j<M.length; i--,j++){
+           if (M[i][j]==1)  return false;
+       }
        return true;
    }
 }
+
 
 // bit manipulation, performance improvement in valid check step
 public class Solution {

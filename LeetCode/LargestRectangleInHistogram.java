@@ -6,9 +6,13 @@
     return 10.
 */
 
-// use Stack to store the continuous sub-array in ascending order
-// when the ascending sub-array terminates, calcualte the area that
-// uses top element in stack as left border, and current element as right border
+// The naive solution is to choose each height as the center and strentch on both sides if the 
+// heights are no less than the central height. Then, calcualte the area with width and center height
+// time: O(n^2); space: O(1)
+
+// use Stack to store the index of continuous sub-array in ascending order
+// when the ascending sub-array terminates, calculate the area by
+// using stack.peek() as left border, and current index as right border
 // time: O(n); sapce: O(n)
 public class Solution {
     public int largestRectangleArea(int[] height) {

@@ -16,8 +16,8 @@
 // running time analyze: there're totally n suffixes, each will be calculated once, 1+2+3+..+n = n^2
 
 
-// Need canWordBreak check to avoid TLE
-// DFS
+// Backtracking
+// canWordBreak() is used to pass the OJ TLE
 // time: O(2^n) (why? at each index, we can break or not break, that's 2^n) 
 public class Solution {
     public ArrayList<String> wordBreak(String s, Set<String> dict) {
@@ -39,6 +39,49 @@ public class Solution {
             }
         }
     } 
+    public boolean canWordBreak(String s, Set<String> dict) {
+        if (s==null || s.length()==0)   return true;
+        boolean[] dp = new boolean[s.length()+1];
+        dp[0] = true;
+        for (int i=1; i<=s.length(); i++){
+            for (int j=i-1; j>=0; j--){
+                if (dict.contains(s.substring(j,i)) && dp[j]){
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[s.length()];
+    }
+}
+
+// Dynamic Programming
+// time: O(2^n)
+public class Solution {
+    public ArrayList<String> wordBreak(String s, Set<String> dict) {
+        ArrayList<String> res = new ArrayList<String>();
+        if (s==null || s.length()==0)   return res;
+        if (!canWordBreak(s, dict))    return res;
+        Map<Integer, ArrayList<String>> dp = new HashMap<Integer, ArrayList<String>>();
+        int N = s.length();
+        for (int i=0; i<=N; i++)
+            dp.put(i, new ArrayList<String>());
+        dp.get(0).add("");
+        for (int i=1; i<=N; i++){
+            // the whole string is a single word, need to be handled separately
+            if (dict.contains(s.substring(0,i)))    
+                dp.get(i).add(s.substring(0,i));
+            for (int j=1; j<i; j++){
+                String w = s.substring(j, i);
+                if (dict.contains(w)){
+                    for (String ss:dp.get(j))
+                        dp.get(i).add(ss+" " + w);
+                }
+            }
+        }
+        return dp.get(N);
+    }
+    
     public boolean canWordBreak(String s, Set<String> dict) {
         if (s==null || s.length()==0)   return true;
         boolean[] dp = new boolean[s.length()+1];

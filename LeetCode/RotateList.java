@@ -1,3 +1,11 @@
+/*
+    Given a list, rotate the list to the right by k places, where k is non-negative.
+
+    For example:
+    Given 1->2->3->4->5->NULL and k = 2,
+    return 4->5->1->2->3->NULL.
+*/
+
 /**
  * Definition for singly-linked list.
  * public class ListNode {
@@ -9,52 +17,15 @@
  *     }
  * }
  */
-public class Solution {
-    public ListNode rotateRight(ListNode head, int n) {
-        // Start typing your Java solution below
-        // DO NOT write main() function
-        
-        if (head == null || head.next == null){
-            return head;
-        }
-        
-        int len = 0;
-        ListNode ln = head;
-        ListNode tail = ln;
-        while (ln != null){
-            len++;
-            tail = ln;
-            ln = ln.next;
-        }
-        
-        n = n%len;
-        
-        if (n == 0){
-            return head;
-        }
-        
-        ListNode newHead = head;
-        ListNode newTail = newHead;
-        int count = len - n ;
-        while(count > 0){
-            newTail = newHead;
-            newHead = newHead.next;
-            count--;
-        }
-        
-        newTail.next = null;
-        tail.next = head;
-        
-        return newHead;
-    }
-}
 
-// Accepted
+
+// Maintain two poointers to track the start and end of the sub-list to be rotated
+// time: O(n); space: O(1)
 public class Solution {
     public ListNode rotateRight(ListNode head, int n) {
         if (head==null || head.next==null || n==0)  return head;
         int len = getLength(head);
-        n = n % len;
+        n = n % len;    // Note modulo here
         if (n==0)   return head;
         ListNode dum = new ListNode(0); dum.next = head;
         ListNode l=head, r=head;

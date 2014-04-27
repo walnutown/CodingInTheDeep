@@ -7,7 +7,10 @@
     return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
 */
 
-// DFS, O(3n)
+// Backtracking
+// Use dot as delimiter to partition the string into 4 parts
+// Note the range of a partition is [0,255], and 00 or 000 is not allowed
+// time: O(Com(n,3))
 public class Solution {
     public ArrayList<String> restoreIpAddresses(String s) {
         ArrayList<String> res = new ArrayList<String>();

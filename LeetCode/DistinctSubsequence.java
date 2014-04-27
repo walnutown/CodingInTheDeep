@@ -11,45 +11,52 @@
     Return 3.
 */
 
-// DFS
-// TLE
+// This quesiton is actually a variant of Subset Sum
+
+// Basic Backtracking
+// For each character occurs in T, it can be counted into the subsequence or not.
+// time: O(2^n); space: recursive stack
 public class Solution {
     public int numDistinct(String S, String T) {
-        if (S==null || T==null) return 0;
-        int[] num = new int[1];
-        finder(S.toCharArray(), 0, T.toCharArray(), 0, num);
-        return num[0];
+        if (S==null || T==null)
+            return 0;
+        return dfs(S, T, 0, 0);
     }
-    public void finder(char[] s, int i, char[] t, int j, int[] num){
-        if (j==t.length){
-            num[0]++;
-            return;
+    private int dfs(String S, String T, int i, int j){
+        if (j==T.length())
+            return 1;
+        if (i==S.length() && j<T.length())
+            return 0;
+        int count = 0;
+        for (int k=i; k<S.length(); k++){
+            if (S.charAt(i)!=T.charAt(j))
+                continue;
+            count += dfs(S, T, i+1, j+1) + dfs(S, T, i+1, j);
         }
-        if (i==s.length)  return;
-        for (int k=i; k<s.length; k++){
-            if (s[k] != t[j]) continue;
-            finder(s, i+1, t, j+1, num);
-        }
+        return count;
     }
 }
 
-// 2d DP, http://blog.csdn.net/u011095253/article/details/9248121
-// dp[i][j] = dp[i][j-1] + dp[i-1][j-1], delete the char, or include the char 
+// Dynamic Programming
+// dp[i][j] -- number of subsequences for S[0,i-1] and T[0,j-1]
+// time: O(m*n); space: O(m*n)
 public class Solution {
     public int numDistinct(String S, String T) {
-        if (S==null || T==null) return 0;
-        int m=T.length(), n=S.length();
-        int[][] dp = new int[m+1][n+1];
+        if (S==null || T==null)
+            return 0;
+        int M = S.length(), N = T.length();
+        int[][] dp = new int[M+1][N+1];
         dp[0][0] = 1;
-        for (int i=1; i<=m; i++)    dp[i][0] = 0;
-        for (int j=1; j<=n; j++)    dp[0][j] = 1;
-        for (int i=1; i<=m; i++){                   
-            for(int j=1; j<=n; j++){
-                if (T.charAt(i-1) == S.charAt(j-1)) dp[i][j] = dp[i][j-1] + dp[i-1][j-1];
-                else    dp[i][j] = dp[i][j-1];
+        for (int i=1; i<=M; i++)
+            dp[i][0] = 1;
+        for (int i=1; i<=M; i++){
+            for (int j=1; j<=N; j++){
+                dp[i][j] = dp[i-1][j];
+                if (S.charAt(i-1)==T.charAt(j-1))
+                    dp[i][j] += dp[i-1][j-1];
             }
         }
-        return dp[m][n];
+        return dp[M][N];
     }
 }
 // 1d DP, remember the conditions of transform 2d DP to 1d DP, and how to transfrom 

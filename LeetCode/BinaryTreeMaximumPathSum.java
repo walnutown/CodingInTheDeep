@@ -23,7 +23,9 @@
  * }
  */
 
-// Recursion, need a gloabl variable. 
+// Recursion
+// Maintain a global variable to track the max path sum during recursion
+// The return value of getMax() is the max sum of path coantaining root node
 public class Solution {
     int max = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {
@@ -32,8 +34,8 @@ public class Solution {
         return max;
     }
     
-    public int getMax(TreeNode root){           // only return value of the max path that includes that root node
-        if (root == null)   return 0;           // in this case, we don't need DFS to get the path
+    public int getMax(TreeNode root){           
+        if (root == null)   return 0;     
         int lmax = getMax(root.left);
         int rmax = getMax(root.right);
         int mmax = Math.max(Math.max(lmax+root.val, rmax+root.val), root.val);

@@ -7,8 +7,8 @@
     Return "100".
 */
 
-// Add from the end of the String, update the carry
-// time: O(Math.max(m, n))
+// Add from the end of the String, and maintain a variable to hold the carry
+// time: O(Math.max(m, n)); space: O(1)
 public class Solution {
     public String addBinary(String a, String b) {
         if (a==null && b==null)
@@ -37,7 +37,8 @@ public class Solution {
     }
 }
 
-// AnnieKim, combine the 3 while loops into 1
+// The following solution make the code more concise.
+// time: O(max(m,n)); space: O(1)
 public class Solution {
     public String addBinary(String a, String b) {
         StringBuilder sb = new StringBuilder();
@@ -49,11 +50,11 @@ public class Solution {
             int num1=0, num2=0;
             if (i>=0) num1 = a.charAt(i--) - '0';
             if (j>=0) num2 = b.charAt(j--) - '0';
-            sb.insert(0, (num1+num2+carry)%2);
+            sb.append((num1+num2+carry)%2);
             carry = (num1+num2+carry)/2;
         }
-        if (carry > 0)  sb.insert(0, 1);
-        return sb.toString();
+        if (carry > 0)  sb.append(carry);
+        return sb.reverse().toString();
     }
 }
 

@@ -18,7 +18,9 @@
  *     }
  * }
  */
-// carry, time: O(m+n)
+
+// Maintain a carry
+// time: O(m+n); space: O(1)
 public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         if (l1 == null || l2 == null)
@@ -48,5 +50,35 @@ public class Solution {
         }
         if (carry > 0)  res.next = new ListNode(carry);
         return dum.next;
+    }
+}
+
+// Combine the while loop to make code more concise
+// time: O(max(m,n)); space(1)
+public class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        if (l1==null || l2==null){
+            if (l1==null && l2==null)   return null;
+            return l1==null? l2: l1;
+        }
+        ListNode sen = new ListNode(0);
+        ListNode s = sen, p = l1, q = l2;
+        int carry = 0;
+        while (p!=null || q!=null){
+            int num1 = 0, num2 = 0;
+            if (p!=null){    
+                num1 = p.val;
+                p = p.next;
+            }
+            if (q!=null){
+                num2 = q.val;
+                q = q.next;
+            }
+            s.next = new ListNode((num1+num2+carry)%10);
+            s = s.next;
+            carry = (num1+num2+carry)/10;
+        }
+        if (carry>0)    s.next = new ListNode(carry);
+        return sen.next;
     }
 }

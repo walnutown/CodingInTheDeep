@@ -13,22 +13,17 @@ public class Solution {
     public ListNode deleteDuplicates(ListNode head) {
         if (head==null || head.next==null)
             return head;
-        ListNode dum = new ListNode(0); dum.next = head;
-        ListNode pprev = dum;
-        while (pprev.next!=null){
-            ListNode p = pprev.next;
-            boolean isDup = false;
-            while (p.next!=null && p.val==p.next.val){
-                p = p.next;
-                isDup = true;
-            }
-            if (isDup)
-                pprev.next = p.next;
-            else{
-                pprev.next = p;
-                pprev = pprev.next;
-            }
-        }  
-        return dum.next;
+        ListNode sen = new ListNode(0); sen.next = head;
+        ListNode pp = sen, p = head;
+        while (p!=null && p.next!=null){
+            ListNode q = p.next;
+            while (q!=null && q.val==p.val)    q = q.next;
+            if (q!=p.next)
+                pp.next = q;
+            else
+                pp = p;
+            p = q;
+        }
+        return sen.next;
     }
 }

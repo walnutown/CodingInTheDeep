@@ -37,32 +37,10 @@
   Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.
 */
 
-
-// Accepted, 3-array DP, modified from AnnieKim, O(n^4)
-//  'dp[k][i][j] == true' means string s1(start from i, length k) is 
-//  a scrambled string of string s2(start from j, length k).
-public class Solution {
-    public boolean isScramble(String s1, String s2){
-        if (s1==null || s2==null)   return s1==null && s2==null;
-        int len = s1.length(), l2 = s2.length();
-        if (len != l2)   return false;
-        boolean[][][] dp = new boolean[len+1][len][len];
-        for (int k=1; k<=len; k++){
-            for (int i=0; i<=len-k; i++){
-                for (int j=0; j<=len-k; j++){
-                    if (k==1)   dp[1][i][j] = (s1.charAt(i)==s2.charAt(j));
-                    for (int p=1; p<k && !dp[k][i][j]; p++)
-                        dp[k][i][j] = dp[p][i][j] && dp[k-p][i+p][j+p] || dp[k-p][i+p][j] && dp[p][i][j+k-p];
-                }
-            }
-        }
-        return dp[len][0][0];
-    }
-}
-
-
-// recursion, from Sophie, O(2^n)
-// TLE
+// Recursion
+// Each time, we divide the string into two parts with or without swap.
+// Chechk whether there's valid scramble, once find, return true.
+// time: O(2^n), for each character, we can cut and swap, or not.
 public class Solution {
     public boolean isScramble(String s1, String s2){
         if (s1==null || s2==null)   return s1==null && s2==null;
@@ -79,6 +57,29 @@ public class Solution {
             if (isScramble(s1l, s2r) && isScramble(s1r, s2l))   return true;
         }
         return false;
+    }
+}
+
+// 3d Dynamic Programming
+// dp[k][i][j] -- string s1(start from i, length k) is a scrambled string of
+// string s2(start from j, length k).
+// time: O(n^4); space: O(n^3)
+public class Solution {
+    public boolean isScramble(String s1, String s2){
+        if (s1==null || s2==null)   return s1==null && s2==null;
+        int len = s1.length(), l2 = s2.length();
+        if (len != l2)   return false;
+        boolean[][][] dp = new boolean[len+1][len][len];
+        for (int k=1; k<=len; k++){
+            for (int i=0; i<=len-k; i++){
+                for (int j=0; j<=len-k; j++){
+                    if (k==1)   dp[1][i][j] = (s1.charAt(i)==s2.charAt(j));
+                    for (int p=1; p<k && !dp[k][i][j]; p++) // once we find dp[k][i][j], stop iteration
+                        dp[k][i][j] = dp[p][i][j] && dp[k-p][i+p][j+p] || dp[k-p][i+p][j] && dp[p][i][j+k-p];
+                }
+            }
+        }
+        return dp[len][0][0];
     }
 }
 
@@ -136,16 +137,3 @@ public class Solution {
       return false;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

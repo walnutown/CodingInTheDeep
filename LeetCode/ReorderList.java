@@ -21,7 +21,7 @@
  */
 
 // get right half, reverse it, and then merge two halves
-// time: O(n)
+// time: O(n); space: O(1)
 public class Solution {
     public void reorderList(ListNode head) {
         if (head==null || head.next==null)
@@ -73,7 +73,7 @@ public class Solution {
 }
 
 // recursion, relocate the last node in each recursive call
-// time: O(n^2)
+// time: O(n^2); space: recursive stack
 public class Solution {
     public void reorderList(ListNode head) {
         if (head==null || head.next==null)
@@ -87,6 +87,5 @@ public class Solution {
         p.next = head.next;
         head.next = p;
         reorderList(p.next);
-    }
-    
+    }   
 }

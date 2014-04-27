@@ -15,7 +15,36 @@
     Note: Given n will be between 1 and 9 inclusive.
 */
 
-// use nextPermutation, TLE
+// This is actually a n! base conversion
+// At position i, we have i! values, and those values are from numbers [1...9] that
+// hasn't been used in left positions.
+// Maintain a StringBuilder to store the available numbers in ascending order
+// The digit on i-th position is the index for number in StringBuilder
+// O(n^2), delete a character from StringBuilder takes O(n) tme; space: O(10)
+public class Solution {
+    public String getPermutation(int n, int k) {
+        if (n==0 || k==0)   return "";
+        StringBuilder nums = new StringBuilder(), ret = new StringBuilder();
+        int base = 1;
+        for (int i=1; i<=n; i++){
+            nums.append(i);
+            base *= i;
+        }
+        k--;
+        while (n>0){
+            base /= n;
+            int numIndex = k/base;
+            k %= base;
+            ret.append(nums.charAt(numIndex));
+            nums.deleteCharAt(numIndex);
+            n--;
+        }
+        return ret.toString();
+    }  
+}
+
+// use nextPermutation to iterate to the kth permutation
+// time: O(n*nlgn); space: O(1)
 public class Solution {
     public String getPermutation(int n, int k) {
         char[] p = new char[n];
@@ -38,27 +67,5 @@ public class Solution {
         char tmp = p[l-1];
         p[l-1] = p[i];
         p[i] = tmp;
-    }
-}
-
-// from AnnieKim, calculate each digit one by one
-public class Solution {
-    public String getPermutation(int n, int k) {
-      StringBuilder num = new StringBuilder(), res = new StringBuilder();
-      int len=1;
-      for (int i=1; i<=n; i++){
-          num.append(i);
-          len *= i;
-      }
-      k--;      // notice, IMPORTANT here
-      while (n > 0){
-          len /= n;
-          int i = k/len;
-          k %= len;
-          res.append(num.charAt(i));
-          num.deleteCharAt(i);
-          n--;
-      }
-      return res.toString();
     }
 }

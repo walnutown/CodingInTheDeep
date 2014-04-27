@@ -21,7 +21,7 @@
  */
 
 // Note:
-// no duplicate values in the BST
+// left < curr < right
 
 // inorder traversal with prev value, always meet the prereq: curr > prev
 // time: O(n); space: recursion stack
