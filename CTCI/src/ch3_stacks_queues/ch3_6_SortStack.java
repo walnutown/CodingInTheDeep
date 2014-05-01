@@ -3,6 +3,8 @@ package ch3_stacks_queues;
 import java.util.Random;
 import java.util.Stack;
 
+import org.junit.Test;
+
 public class ch3_6_SortStack {
 
    /**
@@ -11,7 +13,26 @@ public class ch3_6_SortStack {
     * other data structure (such as an array). The stack supports the following operations:
     * push, pop, peek, and isEmpty
     */
-   public static void main(String[] args) {
+
+   // We have a src stack and a dst stack, we want to move the top element from src stack to a
+   // specific position in the dst stack. Like the Hanoi problem, we need a buffer stack here. It
+   // seems that we need two additional stacks. Yet, in the following code, we use the src stack as
+   // the buffer stack. Thus, we only need one stack.
+   public void sortStack(Stack<Integer> st) {
+      Stack<Integer> ordered_st = new Stack<Integer>();
+      while (!st.isEmpty()) {
+         int tmp = st.pop();
+         while (!ordered_st.isEmpty() && tmp>ordered_st.peek())
+               st.push(ordered_st.pop());
+         ordered_st.push(tmp);
+      } // push back into the original stack to reverse order
+      while (!ordered_st.isEmpty()) {
+         st.push(ordered_st.pop());
+      }
+   }
+
+   @Test
+   public void test() {
       Stack<Integer> st = new Stack<Integer>();
       Random rd = new Random();
       rd.setSeed(System.currentTimeMillis());
@@ -21,26 +42,5 @@ public class ch3_6_SortStack {
       System.out.println(st);
       sortStack(st);
       System.out.println(st);
-   }
-
-   // We have a src stack and a dst stack, we want to move the top element from src stack to a
-   // specific position in the dst stack. Like the Hanoi problem, we need a buffer stack here. It
-   // seems that we need two additional stacks. Yet, in the following code, we use the src stack as
-   // the buffer stack. Thus, we only need one stack.
-   public static void sortStack(Stack<Integer> st) {
-      Stack<Integer> ordered_st = new Stack<Integer>();
-      while (!st.isEmpty()) {
-         int tmp = st.pop();
-         while (!ordered_st.isEmpty()) {
-            if (tmp > ordered_st.peek())
-               st.push(ordered_st.pop());
-            else
-               break;
-         }
-         ordered_st.push(tmp);
-      } // push back into the original stack to reverse order
-      while (!ordered_st.isEmpty()) {
-         st.push(ordered_st.pop());
-      }
    }
 }

@@ -5,6 +5,8 @@ import java.util.NoSuchElementException;
 import java.util.Queue;
 import java.util.Random;
 
+import org.junit.Test;
+
 public class ch3_7_AnimalQueue {
 
    /**
@@ -13,11 +15,90 @@ public class ch3_7_AnimalQueue {
     * of the shelter, or they can select whether they would prefer a dog or a cat (and will
     * receive the oldest animal of that type). They cannot select which specific animal they
     * would like. Create data structure to maintain this system and implement operations such
-    * as enqueue, dequeueAny, dequeueDog, dequeueCat. You may use the built-in Linked_list
+    * as enqueue, dequeueAny, dequeueDog, dequeueCat. You may use the built-in LinkedList
     * data structure
     */
-   // the model used in this question is similar to CTCI-- getMedianOfStreamingData
-   public static void main(String[] args) {
+   // Maintain two queues here, one for dog and one for cat
+   // Maintain a global variable to assign order to both dogs and cats. The order decides which one
+   // to dequeue in dequeueAny()
+
+   public enum AnimalType {
+      DOG, CAT;
+   }
+
+   public class Animal {
+      public int order;
+      public AnimalType type;
+
+      public Animal(AnimalType type) {
+         this.type = type;
+      }
+
+      public String toString() {
+         return type + "";
+      }
+   }
+
+   public class AnimalQueue {
+      private Queue<Animal> dog_qu;
+      private Queue<Animal> cat_qu;
+      private int order;
+
+      public AnimalQueue() {
+         order = 0;
+         dog_qu = new LinkedList<Animal>();
+         cat_qu = new LinkedList<Animal>();
+      }
+
+      public void enque(Animal an) {
+         order++;
+         an.order = order;
+         if (an.type == AnimalType.DOG)
+            dog_qu.add(an);
+         else
+            cat_qu.add(an);
+      }
+
+      // important here to check the empty of queue
+      public Animal dequeAny() {
+         if (dog_qu.isEmpty() || cat_qu.isEmpty()) {
+            if (dog_qu.isEmpty() && cat_qu.isEmpty())
+               throw new NoSuchElementException();
+            return dog_qu.isEmpty() ? cat_qu.poll() : dog_qu.poll();
+         }
+         return dog_qu.peek().order < cat_qu.peek().order ? dog_qu.poll() : cat_qu.poll();
+      }
+
+      public Animal dequeDog() {
+         return dog_qu.poll();
+      }
+
+      public Animal dequeCat() {
+         return cat_qu.poll();
+      }
+
+      public boolean isEmpty() {
+         return dog_qu.isEmpty() && cat_qu.isEmpty();
+      }
+
+      public String toString() {
+         StringBuilder sb = new StringBuilder();
+         Queue<Animal> tmp_dog = new LinkedList<Animal>(dog_qu);
+         Queue<Animal> tmp_cat = new LinkedList<Animal>(cat_qu);
+         sb.append("[");
+         while (!this.isEmpty()) {
+            Animal tmp_an = this.dequeAny();
+            sb.append(tmp_an + ", ");
+         }
+         sb.append("]");
+         dog_qu = new LinkedList<Animal>(tmp_dog);
+         cat_qu = new LinkedList<Animal>(tmp_cat);
+         return sb.toString();
+      }
+   }
+
+   @Test
+   public void test() {
       AnimalQueue aqu = new AnimalQueue();
       Random rd = new Random();
       rd.setSeed(System.currentTimeMillis());
@@ -53,92 +134,4 @@ public class ch3_7_AnimalQueue {
          System.out.println(aqu);
       }
    }
-
-   public enum AnimalType {
-      DOG, CAT;
-   }
-
-   public static class Animal {
-      private int order;
-      private AnimalType type;
-
-      public Animal(AnimalType type) {
-         this.type = type;
-      }
-
-      public void setOrder(int order) {
-         this.order = order;
-      }
-
-      public int getOrder() {
-         return this.order;
-      }
-
-      public AnimalType getType() {
-         return type;
-      }
-
-      public String toString() {
-         return type + "";
-      }
-   }
-
-   public static class AnimalQueue {
-      private Queue<Animal> dog_qu;
-      private Queue<Animal> cat_qu;
-      private int order;
-
-      public AnimalQueue() {
-         order = 0;
-         dog_qu = new LinkedList<Animal>();
-         cat_qu = new LinkedList<Animal>();
-      }
-
-      public void enque(Animal an) {
-         order++;
-         an.setOrder(order);
-         if (an.getType() == AnimalType.DOG)
-            dog_qu.add(an);
-         else
-            cat_qu.add(an);
-      }
-
-      // important here to check the empty of queue
-      public Animal dequeAny() {
-         if (dog_qu.isEmpty() || cat_qu.isEmpty()) {
-            if (dog_qu.isEmpty() && cat_qu.isEmpty())
-               throw new NoSuchElementException();
-            return dog_qu.isEmpty() ? cat_qu.remove() : dog_qu.remove();
-         }
-         return dog_qu.peek().getOrder() < cat_qu.peek().getOrder() ? dog_qu.remove() : cat_qu.remove();
-      }
-
-      public Animal dequeDog() {
-         return dog_qu.remove();
-      }
-
-      public Animal dequeCat() {
-         return cat_qu.remove();
-      }
-
-      public boolean isEmpty() {
-         return dog_qu.isEmpty() && cat_qu.isEmpty();
-      }
-
-      public String toString() {
-         StringBuilder sb = new StringBuilder();
-         Queue<Animal> tmp_dog = new LinkedList<Animal>(dog_qu);
-         Queue<Animal> tmp_cat = new LinkedList<Animal>(cat_qu);
-         sb.append("[");
-         while (!this.isEmpty()) {
-            Animal tmp_an = this.dequeAny();
-            sb.append(tmp_an + ", ");
-         }
-         sb.append("]");
-         dog_qu = new LinkedList<Animal>(tmp_dog);
-         cat_qu = new LinkedList<Animal>(tmp_cat);
-         return sb.toString();
-      }
-   }
-
 }

@@ -2,27 +2,17 @@ package ch3_stacks_queues;
 
 import java.util.Stack;
 
+import org.junit.Test;
+
 public class ch3_5_ImplementQueueUsingTwoStacks {
 
    /**
     * Design a StackQueue class which implements a queue using two stacks
     */
-   // see StackQueue.java
-   public static void main(String[] args) {
-      StackQueue<Integer> qu = new StackQueue<Integer>();
-      System.out.println(qu);
-      qu.add(1);
-      qu.add(2);
-      System.out.println(qu);
-      System.out.println(qu.peek());
-      qu.remove();
-      System.out.println(qu);
-      qu.add(4);
-      System.out.println(qu);
-      System.out.println(qu.peek());
-   }
-   
-   public static class StackQueue<T> {
+
+   // Use one stack to store the elements in order of pushed time, another to store
+   // the elements in reversed order.
+   public class StackQueue<T> {
       private Stack<T> stack, reversed_stack;
 
       public StackQueue() {
@@ -52,6 +42,7 @@ public class ch3_5_ImplementQueueUsingTwoStacks {
          return reversed_stack.peek();
       }
 
+      // Core function
       public void shift(Stack<T> src, Stack<T> dst) {
          while (!src.isEmpty())
             dst.push(src.pop());
@@ -65,5 +56,19 @@ public class ch3_5_ImplementQueueUsingTwoStacks {
       }
    }
 
+   @Test
+   public void test() {
+      StackQueue<Integer> qu = new StackQueue<Integer>();
+      System.out.println(qu);
+      qu.add(1);
+      qu.add(2);
+      System.out.println(qu);
+      System.out.println(qu.peek());
+      qu.remove();
+      System.out.println(qu);
+      qu.add(4);
+      System.out.println(qu);
+      System.out.println(qu.peek());
+   }
 
 }
