@@ -10,6 +10,8 @@
     (order does not matter).
 */
 
+
+
 // use map to store word and freq
 public class Solution {
     public ArrayList<Integer> findSubstring(String S, String[] L) {

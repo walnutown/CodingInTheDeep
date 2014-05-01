@@ -8,13 +8,15 @@
 */
 
 // Rotate the matrix by layers, from outer layer to inner layer
-// Each time, we swap the four borders in a layer in clockwise direction
-// time: O(n); space: O(1)
+// Each time, we swap the four sides in a layer in clockwise direction
+// time: O(n*n), each cell will be accessed at most twice; space: O(1)
 public class Solution {
     public void rotate(int[][] matrix) {
         if (matrix==null || matrix.length==0 || matrix[0].length==0)
             return;
         int N = matrix.length;
+        // If the length of the matrix border is odd numebr, the central cell will not be rotated
+        // otherwise, all cells will be rotated
         for (int layer=0; layer<N/2; layer++){
             for (int i=layer; i<= N-2-layer; i++){
                 int tmp = matrix[layer][i]; // cache left border

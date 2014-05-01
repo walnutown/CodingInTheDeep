@@ -18,7 +18,7 @@ public class ch1_3_IsStringPermutation {
          return a == null && b == null;
       if (a.length() != b.length())
          return false;
-      int[] freq = new int[256];
+      int[] freq = new int[256];    // assume we only have charset of ISO8859 or 2^8 unicode
       for (int i = 0; i < a.length(); i++) {
          freq[a.charAt(i)]++;
       }
