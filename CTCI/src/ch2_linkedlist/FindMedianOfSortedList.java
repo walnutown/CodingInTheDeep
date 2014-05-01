@@ -9,8 +9,8 @@ public class FindMedianOfSortedList {
     * In constant space
     */
 
-   // fast/slow pointers
-   // Note fast/slow have different initial position
+   // Maintain fast/slow pointers
+   // Note fast/slow have different initial position 
    // time: O(n); space: O(1)
    public double findMedianOfSortedList(ListNode head) {
       if (head == null)

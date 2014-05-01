@@ -54,7 +54,7 @@ public class Solution {
 }
 
 // Combine the while loop to make code more concise
-// time: O(max(m,n)); space(1)
+// time: O(m+n); space(1)
 public class Solution {
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         if (l1==null || l2==null){

@@ -3,11 +3,11 @@ package ch2_linkedlist;
 import org.junit.Test;
 
 public class ReverseLinkedList {
-   /*
+   /**
     * Reverse a LinkedList
     */
 
-   // iterative version
+   // Sol1, iterative version
    // Maintain two pointers, one for the new head of the reversed list, here we create a sentinel
    // to ease the border cases; and one for the old head of the list
    // In each step, we insert oldHead.next before the newHead (which is sentinel.next)
@@ -27,8 +27,8 @@ public class ReverseLinkedList {
       return dum.next;
    }
 
-   // recursive version
-   // Each time, we reverse the list after current node first
+   // Sol2, recursive version
+   // Each time, we reverse the list after current node
    // append current node to the end of the reversed list
    // and always return new head of the reversed list
    // time: O(n); space: recursive stack
@@ -40,22 +40,27 @@ public class ReverseLinkedList {
       head.next = null;
       return r; // r is always pointing to the new head of the reversed list
    }
-   
-   // recursive version 2
-   private ListNode res;
-   public ListNode reverse3(ListNode head){
+
+   // Sol3, recursion + sentinel node
+   private ListNode s;
+
+   public ListNode reverse3(ListNode head) {
+      ListNode sen = new ListNode(0);
+      s = sen;
       reverseList(head);
-      return res;
+      return sen.next;
    }
-   
-   public void reverseList(ListNode node){
-      if (node==null || node.next==null){
-         res= node;
+
+   public void reverseList(ListNode node) {
+      if (node.next == null) {
+         s.next = node;
+         s = s.next;
          return;
       }
       reverseList(node.next);
-      node.next.next= node;
       node.next = null;
+      s.next = node;
+      s = s.next;
    }
 
    @Test
@@ -63,7 +68,7 @@ public class ReverseLinkedList {
       int[] A = new int[] { 2, 3, 4, 5, 1, 6 };
       ListNode head = new ListNode(A);
       // System.out.println(reverse(head).printList());
-      //System.out.println(reverse2(head).printList());
+      // System.out.println(reverse2(head).printList());
       System.out.println(reverse3(head).printList());
    }
 }

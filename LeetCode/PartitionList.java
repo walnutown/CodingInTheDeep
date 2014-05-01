@@ -20,7 +20,7 @@
  * }
  */
 
-// Maintain two sentinel nodes of two lists, one with values less than target, ont with values equal or larger than target
+// Maintain two sentinel nodes as head of two lists, one with values less than target, ont with values equal or larger than target
 // The algorithm of this quesiton is easy, similar to merge sort. Yet, there's a easy-to-make bug. Note line 42.
 // time: O(n); space: O(1)
 public class Solution {

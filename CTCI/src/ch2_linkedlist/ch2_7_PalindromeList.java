@@ -2,26 +2,24 @@ package ch2_linkedlist;
 
 import java.util.Stack;
 
-public class ch2_7_LinkedListPalindrome {
+import org.junit.Test;
 
-   /*
+public class ch2_7_PalindromeList {
+
+   /**
     * Implement a function to check if a linked list is a palindrome
     */
-   public static void main(String[] args) {
-      int[] arr = new int[] { 5, 4, 5, 4, 5 };
-      ListNode head = new ListNode(arr);
-      System.out.println(head.printList());
-      System.out.println(isPalindrome2(head));
-   }
 
    // reverse and compare, only need to check the first half
    // time: O(n); space:O(1)
-   public static boolean isPalindrome(ListNode head) {
+   public boolean isPalindrome(ListNode head) {
       return false;
    }
 
-   // stack first half and compare, use fast/slow pointer.
-   public static boolean isPalindrome2(ListNode head) {
+   // Maintain fast/slow pointers to find the middle of the list
+   // stack first half and compare
+   // time: O(n); space: O(n)
+   public boolean isPalindrome2(ListNode head) {
       if (head == null || head.next == null)
          return true;
       ListNode slow = head, fast = head.next.next;
@@ -32,17 +30,26 @@ public class ch2_7_LinkedListPalindrome {
          st.push(slow.val);
          fast = fast.next.next;
       }
-   // adjust 'slow' according to list length
-      if (fast == null) // list length is even  
+      // adjust 'slow' according to list length
+      if (fast == null) // list length is even
          slow = slow.next;
-      else  // list length is odd
+      else {  // list length is odd
          slow = slow.next.next;
+      }
       while (slow != null) {
          if (slow.val != st.pop())
             return false;
          slow = slow.next;
       }
       return true;
+   }
+
+   @Test
+   public void test() {
+      int[] arr = new int[] { 5, 4, 5, 4, 5 };
+      ListNode head = new ListNode(arr);
+      System.out.println(head.printList());
+      System.out.println(isPalindrome2(head));
    }
 
 }
