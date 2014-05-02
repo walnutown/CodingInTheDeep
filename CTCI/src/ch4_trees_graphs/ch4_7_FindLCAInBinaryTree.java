@@ -28,7 +28,7 @@ public class ch4_7_FindLCAInBinaryTree {
          return null;
       int i = 0, j = 0;
       while (i < pa.size() && j < pb.size()) {
-         if (i+1<pa.size() && j+1<pb.size() && pa.get(i + 1) == pb.get(j + 1)) {
+         if (i + 1 < pa.size() && j + 1 < pb.size() && pa.get(i + 1) == pb.get(j + 1)) {
             i++;
             j++;
          } else
@@ -81,28 +81,31 @@ public class ch4_7_FindLCAInBinaryTree {
          return root;
       return left != null ? left : right;
    }
-   
+
    // Sol4 -- To fix Bug in Sol3
-   // We add two flags to mark whether two nodes is present 
-   public TreeNode findLCA4(TreeNode root, TreeNode a, TreeNode b){
+   // We add two flags to mark whether two nodes are present
+   // time: O(n); space: O(1)
+   public TreeNode findLCA4(TreeNode root, TreeNode a, TreeNode b) {
       int[] visited = new int[1];
       TreeNode lca = finder(root, a, b, visited);
-      return visited[0]==2 ? lca : null;
+      return visited[0] == 2 ? lca : null;
    }
-   
-   private TreeNode finder(TreeNode root, TreeNode a, TreeNode b, int[] visited){
-      if (root==null || visited[0]==2)
+
+   private TreeNode finder(TreeNode root, TreeNode a, TreeNode b, int[] visited) {
+      if (root == null || visited[0] == 2)
          return null;
-      if (root == a || root == b){
-         if (a==b)  visited[0]=2;
-         else   visited[0]++;
-         finder(root.left, a, b, visited);
+      if (root == a || root == b) {
+         if (root == a)
+            visited[0]++;
+         if (root == b)
+            visited[0]++;
+         finder(root.left, a, b, visited); // need to continue checking whether another node is in the tree
          finder(root.right, a, b, visited);
          return root;
       }
       TreeNode left = finder(root.left, a, b, visited);
       TreeNode right = finder(root.right, a, b, visited);
-      if (left !=null && right != null)
+      if (left != null && right != null)
          return root;
       return left != null ? left : right;
    }
@@ -121,9 +124,9 @@ public class ch4_7_FindLCAInBinaryTree {
       System.out.println("First Common Ancestor: " + findLCA3(root, a, b));
       System.out.println("First Common Ancestor: " + findLCA4(root, a, b));
    }
-   
+
    @Test
-   public void testOneNodeAbsent(){
+   public void testOneNodeAbsent() {
       System.out.println("\nTest one node is absent");
       int[] arr = new int[] { 1, 3, 5, 7, 9, 14, 23, 32 };
       TreeNode root = new TreeNode(arr);
@@ -136,9 +139,9 @@ public class ch4_7_FindLCAInBinaryTree {
       System.out.println("First Common Ancestor: " + findLCA3(root, a, b));
       System.out.println("First Common Ancestor: " + findLCA4(root, a, b));
    }
-   
+
    @Test
-   public void testTwoSameNodes(){
+   public void testTwoSameNodes() {
       System.out.println("\nTest two nodes are the same");
       int[] arr = new int[] { 1, 3, 5, 7, 9, 14, 23, 32 };
       TreeNode root = new TreeNode(arr);

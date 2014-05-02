@@ -3,10 +3,15 @@ package ch4_trees_graphs;
 import org.junit.Test;
 
 public class FindLCAInBST {
+   /**
+    * Given a binary search tree, find the lowest common ancestor of two given nodes
+    */
+   
+   // Note the following solution cannot handle the case that a or b is not in bst
+   
    // if a<curr, b<curr, go left
    // if a>curr, b>curr, go right
    // else, lca
-   // Note this cannot handle the case that a or b is not in bst
    // time: O(n); space: O(1)
    public TreeNode findLCA(TreeNode root, int a, int b) {
       if (root == null)

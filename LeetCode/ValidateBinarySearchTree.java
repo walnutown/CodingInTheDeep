@@ -8,8 +8,6 @@
     Both the left and right subtrees must also be binary search trees.
 */
 
-// same to CTCI-ch4_5
-
 /**
  * Definition for binary tree
  * public class TreeNode {
@@ -20,6 +18,7 @@
  * }
  */
 
+// http://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/
 // Note:
 // left < curr < right
 

@@ -26,6 +26,7 @@
 // Recursion
 // Maintain a global variable to track the max path sum during recursion
 // The return value of getMax() is the max sum of path coantaining root node
+// time: O(n); space: recursive stack
 public class Solution {
     int max = Integer.MIN_VALUE;
     public int maxPathSum(TreeNode root) {

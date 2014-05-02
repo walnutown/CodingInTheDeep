@@ -4,29 +4,27 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Test;
+
 public class FindPathsOfTargetSum2 {
 
-   /*
+   /**
     * Given a binary tree, to print all paths which sum to a given value.
     * The path does not need to start or end at the root or a leaf. The value of a path is described
     * as the sum of node values on the path
     */
 
-   // refer:
    // http://stackoverflow.com/questions/4591763/find-paths-in-a-binary-search-tree-summing-to-a-target-value
-   public static void main(String[] args) {
-      int[] in = new int[] { 4, 2, 5, 1, 6, 3 };
-      int[] pre = new int[] { 1, 2, 4, 5, 3, 6 };
-      TreeNode root = new TreeNode(in, pre);
-      System.out.println(root.printTree());
-      for (ArrayList<TreeNode> list : getPaths(root, 12)) {
-         System.out.println(list.toString());
-      }
-   }
 
-   static Map<ArrayList<TreeNode>, Integer> paths = new HashMap<ArrayList<TreeNode>, Integer>();
+   // Brute force, find all paths and check.
+   // Basic idea is same to Leetcode/MaximumPathSum
+   // We use a bottom-up way to find all paths.
+   // getPathsStartingAtNode() returns all paths starting at the root
+   // during the recursive calls, we also record paths not starting from root in 'paths'
+   // Besides, we use a map to store paths and its sum. In this case, we can skip calculating path sum
+   Map<ArrayList<TreeNode>, Integer> paths = new HashMap<ArrayList<TreeNode>, Integer>();
 
-   public static ArrayList<ArrayList<TreeNode>> getPaths(TreeNode root, int target) {
+   public ArrayList<ArrayList<TreeNode>> getPaths(TreeNode root, int target) {
       ArrayList<ArrayList<TreeNode>> res = new ArrayList<ArrayList<TreeNode>>();
       if (root == null)
          return res;
@@ -40,7 +38,7 @@ public class FindPathsOfTargetSum2 {
 
    // use path as key (instead of integer) here to ensure unique
    // return all paths (top-down) starting at node
-   public static Map<ArrayList<TreeNode>, Integer> getPathsStartingAtNode(TreeNode node) {
+   private Map<ArrayList<TreeNode>, Integer> getPathsStartingAtNode(TreeNode node) {
       if (node == null)
          return null;
       if (node.left == null && node.right == null) {
@@ -90,4 +88,14 @@ public class FindPathsOfTargetSum2 {
       return map;
    }
 
+   @Test
+   public void test() {
+      int[] in = new int[] { 4, 2, 5, 1, 6, 3 };
+      int[] pre = new int[] { 1, 2, 4, 5, 3, 6 };
+      TreeNode root = new TreeNode(in, pre);
+      System.out.println(root.printTree());
+      for (ArrayList<TreeNode> list : getPaths(root, 12)) {
+         System.out.println(list.toString());
+      }
+   }
 }

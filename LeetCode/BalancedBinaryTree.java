@@ -36,7 +36,7 @@ public class Solution {
     }
 }
 
-// optimization
+// time optimize the above solution
 public class Solution {
     public boolean isBalanced(TreeNode root) {
         if (root==null) return true;
