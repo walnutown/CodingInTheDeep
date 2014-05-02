@@ -1,7 +1,8 @@
 package ch6_brainteasers;
 
 public class ch6_6_ToggleLockers {
-   /*
+
+   /**
     * There're 100 closed lockers in a hallway. A man begins by opening all 100 lockers. Next, he
     * closes every second lockers. Then, on his third pass, he toggles every third locker (closes it
     * if it's open or opens it if it's closed). This process continues for 100 passes, such that on

@@ -1,7 +1,8 @@
 package ch6_brainteasers;
 
 public class ch6_4_BlueEyes {
-   /*
+
+   /**
     * A bunch of people are living on an island, when a visitor comes with a strange order: all
     * blue-eyed people must leave the island as soon as possible. There will be a flight out at 8PM
     * every evening. Each person can see everyone else's eye color, but they do not know their own
@@ -9,6 +10,7 @@ public class ch6_4_BlueEyes {
     * eyes, although they do know that at least one person does. How many days will it take the
     * blue-eyed people to leave?
     */
+
    // SOL
    // use induction
    // analyze the case:
