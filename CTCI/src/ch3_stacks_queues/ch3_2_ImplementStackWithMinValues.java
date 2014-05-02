@@ -23,6 +23,7 @@ public class ch3_2_ImplementStackWithMinValues {
    // the min stack will store [5,1]. 6 and 7 will definitely not be min values.
    // When we pop the elements from the stack, we also have to check the min stack to see whether
    // we have to pop the current min element
+   @SuppressWarnings("serial")
    public class StackWithMin extends Stack<Integer> {
       private Stack<Integer> min_stack;
 

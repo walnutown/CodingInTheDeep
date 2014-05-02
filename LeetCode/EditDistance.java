@@ -16,6 +16,8 @@
 // phrase edit distance is often used to refer specifically to Levenshtein
 // distance
 
+// Another string distance measurement is Hamming distance, only allows substitions
+
 // DP
 // word1.substring(0, i) can be converted into word2.substring(0, j) using mem[i][j] steps
 // mem[i][j] = mem[i][j-1], denotes a insertion operation in word1.substring

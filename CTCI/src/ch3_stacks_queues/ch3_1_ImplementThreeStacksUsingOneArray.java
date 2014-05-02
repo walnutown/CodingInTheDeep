@@ -3,6 +3,8 @@ package ch3_stacks_queues;
 import java.util.EmptyStackException;
 import java.util.Random;
 
+import org.junit.Test;
+
 public class ch3_1_ImplementThreeStacksUsingOneArray {
 
    /**
@@ -11,24 +13,8 @@ public class ch3_1_ImplementThreeStacksUsingOneArray {
    // fixed-size stack, or dynamic-size stack
    // the following code implements 3 fixed-size stacks
    // for the dynamic version, we have to expand the size and move elements if necessary
-   public static void main(String[] args) {
-      ArrayStacks<Integer> as = new ArrayStacks<Integer>(5);
-      Random rd = new Random(System.currentTimeMillis());
-      for (int i = 0; i < 10; i++) {
-         int value = rd.nextInt(10);
-         int index = rd.nextInt(3);
-         System.out.println("Push() to Stack " + index + " value: " + value);
-         as.push(index, value);
-         System.out.println(as);
-         if (i > 5) {
-            index = rd.nextInt(3);
-            value = as.pop(index);
-            System.out.println("Pop() from Stack " + index + " value: " + value);
-         }
-      }
-   }
 
-   public static class ArrayStacks<Integer> {
+   public class ArrayStacks {
       private int[] arr;
       private int capacity;
       private int size;
@@ -38,7 +24,7 @@ public class ch3_1_ImplementThreeStacksUsingOneArray {
          arr = new int[3 * capacity];
          this.capacity = capacity;
          size = 0;
-         st_tops = new int[] { -1, capacity-1, 2 * capacity-1 };
+         st_tops = new int[] { -1, capacity - 1, 2 * capacity - 1 };
       }
 
       public int size() {
@@ -76,19 +62,37 @@ public class ch3_1_ImplementThreeStacksUsingOneArray {
          sb.append("Stack0: [ ");
          for (int i = 0; i <= st_tops[0]; i++)
             sb.append(arr[i] + " ");
-         sb.deleteCharAt(sb.length()-1);
+         sb.deleteCharAt(sb.length() - 1);
          sb.append("]\n");
          sb.append("Stack1: [ ");
          for (int i = capacity; i <= st_tops[1]; i++)
             sb.append(arr[i] + " ");
-         sb.deleteCharAt(sb.length()-1);
+         sb.deleteCharAt(sb.length() - 1);
          sb.append("]\n");
          sb.append("Stack2: [ ");
          for (int i = 2 * capacity; i <= st_tops[2]; i++)
             sb.append(arr[i] + " ");
-         sb.deleteCharAt(sb.length()-1);
+         sb.deleteCharAt(sb.length() - 1);
          sb.append("]");
          return sb.toString();
+      }
+   }
+
+   @Test
+   public void test() {
+      ArrayStacks as = new ArrayStacks(5);
+      Random rd = new Random(System.currentTimeMillis());
+      for (int i = 0; i < 10; i++) {
+         int value = rd.nextInt(10);
+         int index = rd.nextInt(3);
+         System.out.println("Push() to Stack " + index + " value: " + value);
+         as.push(index, value);
+         System.out.println(as);
+         if (i > 5) {
+            index = rd.nextInt(3);
+            value = as.pop(index);
+            System.out.println("Pop() from Stack " + index + " value: " + value);
+         }
       }
    }
 
