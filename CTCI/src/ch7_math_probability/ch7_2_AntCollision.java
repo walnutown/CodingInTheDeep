@@ -16,5 +16,5 @@ public class ch7_2_AntCollision {
    // P(collision) = 1 - P (no collision) = 3/4
    
    // Followup
-   // P = 1- 2*(1/2)^n
+   // P = 1- 2/2^n
 }

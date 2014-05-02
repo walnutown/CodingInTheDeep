@@ -12,6 +12,6 @@ public class ch7_1_BasketballShot {
    
    // Game1 : P1 = p
    // Game2 : P2 = 3 * p^2 * (1-p) + p^3
-   // P1 > P2 =>    p > 3(1-p)p^2 + p^3     =>  (2p-1)(p-1) > 0 => p < 0.5
+   // P1 > P2     =>    p > 3(1-p)p^2 + p^3     =>  (2p-1)(p-1) > 0 => p < 0.5
    // if p=0, p=0.5, p=1, the probability of winning two games are the same
 }

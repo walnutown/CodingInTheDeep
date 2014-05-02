@@ -26,28 +26,22 @@ public class Solution {
         if (points.length<=2)   return points.length;
         int N = points.length, max=2;
         for (int i=0; i<N; i++){
-            Point p1 = points[i];
             Map<Double, Integer> map = new HashMap<Double, Integer>();
             int base =1, infinite=0;  // base counts the number of points that have the same coordinates as p1
             for (int j=i+1; j<N; j++){ // infinite counts the number of lines with infinite slope
-                Point p2 = points[j];
+                Point p1 = points[i], p2 = points[j];
                 if (p1.x==p2.x){
                     if (p1.y==p2.y)     base++;
                     else    infinite++;
                 }
                 else{
                     double slope = p1.y==p2.y ? 0.0 : (double) (p1.y-p2.y)/(p1.x-p2.x); // -0.0, 0.0
-                    if (map.containsKey(slope))
-                        map.put(slope, map.get(slope)+1);
-                    else
-                        map.put(slope, 1);
+                    if (!map.containsKey(slope))    map.put(slope, 0);
+                    map.put(slope, map.get(slope)+1);
                 }
             }
-            int sum = infinite;
-            for (int num : map.values()){
-                sum = Math.max(num, sum);
-            }
-            max = Math.max(max, sum+base);
+            for (int num : map.values())    max = Math.max(base+num, max);
+            max = Math.max(max, base+infinite);
         }
         return max;
     }
