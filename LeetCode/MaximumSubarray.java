@@ -15,17 +15,17 @@
 public class Solution {
     public int maxSubArray(int[] A) {
         if (A==null || A.length==0) return 0;
-        int max = Integer.MIN_VALUE;
-        int sum = 0;
+        int max = Integer.MIN_VALUE, sum = 0;
         for (int i=0; i<A.length; i++){
-            // if sum+A[i] < A[i], sum should be less than zero, then we should set A[i] as the new starting point
+            // if sum+A[i] < A[i], we start a new subarray
             sum = Math.max(A[i], sum+A[i]); 
             max = Math.max(sum, max);
         }
         return max;
     }
 }
-// Divide and Conquer, time: O(nlgn); space: O(1)
+// Divide and Conquer
+// time: O(nlgn); space: O(1)
 public class Solution {
     public int maxSubArray(int[] A) {
         if (A==null || A.length==0) return 0;

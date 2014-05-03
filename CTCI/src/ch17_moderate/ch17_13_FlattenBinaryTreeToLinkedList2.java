@@ -12,9 +12,9 @@ public class ch17_13_FlattenBinaryTreeToLinkedList2 {
     * (implemented with BiNode) into a doubly linked list. The values should be kept in order and
     * the operation should be performed in place.
     * eg,
-    *       3
-    *   1       5
-    * 0   2   4   6
+    *    3
+    *  1   5
+    * 0 2 4 6
     * 0<->1<->2<->3<->4<->5<->6
     */
 
@@ -32,11 +32,12 @@ public class ch17_13_FlattenBinaryTreeToLinkedList2 {
       }
    }
 
-   // similar to leetcode -- FlaternBinaryTreeToLinkedList
+   // Similar to Leetcode/FlaternBinaryTreeToLinkedList
    // The difference lies in the order of the list, in-order or pre-order
 
-   // Inorder traverse the binary tree and maintain the previous node to
-   // connect list
+   // Sol1
+   // Maintain a previous node, connect the current node with previous node during in-order
+   // traversal.
    // time: O(n); space: recursive stack
    BiNode prev;
 
@@ -52,7 +53,7 @@ public class ch17_13_FlattenBinaryTreeToLinkedList2 {
       return head;
    }
 
-   public void converter(BiNode node) {
+   private void converter(BiNode node) {
       if (node == null)
          return;
       converter(node.node1);
@@ -63,11 +64,10 @@ public class ch17_13_FlattenBinaryTreeToLinkedList2 {
       prev = node;
       converter(node.node2);
    }
-   
-   
 
-   // PostOrder traverse the binary tree, and use a wrapper class to hold the head and tail of the
-   // sub list
+   // Recursion
+   // Recursively connect the current node with the tail of left-list and head of right-list
+   // Create a wrapper class to store the head and tail of the list
    // time: O(n); space: O(n)
    public BiNode convertBinaryTreeToDoublyLinkedList2(BiNode root) {
       if (root == null || root.node1 == null && root.node2 == null)
@@ -75,7 +75,7 @@ public class ch17_13_FlattenBinaryTreeToLinkedList2 {
       return converter2(root).head;
    }
 
-   public WrapperNode converter2(BiNode node) {
+   private WrapperNode converter2(BiNode node) {
       if (node == null)
          return null;
       WrapperNode left = converter2(node.node1);
@@ -90,22 +90,17 @@ public class ch17_13_FlattenBinaryTreeToLinkedList2 {
       return ret;
    }
 
-   public void connect(BiNode l, BiNode r) {
+   private void connect(BiNode l, BiNode r) {
       l.node2 = r;
       r.node1 = l;
    }
 
-   public class WrapperNode {
+   private class WrapperNode {
       BiNode head;
       BiNode tail;
 
       public WrapperNode() {
 
-      }
-
-      public WrapperNode(BiNode head, BiNode tail) {
-         this.head = head;
-         this.tail = tail;
       }
    }
 
@@ -125,5 +120,4 @@ public class ch17_13_FlattenBinaryTreeToLinkedList2 {
          newRoot = newRoot.node2;
       }
    }
-
 }

@@ -2,6 +2,8 @@ package ch17_moderate;
 
 import java.util.Arrays;
 
+import org.junit.Test;
+
 public class ch17_6_ShortestUnsortedSubsequence {
 
    /**
@@ -10,12 +12,13 @@ public class ch17_6_ShortestUnsortedSubsequence {
     * smallest such sequence)
     */
 
-   // <1> find longest increasing subsequence from left and right side
-   // <2> shrink left and right sequence border according to min/max value of mid subsequence.
+   // <1> get the ending of the ascending subsequence starting from head
+   // <2> get the ending of the descending subsequence starting from end
+   // <3> shrink left and right sequence border according to min/max value of mid subsequence.
    // otherwise, even the left, mid and right sub-list is ordered, the whole list will not be
    // ordered
    // time: O(n); space: O(1)
-   public static int[] smallestUnsortedSubsequence(int[] nums) {
+   public int[] smallestUnsortedSubsequence(int[] nums) {
       if (nums == null || nums.length <= 1)
          return null;
       int i = 0, j = nums.length - 1;
@@ -37,7 +40,8 @@ public class ch17_6_ShortestUnsortedSubsequence {
       return Arrays.copyOfRange(nums, i + 1, j);
    }
 
-   public static void main(String[] args) {
+   @Test
+   public void test() {
       int[] nums = new int[] { 1, 2, 3, 5 };
       System.out.println(Arrays.toString(smallestUnsortedSubsequence(nums)));
    }

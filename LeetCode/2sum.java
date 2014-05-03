@@ -10,13 +10,13 @@
     Output: index1=1, index2=2
 */
 
-// use map to store value-index, then traverse form both sides. 
+// Maintain two pointers, traverse form both sides. 
+// Since we're required to return the index of the two elements, we create an idnex mapping at first
 // time: O(nlgn); space: O(n)
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {
         int[] result = new int[2];
         if (numbers == null || numbers.length < 2)      return result;
-        // create index mapping
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         for (int i = 0; i < numbers.length; i++){
             map.put(numbers[i], i+1);

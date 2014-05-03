@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Test;
+
 public class ch17_5_MasterMind {
 
    /**
@@ -20,7 +22,8 @@ public class ch17_5_MasterMind {
 
    // <1> traverse solution and count hit, as well as the frequency of not matched characters
    // <2> traverse guess and count the pseudoHit
-   public static int[] solveMasterMind(char[] solution, char[] guess) {
+   // time: O(n); space: O(n)
+   public int[] solveMasterMind(char[] solution, char[] guess) {
       int hit = 0, pseudoHit = 0;
       Map<Character, Integer> map = new HashMap<Character, Integer>();
       for (int i = 0; i < solution.length; i++) {
@@ -29,9 +32,8 @@ public class ch17_5_MasterMind {
             hit++;
          else {
             if (!map.containsKey(color))
-               map.put(color, 1);
-            else
-               map.put(color, map.get(color) + 1);
+               map.put(color, 0);
+            map.put(color, map.get(color) + 1);
          }
       }
 
@@ -45,7 +47,8 @@ public class ch17_5_MasterMind {
       return new int[] { hit, pseudoHit };
    }
 
-   public static void main(String[] args) {
+   @Test
+   public void test() {
       char[] solution = new char[] { 'G', 'G', 'Y', 'B' };
       char[] guess = new char[] { 'G', 'B', 'Y', 'B' };
       System.out.println(Arrays.toString(solveMasterMind(solution, guess)));

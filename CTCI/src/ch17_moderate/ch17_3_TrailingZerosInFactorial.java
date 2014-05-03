@@ -7,6 +7,7 @@ public class ch17_3_TrailingZerosInFactorial {
    /**
     * Write an algorithm which computes the number of trailing zeros in n factorial
     */
+   
    // Sol1
    // the number of trailing zeros is decided by 10 (2*5)
    // we need to count the number of multiples of 2 and 5, more concisely, the number of multiples

@@ -3,8 +3,9 @@ package ch17_moderate;
 public class ch17_2_TicTacToeState {
 
    /**
-    * Design an algorithm to figure out if someone has own a game of tic-tac-toe
+    * Design an algorithm to figure out if someone has win a game of tic-tac-toe
     */
+   
    // similar to TicTacToeState(Company/slideshare)
    // Note"
    // consider one more point: How to improve the performance if we have to check state

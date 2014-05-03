@@ -27,39 +27,41 @@ public class ch17_14_FindMinWordBreak {
     * we have capitalized for clarity.
     */
 
-   public String findMinWordBreak(String str, Set<String> dict) {
-      if (str == null || str.length() == 0)
-         return "";
+   // A variant of Leetcode/WordBreak
+   // Create a wrapper class to hold the minBreakWord and number of invalid characters 
+   // Backtracking + memoization
+   private String findMinWordBreak(String s, Set<String> dict) {
+      if (s == null || s.length() == 0)
+         return s;
       Map<Integer, R> map = new HashMap<Integer, R>();
-      return finder(str, dict, 0, 0, map).value;
+      return dfs(s, 0, dict, map).value;
    }
 
-   /**
-    * choose to break or not break at each character
-    * @param map stores the min-break of str.substring(start)
-    * @param start/end marks a single word
-    */
-   public R finder(String str, Set<String> dict, int start, int end, Map<Integer, R> map) {
-      if (end == str.length()) // this termination state is IMPORTANT
-         return new R(end - start, str.substring(start).toUpperCase());
-      if (map.containsKey(start))
-         return map.get(start);
-      String word = str.substring(start, end + 1);
-      // break at the end of the word
-      R brek = new R(finder(str, dict, end + 1, end + 1, map));
-      if (!dict.contains(word)) {
-         brek.invalidNum += word.length();
-         brek.value = word.toUpperCase() + " " + brek.value;
-      } else
-         brek.value = word + " " + brek.value;
-      // not break at the end of the word
-      R noBrek = finder(str, dict, start, end + 1, map);
-      R min = min(brek, noBrek);
-      map.put(start, min);
+   private R dfs(String s, int index, Set<String> dict, Map<Integer, R> map) {
+      if (map.containsKey(index))
+         return new R(map.get(index));
+      if (index == s.length()) {
+         return new R(0, "");
+      }
+      R min = new R(Integer.MAX_VALUE, "");
+      for (int i = index; i < s.length(); i++) {
+         R curr = new R(0, "");
+         String word = s.substring(index, i + 1);
+         R next = dfs(s, i + 1, dict, map);
+         if (dict.contains(word)) {
+            curr.value = word + " " + next.value;
+            curr.invalidNum = next.invalidNum;
+         } else {
+            curr.value = word.toUpperCase() + " " + next.value;
+            curr.invalidNum = word.length() + next.invalidNum;
+         }
+         min = min(curr, min);
+      }
+      map.put(index, min);
       return min;
    }
 
-   public R min(R a, R b) {
+   private R min(R a, R b) {
       if (a == null)
          return b;
       if (b == null)
@@ -72,14 +74,9 @@ public class ch17_14_FindMinWordBreak {
          return a.value.length() < b.value.length() ? a : b;
    }
 
-   public class R {
+   private class R {
       int invalidNum;
       String value;
-
-      public R(int invalidNum) {
-         this.invalidNum = invalidNum;
-         value = "";
-      }
 
       public R(int invalidNum, String value) {
          this.invalidNum = invalidNum;
