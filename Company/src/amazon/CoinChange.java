@@ -54,8 +54,8 @@ public class CoinChange {
       return dp[target];
    }
 
-   // Sol4
-   // DP
+   // Sol4, correct Dynamic Programming
+   // dp[i][j] -- to make change for value i using only coins[0...j]
    // time: O(m*n); space: O(m*n)
    public int coinChange4(int[] A, int target) {
       if (A == null || A.length == 0)
@@ -68,7 +68,7 @@ public class CoinChange {
          for (int j = 0; j < N; j++) {
             // count solutions containing A[j]
             int x = i >= A[j] ? dp[i - A[j]][j] : 0;
-            // count solutions not containing A[j]
+            // count solutions not containing A[j] (solutions only use coins A[0...j-1])
             int y = j >= 1 ? dp[i][j - 1] : 0;
             dp[i][j] = x + y;
          }

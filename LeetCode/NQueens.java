@@ -21,7 +21,7 @@
 // Basic Backtracking
 // Note, we use a int matrix to mark the position of Queen and build board finally.
 // Becuase operations on int array is easy than on string array
-// time: O()
+// time: O(2^(N*N)), each cell has two options
 public class Solution {
    public ArrayList<String[]> solveNQueens(int n){
         ArrayList<String[]> res = new ArrayList<String[]>();

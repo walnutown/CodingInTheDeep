@@ -2,38 +2,43 @@ package ch9_recursion_dynamic_programming;
 
 import java.util.Arrays;
 
+import org.junit.Test;
+
 public class ch9_3_MagicIndex {
 
-   /*
+   /**
     * Magic Index : A[i] = i
-    * Given a sorted array of distinct integers, write a method to find a magic index
-    * if one exists, in array A
+    * Given a sorted array of distinct integers, write a method to find a magic index in A
+    * If no one exists, return -1
     */
-   public static void main(String[] args) {
-      int[] arr  =new int[]{0,2,4,5};
-      int[] arr2 = new int[] { -3, 3, 3, 3, 3, 20 };
-      System.out.println(Arrays.toString(arr));
-      System.out.println(findMagicIndex(arr));
-      System.out.println(findMagicIndex2(arr));
-      System.out.println(findMagicIndex3(arr2, 0, arr.length));
-   }
 
+   // Sol1
+   // The naive solution is to traverse each index
+   // time: average case O(n); space: O(1)
+
+   // Sol2
+   // One optimization to Sol1 is based on the following observation
+   // if i < A[i], for all j>i, j<A[j], because A is a distinct and sorted array, A[j]-A[i]>=j-i
+   // Thus, we have A[j]-j>= A[i]-i>0
+   // To use this observation, once we find that i<A[i], we stop the traversal.
    // time: O(n)
-   public static int findMagicIndex(int[] arr) {
+   public int findMagicIndex(int[] arr) {
       int index = 0;
       while (index < arr.length) {
          if (arr[index] == index)
             return index;
-         else if (index < arr[index]) { // key step here
-            index = arr[index];
-         } else
+         else if (index < arr[index])
+            break;
+         else
             index++;
       }
       return -1;
    }
 
-   // binary search
-   public static int findMagicIndex2(int[] arr) {
+   // Sol3
+   // Use binary search
+   // time: O(lgn); space: O(1)
+   public int findMagicIndex2(int[] arr) {
       int start = 0, end = arr.length - 1;
       while (start <= end) {
          int mid = (start + end) / 2;
@@ -47,20 +52,12 @@ public class ch9_3_MagicIndex {
       return -1;
    }
 
-   // Follow Up
-   // What if the values are not distinct?
-
-   // binary search, have to search both halves each time
-   public static int findMagicIndex3(int[] arr, int start, int end) {
-      if (start > end)
-         return -1;
-      int mid = (start + end) >> 1;
-      if (arr[mid] == mid)
-         return mid;
-      else if (arr[mid] > mid) {
-         return Math.max(findMagicIndex3(arr, start, mid - 1), findMagicIndex3(arr, arr[mid], end));
-      } else
-         return Math.max(findMagicIndex3(arr, start, arr[mid]), findMagicIndex3(arr, mid + 1, end));
+   @Test
+   public void test() {
+      int[] arr = new int[] { 0, 2, 4, 5 };
+      System.out.println(Arrays.toString(arr));
+      System.out.println(findMagicIndex(arr));
+      System.out.println(findMagicIndex2(arr));
    }
 
 }

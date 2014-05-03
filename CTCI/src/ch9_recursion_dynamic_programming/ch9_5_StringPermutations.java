@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class ch9_5_StringPermutations {
 
-   /*
+   /**
     * Write a method to compute all permutations of a string
     * The string contains duplicate characters.
     */

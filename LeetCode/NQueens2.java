@@ -26,28 +26,26 @@
 public class Solution {
     public int totalNQueens(int n) {
         if (n == 0) return 0;
-        int[] num = new int[1];
         int[][] board = new int[n][n];
-        finder(board, 0, n, num);
-        return num[0];
+        return finder(board, 0, n);
     }
     
-    public void finder(int[][] board, int row, int n, int[] num){
+    private int finder(int[][] board, int row, int n){
         if (row == n){
-            num[0]++;
-            return;
+            return 1;
         }
+        int count = 0;
         for (int i =0; i < n; i++){
             if (isValid(board, row, i)){
                 board[row][i] = 1;
-                finder(board, row+1, n, num);
+                count += finder(board, row+1, n);
                 board[row][i] = 0;
             }
         }
+        return count;
     }
     
-    // time: O(n)
-    public boolean isValid(int[][] board, int row, int col){
+    private boolean isValid(int[][] board, int row, int col){
         for (int i=0; i <= row; i++)
             if (board[i][col] == 1) return false;
         for (int i=row, j=col; i>=0 && j>=0; i--, j--)

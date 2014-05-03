@@ -1,19 +1,21 @@
 package ch11_sorting_searching;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Test;
 
 public class LongestIncreasingSubsequence {
 
-   /*
+   /**
     * Find the length of the longest increasing subsequence in an array of integers.
     * This subsequence is not necessarily contiguous.
     * e.g. [1,9,2], [1,2] or [1,9] is the longest increasing subsequence
     */
-   
+
    /*
-    * DP, memoize the LIS ending at index i, and then traverse to get max
+    * DP
+    * dp[i] -- length of LIS ending at index i
     * time: O(n^2); space: O(n)
     */
    public int findLIS(int[] arr) {
@@ -36,40 +38,41 @@ public class LongestIncreasingSubsequence {
    }
 
    /*
-    * Patience Sorting. Maintain potential longest increasing subsequences and update their tail elements
-    * the list at index i has i+1 elements
-    * refer: http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
+    * Patience Sorting. http://en.wikipedia.org/wiki/Patience_sorting
+    * This is basically a greedy algorithm.
+    * Maintain several piles, piles[i] stores the top element of the pile. In each pile, all
+    * elements are in ascending order from top to bottom. The number of piles is the length of the
+    * LIS. LIS can be recovered by taking the top element in each pile.
+    * http://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/
     * time: O(nlgn)
     */
-   public int findLIS2(int[] A){
-      if (A==null || A.length==0)
+   public int findLIS2(int[] A) {
+      if (A == null || A.length == 0)
          return 0;
       int N = A.length;
-      int[] tails = new int[N];
-      tails[0] = A[0];
-      int len = 1;
-      for (int i=1; i<N; i++){
-         if (A[i]<tails[0])
-            tails[0] = A[i];
-         else if (A[i] > tails[len-1])
-            tails[len++] = A[i];
+      ArrayList<Integer> piles = new ArrayList<Integer>();
+      piles.add(A[0]);
+      for (int i = 1; i < N; i++) {
+         int index = binarySearchCeil(piles, A[i]);
+         if (index == piles.size())
+            piles.add(A[i]);
          else
-            tails[ceilIndex(tails, -1, len-1, A[i])] = A[i];
-         System.out.println(Arrays.toString(tails));
+            piles.set(index, A[i]);
+         System.out.println(piles);
       }
-      return len;
+      return piles.size();
    }
    
-   // binary search the index of list and update its tail element
-   private int ceilIndex(int[] tails, int start, int end, int key){
-      while (start<end){
-         int mid = (start+end)>>1;
-         if (tails[mid]root<key)
-            start = mid+1;
+   private int binarySearchCeil(ArrayList<Integer> A, int target){
+      int start = 0, end = A.size()-1;
+      while (start<=end){
+         int mid = start+(end-start)/2;
+         if (A.get(mid)>=target)
+            end = mid-1;
          else
-            end = mid;
+            start = mid+1;
       }
-      return end;
+      return start;
    }
 
    @Test
