@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class CountingSort {
-   /*
+   /**
     * Counting sort determines, for each input element x, the number of elements less than x. It
     * uses this information to place element x directly into its position in the output array. we
     * must modify this scheme slightly to handle the situation in which several elements have the
@@ -18,7 +18,7 @@ public class CountingSort {
    // elements to be sorted
    // [2] Can beat the lower bond of comparison sort O(nlgn)
    // [3] uses a hashing to get the index of element in count table. Thus, can also work on negative numbers
-   // [4] can be paralled
+   // [4] can be paralleled
 
    // [1] build a count table C of size K (K = A.max - A.min+1), store the number of occurrence times
    // of an element in A

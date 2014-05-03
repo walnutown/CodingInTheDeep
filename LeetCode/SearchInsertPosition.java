@@ -10,7 +10,9 @@
     [1,3,5,6], 0 → 0
 */
 
-// binary search, the key is to return 'start' or 'end' when the element is not found
+// binary search
+// The key observation is that: the last step in while loop is start==end==mid, 
+// if A[mid]>target, mid is insertion position; if A[mid]<target, mid+1 is insertion position.
 // time: O(lgn)
 public class Solution {
     public int searchInsert(int[] A, int target) {
@@ -22,6 +24,6 @@ public class Solution {
             else if (A[mid] > target)   end=mid-1;
             else    start=mid+1;
         }
-        return start;
+        return start;   // equals 'return end+1;'
     }
 }

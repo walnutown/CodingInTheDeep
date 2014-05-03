@@ -1,6 +1,6 @@
 package ch9_recursion_dynamic_programming;
 
-public class ch9_10_LongestIncreasingSubsequence3 {
+public class ch9_10_LongestIncreasingSubsequence4 {
 
    /**
     * A stack of n boxes, with widths wi, heights hi, and depth di. The boxes cannot be rotated

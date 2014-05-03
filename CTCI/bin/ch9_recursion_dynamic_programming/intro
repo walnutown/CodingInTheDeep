@@ -13,6 +13,3 @@ Approach:
 			
 Dynamic Programming:
 	Recursive with cache			
-
-Comparison with Iterative
-	all recursive code can be implemented iteratively. So, it's a topic to talk with the interviewee. 

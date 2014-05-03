@@ -2,9 +2,11 @@ package ch11_sorting_searching;
 
 import java.util.Arrays;
 
+import org.junit.Test;
+
 public class ch11_5_SearchInArrayWithEmptyStrings {
 
-   /*
+   /**
     * Given a sorted array of strings which is interspersed with empty strings.
     * Write a method to find the location of a given string.
     */
@@ -17,7 +19,7 @@ public class ch11_5_SearchInArrayWithEmptyStrings {
    // With interspersed empty strings, we do some modification: if mid is empty string,
    // search both sides simultaneously to find the closest non-empty string
    // time: average O(lgn), worst O(n)
-   public static int findString(String[] arr, String target) {
+   public int findString(String[] arr, String target) {
       int start = 0, end = arr.length - 1;
       while (start <= end) {
          int mid = start + (end - start) / 2;
@@ -51,7 +53,8 @@ public class ch11_5_SearchInArrayWithEmptyStrings {
       return -1;
    }
 
-   public static void main(String[] args) {
+   @Test
+   public void test() {
       String[] arr = new String[] { "at", "", "", "", "ball", "", "", "car", "", "", "dad", "", "" };
       String target = "";
       System.out.println(Arrays.toString(arr));

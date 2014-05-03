@@ -4,18 +4,18 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-public class ch11_6_SearchMatrix {
+public class ch11_6_Search2DMatrix2 {
 
-   /*
+   /**
     * Given an M * N matrix in which each row and each column is sorted in ascending order,
     * write a method to find an element.
     */
 
    // The basic idea is similar to binary search, we choose a starting point (top-right or
    // bottom-left), whose one-side neighbor is smaller than it, another side neighbor is larger than
-   // it. Through comparison with current element, we move the position.
+   // it. By comparing target and current element, we move the position.
    // In the following implementation, we start from top-right, and find a path to the target number
-   // time: O(m+n)
+   // time: O(m+n); space: O(1)
    public String matrixSearch(int[][] matrix, int num) {
       int col = matrix[0].length - 1;
       int row = 0;
@@ -38,12 +38,15 @@ public class ch11_6_SearchMatrix {
 
    @Test
    public void test() {
-      int[][] matrix = new int[][] { { 15, 20, 40, 85 }, { 20, 35, 89, 95 }, { 30, 55, 95, 105 },
-            { 40, 80, 100, 120 } };
+      int[][] matrix = new int[][] { 
+            { 15, 20, 40, 85 }, 
+            { 20, 35, 89, 95 }, 
+            { 30, 55, 95, 105 },
+            { 40, 80, 100, 120 }
+      };
       int num = 55;
       printMatrix(matrix);
       System.out.println(matrixSearch(matrix, num));
-
    }
 
 }

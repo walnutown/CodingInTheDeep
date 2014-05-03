@@ -3,7 +3,8 @@ package ch11_sorting_searching;
 import org.junit.Test;
 
 public class QuickSelect {
-   /*
+
+   /**
     * Select the kth smallest element in an unordered array
     */
 

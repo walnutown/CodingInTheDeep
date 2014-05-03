@@ -5,9 +5,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.Test;
+
 public class ch11_7_LongestIncreasingSubSequence3 {
 
-   /*
+   /**
     * A circus is designing a tower routine consisting of people standing atop of one
     * another's shoulder. Each person should be both lighter and shorter than the person below him
     * or her.
@@ -18,7 +20,7 @@ public class ch11_7_LongestIncreasingSubSequence3 {
 
    // sort the array by height and weight, then use dynamic programming to get the LIS
    // time: O(n*n); space: O(n)
-   public static ArrayList<Person> buildTower(Person[] persons) {
+   public ArrayList<Person> buildTower(Person[] persons) {
       ArrayList<Person> tower = new ArrayList<Person>();
       if (persons == null || persons.length == 0)
          return tower;
@@ -41,21 +43,21 @@ public class ch11_7_LongestIncreasingSubSequence3 {
       return tower;
    }
 
-   public static void initMem(Map<Integer, ArrayList<Person>> mem, int length) {
+   private void initMem(Map<Integer, ArrayList<Person>> mem, int length) {
       for (int i = 0; i < length; i++) {
          mem.put(i, new ArrayList<Person>());
       }
    }
 
-   public static void main(String[] args) {
-
+   @Test
+   public void test() {
       Person[] persons = new Person[] { new Person(65, 100), new Person(70, 150),
             new Person(56, 90), new Person(75, 190), new Person(60, 95), new Person(68, 110) };
       System.out.println(Arrays.toString(persons));
       System.out.println(buildTower(persons).toString());
    }
 
-   public static class Person implements Comparable<Person> {
+   public class Person implements Comparable<Person> {
       private int height;
       private int weight;
 

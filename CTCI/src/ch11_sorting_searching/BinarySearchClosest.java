@@ -7,7 +7,7 @@ import org.junit.Test;
 public class BinarySearchClosest {
 
    /**
-    * Binary search an array to find the closest element of the target
+    * Binary search a sorted array to find the closest element of the target
     */
 
    // Basic binary search + choose between A[start] end A[end]

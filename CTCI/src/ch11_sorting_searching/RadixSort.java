@@ -6,21 +6,20 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
 
+import org.junit.Test;
+
 public class RadixSort {
 
    /**
     * radix sort is a non-comparative integer sorting algorithm that sorts data with integer keys by
     * grouping keys by the individual digits which share the same significant position and value
     */
-   private static final int BUCKET_NUM = 10;
+   
+   // http://www.geeksforgeeks.org/radix-sort/
+   // time: O(n*lgb(k)), n is the length of array, b is the base of number, k is the max value of number
+   private final int BUCKET_NUM = 10;
 
-   public static void main(String[] args) {
-      int[] arr = new int[] { 20, 3, 10, 3234, 593 };
-      radixSort(arr);
-      System.out.println(Arrays.toString(arr));
-   }
-
-   public static void radixSort(int[] arr) {
+   public void radixSort(int[] arr) {
       Map<Integer, Queue<Integer>> buckets = new HashMap<Integer, Queue<Integer>>();
       boolean done = false;
       int divider = 1;
@@ -46,10 +45,17 @@ public class RadixSort {
       }
    }
 
-   public static void clearBuckets(Map<Integer, Queue<Integer>> buckets) {
+   private void clearBuckets(Map<Integer, Queue<Integer>> buckets) {
       for (int i = 0; i < BUCKET_NUM; i++) {
          buckets.put(i, new LinkedList<Integer>());
       }
+   }
+
+   @Test
+   public void test() {
+      int[] arr = new int[] { 20, 3, 10, 3234, 593 };
+      radixSort(arr);
+      System.out.println(Arrays.toString(arr));
    }
 
 }

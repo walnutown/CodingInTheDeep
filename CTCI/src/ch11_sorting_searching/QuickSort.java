@@ -4,12 +4,13 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-/**
- * Quick-sort is a divide and conquer algorithm.
- * It divides a large list into two smaller sub-lists,
- * then recursively sort the sub-lists
- */
 public class QuickSort {
+
+   /**
+    * Quick-sort is a divide and conquer algorithm.
+    * It divides a large list into two smaller sub-lists,
+    * then recursively sort the sub-lists
+    */
 
    // from CLRS, easier to deal with index
    public void quickSort(int[] arr, int start, int end) {

@@ -10,18 +10,20 @@ public class CountInversionsInArray {
     * Let A[1..n] be an array of n distinct numbers. If i<j and A[i] > A[j], then the pair(i, j) is
     * called an inversion of A
     */
-   // reference:
+
    // http://www.geeksforgeeks.org/counting-inversions/
    // CLSR, Chapter2
 
+   // Sol1
    // The naive solution is to check all pairs. Each pair needs two index, so we have n^2 pairs
    // time: O(n^2)
 
+   // Sol2
    // we can modify merge sort to solve this problem
    // each inversion implies one merge-inversion in the merge step.
    // If l<r, no merge; if l>r, we need a merge-inversion, and the number of inversions is mid-l+1
-   // (why? because r will be moved to the position before l, elements in the range[l+1, mid] will
-   // also form an inversion with r
+   // (why? because all the elements in the range[l+1, mid] is larger than l, thus will also form an
+   // inversion with r
 
    // time: O(nlgn)
    public int mergeSort(int[] arr, int start, int end) {
@@ -63,7 +65,6 @@ public class CountInversionsInArray {
       int[] A = new int[] { 2, 3, 8, 6, 1 };
       int count = mergeSort(A, 0, A.length - 1);
       System.out.println(count);
-
    }
 
 }
