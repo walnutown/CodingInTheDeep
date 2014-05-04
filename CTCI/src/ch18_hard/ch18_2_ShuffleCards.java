@@ -3,6 +3,8 @@ package ch18_hard;
 import java.util.Arrays;
 import java.util.Random;
 
+import org.junit.Test;
+
 public class ch18_2_ShuffleCards {
 
    /**
@@ -10,15 +12,17 @@ public class ch18_2_ShuffleCards {
     * of the 52! permutations of the deck has to be equally likely. Assume that you are given a
     * random number generator which is perfect
     */
-  
-   // This is actually a special case of CTCI-GetRandomSetFromArray (the size of the set is same as the array)
-   // A good analogy is to pick n balls from the bag continuously.
-   private static Random r = new Random(System.currentTimeMillis());
 
-   // recursion
+   // This is actually a special case of CTCI/GetRandomSetFromArray (the size of the set is same as
+   // the array)
+   // A good analogy is to pick n balls from the bag continuously.
+   // We can get balls out in different order, this process is like shuffling the cards
+   private Random r = new Random(System.currentTimeMillis());
+
+   // Sol1, recursion
    // shuffle the first n-1 elements, then the new element n
    // time: O(n)
-   public static int[] shuffler1(int[] cards, int index) {
+   public int[] shuffler1(int[] cards, int index) {
       if (index == 0)
          return cards;
       shuffler1(cards, index - 1);
@@ -29,9 +33,9 @@ public class ch18_2_ShuffleCards {
       return cards;
    }
 
-   // iteration
+   // Sol2, iteration
    /*
-    * How does this work?  Use induction to prove
+    * How does this work? Use induction to prove
     * The probability that ith element (including the last one) goes to last position is 1/n,
     * because we randomly pick an element in first iteration.
     * The probability that ith element goes to second last position can be proved to be 1/n by
@@ -42,14 +46,13 @@ public class ch18_2_ShuffleCards {
     * previous step is picked again so that the last element is swapped)
     * So the probability = ((n-1)/n) x (1/(n-1)) = 1/n
     * Case 2: 0 < i < n-1 (index of non-last):
-    * The probability of ith element going to second last position = (probability that ith element is not
+    * The probability of ith element going to second last position = (probability that ith element
+    * is not
     * picked in previous iteration) x (probability that ith element is picked in this iteration)
     * So the probability = ((n-1)/n) x (1/(n-1)) = 1/n
     */
-   // An easy way to understand this method is to think of the question: take n balls from a bag of n balls
-   // We can get balls out in different order, this process is like shuffling the cards
    // time: O(n); space: O(1)
-   public static int[] shuffler2(int[] cards) {
+   public int[] shuffler2(int[] cards) {
       for (int i = cards.length - 1; i > 0; i--) {
          int k = rand(0, i);
          int tmp = cards[i];
@@ -60,15 +63,15 @@ public class ch18_2_ShuffleCards {
    }
 
    // both lower, higher inclusive
-   public static int rand(int lower, int higher) {
+   private int rand(int lower, int higher) {
       return lower + r.nextInt(higher + 1 - lower);
    }
-   
-   public static void main(String[] args) {
+
+   @Test
+   public void test() {
       int[] A = new int[] { 1, 2, 3, 4, 5, 6, 7 };
       System.out.println(Arrays.toString(shuffler1(A, A.length - 1)));
       System.out.println(Arrays.toString(shuffler2(A)));
    }
-
 
 }

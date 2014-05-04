@@ -6,18 +6,26 @@ import java.util.Map;
 
 import org.junit.Test;
 
-public class ch18_8_LocateSubstrings {
+public class ch18_8_SearchSrings {
 
    /**
-    * Given a string s and an array of smaller strings T, design a method to search s for each small
+    * Given a string S and an array of smaller strings T, design a method to search S for each small
     * string in T
     */
 
-   // In leetcode-- ImplementStrStr, we only need to call the search method once
-   // in this question, we ahve to call the search method multiple times. So, we use different
+   // http://www.geeksforgeeks.org/pattern-searching-set-8-suffix-tree-introduction/
+   // http://www.allisons.org/ll/AlgDS/Tree/Suffix/
+   
+   // There're n(n+1)/2 substrings in a string, so, it's rather surprising that a suffix tree can be
+   // built in O(n) time
+   
+   // Similar to Leetcode/ImplementStrStr,
+   // The difference lies that, we only need to call StrStr() once in Leetcode/ImplementStrStr
+   // but in this question, we have to call StrStr() multiple times for each word. So, we use different
    // approaches.
    
-   // use suffix tree
+   // use suffix tree, here we didn't use the build method of O(n) running time
+   // O(n^2) time to build the suffix tree, O(m) time to search for the string pattern
 
    public class SuffixTree {
       SuffixTreeNode root;
@@ -25,10 +33,16 @@ public class ch18_8_LocateSubstrings {
       public SuffixTree() {
          root = new SuffixTreeNode('0');
       }
+      
+      public SuffixTree(String s){
+         root = new SuffixTreeNode('0');
+         build(s);
+      }
 
-      // O(n!), n is the length of s
-      public void build(String s) {
-         for (int i = 0; i < s.length(); i++) { // build suffix tree from different starting index
+      // insert each suffix into the suffix tree
+      // O(n^2), n is the length of s
+      private void build(String s) {
+         for (int i = 0; i < s.length(); i++) { 
             root.insertSuffix(s.substring(i), i);
          }
       }
@@ -42,7 +56,7 @@ public class ch18_8_LocateSubstrings {
    public class SuffixTreeNode {
       Map<Character, SuffixTreeNode> children = new HashMap<Character, SuffixTreeNode>();
       char value;
-      ArrayList<Integer> indexes = new ArrayList<Integer>();
+      ArrayList<Integer> indices = new ArrayList<Integer>();
 
       public SuffixTreeNode(char value) {
          this.value = value;
@@ -51,7 +65,7 @@ public class ch18_8_LocateSubstrings {
       public void insertSuffix(String s, int index) {
          if (s == null || s.length() == 0)
             return;
-         indexes.add(index);
+         indices.add(index);
          char v = s.charAt(0);
          if (!children.containsKey(v)) {
             SuffixTreeNode child = new SuffixTreeNode(v);
@@ -62,7 +76,7 @@ public class ch18_8_LocateSubstrings {
 
       public ArrayList<Integer> search(String s) {
          if (s == null || s.length() == 0)
-            return indexes;
+            return indices;
          char v = s.charAt(0);
          if (children.containsKey(v))
             return children.get(v).search(s.substring(1));
@@ -74,8 +88,7 @@ public class ch18_8_LocateSubstrings {
    public void test() {
       String testString = "mississippi";
       String[] stringList = { "is", "sip", "hi", "sis" };
-      SuffixTree tree = new SuffixTree();
-      tree.build(testString);
+      SuffixTree tree = new SuffixTree(testString);
       for (String s : stringList) {
          ArrayList<Integer> list = tree.search(s);
          if (list != null) {

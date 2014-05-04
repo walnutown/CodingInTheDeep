@@ -9,10 +9,10 @@ public class ch18_6_FIndKSmallestElementsInArray {
    /*
     * <1> sort, O(nlgn)
     * <2> maxHeap O(nlgm)
-    *   Traverse through the list, on each element, we insert it into the list and delete the largest element.
-    * <3> quick select, average: O(n); worst: O(n^2)  
+    * Traverse through the list, for each element, we insert it into the heap and delete the largest
+    * element from the heap.
+    * <3> quick select, average: O(n); worst: O(n^2)
     */
-   // similar to Company/amazon - FindTheKthSmallestInArray
-   
+   // Similar to Company/amazon/FindTheKthSmallestInArray
 
 }

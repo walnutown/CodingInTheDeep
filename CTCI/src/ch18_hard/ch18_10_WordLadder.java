@@ -7,6 +7,6 @@ public class ch18_10_WordLadder {
     * into another word by changing only one letter at a time. The new word you get in each step
     * must be in the dictionary
     */
-   // leetcode -- WordLadder2 (store previous nodes to recover all the valid paths)
+   // LeetCode/WordLadder2 (store previous nodes to recover all the valid paths)
 
 }

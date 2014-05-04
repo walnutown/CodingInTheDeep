@@ -677,7 +677,12 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * a space optimized trie, where each node with only one child is merged with its child
   * Efficient for small sets (especially if the strings are long) and for sets of strings that share long prefixes
 * Suffix Tree
-  * Usage: e.g. Longest Common Substring
+  * Compressed trie of all suffix substrings
+  * Usage: 
+    * Longest Common Substring
+    * Longest repeated substring
+    * Longest palindrome in a string
+    * Search string pattern
 * [Segment Tree](http://www.geeksforgeeks.org/segment-tree-set-1-sum-of-given-range/)
   * a tree data structure (balanced binary tree) for storing intervals, or segments.
   * Provide efficient query for range values
@@ -685,7 +690,7 @@ is that in f(n) = O(g(n)), the bound 0 <= f(n) <= cg(n) holds for some constant 
   * One usage is in search engine. (e.g. [Lucene](http://blog.mikemccandless.com/2013/12/fast-range-faceting-using-segment-trees.html))
 * [Ternary Search Tree](http://en.wikipedia.org/wiki/Ternary_search_tree)
   * A type of Trie.
-  * Space efficient compared to standard compared to prefix trees, at the cost of speed
+  * Space efficient compared to standard prefix trees, at the cost of speed
 
 * LinkedHashMap
   * Hash table and linked list implementation of the Map interface, with predictable iteration order, and without incurring the increased cost associate with TreeMap.

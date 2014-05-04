@@ -21,7 +21,7 @@
 // similar to print the shortest path between two nodes on a graph
 // BFS + map(store previous ndoes)
 public class Solution {
-    public ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
+    public static ArrayList<ArrayList<String>> findLadders(String start, String end, HashSet<String> dict) {
       Map<String, Set<String>> map = new HashMap<String, Set<String>>();
       ArrayList<Set<String>> layers = new ArrayList<Set<String>>();
       layers.add(new HashSet<String>());
@@ -46,12 +46,9 @@ public class Solution {
                   String adj = sb.toString();
                   if (dict.contains(adj)) {
                      layers.get(next).add(adj);
-                     if (map.containsKey(adj))
-                        map.get(adj).add(word);
-                     else {
+                     if (!map.containsKey(adj))
                         map.put(adj, new HashSet<String>());
-                        map.get(adj).add(word);
-                     }
+                     map.get(adj).add(word);
                   }
                }
             }
@@ -63,24 +60,20 @@ public class Solution {
          next = tmp;
          layers.get(next).clear();
       }
-      if (!map.isEmpty()){
-         ArrayList<String> path = new ArrayList<String>();
-         path.add(start);
-         buildPaths(start, end, map, paths, path);
-      }
+      if (!map.isEmpty())
+         buildPaths(start, end, map, paths, new ArrayList<String>());
       return paths;
    }
 
-   public void buildPaths(String curr, String end, Map<String, Set<String>> map, ArrayList<ArrayList<String>> paths, ArrayList<String> path) {
+   public static void buildPaths(String curr, String end, Map<String, Set<String>> map, ArrayList<ArrayList<String>> paths, ArrayList<String> path) {
+      path.add(curr);
       if (curr.equals(end)) {
          paths.add(new ArrayList<String>(path));
-         return;
-      }
-      for (String w : map.get(curr)) {
-         path.add(w);
-         buildPaths(w, end, map, paths, path);
-         path.remove(path.size() - 1);
+      }else{
+        for (String w : map.get(curr))
+            buildPaths(w, end, map, paths, path);
       }  
+      path.remove(path.size() - 1);
    }
 }
 
@@ -108,39 +101,31 @@ public class Solution {
                      continue;
                   if (dict.contains(adj)) {
                      curr.add(adj);
-                     if (map.containsKey(adj))
-                        map.get(adj).add(word);
-                     else {
+                     if (!map.containsKey(adj))
                         map.put(adj, new HashSet<String>());
-                        map.get(adj).add(word);
-                     }
+                     map.get(adj).add(word);
                   }
                }
             }
          }
-         for (String s : curr) // move the visited words
+         for (String s : curr)
             dict.remove(s);
          prev = curr;
       }
-      if (!map.isEmpty()){
-         ArrayList<String> path = new ArrayList<String>();
-         path.add(start);
-         buildPaths(start, end, map, paths, path);
-      }
+      if (!map.isEmpty())
+         buildPaths(start, end, map, paths, new ArrayList<String>());
       return paths;
    }
 
    public void buildPaths(String curr, String end, Map<String, Set<String>> map, ArrayList<ArrayList<String>> paths, ArrayList<String> path) {
+      path.add(curr);
       if (curr.equals(end)) {
          paths.add(new ArrayList<String>(path));
-         return;
+      }else{
+        for (String w : map.get(curr)) {
+            buildPaths(w, end, map, paths, path);
+        }  
       }
-      for (String w : map.get(curr)) {
-         path.add(w);
-         buildPaths(w, end, map, paths, path);
-         path.remove(path.size() - 1);
-      }  
+      path.remove(path.size() - 1);
    }
 }
-
-

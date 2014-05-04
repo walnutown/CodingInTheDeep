@@ -18,7 +18,11 @@ public class LongestCommonSubString {
     * common substring is Geeks
     */
 
-   // refer http://www.geeksforgeeks.org/longest-common-substring/
+   // Sol1
+   // The longest common substring problem can be solved using suffixTree in O(m+n) time
+
+   // Sol2
+   // http://www.geeksforgeeks.org/longest-common-substring/
    // Dynamic Programming
    // Maintain a 2d matrix stroing common substrings
    // dp[i][j] holds the longest common suffix of two substrings with length i and j

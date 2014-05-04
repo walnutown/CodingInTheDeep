@@ -10,8 +10,12 @@ public class ch18_11_FindMaxSubsqaure {
     * pixels
     */
 
-   // naive, O(n^4)
-   // iteratively find the square of size N*N, (N-1)*(N-1), ...
+   // Sol1
+   // The naive solution is to traverse all the subsquares, check its four borders, and find the max
+   // One subsquare can be represented by a top-left point and the size of the border. Hence, we
+   // have n^3
+   // different subsquares. And we need O(n) to check whether it's a valid subsquare.
+   // time: O(n^4)
    public Subsquare findMaxSubsquare(int[][] square) {
       for (int i = square.length; i >= 1; i--) {
          Subsquare s = findSquareWithSize(square, i);
@@ -21,7 +25,7 @@ public class ch18_11_FindMaxSubsqaure {
       return null;
    }
 
-   public Subsquare findSquareWithSize(int[][] square, int size) {
+   private Subsquare findSquareWithSize(int[][] square, int size) {
       // on an edge of length N, there're (N-size+1) subsquares of length 'size'
       for (int i = 0; i < square.length - size + 1; i++) {
          for (int j = 0; j < square.length - size + 1; j++) {
@@ -32,7 +36,7 @@ public class ch18_11_FindMaxSubsqaure {
       return null;
    }
 
-   public boolean isSquare(int[][] square, int row, int col, int size) {
+   private boolean isSquare(int[][] square, int row, int col, int size) {
       for (int i = 0; i < size; i++) {
          if (square[row][col + i] == 0 || square[row + size - 1][col + i] == 0)
             return false;
@@ -46,7 +50,7 @@ public class ch18_11_FindMaxSubsqaure {
    }
 
    // [row, col] is the top-left corner of the subsquare
-   public class Subsquare {
+   private class Subsquare {
       int row;
       int col;
       int size;
@@ -62,16 +66,14 @@ public class ch18_11_FindMaxSubsqaure {
       }
    }
 
+   // Sol2
+   // Pre-process the subsquare to reduce the time of checking valid subsqaure from O(n) to O(1)
+   // processed[i][j] -- SquareCell(i,j), a wrapper class storing number of continuous black cells on
+   // right and below
+   // time: O(n^3)
    public Subsquare findMaxSubsquare2(int[][] matrix) {
-      assert (matrix.length > 0);
-      for (int row = 0; row < matrix.length; row++) {
-         assert (matrix[row].length == matrix.length);
-      }
-
       SquareCell[][] processed = processSquare(matrix);
-
       int N = matrix.length;
-
       for (int i = N; i >= 1; i--) {
          Subsquare square = findSquareWithSize2(processed, i);
          if (square != null) {
@@ -81,10 +83,9 @@ public class ch18_11_FindMaxSubsqaure {
       return null;
    }
 
-   public Subsquare findSquareWithSize2(SquareCell[][] processed, int square_size) {
+   private Subsquare findSquareWithSize2(SquareCell[][] processed, int square_size) {
       // On an edge of length N, there are (N - sz + 1) squares of length sz.
       int count = processed.length - square_size + 1;
-
       // Iterate through all squares with side length square_size.
       for (int row = 0; row < count; row++) {
          for (int col = 0; col < count; col++) {
@@ -99,7 +100,7 @@ public class ch18_11_FindMaxSubsqaure {
    private boolean isSquare2(SquareCell[][] matrix, int row, int col, int size) {
       SquareCell topLeft = matrix[row][col];
       SquareCell topRight = matrix[row][col + size - 1];
-      SquareCell bottomRight = matrix[row + size - 1][col];
+      SquareCell bottomLeft = matrix[row + size - 1][col];
       if (topLeft.blacksRight < size) { // Check top edge
          return false;
       }
@@ -109,15 +110,14 @@ public class ch18_11_FindMaxSubsqaure {
       if (topRight.blacksBelow < size) { // Check right edge
          return false;
       }
-      if (bottomRight.blacksRight < size) { // Check bottom edge
+      if (bottomLeft.blacksRight < size) { // Check bottom edge
          return false;
       }
       return true;
    }
 
-   public SquareCell[][] processSquare(int[][] matrix) {
+   private SquareCell[][] processSquare(int[][] matrix) {
       SquareCell[][] processed = new SquareCell[matrix.length][matrix.length];
-
       for (int r = matrix.length - 1; r >= 0; r--) {
          for (int c = matrix.length - 1; c >= 0; c--) {
             int blacksRight = 0;
@@ -140,20 +140,12 @@ public class ch18_11_FindMaxSubsqaure {
       return processed;
    }
 
-   public class SquareCell {
+   private class SquareCell {
       public int blacksRight = 0;
       public int blacksBelow = 0;
 
       public SquareCell(int right, int below) {
          blacksRight = right;
-         blacksBelow = below;
-      }
-
-      public void setZerosRight(int right) {
-         blacksRight = right;
-      }
-
-      public void setZerosBelow(int below) {
          blacksBelow = below;
       }
    }
@@ -165,7 +157,6 @@ public class ch18_11_FindMaxSubsqaure {
             { 1, 1, 1, 1 }, };
       System.out.println(findMaxSubsquare(square));
       System.out.println(findMaxSubsquare2(square));
-
    }
 
 }

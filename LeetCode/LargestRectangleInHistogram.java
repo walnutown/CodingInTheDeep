@@ -12,7 +12,7 @@
 
 // use Stack to store the index of continuous sub-array in ascending order
 // when the ascending sub-array terminates, calculate the area by
-// using stack.peek() as left border, and current index as right border
+// using element before stack.top() as left border, and current index as right border
 // time: O(n); sapce: O(n)
 public class Solution {
     public int largestRectangleArea(int[] height) {

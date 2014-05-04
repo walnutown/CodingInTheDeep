@@ -11,9 +11,9 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-public class ch18_5_FindDistanceOfWordsInFile {
+public class ch18_5_FindMinDistanceOfWords {
 
-   /*
+   /**
     * You have a large text file containing words. Given any two words, find the shortest distance
     * (in terms of number of words) between them in the file. If the operation will be repeated many
     * times for the file (but different pairs of words), can you optimize your solution?
