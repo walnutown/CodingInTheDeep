@@ -13,6 +13,15 @@
     Could you come up with an one-pass algorithm using only constant space?
 */
 
+// Sol1
+// Comparison sort
+// time: O(nlgn); space: O(1)
+
+// Sol2
+// Counting sort
+// time: O(n); space: O(n)
+
+// Sol3
 // Maintain 3 pointers, one for ending inedx of red -- r, one for starting index of blue -- b, and the
 // third one--i, used to traverse the array
 // if A[i]==2, swap to blue subarray (which is out of order), the swapped value may be 0, which may cause another swap
@@ -22,13 +31,13 @@ public class Solution {
     public void sortColors(int[] A) {
         if (A==null || A.length==0) return;
         int r=0, b=A.length-1, i=0;
-        while (i <= b){ // at this time, b ahsn't been filled by blue yet, so we need "=" here
+        while (i <= b){ // at this time, b hasn't been filled by blue yet, so we need "=" here
             if (A[i] == 0) swap(A, i++, r++); 
             else if (A[i] == 2) swap(A, i, b--); 
             else i++;
         }
     }
-    public void swap(int[] A, int i, int j){
+    private void swap(int[] A, int i, int j){
         int tmp = A[i]; A[i] = A[j]; A[j] = tmp;
     }
 }

@@ -5,19 +5,19 @@
 */
 
 // binary search
+// The square root of x will be smaller than x/2+1. Why? (x/2+1)*(x/2+1)> x
 // time: O(lgn)
 public class Solution {
     public int sqrt(int x) {
-        if (x < 2)  return x;
-        int start = 0, end = x;
-        while (start <= end){            
-            int mid = (start + end) >>1;
-            int tmp = x/mid;                // use division here to avoid overflow
-            if (tmp > mid)  start = mid+1;
-            else if (tmp < mid)  end = mid-1;
-            else return mid;
-        } // 'start' > 'end' here
-        return end;   // understand why 'end', instead of 'start'. 
+        if (x<=1)   return x;
+        int start = 0, end = x/2+1; 
+        while (start<=end){
+            int mid = start + (end-start)/2;
+            if (mid==x/mid) return mid;     // compare mid & x/mid, instead of mid*mid & x, to avoid overflow
+            else if (mid < x/mid)   start = mid+1;
+            else end = mid-1;
+        }
+        return end;     // choose the smaller one
     }
 }
 
@@ -29,7 +29,7 @@ public class Solution {
         double r = 1; // need to use double here, otherwise, sqrt(2) may fall in endless loop
         while (true){
             double r0 = (r+x/r)/2;
-            if (Math.abs(r-r0)<1)
+            if (Math.abs(r-r0)<0.1)
                 return (int)r0; // remember to cast here
             r = r0;
         }

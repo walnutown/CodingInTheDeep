@@ -2,10 +2,10 @@ package google;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
 
 import lib.Interval;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class ScheduleMeetingsInMinimumRooms {
 
-   /*
+   /**
     * Given a set of lectures, with start and end times.
     * Find the minimum number of classrooms, needed to schedule all the lectures so that two
     * lectures do not occur at the same time in the same room
@@ -21,7 +21,9 @@ public class ScheduleMeetingsInMinimumRooms {
 
    // http://courses.engr.illinois.edu/cs473/sp2011/lectures/11_notes.pdf
 
-   // Greedy algorithm
+   // Sol1
+   // Greedy algorithm based on end time of interval, this solution can provide detailed
+   // arrangement of the rooms.
    // [1] sort all the lectures according to their start time
    // [2] keep track of the finish time of the last lecture in each room
    // [3] Find whether there's a room that is not conflict with the current lecture
@@ -76,11 +78,13 @@ public class ScheduleMeetingsInMinimumRooms {
       return rooms.size();
    }
 
+   // Sol2
+   // Based on the observation that the maximum number of rooms is equal to the maximum depth.
    // Calculate maximum number of conflict intervals at the same time (depth)
    // Maintain a queue of intervals, and a variable hold the max number of rooms
    // Traverse the sorted intervals, for each interval, add it into the queue
    // and remove all the intervals that are not conflict with it, update the max.
-   // time: O(nlgn); space: O(n)
+   // time: O(n^2); space: O(n)
    public int getMinimumNumberOfRooms2(Interval[] intervals) {
       if (intervals == null || intervals.length == 0)
          return 0;
@@ -108,6 +112,32 @@ public class ScheduleMeetingsInMinimumRooms {
       return max;
    }
 
+   // Sol3
+   // Time optimize the Sol2 using priority queue to store the conflict intervals
+   // In this way, we can reduce the average time of removing unconflict rooms
+   public int getMinimumNumberOfRooms3(Interval[] intervals) {
+      if (intervals == null || intervals.length == 0)
+         return 0;
+      Arrays.sort(intervals, new Comparator<Interval>() {
+         public int compare(Interval int1, Interval int2) {
+            return int1.start - int2.start;
+         }
+      });
+      int max = 0;
+      PriorityQueue<Interval> pq = new PriorityQueue<Interval>(intervals.length, new Comparator<Interval>() {
+         public int compare(Interval int1, Interval int2) {
+            return int1.end - int2.end;
+         }
+      });
+      for (Interval intr : intervals) {
+         while (!pq.isEmpty() && pq.peek().end < intr.start)
+            pq.poll();
+         pq.add(intr);
+         max = Math.max(max, pq.size());
+      }
+      return max;
+   }
+
    @Test
    public void test() {
       Interval[] intervals = new Interval[] { new Interval(1, 3), new Interval(2, 5),
@@ -115,5 +145,6 @@ public class ScheduleMeetingsInMinimumRooms {
             new Interval(8, 10), };
       System.out.println(getMinimumNumberOfRooms(intervals));
       System.out.println(getMinimumNumberOfRooms2(intervals));
+      System.out.println(getMinimumNumberOfRooms3(intervals));
    }
 }

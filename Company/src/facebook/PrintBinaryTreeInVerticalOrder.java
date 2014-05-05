@@ -8,8 +8,8 @@ import lib.TreeNode;
 
 import org.junit.Test;
 
-public class PrintBinaryTreeInColumnOrder {
-   /*
+public class PrintBinaryTreeInVerticalOrder {
+   /**
     * Print arbitrary binary tree by vertical levels / columns from left to right
       example tree
 
@@ -59,10 +59,8 @@ public class PrintBinaryTreeInColumnOrder {
     private void dfs(TreeNode node, int key, Map<Integer,ArrayList<Integer>> map){
         if (node==null)
           return;
-        if (!map.containsKey(key)){
-          ArrayList<Integer> r = new ArrayList<Integer>();
-          map.put(key, r);
-        }
+        if (!map.containsKey(key))
+          map.put(key, new ArrayList<Integer>());
         map.get(key).add(node.val);
         dfs(node.left, key-1, map);
         dfs(node.right, key+1, map);

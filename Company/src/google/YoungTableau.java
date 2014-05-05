@@ -7,7 +7,8 @@ import java.util.PriorityQueue;
 import org.junit.Test;
 
 public class YoungTableau {
-   /*
+   
+   /**
     * Given a N*N Matrix.
     * All rows are sorted, and all columns are sorted.
     * Find the Kth Largest element of the matrix.
@@ -17,7 +18,7 @@ public class YoungTableau {
    // This is actually a variant of merge sort.
    // Each row in the matrix can be regarded as a array of size N
    // Then the question becomes to merge sort M arrays of size N
-   // time: O(klgk); sapce: O(k)
+   // time: O(klgk); space: O(k)
    public ArrayList<Integer> getKthLargestInYoungTableau(int[][] matrix, int k){
       int M = matrix.length, N = matrix[0].length;
       ArrayList<Integer> res = new ArrayList<Integer>();
