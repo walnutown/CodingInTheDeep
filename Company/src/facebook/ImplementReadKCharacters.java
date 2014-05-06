@@ -1,7 +1,8 @@
 package facebook;
 
 public class ImplementReadKCharacters {
-   /*
+   
+   /**
     * Given a function, read2014(), implement a method to read k characters 
     */
    // Similar to ImplementReadLine
@@ -10,7 +11,7 @@ public class ImplementReadKCharacters {
       return null;
    }
    
-   StringBuilder buffer;
+   static StringBuilder buffer;
    public String read(int k){
       if (buffer.length()==0){
          buffer.append(read2014());

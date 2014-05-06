@@ -20,6 +20,23 @@
 */
 
 
+// Sol1
+// Recursion
+// TLE
+public class Solution {
+    public boolean isMatch(String s, String p) {
+        if (s==null || p==null) return false;
+        int M = s.length(), N = p.length();
+        if (M==0 && N==0)   return true;
+        if (M==0)   return p.charAt(0)=='*' && isMatch(s, p.substring(1));
+        if (N==0)   return false;
+        if (s.charAt(0)==p.charAt(0) || p.charAt(0)=='?'){
+            if (isMatch(s.substring(1), p.substring(1)))    return true;
+        }
+        return p.charAt(0)=='*' && (isMatch(s, p.substring(1)) || isMatch(s.substring(1), p));
+    }
+}
+
 // from sophie,
 public class Solution {
     public boolean isMatch(String s, String p) {
@@ -63,45 +80,29 @@ public class Solution {
     }
 }
 
-// From AnnieKim
+// The difficulty mainly lies in that '*' can match with a sequence of characters
+// The trick here is to maintain two pointers to hold the backup positions for pointers i,j in s,p
+// Once we find that s.substring(i, j) can not be replaced by '*', we try s.subtring(i+1,j).
+
 public class Solution {
     public boolean isMatch(String s, String p) {
-        if (s==null || p==null)  return s==null && p==null;
-        return isMatch(s.toCharArray(), p.toCharArray());
-    } 
-    public boolean isMatch(char[] s, char[] p){
-        int i=0, j=0;
-        int sb=-1, pb=-1;
-        while (i<s.length){
-            if (j<p.length && (p[j]==s[i] || p[j]=='?')){
+        if (s==null || p==null) return false;
+        int M = s.length(), N = p.length();
+        int sb = -1, pb = -1, i=0, j=0;
+        while (i<M ){
+            if (j<N && (s.charAt(i)==p.charAt(j) || p.charAt(j)=='?')){
                 i++; j++;
-            }else if (j<p.length && p[j]=='*'){
-                while (j<p.length && p[j]=='*')   j++;    // ignore duplicates
-                if (j==p.length)  return true;
-                sb=i; pb=j;
-            }else{
-                if (sb==-1) return false;
+            }else if (j<N && p.charAt(j)=='*'){
+                while (j<N && p.charAt(j)=='*') j++;    // ignore duplicate '*'
+                if (j==N)   return true;
+                sb = i; pb = j;
+            }else{  // mistach, if there's backup, move to backup position;otherwise, return false;
+                if (sb==-1) return false;   // No backup found
                 i = ++sb;
                 j = pb;
             }
         }
-        while(j<p.length && p[j]=='*')    j++;
-        return i==s.length && j==p.length;           
+        while (j<N && p.charAt(j)=='*') j++;
+        return j==N;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

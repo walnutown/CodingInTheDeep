@@ -1,7 +1,8 @@
 package facebook;
 
 public class ImplementReadLine {
-   /*
+   
+   /**
     * Give you a function char* read4096(), return a string which has <= 4096 characters
     * If the string is less than 4096 characters, this means we've reached the end of file EOF
     * Use API read4096(), write a function char* readline()
@@ -14,7 +15,7 @@ public class ImplementReadLine {
       return null;
    }
 
-   /**
+   /*
     * There're two cases:
     * [1] there's a complete line in the buffer, we read the line and adjust the buffer
     * [2] there's no complete line in the buffer, we need to read more characters through read4k()

@@ -44,48 +44,23 @@ public class Solution {
             return isMatch || m(s,p,i+1,j+1);
         }else
             return j+1<p.length && p[j+1]=='*' && m(s,p,i,j+2);
-    }
-    
+    }   
 }
 
-class Solution4 {
+// Refactor code
+public class Solution {
     public boolean isMatch(String s, String p) {
-        if(s == null) return p == null;
-        if (p.isEmpty()) return s.isEmpty();
-        int N = s.length(), M = p.length();
-        Stack<Integer>[] cache = new Stack[M];
-        for(int i = 0; i < M; i++) cache[i] = new Stack<Integer>(); // initial
-        int sIt = 0, pIt = 0;
-        while(pIt >= 0 && pIt < M) {  // matching
-          if(pIt + 1 < M && p.charAt(pIt + 1) == '*') { // next is *
-            while(sIt < N && p.charAt(pIt) == s.charAt(sIt)) {  // try to match
-              if(pIt + 2 < M) cache[pIt + 2].push(sIt); // store possibile
-              sIt++;
-            }
-            if(p.charAt(pIt) == '.') {  // match any
-              while(sIt < N) {
-                if(pIt + 2 < M) cache[pIt + 2].push(sIt); // store possibile
-                sIt++;
-              }
-            }
-            pIt += 2;
-          }
-          else if(sIt < N && (p.charAt(pIt) == s.charAt(sIt) || p.charAt(pIt) == '.')) {  // match
-            pIt++; sIt++;
-          }
-          else {  // not match
-            while(pIt >= 0) {
-              if(!cache[pIt].isEmpty()) break;
-              pIt--;
-            }
-            if(pIt >= 0)
-              sIt = (int)(cache[pIt].pop());
-          }
-          if(pIt == M && sIt == N) return true;
+        if (s==null || p==null) return false;
+        int M = s.length(), N = p.length();
+        if (M==0 && N==0)   return true;
+        if (N==0)    return false;
+        if (M==0)   return N>=2 && p.charAt(1)=='*' && isMatch(s, p.substring(2));
+        if (s.charAt(0)==p.charAt(0) || p.charAt(0)=='.'){
+            if (isMatch(s.substring(1), p.substring(1))) return true;
+            if (N>=2 && p.charAt(1)=='*' && isMatch(s.substring(1),p))  return true;
         }
-        return false;
+        return N>=2 && p.charAt(1)=='*' && isMatch(s, p.substring(2));
     }
 }
-
 
 

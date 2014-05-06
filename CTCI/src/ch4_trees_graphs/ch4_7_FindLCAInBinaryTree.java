@@ -21,45 +21,42 @@ public class ch4_7_FindLCAInBinaryTree {
 
    // Sol2
    // find two paths from root to node1 and node2. Compare the two paths
-   // time: O(2n); space: O(n)
+   // time: O(n); space: O(n)
    public TreeNode findLCA2(TreeNode root, TreeNode a, TreeNode b) {
-      ArrayList<TreeNode> pa = getPath(root, a), pb = getPath(root, b);
-      if (pa == null || pb == null)
+      ArrayList<ArrayList<TreeNode>> paths = getPath(root, a, b);
+      if (paths.size() == 0)
          return null;
+      if (paths.size() == 1)    // a,b may be the same node
+         return a == b ? a : null;
+      ArrayList<TreeNode> p1 = paths.get(0), p2 = paths.get(1);
       int i = 0, j = 0;
-      while (i < pa.size() && j < pb.size()) {
-         if (i + 1 < pa.size() && j + 1 < pb.size() && pa.get(i + 1) == pb.get(j + 1)) {
+      while (i < p1.size() && j < p2.size()) {
+         if (i + 1 < p1.size() && j + 1 < p2.size() && p1.get(i + 1) == p2.get(j + 1)) {
             i++;
             j++;
          } else
             break;
       }
-      return pa.get(i);
+      return p1.get(i);
    }
 
-   private ArrayList<TreeNode> getPath(TreeNode root, TreeNode target) {
-      return dfs(root, target, new ArrayList<TreeNode>());
+   private ArrayList<ArrayList<TreeNode>> getPath(TreeNode root, TreeNode a, TreeNode b) {
+      ArrayList<ArrayList<TreeNode>> paths = new ArrayList<ArrayList<TreeNode>>();
+      dfs(root, a, b, paths, new ArrayList<TreeNode>());
+      return paths;
    }
 
-   // find a path from root to target node
-   // Note how we record the valid path here. This is the most challenging part of this
-   // seems-to-be-easy dfs
-   private ArrayList<TreeNode> dfs(TreeNode root, TreeNode target, ArrayList<TreeNode> path) {
+   private void dfs(TreeNode root, TreeNode a, TreeNode b, ArrayList<ArrayList<TreeNode>> paths, ArrayList<TreeNode> path) {
       if (root == null)
-         return null;
+         return;
       path.add(root);
-      ArrayList<TreeNode> res = null;
-      if (root == target)
-         res = new ArrayList<TreeNode>(path);
-      else {
-         ArrayList<TreeNode> lp = dfs(root.left, target, path), rp = dfs(root.right, target, path);
-         if (lp != null)
-            res = lp;
-         if (rp != null)
-            res = rp;
+      if (root == a || root == b) {
+         ArrayList<TreeNode> tmp = new ArrayList<TreeNode>(path);
+         paths.add(tmp);
       }
+      dfs(root.left, a, b, paths, path);
+      dfs(root.right, a, b, paths, path);
       path.remove(path.size() - 1);
-      return res;
    }
 
    // Sol3 -- Has Bug
@@ -99,7 +96,8 @@ public class ch4_7_FindLCAInBinaryTree {
             visited[0]++;
          if (root == b)
             visited[0]++;
-         finder(root.left, a, b, visited); // need to continue checking whether another node is in the tree
+         finder(root.left, a, b, visited); // need to continue checking whether another node is in
+                                           // the tree
          finder(root.right, a, b, visited);
          return root;
       }

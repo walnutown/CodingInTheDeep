@@ -32,7 +32,9 @@ public class Solution {
     }
 }
 
-// Accepted, without stack, just use pointer to the previous valid string
+// Maintain a pointer to the actual end of the path. 
+// Without stack, overwrite the original splits
+// time: O(n); space: O(1)
 public class Solution {
     public String simplifyPath(String path) {
         if (path==null || path.length()==0)	return "";
@@ -42,7 +44,7 @@ public class Solution {
 			if (split.equals("..")){
 				if (last>0)	last--;
 			}
-			else if (!split.equals(".") && split.length()>0)	splits[last++]=split; // split.length()>0 is for the case "/aa//b"
+			else if (!split.equals(".") && !split.isEmpty())	splits[last++]=split; // split.length()>0 is for the case "/aa//b"
 		}
 		if (last==0)	return "/";
 		StringBuilder sb = new StringBuilder();

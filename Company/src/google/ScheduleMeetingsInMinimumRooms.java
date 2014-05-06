@@ -2,6 +2,7 @@ package google;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -138,6 +139,44 @@ public class ScheduleMeetingsInMinimumRooms {
       return max;
    }
 
+   // Sol4
+   // Sort all the time point (mark the starting time).
+   // When we meet a starting time, increment the depth, when we meet a ending time, decrement
+   // In this way, we can find the max depth.
+   // This can also be used to count the number of online users in different periods
+   // time: O(ngln); space: O(n)
+   public int getMinimumNumberOfRooms4(Interval[] intervals) {
+      ArrayList<TimePoint> tps = new ArrayList<TimePoint>();
+      for (Interval intr : intervals) {
+         tps.add(new TimePoint(intr.start, true));
+         tps.add(new TimePoint(intr.end, false));
+      }
+      Collections.sort(tps, new Comparator<TimePoint>() {
+         public int compare(TimePoint p1, TimePoint p2) {
+            return p1.val - p2.val;
+         }
+      });
+      int max = 0, count = 0;
+      for (TimePoint tp : tps) {
+         if (tp.isStart) {
+            count++;
+            max = Math.max(max, count);
+         } else
+            count--;
+      }
+      return max;
+   }
+
+   private class TimePoint {
+      int val;
+      boolean isStart;
+
+      public TimePoint(int val, boolean isStart) {
+         this.val = val;
+         this.isStart = isStart;
+      }
+   }
+
    @Test
    public void test() {
       Interval[] intervals = new Interval[] { new Interval(1, 3), new Interval(2, 5),
@@ -146,5 +185,6 @@ public class ScheduleMeetingsInMinimumRooms {
       System.out.println(getMinimumNumberOfRooms(intervals));
       System.out.println(getMinimumNumberOfRooms2(intervals));
       System.out.println(getMinimumNumberOfRooms3(intervals));
+      System.out.println(getMinimumNumberOfRooms4(intervals));
    }
 }

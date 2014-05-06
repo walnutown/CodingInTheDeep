@@ -37,16 +37,15 @@ public class BitDivideOperation {
    public int bitMinus(int a, int b) {
       return bitAdd(a, negative(b));
    }
+   
 
    @Test
    public void test() {
       for (int i = -100; i < 0; i++) {
          for (int j = 1; j < 100; j++) {
-            int sol1 = bitDivide(i, j);
-               System.out.println(i + "/" + j + ": " + sol1);
+            int sol1 = bitDivide(i, j), sol2 = i/j;
+               System.out.println(i + "/" + j + ": " + sol1 + "; " + sol2);
          }
       }
-
    }
-
 }
