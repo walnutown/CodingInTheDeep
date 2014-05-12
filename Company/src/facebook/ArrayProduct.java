@@ -5,7 +5,8 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class ArrayProduct {
-   /*
+
+   /**
     * input [2,3,1,4]
     * output [12,8,24,6]
     * Multiply all fields except it's own position.
@@ -13,6 +14,9 @@ public class ArrayProduct {
     * 1. no use of division
     * 2. complexity in O(n)
     */
+   
+   // Two pass of the array to store the left and right product to current element
+   // time: O(n); space: O(n)
    public int[] getProducts(int[] A) {
       if (A == null || A.length == 0)
          return null;
@@ -29,10 +33,10 @@ public class ArrayProduct {
       P[0] = rP;
       return P;
    }
-   
+
    @Test
-   public void test(){
-      int[] A = new int[]{2,3,1,4};
+   public void test() {
+      int[] A = new int[] { 2, 3, 1, 4 };
       System.out.println(Arrays.toString(getProducts(A)));
    }
 }

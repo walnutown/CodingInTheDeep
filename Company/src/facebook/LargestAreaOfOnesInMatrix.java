@@ -3,7 +3,8 @@ package facebook;
 import org.junit.Test;
 
 public class LargestAreaOfOnesInMatrix {
-   /*
+   
+   /**
     * Given a matrix consisting of 0's and 1's, find the largest connected component consisting of
     * 1's.
     */

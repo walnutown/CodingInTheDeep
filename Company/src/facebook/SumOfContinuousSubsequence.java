@@ -8,7 +8,8 @@ import java.util.Map;
 import org.junit.Test;
 
 public class SumOfContinuousSubsequence {
-   /*
+   
+   /**
     * Given an array, write a function to print all continuous subsequences in the array which sum of
     * 0.
     * e.g:

@@ -3,7 +3,8 @@ package facebook;
 import org.junit.Test;
 
 public class GraphTraversal {
-   /*
+   
+   /**
     * Given the following 3 by 3 grid where the (first row, first column) is represented by (0,0):
     * (0,1), (1,2), (3,3)
     * (1,1), (3,3), (3,2)

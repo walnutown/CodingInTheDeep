@@ -1,7 +1,7 @@
 package yahoo;
 
 public class RangeQueryInStreamingData {
-   /*
+   /**
     * Given continuous data stream , design data structure to return 15 min stock information
     */
 

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class FindMinMaxInArrayWithLeastComparison {
-   /*
+   /**
     * Find the min and max in an array. Do it in less than 2n comparisons. (Finds both max and min
     * in about 3/2n comparisons)
     */

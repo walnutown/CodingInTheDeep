@@ -8,12 +8,12 @@ import lib.TreeNode;
 import org.junit.Test;
 
 public class SinkZerosInBinaryTree {
-   /*
+   /**
     * Sink Zero in Binary Tree. Swap zero value of a node with non-zero value of one of its
     * descendants. So that no node with value zero could be parent of node with non-zero.
     */
 
-   /**
+   /*
     * Recursion. Sink zeros in child subtree first, and then parent.
     * time: O(n^2); space: O(1)
     */

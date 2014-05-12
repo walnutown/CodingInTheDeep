@@ -3,13 +3,14 @@ package facebook;
 import org.junit.Test;
 
 public class ConvertExcelColumnNumber {
-   /*
+   
+   /**
     * Microsoft Excel numbers cells as A...Z and after that AA, AB.... AAA, AAB...ZZZ and so on.
     * Given a number, convert it to that format and vice versa.
     */
 
    // Basically, is convert base10 to base26.
-   // The challenge is that A-1, Z-26, 
+   // The challenge is that not zero-indexed, the first number starts from 1 
    // So, we have 1-A, 26-Z, 27-AA
    public String intToStr(int N) {
       if (N <= 0)

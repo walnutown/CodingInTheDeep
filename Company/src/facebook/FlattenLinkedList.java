@@ -6,7 +6,8 @@ import java.util.PriorityQueue;
 import org.junit.Test;
 
 public class FlattenLinkedList {
-   /*
+   
+   /**
     * Given a List structure where each node contains a Next node and optionally a pointer to
     * another list, flatten that list
     * e.g.

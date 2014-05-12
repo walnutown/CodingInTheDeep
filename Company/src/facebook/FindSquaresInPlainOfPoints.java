@@ -1,7 +1,8 @@
 package facebook;
 
 public class FindSquaresInPlainOfPoints {
-   /*
+   
+   /**
     * Given a plain of points, find all the squares in the plain 
     */
    

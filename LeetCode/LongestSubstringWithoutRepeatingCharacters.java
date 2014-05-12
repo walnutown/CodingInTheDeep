@@ -6,8 +6,8 @@
 
 // Sliding window
 // Maintain two pointers to mark the start and end of the substring
-// Each time, move the end pointer until the substring is invalid, 
-// at this time, we should adjust left border and update maxLength
+// Each time, move forward the end pointer if the substring is valid, 
+// if the substring becomes invalid, move forward start pointer and update maxLength
 // time: O(n); space: O(n)
 public class Solution {
     public int lengthOfLongestSubstring(String s) {

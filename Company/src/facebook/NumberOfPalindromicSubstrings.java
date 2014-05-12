@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-public class NumberOfSubstringPalindromes {
-   /*
+public class NumberOfPalindromicSubstrings {
+   
+   /**
     * Write a function for retrieving the total number of substring palindromes.
     * For example the input is 'abba' then the possible palindromes= a, b, b, a, bb, abba
     * So the result is 6.
     */
    
    // refer to Leetcode/LongestPalindromicSubstring
-   /**
+   /*
     * Traverse each character, set it as the middle and stretch on both sides, if the substring
     * remains to be a palindrome, we store the palindrome and continue stretch, otherwise, break
     * There're two cases:

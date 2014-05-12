@@ -10,7 +10,7 @@ import org.junit.Test;
 
 public class IntervalScheduling {
 
-   /*
+   /**
     * Given a set of intervals, find the largest subset of intervals that no two intervals overlap
     * with each other
     */

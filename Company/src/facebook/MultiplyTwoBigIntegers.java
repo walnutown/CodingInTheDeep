@@ -5,7 +5,8 @@ import java.util.Arrays;
 import org.junit.Test;
 
 public class MultiplyTwoBigIntegers {
-   /*
+   
+   /**
     * Given two big integers, how to multiply them without overflow?
     * You can use any format to represent the big integer
     */

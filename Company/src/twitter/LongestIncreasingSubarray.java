@@ -2,10 +2,11 @@ package twitter;
 
 import org.junit.Test;
 
-public class LongestContinuousIncreasingSubsequence {
-   /*
-    * Find the length of the longest increasing subsequence in an array of integers.
-    * This subsequence should be contiguous.
+public class LongestIncreasingSubarray {
+   
+   /**
+    * Find the length of the longest increasing subarray in an array of integers.
+    * This subarray should be contiguous.
     */
    
    // traverse the array and update the max length
