@@ -305,7 +305,7 @@ Knowledge Base for Concepts related questions in programming interview
     * A generic type is a generic class or interface that is parameterized over types. eg, Comparator<T>
     * A type variable can be any non-primitive type (class type, interface type, array type...)
     * Declaration:
-      *  class name<T1, T2, ..., Tn>{}
+      *  class name\<T1, T2, ..., Tn>{}
     * Example:
     <pre><code>// Class without generic type
     public class Box{
@@ -314,7 +314,7 @@ Knowledge Base for Concepts related questions in programming interview
       public Object get(){return obj;}
     }
     // Class with generic type
-    public class Box<T>{
+    public class Box\<T>{
       private T t;
       public void set(T t){this.t = t;}
       public T get(){return t;}

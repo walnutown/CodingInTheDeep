@@ -9,7 +9,7 @@ public class CallHandler{
    private static CallHandler instance;
    private final int LEVELS = 3; // 3 levels of employees
    List<List<Employee>> employeeLevels;
-   List<List<Call>> callQueues; // queues for each call's rank
+   List<List<Call>> callQueues; // queues for list of calls for each rank
    
    private CallHandler(){}
    

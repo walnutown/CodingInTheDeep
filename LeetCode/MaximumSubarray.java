@@ -8,7 +8,12 @@
     If you have figured out the O(n) solution, try coding another solution using the divide and conquer approach, which is more subtle.
 */
 
+// http://en.wikipedia.org/wiki/Maximum_subarray_problem
+// Kadane's Algorithm (1984)
+
 // Dynamic Programming
+// sum -- the max subarray sum ending at current value
+// max -- the max subarray sum found so far
 // In each day, we check the previous max, if max>0, we add current value to the subarray
 // if max<0, we choose current day as a new starting point for subarray
 // time: O(n); space: O(1)

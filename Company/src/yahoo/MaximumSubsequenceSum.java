@@ -10,6 +10,8 @@ public class MaximumSubsequenceSum {
     * condition: we should not select two contiguous numbers
     */
 
+   // This is a variant of Leetcode/MaximumSubarray
+
    // Dynamic Programming.
    // dp[i] -- the max sum of subsequence ending at A[i]
    // The recursive function is dp[i] = Max(A[i], dp[i-2]+A[i], dp[i-3]+A[i])
