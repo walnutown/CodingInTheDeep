@@ -2,13 +2,9 @@ package facebook;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.junit.Test;
 
@@ -24,86 +20,25 @@ public class Codec {
 
    // Two methods are used to optimize the running time of the program
 
-   // TODO separate the inputbitstream and outputstream
    private class BitStream {
       byte[] bytes;
       int capacity; // max number of bits
-      int bitCount;     // actual number of bits
+      int size;     // actual number of bits
 
-      BitStream(byte[] bytes) {
-         this.bytes = bytes;
-         capacity = bytes.length * 8;
-         bitCount = 0;
+      BitStream() {
       }
 
-      BitStream(int initialCapacity) {
-         capacity = initialCapacity;
-         bitCount = 0;
-         bytes = new byte[(capacity - 1) / 8];
-      }
-
-      public void append(byte b) throws Exception {
-         for (int i = 7; i >= 0; i--)
-            appendBit((b >> i) & 1);
-      }
-
-      public void append(Word word) throws Exception {
-         int offset = word.offset, length = word.length;
-         int wordMaxOffset = (int) Math.pow(2, MAX_OFFSET);
-         int wordMaxLength = (int) Math.pow(2, MAX_LENGTH);
-         if (offset < 0 || offset >= wordMaxOffset)
-            throw new Exception("Word offset out of bounds");
-         if (length < 0 || length >= wordMaxLength)
-            throw new Exception("Word length out of bounds");
-         for (int i = MAX_OFFSET - 1; i >= 0; i--)
-            appendBit((word.offset >> i) & 1);
-         for (int i = MAX_LENGTH - 1; i >= 0; i--)
-            appendBit((word.length >> i) & 1);
-      }
-
-      public void appendBit(int bit) throws Exception {
-         if (bit != 0 && bit != 1)
-            throw new Exception(bit + " is not a bit");
-         bitCount++;
-         if (bit == 1) {
-            int byteIndex = (bitCount - 1) / 8, offset = 7 - (bitCount - 1) % 8;
-            bytes[byteIndex] |= (1 << offset);
-         }
-
-      }
-
-      public boolean hasNextWord() {
-         if (bitCount == capacity)
-            return false;
-         if (getBit(bitCount) == 0 && bitCount + 8 <= capacity)
-            return true;
-         else if (getBit(bitCount) == 1 && bitCount + 16 <= capacity)
-            return true;
-         return false;
-      }
-
-      public int next() {
-         int ret = getBit(bitCount);
-         bitCount++;
-         return ret;
-      }
-
-      public int next(int length) throws Exception {
-         int ret = getInteger(bitCount, bitCount + length - 1);
-         bitCount += length;
-         return ret;
-      }
-
-      public byte[] toByteArray() {
-         trimToSize();
-         return bytes;
+      ByteArray toByteArray() {
+         int actualLength = (size - 1) / 8 + 1;
+         ByteArray byteArr = new ByteArray(bytes, actualLength);
+         return byteArr;
       }
 
       @Override
       public String toString() {
          StringBuilder sb = new StringBuilder();
          int count = 0;
-         for (int i = 0; i < bitCount; i++) {
+         for (int i = 0; i < size; i++) {
             sb.append(getBit(i));
             count++;
             if (count == 8) {
@@ -115,16 +50,83 @@ public class Codec {
          return sb.toString();
       }
 
-      // minimize the byte array size
-      private void trimToSize() {
-         int actualLength = (bitCount - 1) / 8 + 1;
-         if (actualLength < bytes.length)
-            bytes = Arrays.copyOf(bytes, actualLength);
-      }
-
-      private int getBit(int bitIndex) {
+      int getBit(int bitIndex) {
          int byteIndex = bitIndex / 8, offset = 7 - bitIndex % 8;
          return (bytes[byteIndex] >> offset) & 1;
+      }
+   }
+
+   private class BitOutputStream extends BitStream {
+
+      BitOutputStream(int initialCapacity) {
+         capacity = initialCapacity;
+         size = 0;
+         bytes = new byte[(capacity - 1) / 8];
+      }
+
+      void write(byte b) throws Exception {
+         for (int i = 7; i >= 0; i--)
+            writeBit((b >> i) & 1);
+      }
+
+      void write(Word word) throws Exception {
+         int offset = word.offset, length = word.length;
+         int wordMaxOffset = (int) Math.pow(2, OFFSET_BIT_NUM);
+         int wordMaxLength = (int) Math.pow(2, LENGTH_BIT_NUM);
+         if (offset < 0 || offset >= wordMaxOffset)
+            throw new Exception("Word offset out of bounds");
+         if (length < 0 || length >= wordMaxLength)
+            throw new Exception("Word length out of bounds");
+         for (int i = OFFSET_BIT_NUM - 1; i >= 0; i--)
+            writeBit((word.offset >> i) & 1);
+         for (int i = LENGTH_BIT_NUM - 1; i >= 0; i--)
+            writeBit((word.length >> i) & 1);
+      }
+
+      void writeBit(int bit) throws Exception {
+         if (bit != 0 && bit != 1)
+            throw new Exception(bit + " is not a bit");
+         size++;
+         if (bit == 1) {
+            int byteIndex = (size - 1) / 8, offset = 7 - (size - 1) % 8;
+            bytes[byteIndex] |= (1 << offset);
+         }
+      }
+   }
+
+   private class BitInputStream extends BitStream {
+      BitInputStream(ByteArray byteArr) {
+         this.bytes = byteArr.toArray();
+         capacity = byteArr.size * 8;
+         size = 0;
+      }
+
+      void seek(int offset) throws Exception {
+         if (offset >= capacity)
+            throw new Exception("Offset out of bounds");
+         size = offset;
+      }
+
+      boolean hasNextWord() {
+         if (size == capacity)
+            return false;
+         if (getBit(size) == 0 && size + 8 <= capacity)
+            return true;
+         else if (getBit(size) == 1 && (size + LENGTH_BIT_NUM + OFFSET_BIT_NUM <= capacity))
+            return true;
+         return false;
+      }
+
+      int next() {
+         int ret = getBit(size);
+         size++;
+         return ret;
+      }
+
+      int next(int length) throws Exception {
+         int ret = getInteger(size, size + length - 1);
+         size += length;
+         return ret;
       }
 
       private int getInteger(int startIndex, int endIndex) throws Exception {
@@ -134,6 +136,46 @@ public class Codec {
          for (int i = endIndex; i >= startIndex; i--)
             res |= (getBit(i) << (endIndex - i));
          return res;
+      }
+   }
+
+   // use custom class instead of ArrayList<Byte> to reduce time of boxing and unboxing
+   private class ByteArray {
+      byte[] bytes;
+      int capacity;
+      int size;
+
+      ByteArray(int initialCapacity) {
+         capacity = initialCapacity;
+         bytes = new byte[capacity];
+         size = 0;
+      }
+
+      ByteArray(byte[] bytes, int size) {
+         this.bytes = bytes;
+         capacity = bytes.length;
+         this.size = size;
+      }
+
+      void add(byte b) {
+         bytes[size++] = b;
+      }
+
+      void add(ByteArray in, int start, int length) {
+         for (int i = start; i < start + length - 1; i++)
+            add(in.get(i));
+      }
+
+      byte get(int byteIndex) {
+         return bytes[byteIndex];
+      }
+
+      byte[] toArray() {
+         return bytes;
+      }
+
+      boolean isFull() {
+         return size == capacity;
       }
    }
 
@@ -159,126 +201,133 @@ public class Codec {
       }
    }
 
-   private class ByteArray {
-      byte[] bytes;
-      int capacity;
-      int size;
+   final static int OFFSET_BIT_NUM = 4;
+   final static int LENGTH_BIT_NUM = 3;
+   final static int BLOCK_SIZE = 16*2; // 2^12 should be its factor
 
-      ByteArray(int initialCapacity) {
-         capacity = initialCapacity;
-         bytes = new byte[capacity];
-         size = 0;
-      }
-
-      public void add(byte b) {
-         if (size >= capacity)
-            throw new ArrayIndexOutOfBoundsException("ByteArray Index Out of Bounds.");
-         bytes[size++] = b;
-      }
-      
-      public int get(int byteIndex){
-         if (byteIndex>=size)
-            throw new ArrayIndexOutOfBoundsException("ByteArray Index Out of Bounds.");
-         return bytes[byteIndex];
-      }
-   }
-
-   final static int MAX_OFFSET = 12;
-   final static int MAX_LENGTH = 4;
-   final static int BLOCK_SIZE = 1024 * 1024;
-
-   public void decode(File inFile, File outFile) throws Exception {
-      byte[] input = read(inFile);
-      print(input, input.length);
-      BitStream bits = new BitStream(input);
-      // TODO need optimization here
-      byte[] output = new byte[BLOCK_SIZE];
-      int byteIndex = 0;
-      while (bits.hasNextWord()) {
-         int flag = bits.next();
-         if (flag == 0) {
-            output[byteIndex++] = (byte) bits.next(8);
-         } else {
-            int offset = bits.next(12), length = bits.next(4);
-            int startIndex = byteIndex - 1 - offset, endIndex = startIndex + length - 1;
-            for (int i = startIndex; i <= endIndex; i++)
-               output[byteIndex++] = output[i];
-         }
-      }
-      print(output, byteIndex);
-      write(output, byteIndex, outFile);
-   }
-
-   public void encode(String inFile, String outFile) throws Exception {
-      int dictionaryMaxSize = (int) Math.pow(2, MAX_OFFSET) - 1;
-      int bufferMaxSize = (int) Math.pow(2, MAX_LENGTH) - 1;
-      Window dictionary = new Window(dictionaryMaxSize, -1, -1);
-      Window buffer = new Window(bufferMaxSize, 0, bufferMaxSize - 1);
-
-      ByteArray bytes = read(inFile, 0, BLOCK_SIZE);
-      print(bytes);
-      BitStream bits = new BitStream(input.length * 17);
-      int i = 0;
-      while (i < input.length) {
-         Word word = search(input, dictionary, buffer);
-         if (word.length == 0) {
-            bits.appendBit(0);
-            bits.append(input[i]);
-         } else {
-            bits.appendBit(1);
-            bits.append(word);
-         }
-         int len = word.length == 0 ? 1 : word.length;
-         i += len;
-         buffer.start += len;
-         buffer.end = Math.min(buffer.end + len, input.length - 1);
-         dictionary.end += len;
-         dictionary.start = dictionary.end + 1 > dictionary.size ? dictionary.end + 1 - dictionary.size : 0;
-      }
-      byte[] output = bits.toByteArray();
-      print(output, output.length);
-      write(output, output.length, outFile);
-   }
-
-   // TODO optimize the large file reading
-   private ByteArray read(String fileName, int offset, int len) throws IOException {
-      // TODO optimize the arraylist here
-      RandomAccessFile raf = null;
-      ByteArray bytes = new ByteArray(len);
+   // write to buffer when we have 4k bytes
+   // the key problem is there may be remaining bytes in inBytes when 4k is reached, how to combine
+   // the remaining bytes with next inBytes?
+   public void decode(String inFile, String outFile) throws Exception {
+      BufferedInputStream in = new BufferedInputStream(new FileInputStream(inFile));
+      BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outFile));
+      ByteArray inBytes = null, outBytes = null;
+      BitInputStream inBits = null;
       try {
-         raf = new RandomAccessFile(fileName, "r");
-         int b;
-         while ((b = raf.read()) != -1 && len-->0)
-            bytes.add((byte) b);
+         do {
+            inBytes = new ByteArray(BLOCK_SIZE);
+            int bitStartIndex = 0;
+            if (inBits != null) {
+               bitStartIndex = inBits.size % 8;
+               ByteArray oldInBytes = inBits.toByteArray();
+               inBytes.add(oldInBytes, oldInBytes.size - 1, oldInBytes.capacity - (oldInBytes.size - 1));
+            }
+            read(in, inBytes, BLOCK_SIZE - inBytes.size);
+            print(inBytes);
+            inBits = new BitInputStream(inBytes);
+            inBits.seek(bitStartIndex);
+            // TODO need optimization here
+            outBytes = new ByteArray(BLOCK_SIZE);
+            while (inBits.hasNextWord() && !outBytes.isFull()) {
+               int flag = inBits.next();
+               if (flag == 0) {
+                  outBytes.add((byte) inBits.next(8));
+               } else {
+                  int offset = inBits.next(OFFSET_BIT_NUM), length = inBits.next(LENGTH_BIT_NUM);
+                  int startIndex = outBytes.size - 1 - offset, endIndex = startIndex + length - 1;
+                  for (int i = startIndex; i <= endIndex; i++) {
+                     outBytes.add(outBytes.get(i));
+                  }
+               }
+            }
+            print(outBytes);
+            System.out.println("Decode: input: " + inBits.toByteArray().size + " output: " + outBytes.size + "\n");
+            write(outBytes, out);
+         } while (inBytes.isFull());
       } finally {
-         if (raf != null)
-            raf.close();
-      }
-      return bytes;
-   }
-
-   private void write(byte[] output, int length, File file) throws IOException {
-      BufferedOutputStream out = null;
-      try {
-         out = new BufferedOutputStream(new FileOutputStream(file));
-         for (int i = 0; i < length; i++)
-            out.write(output[i]);
-      } finally {
+         if (in != null)
+            in.close();
          if (out != null)
             out.close();
       }
    }
 
+   public void encode(String inFile, String outFile) throws Exception {
+      int dictionaryMaxSize = (int) Math.pow(2, OFFSET_BIT_NUM) - 1;
+      int bufferMaxSize = (int) Math.pow(2, LENGTH_BIT_NUM) - 1;
+      Window dictionary = new Window(dictionaryMaxSize, -1, -1);
+      Window buffer = new Window(bufferMaxSize, 0, bufferMaxSize - 1);
+      BufferedInputStream in = new BufferedInputStream(new FileInputStream(inFile));
+      BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(outFile));
+      ByteArray inBytes = null, outBytes = null;
+      BitOutputStream outBits = null;
+      try {
+         do {
+            // init windows
+            dictionary.start = -1;
+            dictionary.end = -1;
+            buffer.start = 0;
+            buffer.end = bufferMaxSize - 1;
+
+            inBytes = new ByteArray(BLOCK_SIZE);
+            read(in, inBytes, BLOCK_SIZE);
+            print(inBytes);
+            // when the chunk is small, the compressed one may be larger than the original one
+            outBits = new BitOutputStream(inBytes.size * (1 + LENGTH_BIT_NUM + OFFSET_BIT_NUM));
+            int i = 0;
+            while (i < inBytes.size) {
+               Word word = search(inBytes, dictionary, buffer);
+               if (word.length == 0) {
+                  outBits.writeBit(0);
+                  outBits.write(inBytes.get(i));
+               } else {
+                  outBits.writeBit(1);
+                  outBits.write(word);
+               }
+               int len = word.length == 0 ? 1 : word.length;
+               i += len;
+               // shift windows
+               buffer.start += len;
+               buffer.end = Math.min(buffer.end + len, inBytes.size - 1);
+               dictionary.end += len;
+               dictionary.start = dictionary.end + 1 > dictionary.size ? dictionary.end + 1 - dictionary.size : 0;
+            }
+            outBytes = outBits.toByteArray();
+            print(outBytes);
+            System.out.println("Encode: input: " + inBytes.size + " output: " + outBytes.size + "\n");
+            write(outBytes, out);
+         } while (inBytes.isFull());
+         System.out.println("Encode End\n");
+      } finally {
+         if (in != null)
+            in.close();
+         if (out != null)
+            out.close();
+      }
+
+   }
+
+   private void read(BufferedInputStream in, ByteArray bytes, int len) throws IOException {
+      int b;
+      while (len-- > 0 && (b = in.read()) != -1)
+         bytes.add((byte) b);
+   }
+
+   private void write(ByteArray bytes, BufferedOutputStream out) throws IOException {
+      for (int i = 0; i < bytes.size; i++)
+         out.write(bytes.get(i));
+   }
+
    // O(m*n)
    // TODO optimize the search
-   private Word search(byte[] input, Window dictionary, Window buffer) {
+   private Word search(ByteArray bytes, Window dictionary, Window buffer) {
       Word word = new Word(0, 0);
       if (buffer.start == 0)
          return word;
       int i = dictionary.start;
       while (i <= dictionary.end) {
          int len = 0;
-         while (i + len <= dictionary.end && buffer.start + len < buffer.end && input[i + len] == input[buffer.start + len]) {
+         while (i + len <= dictionary.end && buffer.start + len < buffer.end && bytes.get(i + len) == bytes.get(buffer.start + len)) {
             len++;
          }
          if (len > 1 && len > word.length) {
@@ -289,22 +338,11 @@ public class Codec {
       }
       return word;
    }
-   
-   private void print(ByteArray bytes){
-      for (int i = 0; i < bytes.size; i++) {
-         for (int j = 7; j >= 0; j--) {
-            System.out.print((bytes.get(i) >> j) & 1);
-         }
-         System.out.print(" ");
-      }
-      System.out.print("\n");
-   }
 
-   private void print(byte[] bytes, int length) {
-      for (int i = 0; i < length; i++) {
-         for (int j = 7; j >= 0; j--) {
-            System.out.print((bytes[i] >> j) & 1);
-         }
+   private void print(ByteArray bytes) {
+      for (int i = 0; i < bytes.size; i++) {
+         for (int j = 7; j >= 0; j--)
+            System.out.print((bytes.get(i) >> j) & 1);
          System.out.print(" ");
       }
       System.out.print("\n");
@@ -312,9 +350,9 @@ public class Codec {
 
    @Test
    public void test() throws Exception {
-      File file1 = new File("src/facebook/test.txt");
-      File file2 = new File("src/facebook/test1.txt");
-      File file3 = new File("src/facebook/test2.txt");
+      String file1 = "src/facebook/test.txt";
+      String file2 = "src/facebook/test1.txt";
+      String file3 = "src/facebook/test2.txt";
       encode(file1, file2);
       decode(file2, file3);
    }
