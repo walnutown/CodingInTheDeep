@@ -162,7 +162,7 @@ public class Codec {
       }
 
       void add(ByteArray in, int start, int length) {
-         for (int i = start; i < start + length - 1; i++)
+         for (int i = start; i < start + length; i++)
             add(in.get(i));
       }
 
@@ -176,6 +176,10 @@ public class Codec {
 
       boolean isFull() {
          return size == capacity;
+      }
+      
+      boolean isEmpty(){
+         return size==0;
       }
    }
 
@@ -201,9 +205,9 @@ public class Codec {
       }
    }
 
-   final static int OFFSET_BIT_NUM = 4;
-   final static int LENGTH_BIT_NUM = 3;
-   final static int BLOCK_SIZE = 16*2; // 2^12 should be its factor
+   final static int OFFSET_BIT_NUM = 12;
+   final static int LENGTH_BIT_NUM = 4;
+   final static int BLOCK_SIZE = 4096*100; // 2^12 should be its factor
 
    // write to buffer when we have 4k bytes
    // the key problem is there may be remaining bytes in inBytes when 4k is reached, how to combine
@@ -215,18 +219,15 @@ public class Codec {
       BitInputStream inBits = null;
       try {
          do {
+            int maxInputSize = inBytes==null? BLOCK_SIZE : inBytes.size; 
             inBytes = new ByteArray(BLOCK_SIZE);
-            int bitStartIndex = 0;
             if (inBits != null) {
-               bitStartIndex = inBits.size % 8;
                ByteArray oldInBytes = inBits.toByteArray();
-               inBytes.add(oldInBytes, oldInBytes.size - 1, oldInBytes.capacity - (oldInBytes.size - 1));
+               inBytes.add(oldInBytes, oldInBytes.size, maxInputSize - oldInBytes.size);
             }
             read(in, inBytes, BLOCK_SIZE - inBytes.size);
             print(inBytes);
             inBits = new BitInputStream(inBytes);
-            inBits.seek(bitStartIndex);
-            // TODO need optimization here
             outBytes = new ByteArray(BLOCK_SIZE);
             while (inBits.hasNextWord() && !outBytes.isFull()) {
                int flag = inBits.next();
@@ -243,7 +244,7 @@ public class Codec {
             print(outBytes);
             System.out.println("Decode: input: " + inBits.toByteArray().size + " output: " + outBytes.size + "\n");
             write(outBytes, out);
-         } while (inBytes.isFull());
+         } while (!inBytes.isEmpty());
       } finally {
          if (in != null)
             in.close();
@@ -349,12 +350,41 @@ public class Codec {
    }
 
    @Test
-   public void test() throws Exception {
-      String file1 = "src/facebook/test.txt";
-      String file2 = "src/facebook/test1.txt";
-      String file3 = "src/facebook/test2.txt";
+   public void testSingleRepeat() throws Exception {
+      String file1 = "src/facebook/test11.txt";
+      String file2 = "src/facebook/test12.txt";
+      String file3 = "src/facebook/test13.txt";
       encode(file1, file2);
       decode(file2, file3);
+   }
+   
+   @Test
+   public void testSmallFile() throws Exception{
+      String file1 = "src/facebook/test21.txt";
+      String file2 = "src/facebook/test22.txt";
+      String file3 = "src/facebook/test23.txt";
+      encode(file1, file2);
+      decode(file2, file3);
+   }
+   
+   @Test
+   public void testLargeFile() throws Exception{
+      String file1 = "src/facebook/test31.txt";
+      String file2 = "src/facebook/test32.txt";
+      String file3 = "src/facebook/test33.txt";
+      encode(file1, file2);
+      decode(file2, file3);
+   }
+   
+   @Test
+   public void testSuperLargeFile() throws Exception{
+      long startTime = System.currentTimeMillis();
+      String file1 = "src/facebook/test41.txt";
+      String file2 = "src/facebook/test42.txt";
+      String file3 = "src/facebook/test43.txt";
+      encode(file1, file2);
+      decode(file2, file3);
+      System.out.println(System.currentTimeMillis() - startTime);
    }
 
 }
