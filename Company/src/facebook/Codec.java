@@ -5,6 +5,11 @@ import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -204,10 +209,77 @@ public class Codec {
          this.end = end;
       }
    }
+   
+   private class SuffixTreeNode{
+      byte value;
+      Deque<Integer> positions;
+      Map<Byte, SuffixTreeNode> children;
+       
+      SuffixTreeNode(byte value){
+         children = new HashMap<Byte, SuffixTreeNode>();
+         positions = new LinkedList<Integer>();
+         this.value = value;
+      }
+      
+      void add(byte b){
+         children.put(b, new SuffixTreeNode(b));
+      }
+      
+      SuffixTreeNode get(byte b){
+         if (!children.containsKey(b))
+            return null;
+         return children.get(b);
+      }
+      
+      boolean has(byte b){
+         return children.containsKey(b);
+      }
+      
+      boolean hasChildren(){
+         return !children.isEmpty();
+      }
+      
+      Collection<SuffixTreeNode> getChildren(){
+         return children.values();
+      }
+      
+      void addPosition(int index){
+         positions.addLast(index);
+      }
+   }
+   
+   private class SuffixTree{
+      SuffixTreeNode root;
+     
+      SuffixTree(){
+         root = new SuffixTreeNode((byte)0);
+      }
+      void insert(byte b, int startIndex){
+         
+         
+      }
+      
+      LinkedList<SuffixTreeNode> getLeafNodes(){
+         LinkedList<SuffixTreeNode> leaves = new LinkedList<SuffixTreeNode>();
+         dfs(root, leaves);
+         return leaves;
+      } 
+      
+      void dfs(SuffixTreeNode node, LinkedList<SuffixTreeNode> leaves){
+         if (node==null)
+            return;
+         if (!node.hasChildren())
+            leaves.add(node);
+         for (SuffixTreeNode child : node.getChildren())
+            dfs(child, leaves);
+         
+      }
+      
+   }
 
    final static int OFFSET_BIT_NUM = 12;
    final static int LENGTH_BIT_NUM = 4;
-   final static int BLOCK_SIZE = 4096*100; // 2^12 should be its factor
+   final static int BLOCK_SIZE = 4096*1024; // 2^12 should be its factor
 
    // write to buffer when we have 4k bytes
    // the key problem is there may be remaining bytes in inBytes when 4k is reached, how to combine
@@ -226,7 +298,7 @@ public class Codec {
                inBytes.add(oldInBytes, oldInBytes.size, maxInputSize - oldInBytes.size);
             }
             read(in, inBytes, BLOCK_SIZE - inBytes.size);
-            print(inBytes);
+            //print(inBytes);
             inBits = new BitInputStream(inBytes);
             outBytes = new ByteArray(BLOCK_SIZE);
             while (inBits.hasNextWord() && !outBytes.isFull()) {
@@ -241,7 +313,7 @@ public class Codec {
                   }
                }
             }
-            print(outBytes);
+            //print(outBytes);
             System.out.println("Decode: input: " + inBits.toByteArray().size + " output: " + outBytes.size + "\n");
             write(outBytes, out);
          } while (!inBytes.isEmpty());
@@ -272,7 +344,7 @@ public class Codec {
 
             inBytes = new ByteArray(BLOCK_SIZE);
             read(in, inBytes, BLOCK_SIZE);
-            print(inBytes);
+            //print(inBytes);
             // when the chunk is small, the compressed one may be larger than the original one
             outBits = new BitOutputStream(inBytes.size * (1 + LENGTH_BIT_NUM + OFFSET_BIT_NUM));
             int i = 0;
@@ -294,7 +366,7 @@ public class Codec {
                dictionary.start = dictionary.end + 1 > dictionary.size ? dictionary.end + 1 - dictionary.size : 0;
             }
             outBytes = outBits.toByteArray();
-            print(outBytes);
+            //print(outBytes);
             System.out.println("Encode: input: " + inBytes.size + " output: " + outBytes.size + "\n");
             write(outBytes, out);
          } while (inBytes.isFull());
@@ -333,8 +405,10 @@ public class Codec {
          }
          if (len > 1 && len > word.length) {
             word.length = len;
-            word.offset = dictionary.end - i;
+            word.offset = dictionary.end - i;  
          }
+         if (len==buffer.size)
+            break;
          i++;
       }
       return word;
@@ -383,8 +457,10 @@ public class Codec {
       String file2 = "src/facebook/test42.txt";
       String file3 = "src/facebook/test43.txt";
       encode(file1, file2);
+      long encode = System.currentTimeMillis();
+      System.out.println(encode - startTime);
       decode(file2, file3);
-      System.out.println(System.currentTimeMillis() - startTime);
+      System.out.println(System.currentTimeMillis() - encode);
    }
 
 }
